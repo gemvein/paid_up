@@ -13,7 +13,7 @@ module SubscriptionFeatures
 
     def add_initializer
       output "To start with, you'll need an initializer.  This is where you put your configuration options.", :magenta
-      template "initializer.rb", "config/initializers/SubscriptionFeatures.rb"
+      template "initializer.rb", "config/initializers/subscription_features.rb"
     end
 
     def add_migrations

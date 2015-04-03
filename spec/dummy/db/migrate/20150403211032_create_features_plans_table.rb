@@ -1,4 +1,4 @@
-class CreateFeaturesPlans < ActiveRecord::Migration
+class CreateFeaturesPlansTable < ActiveRecord::Migration
   def change
     create_table :features_plans do |t|
       t.references :feature, index: true, foreign_key: true

@@ -1,4 +1,4 @@
-class CreateFeatures < ActiveRecord::Migration
+class CreateFeaturesTable < ActiveRecord::Migration
   def change
     create_table :features do |t|
       t.string :name

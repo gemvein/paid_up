@@ -1,4 +1,4 @@
-class CreatePlans < ActiveRecord::Migration
+class CreatePlansTable < ActiveRecord::Migration
   def change
     create_table :plans do |t|
       t.decimal :charge

@@ -32,10 +32,10 @@ Gem::Specification.new do |s|
     "config/routes.rb",
     "lib/generators/subscription_features/install/install_generator.rb",
     "lib/generators/subscription_features/install/templates/initializer.rb",
-    "lib/generators/subscription_features/install/templates/migrate/create_features.rb",
-    "lib/generators/subscription_features/install/templates/migrate/create_features_plans.rb",
-    "lib/generators/subscription_features/install/templates/migrate/create_plans.rb",
-    "lib/generators/subscription_features/install/templates/migrate/create_subscriptions.rb",
+    "lib/generators/subscription_features/install/templates/migrate/create_features_plans_table.rb",
+    "lib/generators/subscription_features/install/templates/migrate/create_features_table.rb",
+    "lib/generators/subscription_features/install/templates/migrate/create_plans_table.rb",
+    "lib/generators/subscription_features/install/templates/migrate/create_subscriptions_table.rb",
     "lib/generators/subscription_features/utils.rb",
     "lib/subscription_features.rb",
     "lib/subscription_features/configuration.rb",
@@ -86,6 +86,7 @@ Gem::Specification.new do |s|
     "spec/dummy/public/favicon.ico",
     "spec/rails_helper.rb",
     "spec/spec_helper.rb",
+    "spec/subscription_features_spec.rb",
     "subscription_features.gemspec"
   ]
   s.homepage = "http://github.com/nerakdon/subscription_features"
@@ -103,12 +104,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<jeweler>, [">= 0"])
       s.add_runtime_dependency(%q<subscription_features>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_development_dependency(%q<cucumber-rails>, [">= 0"])
       s.add_development_dependency(%q<database_cleaner>, [">= 0"])
-      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_development_dependency(%q<cucumber-rails>, [">= 0"])
-      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
-      s.add_development_dependency(%q<sqlite3>, [">= 0"])
     else
       s.add_dependency(%q<rails>, [">= 4.2"])
       s.add_dependency(%q<rails-i18n>, [">= 0"])
@@ -116,12 +112,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<subscription_features>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_dependency(%q<cucumber-rails>, [">= 0"])
       s.add_dependency(%q<database_cleaner>, [">= 0"])
-      s.add_dependency(%q<rspec-rails>, [">= 0"])
-      s.add_dependency(%q<cucumber-rails>, [">= 0"])
-      s.add_dependency(%q<database_cleaner>, [">= 0"])
-      s.add_dependency(%q<sqlite3>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, [">= 4.2"])
@@ -130,12 +121,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<subscription_features>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
-    s.add_dependency(%q<cucumber-rails>, [">= 0"])
     s.add_dependency(%q<database_cleaner>, [">= 0"])
-    s.add_dependency(%q<rspec-rails>, [">= 0"])
-    s.add_dependency(%q<cucumber-rails>, [">= 0"])
-    s.add_dependency(%q<database_cleaner>, [">= 0"])
-    s.add_dependency(%q<sqlite3>, [">= 0"])
   end
 end
 
