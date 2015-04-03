@@ -1,3 +1,7 @@
 module SubscriptionFeatures
-  VERSION = "0.0.1"
+  VERSION = File.read(File.expand_path('../../../VERSION', __FILE__))
+  
+  def self.version_string
+    "SubscriptionFeatures version #{SubscriptionFeatures::VERSION}"
+  end
 end

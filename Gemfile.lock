@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    subscription_features (0.0.1)
+    subscription_features (0.0.0)
       rails
 
 GEM
