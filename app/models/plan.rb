@@ -2,8 +2,7 @@ class Plan < ActiveRecord::Base
   has_many :features_plans
   has_many :features, :through => :features_plans
   has_many :subscriptions
-  has_many :groups, :through => :subscriptions
-  has_many :users, :through => :subscriptions
+  has_many :subscribers, :through => :subscriptions
 
   validates_presence_of :charge, :description, :name, :period, :cycles
 
