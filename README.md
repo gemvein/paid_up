@@ -5,7 +5,17 @@
 [![Build Status](https://travis-ci.org/nerakdon/subscription_features.svg)](https://travis-ci.org/nerakdon/subscription_features)
 [![Coverage Status](https://coveralls.io/repos/nerakdon/subscription_features/badge.png)](https://coveralls.io/r/nerakdon/subscription_features)
 
-Description goes here.
+Installation
+----------------------------
+First you need a working user-type model, with any authentication system you like. I recommend the gem 'devise' for this. Once you have your model in place, add subscription_features to your `Gemfile`:
+
+    gem 'subscription_features'
+
+Next, install it by executing these commands:
+
+    bundle install
+    rails g subscription_features:install
+
 
 Contributing to  Subscription Features
 ----------------------------

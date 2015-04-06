@@ -1,5 +1,6 @@
 module SubscriptionFeatures
-  class InstallGenerator < Rails::Generators::Base
+  class InstallGenerator < Rails::Generators::NamedBase
+    argument :user_model_name, :type => :string, :default => "User"
     source_root File.expand_path("../templates", __FILE__)
     require File.expand_path('../../utils', __FILE__)
     include Generators::Utils
@@ -29,6 +30,12 @@ module SubscriptionFeatures
       unless ActiveRecord::Base.connection.table_exists? 'subscriptions'
         migration_template 'migrate/create_subscriptions_table.rb', 'db/migrate/create_subscriptions_table.rb' rescue output $!.message
       end
+    end
+
+    def add_to_model
+      output "Adding SubscriptionFeatures to your #{user_model_name} model", :magenta
+      gsub_file "app/models/#{user_model_name.downcase}.rb", /^\n  subscriber$/, ''
+      inject_into_file "app/models/#{user_model_name.downcase}.rb", "\n  subscriber", after: "class #{user_model_name} < ActiveRecord::Base"
     end
 
     def add_route

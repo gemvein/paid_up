@@ -9,11 +9,12 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'sqlite3'
+  gem 'devise'
 end
 
 group :test do
   gem 'cucumber-rails', require: false
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers'
   gem 'minitest', '~>5.5.1'
   gem "launchy", "~> 2.1.2", require: false
   gem 'factory_girl_rails', require: false

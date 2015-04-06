@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "SubscriptionFeatures" do
-  it "fails" do
-    fail "hey buddy, you should probably rename this file and start specing for real"
+  it 'should return correct version string' do
+    SubscriptionFeatures.version_string.should == "SubscriptionFeatures version #{SubscriptionFeatures::VERSION}"
   end
 end

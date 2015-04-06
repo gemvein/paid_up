@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-04-03"
+  s.date = "2015-04-06"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
   s.extra_rdoc_files = [
@@ -20,8 +20,6 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".rspec",
-    ".ruby-gemset",
-    ".ruby-version",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
@@ -29,6 +27,10 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "app/models/feature.rb",
+    "app/models/features_plan.rb",
+    "app/models/plan.rb",
+    "app/models/subscription.rb",
     "config/routes.rb",
     "lib/generators/subscription_features/install/install_generator.rb",
     "lib/generators/subscription_features/install/templates/initializer.rb",
@@ -38,6 +40,11 @@ Gem::Specification.new do |s|
     "lib/generators/subscription_features/install/templates/migrate/create_subscriptions_table.rb",
     "lib/generators/subscription_features/utils.rb",
     "lib/subscription_features.rb",
+    "lib/subscription_features/concerns/models/feature.rb",
+    "lib/subscription_features/concerns/models/features_plan.rb",
+    "lib/subscription_features/concerns/models/plan.rb",
+    "lib/subscription_features/concerns/models/subscription.rb",
+    "lib/subscription_features/concerns/models/user.rb",
     "lib/subscription_features/configuration.rb",
     "lib/subscription_features/engine.rb",
     "lib/subscription_features/localization.rb",
@@ -54,6 +61,7 @@ Gem::Specification.new do |s|
     "spec/dummy/app/mailers/.keep",
     "spec/dummy/app/models/.keep",
     "spec/dummy/app/models/concerns/.keep",
+    "spec/dummy/app/models/user.rb",
     "spec/dummy/app/views/layouts/application.html.erb",
     "spec/dummy/bin/bundle",
     "spec/dummy/bin/rails",
@@ -74,16 +82,26 @@ Gem::Specification.new do |s|
     "spec/dummy/config/initializers/inflections.rb",
     "spec/dummy/config/initializers/mime_types.rb",
     "spec/dummy/config/initializers/session_store.rb",
+    "spec/dummy/config/initializers/subscription_features.rb",
     "spec/dummy/config/initializers/wrap_parameters.rb",
     "spec/dummy/config/locales/en.yml",
     "spec/dummy/config/routes.rb",
     "spec/dummy/config/secrets.yml",
+    "spec/dummy/db/development.sqlite3",
+    "spec/dummy/db/migrate/20150403211031_create_features_table.rb",
+    "spec/dummy/db/migrate/20150403211032_create_features_plans_table.rb",
+    "spec/dummy/db/migrate/20150403211033_create_plans_table.rb",
+    "spec/dummy/db/migrate/20150403211034_create_subscriptions_table.rb",
+    "spec/dummy/db/test.sqlite3",
     "spec/dummy/lib/assets/.keep",
     "spec/dummy/log/.keep",
+    "spec/dummy/log/development.log",
+    "spec/dummy/log/test.log",
     "spec/dummy/public/404.html",
     "spec/dummy/public/422.html",
     "spec/dummy/public/500.html",
     "spec/dummy/public/favicon.ico",
+    "spec/models/user_spec.rb",
     "spec/rails_helper.rb",
     "spec/spec_helper.rb",
     "spec/subscription_features_spec.rb",
@@ -105,6 +123,8 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<subscription_features>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
       s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<devise>, [">= 0"])
     else
       s.add_dependency(%q<rails>, [">= 4.2"])
       s.add_dependency(%q<rails-i18n>, [">= 0"])
@@ -113,6 +133,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<subscription_features>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
       s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<devise>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, [">= 4.2"])
@@ -122,6 +144,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<subscription_features>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
     s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<devise>, [">= 0"])
   end
 end
 

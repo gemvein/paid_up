@@ -7,6 +7,7 @@ module SubscriptionFeatures
   require 'subscription_features/engine'
   require 'subscription_features/localization'
   require 'subscription_features/version'
+  require 'subscription_features/mixins'
 
   require 'haml-rails'
 end
