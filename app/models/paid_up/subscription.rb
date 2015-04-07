@@ -1,4 +1,4 @@
-class SubscriptionFeatures::Subscription < ActiveRecord::Base
+class PaidUp::Subscription < ActiveRecord::Base
   belongs_to :plan
   belongs_to :subscriber, :polymorphic => true
   has_many :groups

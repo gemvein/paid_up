@@ -1,23 +1,23 @@
- Subscription Features
+Paid Up
 ===========
 
-[![GitHub version](https://badge.fury.io/gh/nerakdon%2Fsubscription_features.svg)](http://badge.fury.io/gh/nerakdon%2Fsubscription_features)
-[![Build Status](https://travis-ci.org/nerakdon/subscription_features.svg)](https://travis-ci.org/nerakdon/subscription_features)
-[![Coverage Status](https://coveralls.io/repos/nerakdon/subscription_features/badge.png)](https://coveralls.io/r/nerakdon/subscription_features)
+[![GitHub version](https://badge.fury.io/gh/nerakdon%2Fpaid_up.svg)](http://badge.fury.io/gh/nerakdon%2Fpaid_up)
+[![Build Status](https://travis-ci.org/nerakdon/paid_up.svg)](https://travis-ci.org/nerakdon/paid_up)
+[![Coverage Status](https://coveralls.io/repos/nerakdon/paid_up/badge.png)](https://coveralls.io/r/nerakdon/paid_up)
 
 Installation
 ----------------------------
-First you need a working user-type model, with any authentication system you like. I recommend the gem 'devise' for this. Once you have your model in place, add subscription_features to your `Gemfile`:
+First you need a working user-type model, with any authentication system you like. I recommend the gem 'devise' for this. Once you have your model in place, add paid_up to your `Gemfile`:
 
-    gem 'subscription_features'
+    gem 'paid_up'
 
 Next, install it by executing these commands:
 
     bundle install
-    rails g subscription_features:install
+    rails g paid_up:install
 
 
-Contributing to  Subscription Features
+Contributing to Paid Up
 ----------------------------
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.

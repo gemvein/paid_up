@@ -1,4 +1,4 @@
-module SubscriptionFeatures
+module PaidUp
   module Generators
     module Utils
       def output(output, color = :green)

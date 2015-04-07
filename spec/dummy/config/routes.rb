@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   
   
   
-  mount SubscriptionFeatures::Engine => '/subscription_features', :as => 'SubscriptionFeatures'
-  mount SubscriptionFeatures::Engine, at: '/'
+  mount PaidUp::Engine => '/paid_up', :as => 'PaidUp'
+  mount PaidUp::Engine, at: '/'
   devise_for :users
   root to: "home#index"
   

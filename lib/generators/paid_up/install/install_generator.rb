@@ -1,4 +1,4 @@
-module SubscriptionFeatures
+module PaidUp
   class InstallGenerator < Rails::Generators::NamedBase
     argument :user_model_name, :type => :string, :default => "User"
     source_root File.expand_path("../templates", __FILE__)
@@ -7,18 +7,18 @@ module SubscriptionFeatures
     include Rails::Generators::Migration
 
     def hello
-      output "SubscriptionFeatures Installer will now install itself", :magenta
+      output "PaidUp Installer will now install itself", :magenta
     end
 
     # all public methods in here will be run in order
 
     def add_initializer
       output "To start with, you'll need an initializer.  This is where you put your configuration options.", :magenta
-      template "initializer.rb", "config/initializers/subscription_features.rb"
+      template "initializer.rb", "config/initializers/paid_up.rb"
     end
 
     def add_migrations
-      rake 'subscription_features:install:migrations'
+      rake 'paid_up:install:migrations'
       # unless ActiveRecord::Base.connection.table_exists? 'features'
       #   migration_template 'migrate/create_features_table.rb', 'db/migrate/create_features_table.rb' rescue output $!.message
       # end
@@ -34,15 +34,15 @@ module SubscriptionFeatures
     end
 
     def add_to_model
-      output "Adding SubscriptionFeatures to your #{user_model_name} model", :magenta
+      output "Adding PaidUp to your #{user_model_name} model", :magenta
       gsub_file "app/models/#{user_model_name.downcase}.rb", /^\n  subscriber$/, ''
       inject_into_file "app/models/#{user_model_name.downcase}.rb", "\n  subscriber", after: "class #{user_model_name} < ActiveRecord::Base"
     end
 
     def add_route
-      output "Adding SubscriptionFeatures to your routes.rb file", :magenta
-      gsub_file "config/routes.rb", /mount SubscriptionFeatures::Engine => '\/.*', :as => 'SubscriptionFeatures'/, ''
-      route("mount SubscriptionFeatures::Engine => '/subscription_features', :as => 'SubscriptionFeatures'")
+      output "Adding PaidUp to your routes.rb file", :magenta
+      gsub_file "config/routes.rb", /mount PaidUp::Engine => '\/.*', :as => 'PaidUp'/, ''
+      route("mount PaidUp::Engine => '/', :as => 'PaidUp'")
     end
 
     def self.next_migration_number(dirname)

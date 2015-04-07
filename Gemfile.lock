@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    subscription_features (0.0.0)
+    paid_up (0.0.0)
       haml-rails
       jeweler
+      paid_up
       rails (>= 4.2)
       rails-i18n
-      subscription_features
 
 GEM
   remote: https://rubygems.org/
@@ -238,9 +238,9 @@ DEPENDENCIES
   jeweler
   launchy (~> 2.1.2)
   minitest (~> 5.5.1)
+  paid_up!
   rails (>= 4.2)
   rails-i18n
   rspec-rails
   shoulda-matchers
   sqlite3
-  subscription_features!

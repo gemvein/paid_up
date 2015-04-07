@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe SubscriptionFeatures::PlansController do
+RSpec.describe PaidUp::PlansController do
   include_context 'plans and features'
 
   describe "GET #index" do

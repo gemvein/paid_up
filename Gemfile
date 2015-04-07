@@ -20,7 +20,7 @@ group :test do
   gem 'factory_girl_rails', require: false
 end
 
-# Declare your gem's dependencies in subscription_features.gemspec.
+# Declare your gem's dependencies in paid_up.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec

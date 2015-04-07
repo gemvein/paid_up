@@ -1,4 +1,4 @@
-module SubscriptionFeatures
+module PaidUp
   module Mixins
     extend ActiveSupport::Concern
     class_methods do
@@ -18,4 +18,4 @@ module SubscriptionFeatures
   end
 end
 
-ActiveRecord::Base.send(:include, SubscriptionFeatures::Mixins)
+ActiveRecord::Base.send(:include, PaidUp::Mixins)

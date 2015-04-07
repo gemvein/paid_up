@@ -1,5 +1,5 @@
-module SubscriptionFeatures
-  def self.configure(configuration = SubscriptionFeatures::Configuration.new)
+module PaidUp
+  def self.configure(configuration = PaidUp::Configuration.new)
     if block_given?
       yield configuration
     end
@@ -7,7 +7,7 @@ module SubscriptionFeatures
   end
   
   def self.configuration
-    @@configuration ||= SubscriptionFeatures::Configuration.new
+    @@configuration ||= PaidUp::Configuration.new
   end
   
   class Configuration

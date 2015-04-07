@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe SubscriptionFeatures::PlansController do
-  routes { SubscriptionFeatures::Engine.routes }
+describe PaidUp::PlansController do
+  routes { PaidUp::Engine.routes }
 
   describe "routes to the list of all plans" do
     subject { get plans_path }
 
-    it { should route_to(:controller => "subscription_features/plans", :action => "index")}
+    it { should route_to(:controller => "paid_up/plans", :action => "index")}
   end
 end

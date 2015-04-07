@@ -1,6 +1,6 @@
-module SubscriptionFeatures
+module PaidUp
   class Engine < Rails::Engine 
-    isolate_namespace SubscriptionFeatures
+    isolate_namespace PaidUp
 
     def self.table_name_prefix
       'magazine_'

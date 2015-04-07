@@ -1,4 +1,4 @@
-class SubscriptionFeatures::FeaturesPlan < ActiveRecord::Base
+class PaidUp::FeaturesPlan < ActiveRecord::Base
   belongs_to :plan
   belongs_to :feature
   validates_presence_of :setting

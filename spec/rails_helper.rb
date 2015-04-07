@@ -52,6 +52,6 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.before(:each, :type => :controller) { routes { SubscriptionFeatures::Engine.routes } }
-  config.before(:each, :type => :routing)    { routes { SubscriptionFeatures::Engine.routes } }
+  config.before(:each, :type => :controller) { routes { PaidUp::Engine.routes } }
+  config.before(:each, :type => :routing)    { routes { PaidUp::Engine.routes } }
 end

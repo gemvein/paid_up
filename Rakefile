@@ -9,8 +9,8 @@ end
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "subscription_features"
-  gem.homepage = "http://github.com/nerakdon/subscription_features"
+  gem.name = "paid_up"
+  gem.homepage = "http://www.gemvein.com/museum/cases/paid_up"
   gem.license = "MIT"
   gem.summary = %Q{Allows a model of your choosing to subscribe to a plan, which enables features.}
   gem.description = %Q{Allows a model of your choosing (such as users) to subscribe to a plan, which enables features.}
@@ -37,7 +37,7 @@ require 'rdoc/task'
 
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'SubscriptionFeatures'
+  rdoc.title    = 'PaidUp'
   rdoc.options << '--line-numbers'
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
