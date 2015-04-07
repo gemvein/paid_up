@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe User do
-  it { should have_one(:subscription) }
-  it { should have_one(:plan) }
-  it { should have_many(:features) }
+describe Subscription do
+  it { should belong_to(:plan) }
+  it { should have_many(:features).through(:plan) }
+  it { should belong_to(:subscriber) }
 end
