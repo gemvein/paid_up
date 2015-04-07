@@ -7,6 +7,7 @@ gem 'jeweler'
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
   gem 'database_cleaner'
   gem 'sqlite3'
   gem 'devise'

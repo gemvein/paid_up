@@ -1,6 +1,6 @@
 class PaidUp::FeaturesPlan < ActiveRecord::Base
-  belongs_to :plan
-  belongs_to :feature
+  belongs_to :plan, class_name: 'PaidUp::Plan'
+  belongs_to :feature, class_name: 'PaidUp::Feature'
   validates_presence_of :setting
 
   def unlimited?
@@ -8,7 +8,7 @@ class PaidUp::FeaturesPlan < ActiveRecord::Base
   end
 
   def self.find_by_feature_name(name)
-    feature = Feature.find_by_name(name)
+    feature = PaidUp::Feature.find_by_name(name)
 
     if feature.nil?
       if feature.setting_type == 'boolean'

@@ -14,7 +14,8 @@ First you need a working user-type model, with any authentication system you lik
 Next, install it by executing these commands:
 
     bundle install
-    rails g paid_up:install
+    rails g paid_up:install [USER_MODEL_NAME]
+    rake db:migrate
 
 
 Contributing to Paid Up

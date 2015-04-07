@@ -1,5 +1,5 @@
 class PaidUp::PlansController < ApplicationController
   def index
-    @plans = Plan.all
+    @plans = PaidUp::Plan.all
   end
 end

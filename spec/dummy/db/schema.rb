@@ -11,26 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407170147) do
+ActiveRecord::Schema.define(version: 20150407225029) do
 
-  create_table "features", force: :cascade do |t|
+  create_table "paid_up_features", force: :cascade do |t|
     t.string "name"
     t.string "setting_type"
     t.text   "description"
   end
 
-  add_index "features", ["name"], name: "index_features_on_name", unique: true
+  add_index "paid_up_features", ["name"], name: "index_paid_up_features_on_name", unique: true
 
-  create_table "features_plans", force: :cascade do |t|
+  create_table "paid_up_features_plans", force: :cascade do |t|
     t.integer "feature_id"
     t.integer "plan_id"
     t.integer "setting"
   end
 
-  add_index "features_plans", ["feature_id"], name: "index_features_plans_on_feature_id"
-  add_index "features_plans", ["plan_id"], name: "index_features_plans_on_plan_id"
+  add_index "paid_up_features_plans", ["feature_id"], name: "index_paid_up_features_plans_on_feature_id"
+  add_index "paid_up_features_plans", ["plan_id"], name: "index_paid_up_features_plans_on_plan_id"
 
-  create_table "plans", force: :cascade do |t|
+  create_table "paid_up_plans", force: :cascade do |t|
     t.decimal  "charge"
     t.string   "period"
     t.integer  "cycles"
@@ -41,7 +41,19 @@ ActiveRecord::Schema.define(version: 20150407170147) do
     t.datetime "updated_at"
   end
 
-  add_index "plans", ["name"], name: "index_plans_on_name", unique: true
+  add_index "paid_up_plans", ["name"], name: "index_paid_up_plans_on_name", unique: true
+
+  create_table "paid_up_subscriptions", force: :cascade do |t|
+    t.integer  "plan_id"
+    t.integer  "subscriber_id"
+    t.string   "subscriber_type"
+    t.datetime "charged_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "paid_up_subscriptions", ["plan_id"], name: "index_paid_up_subscriptions_on_plan_id"
+  add_index "paid_up_subscriptions", ["subscriber_type", "subscriber_id"], name: "subscriber"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

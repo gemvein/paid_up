@@ -54,7 +54,11 @@ shared_context "plans and features" do
     )
   }
   let!(:ad_free_no_ads_features_plan) {
-    no_ads_plan.features_plans.create(feature: ad_free_feature)
+    FactoryGirl.create(
+       :features_plan,
+       plan_id: no_ads_plan.id,
+       feature_id: ad_free_feature.id
+    )
   }
   let!(:group_leader_plan) {
     FactoryGirl.create(
@@ -65,13 +69,28 @@ shared_context "plans and features" do
     )
   }
   let!(:ad_free_group_leader_features_plan) {
-    group_leader_plan.features_plans.create(feature: ad_free_feature, setting: true)
+    FactoryGirl.create(
+        :features_plan,
+        plan_id: group_leader_plan.id,
+        feature_id: ad_free_feature.id,
+        setting: true
+    )
   }
   let!(:groups_group_leader_features_plan) {
-    group_leader_plan.features_plans.create(feature: groups_feature, setting: 1)
+    FactoryGirl.create(
+        :features_plan,
+        plan_id: group_leader_plan.id,
+        feature_id: groups_feature.id,
+        setting: 1
+    )
   }
   let!(:configuration_group_leader_features_plan) {
-    group_leader_plan.features_plans.create(feature: configuration_feature, setting: true)
+    FactoryGirl.create(
+        :features_plan,
+        plan_id: group_leader_plan.id,
+        feature_id: configuration_feature.id,
+        setting: true
+    )
   }
   let!(:professional_plan) {
     FactoryGirl.create(
@@ -82,19 +101,44 @@ shared_context "plans and features" do
     )
   }
   let!(:ad_free_professional_features_plan) {
-    professional_plan.features_plans.create(feature: ad_free_feature, setting: true)
+    FactoryGirl.create(
+        :features_plan,
+        plan_id: professional_plan.id,
+        feature_id: ad_free_feature.id,
+        setting: true
+    )
   }
   let!(:groups_professional_features_plan) {
-    professional_plan.features_plans.create(feature: groups_feature, setting: -1)
+    FactoryGirl.create(
+        :features_plan,
+        plan_id: professional_plan.id,
+        feature_id: groups_feature.id,
+        setting: -1
+    )
   }
   let!(:configuration_professional_features_plan) {
-    professional_plan.features_plans.create(feature: configuration_feature, setting: true)
+    FactoryGirl.create(
+        :features_plan,
+        plan_id: professional_plan.id,
+        feature_id: configuration_feature.id,
+        setting: true
+    )
   }
   let!(:theme_professional_features_plan) {
-    professional_plan.features_plans.create(feature: theme_feature, setting: true)
+    FactoryGirl.create(
+        :features_plan,
+        plan_id: professional_plan.id,
+        feature_id: theme_feature.id,
+        setting: true
+    )
   }
   let!(:calendar_professional_features_plan) {
-    professional_plan.features_plans.create(feature: calendar_feature, setting: true)
+    FactoryGirl.create(
+        :features_plan,
+        plan_id: professional_plan.id,
+        feature_id: calendar_feature.id,
+        setting: true
+    )
   }
 
 end
