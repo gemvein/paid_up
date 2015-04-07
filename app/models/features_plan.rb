@@ -7,19 +7,17 @@ class FeaturesPlan < ActiveRecord::Base
     setting == -1
   end
 
-  module ClassMethods
-    def find_by_feature_name(name)
-      feature = Feature.find_by_name(name)
+  def self.find_by_feature_name(name)
+    feature = Feature.find_by_name(name)
 
-      if feature.nil?
-        if feature.setting_type == 'boolean'
-          false
-        else
-          nil
-        end
+    if feature.nil?
+      if feature.setting_type == 'boolean'
+        false
       else
-        find_by_feature_id(feature.id)
+        nil
       end
+    else
+      find_by_feature_id(feature.id)
     end
   end
 end
