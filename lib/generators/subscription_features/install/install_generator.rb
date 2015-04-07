@@ -18,18 +18,19 @@ module SubscriptionFeatures
     end
 
     def add_migrations
-      unless ActiveRecord::Base.connection.table_exists? 'features'
-        migration_template 'migrate/create_features_table.rb', 'db/migrate/create_features_table.rb' rescue output $!.message
-      end
-      unless ActiveRecord::Base.connection.table_exists? 'features_plans'
-        migration_template 'migrate/create_features_plans_table.rb', 'db/migrate/create_features_plans_table.rb' rescue output $!.message
-      end
-      unless ActiveRecord::Base.connection.table_exists? 'plans'
-        migration_template 'migrate/create_plans_table.rb', 'db/migrate/create_plans_table.rb' rescue output $!.message
-      end
-      unless ActiveRecord::Base.connection.table_exists? 'subscriptions'
-        migration_template 'migrate/create_subscriptions_table.rb', 'db/migrate/create_subscriptions_table.rb' rescue output $!.message
-      end
+      rake 'subscription_features:install:migrations'
+      # unless ActiveRecord::Base.connection.table_exists? 'features'
+      #   migration_template 'migrate/create_features_table.rb', 'db/migrate/create_features_table.rb' rescue output $!.message
+      # end
+      # unless ActiveRecord::Base.connection.table_exists? 'features_plans'
+      #   migration_template 'migrate/create_features_plans_table.rb', 'db/migrate/create_features_plans_table.rb' rescue output $!.message
+      # end
+      # unless ActiveRecord::Base.connection.table_exists? 'plans'
+      #   migration_template 'migrate/create_plans_table.rb', 'db/migrate/create_plans_table.rb' rescue output $!.message
+      # end
+      # unless ActiveRecord::Base.connection.table_exists? 'subscriptions'
+      #   migration_template 'migrate/create_subscriptions_table.rb', 'db/migrate/create_subscriptions_table.rb' rescue output $!.message
+      # end
     end
 
     def add_to_model

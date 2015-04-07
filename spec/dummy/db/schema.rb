@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406172005) do
+ActiveRecord::Schema.define(version: 20150407170147) do
 
   create_table "features", force: :cascade do |t|
     t.string "name"
@@ -42,18 +42,6 @@ ActiveRecord::Schema.define(version: 20150406172005) do
   end
 
   add_index "plans", ["name"], name: "index_plans_on_name", unique: true
-
-  create_table "subscriptions", force: :cascade do |t|
-    t.integer  "plan_id"
-    t.integer  "subscriber_id"
-    t.string   "subscriber_type"
-    t.datetime "charged_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id"
-  add_index "subscriptions", ["subscriber_type", "subscriber_id"], name: "index_subscriptions_on_subscriber_type_and_subscriber_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

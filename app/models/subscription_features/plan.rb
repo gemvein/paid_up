@@ -1,4 +1,4 @@
-class Plan < ActiveRecord::Base
+class SubscriptionFeatures::Plan < ActiveRecord::Base
   has_many :features_plans
   has_many :features, :through => :features_plans
   has_many :subscriptions
