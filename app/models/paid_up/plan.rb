@@ -31,4 +31,12 @@ class PaidUp::Plan < ActiveRecord::Base
   def feature_unlimited?(name)
     feature_setting(name) == -1
   end
+
+  def current_phrase
+    cycles.to_s + ' ' + period + ' ago'
+  end
+
+  def current_date
+    Chronic.parse(current_phrase)
+  end
 end

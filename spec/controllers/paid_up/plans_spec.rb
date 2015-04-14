@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe PaidUp::PlansController do
-  routes { PaidUp::Engine.routes }
   include_context 'plans and features'
 
   describe "GET #index" do

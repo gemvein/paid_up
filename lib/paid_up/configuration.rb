@@ -11,12 +11,12 @@ module PaidUp
   end
   
   class Configuration
-    attr_accessor :application_name, :application_description, :application_keywords
+    attr_accessor :current_subscriber_method, :default_subscriber_method, :default_plan_name
     
     def initialize
-      self.application_name = "TODO"
-      self.application_description = "TODO"
-      self.application_keywords = "TODO"
+      self.current_subscriber_method = "TODO"
+      self.default_subscriber_method = "TODO"
+      self.default_plan_name = "TODO"
     end
   end
 end

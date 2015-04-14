@@ -1,5 +1,7 @@
-class PaidUp::PlansController < ApplicationController
-  def index
-    @plans = PaidUp::Plan.all
+module PaidUp
+  class PlansController < PaidUpController
+    def index
+      @plans = PaidUp::Plan.all
+    end
   end
 end

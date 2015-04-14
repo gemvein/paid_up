@@ -4,6 +4,9 @@ gem 'rails', '>= 4.2'
 gem 'rails-i18n'
 gem 'haml-rails'
 gem 'jeweler'
+gem 'bootstrap_leather'
+gem 'seedbank'
+gem 'chronic'
 
 group :test, :development do
   gem 'rspec-rails'
@@ -11,6 +14,9 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'sqlite3'
   gem 'devise'
+  gem 'high_voltage'
+  gem 'forgery'
+  gem 'bootswitch'
 end
 
 group :test do

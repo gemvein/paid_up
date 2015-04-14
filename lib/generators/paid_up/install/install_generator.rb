@@ -14,11 +14,13 @@ module PaidUp
 
     def add_initializer
       output "To start with, you'll need an initializer.  This is where you put your configuration options.", :magenta
-      template "initializer.rb", "config/initializers/paid_up.rb"
+      template "initializer.rb.erb", "config/initializers/paid_up.rb", assigns: { user_model: ('::' + user_model_name).constantize.new }
     end
 
     def add_migrations
+      output "Next come migrations.", :magenta
       rake 'paid_up:install:migrations'
+      PaidUp::Engine.load_seed
       # unless ActiveRecord::Base.connection.table_exists? 'features'
       #   migration_template 'migrate/create_features_table.rb', 'db/migrate/create_features_table.rb' rescue output $!.message
       # end
