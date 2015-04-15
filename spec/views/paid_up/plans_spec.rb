@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "paid_up/plans/index" do
   include_context 'plans and features'
+
   context 'when user is anonymous' do
     before do
       assign(:current_subscriber, User.new)
