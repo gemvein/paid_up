@@ -1,9 +1,9 @@
 Paid Up
 ===========
 
-[![GitHub version](https://badge.fury.io/gh/nerakdon%2Fpaid_up.svg)](http://badge.fury.io/gh/nerakdon%2Fpaid_up)
-[![Build Status](https://travis-ci.org/nerakdon/paid_up.svg)](https://travis-ci.org/nerakdon/paid_up)
-[![Coverage Status](https://coveralls.io/repos/nerakdon/paid_up/badge.png)](https://coveralls.io/r/nerakdon/paid_up)
+[![GitHub version](https://badge.fury.io/gh/gemvein%2Fpaid_up.svg)](http://badge.fury.io/gh/gemvein%2Fpaid_up)
+[![Build Status](https://travis-ci.org/gemvein/paid_up.svg)](https://travis-ci.org/gemvein/paid_up)
+[![Coverage Status](https://coveralls.io/repos/gemvein/paid_up/badge.png)](https://coveralls.io/r/gemvein/paid_up)
 
 Installation
 ----------------------------
