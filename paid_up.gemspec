@@ -11,9 +11,10 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-04-06"
+  s.date = "2015-04-16"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
+  s.executables = ["rails"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"
@@ -27,42 +28,44 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
-    "app/models/feature.rb",
-    "app/models/features_plan.rb",
-    "app/models/plan.rb",
-    "app/models/subscription.rb",
+    "app/controllers/paid_up/paid_up_controller.rb",
+    "app/controllers/paid_up/plans_controller.rb",
+    "app/controllers/paid_up/subscriptions_controller.rb",
+    "app/helpers/paid_up/plans_helper.rb",
+    "app/models/ability.rb",
+    "app/models/paid_up/feature.rb",
+    "app/models/paid_up/features_plan.rb",
+    "app/models/paid_up/plan.rb",
+    "app/models/paid_up/subscription.rb",
+    "app/views/paid_up/plans/index.html.haml",
+    "app/views/paid_up/subscriptions/new.html.haml",
+    "bin/rails",
+    "config/locales/en.yml",
     "config/routes.rb",
+    "db/migrate/20150407105900_create_paid_up_features_plans_table.rb",
+    "db/migrate/20150407110100_create_paid_up_features_table.rb",
+    "db/migrate/20150407110101_create_paid_up_plans_table.rb",
+    "db/migrate/20150407110102_create_paid_up_subscriptions_table.rb",
     "lib/generators/paid_up/install/install_generator.rb",
-    "lib/generators/paid_up/install/templates/initializer.rb",
-    "lib/generators/paid_up/install/templates/migrate/create_features_plans_table.rb",
-    "lib/generators/paid_up/install/templates/migrate/create_features_table.rb",
-    "lib/generators/paid_up/install/templates/migrate/create_plans_table.rb",
-    "lib/generators/paid_up/install/templates/migrate/create_subscriptions_table.rb",
+    "lib/generators/paid_up/install/templates/initializer.rb.erb",
     "lib/generators/paid_up/utils.rb",
     "lib/paid_up.rb",
-    "lib/paid_up/concerns/models/feature.rb",
-    "lib/paid_up/concerns/models/features_plan.rb",
-    "lib/paid_up/concerns/models/plan.rb",
-    "lib/paid_up/concerns/models/subscription.rb",
-    "lib/paid_up/concerns/models/user.rb",
     "lib/paid_up/configuration.rb",
     "lib/paid_up/engine.rb",
     "lib/paid_up/localization.rb",
+    "lib/paid_up/mixins.rb",
     "lib/paid_up/railtie.rb",
     "lib/paid_up/version.rb",
+    "paid_up.gemspec",
+    "spec/controllers/paid_up/plans_spec.rb",
+    "spec/controllers/paid_up/subscriptions_spec.rb",
     "spec/dummy/README.rdoc",
     "spec/dummy/Rakefile",
-    "spec/dummy/app/assets/images/.keep",
     "spec/dummy/app/assets/javascripts/application.js",
-    "spec/dummy/app/assets/stylesheets/application.css",
     "spec/dummy/app/controllers/application_controller.rb",
-    "spec/dummy/app/controllers/concerns/.keep",
-    "spec/dummy/app/helpers/application_helper.rb",
-    "spec/dummy/app/mailers/.keep",
-    "spec/dummy/app/models/.keep",
-    "spec/dummy/app/models/concerns/.keep",
     "spec/dummy/app/models/user.rb",
-    "spec/dummy/app/views/layouts/application.html.erb",
+    "spec/dummy/app/views/layouts/application.html.haml",
+    "spec/dummy/app/views/pages/index.html.haml",
     "spec/dummy/bin/bundle",
     "spec/dummy/bin/rails",
     "spec/dummy/bin/rake",
@@ -78,20 +81,30 @@ Gem::Specification.new do |s|
     "spec/dummy/config/initializers/assets.rb",
     "spec/dummy/config/initializers/backtrace_silencers.rb",
     "spec/dummy/config/initializers/cookies_serializer.rb",
+    "spec/dummy/config/initializers/devise.rb",
     "spec/dummy/config/initializers/filter_parameter_logging.rb",
+    "spec/dummy/config/initializers/high_voltage.rb",
     "spec/dummy/config/initializers/inflections.rb",
     "spec/dummy/config/initializers/mime_types.rb",
-    "spec/dummy/config/initializers/session_store.rb",
     "spec/dummy/config/initializers/paid_up.rb",
+    "spec/dummy/config/initializers/session_store.rb",
     "spec/dummy/config/initializers/wrap_parameters.rb",
+    "spec/dummy/config/locales/devise.en.yml",
     "spec/dummy/config/locales/en.yml",
     "spec/dummy/config/routes.rb",
     "spec/dummy/config/secrets.yml",
     "spec/dummy/db/development.sqlite3",
-    "spec/dummy/db/migrate/20150403211031_create_features_table.rb",
-    "spec/dummy/db/migrate/20150403211032_create_features_plans_table.rb",
-    "spec/dummy/db/migrate/20150403211033_create_plans_table.rb",
-    "spec/dummy/db/migrate/20150403211034_create_subscriptions_table.rb",
+    "spec/dummy/db/migrate/20150406154440_create_users_table.rb",
+    "spec/dummy/db/migrate/20150406154457_add_devise_to_users.rb",
+    "spec/dummy/db/migrate/20150407225026_create_paid_up_features_plans_table.paid_up.rb",
+    "spec/dummy/db/migrate/20150407225027_create_paid_up_features_table.paid_up.rb",
+    "spec/dummy/db/migrate/20150407225028_create_paid_up_plans_table.paid_up.rb",
+    "spec/dummy/db/migrate/20150407225029_create_paid_up_subscriptions_table.paid_up.rb",
+    "spec/dummy/db/schema.rb",
+    "spec/dummy/db/seeds.rb",
+    "spec/dummy/db/seeds/features.seeds.rb",
+    "spec/dummy/db/seeds/features_plans.seeds.rb",
+    "spec/dummy/db/seeds/plans.seeds.rb",
     "spec/dummy/db/test.sqlite3",
     "spec/dummy/lib/assets/.keep",
     "spec/dummy/log/.keep",
@@ -101,13 +114,28 @@ Gem::Specification.new do |s|
     "spec/dummy/public/422.html",
     "spec/dummy/public/500.html",
     "spec/dummy/public/favicon.ico",
+    "spec/dummy/test/controllers/plans_controller_controller_test.rb",
+    "spec/factories/feature.rb",
+    "spec/factories/features_plan.rb",
+    "spec/factories/plan.rb",
+    "spec/factories/user.rb",
+    "spec/models/paid_up/feature_spec.rb",
+    "spec/models/paid_up/features_plan_spec.rb",
+    "spec/models/paid_up/plan_spec.rb",
+    "spec/models/paid_up/subscription_spec.rb",
     "spec/models/user_spec.rb",
-    "spec/rails_helper.rb",
-    "spec/spec_helper.rb",
     "spec/paid_up_spec.rb",
-    "paid_up.gemspec"
+    "spec/rails_helper.rb",
+    "spec/routing/paid_up/plans_spec.rb",
+    "spec/routing/paid_up/subscription_spec.rb",
+    "spec/spec_helper.rb",
+    "spec/support/factory_girl.rb",
+    "spec/support/plans_and_features.rb",
+    "spec/support/subscribers.rb",
+    "spec/views/paid_up/plans_spec.rb",
+    "spec/views/paid_up/subscriptions_spec.rb"
   ]
-  s.homepage = "http://github.com/nerakdon/paid_up"
+  s.homepage = "http://www.gemvein.com/museum/cases/paid_up"
   s.licenses = ["MIT"]
   s.rubygems_version = "2.4.6"
   s.summary = "Allows a model of your choosing to subscribe to a plan, which enables features."
@@ -120,32 +148,56 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rails-i18n>, [">= 0"])
       s.add_runtime_dependency(%q<haml-rails>, [">= 0"])
       s.add_runtime_dependency(%q<jeweler>, [">= 0"])
+      s.add_runtime_dependency(%q<bootstrap_leather>, [">= 0"])
+      s.add_runtime_dependency(%q<seedbank>, [">= 0"])
+      s.add_runtime_dependency(%q<chronic>, [">= 0"])
+      s.add_runtime_dependency(%q<devise>, [">= 0"])
+      s.add_runtime_dependency(%q<cancan>, [">= 0"])
       s.add_runtime_dependency(%q<paid_up>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_development_dependency(%q<rspec-collection_matchers>, [">= 0"])
       s.add_development_dependency(%q<database_cleaner>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
-      s.add_development_dependency(%q<devise>, [">= 0"])
+      s.add_development_dependency(%q<high_voltage>, [">= 0"])
+      s.add_development_dependency(%q<forgery>, [">= 0"])
+      s.add_development_dependency(%q<bootswitch>, [">= 0"])
     else
       s.add_dependency(%q<rails>, [">= 4.2"])
       s.add_dependency(%q<rails-i18n>, [">= 0"])
       s.add_dependency(%q<haml-rails>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<bootstrap_leather>, [">= 0"])
+      s.add_dependency(%q<seedbank>, [">= 0"])
+      s.add_dependency(%q<chronic>, [">= 0"])
+      s.add_dependency(%q<devise>, [">= 0"])
+      s.add_dependency(%q<cancan>, [">= 0"])
       s.add_dependency(%q<paid_up>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_dependency(%q<rspec-collection_matchers>, [">= 0"])
       s.add_dependency(%q<database_cleaner>, [">= 0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
-      s.add_dependency(%q<devise>, [">= 0"])
+      s.add_dependency(%q<high_voltage>, [">= 0"])
+      s.add_dependency(%q<forgery>, [">= 0"])
+      s.add_dependency(%q<bootswitch>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, [">= 4.2"])
     s.add_dependency(%q<rails-i18n>, [">= 0"])
     s.add_dependency(%q<haml-rails>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<bootstrap_leather>, [">= 0"])
+    s.add_dependency(%q<seedbank>, [">= 0"])
+    s.add_dependency(%q<chronic>, [">= 0"])
+    s.add_dependency(%q<devise>, [">= 0"])
+    s.add_dependency(%q<cancan>, [">= 0"])
     s.add_dependency(%q<paid_up>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
+    s.add_dependency(%q<rspec-collection_matchers>, [">= 0"])
     s.add_dependency(%q<database_cleaner>, [">= 0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
-    s.add_dependency(%q<devise>, [">= 0"])
+    s.add_dependency(%q<high_voltage>, [">= 0"])
+    s.add_dependency(%q<forgery>, [">= 0"])
+    s.add_dependency(%q<bootswitch>, [">= 0"])
   end
 end
 

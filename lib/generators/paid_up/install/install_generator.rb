@@ -43,8 +43,8 @@ module PaidUp
 
     def add_route
       output "Adding PaidUp to your routes.rb file", :magenta
-      gsub_file "config/routes.rb", /mount PaidUp::Engine => '\/.*', :as => 'PaidUp'/, ''
-      route("mount PaidUp::Engine => '/', :as => 'PaidUp'")
+      gsub_file "config/routes.rb", /mount PaidUp::Engine => '\/.*', :as => 'paid_up'/, ''
+      route("mount PaidUp::Engine => '/', :as => 'paid_up'")
     end
 
     def self.next_migration_number(dirname)

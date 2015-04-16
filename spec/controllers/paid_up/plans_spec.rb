@@ -13,12 +13,10 @@ RSpec.describe PaidUp::PlansController do
       it { should be_success }
       it { should have_http_status(200) }
     end
-
     context "renders the index template" do
       subject { response }
       it { should render_template("index") }
     end
-
     context "loads all of the plans into @plans" do
       subject { assigns(:plans) }
       it { should eq(PaidUp::Plan.all) }

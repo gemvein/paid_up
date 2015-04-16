@@ -6,6 +6,8 @@ class PaidUp::Plan < ActiveRecord::Base
 
   validates_presence_of :charge, :description, :name, :period, :cycles
 
+  scope :free, -> { where(charge: 0.00) }
+
   def feature_setting(name)
     feature = PaidUp::Feature.find_by_name(name)
     raw = features_plans.find_by_feature_name(name)
@@ -32,11 +34,19 @@ class PaidUp::Plan < ActiveRecord::Base
     feature_setting(name) == -1
   end
 
-  def current_phrase
-    cycles.to_s + ' ' + period + ' ago'
+  def valid_date_phrase
+    cycles.to_s + ' ' + period + ' from now'
   end
 
-  def current_date
-    Chronic.parse(current_phrase)
+  def valid_date
+    Chronic.parse(valid_date_phrase)
+  end
+
+  def self.highest
+    order('charge DESC').first
+  end
+
+  def self.default
+    where(name: PaidUp.configuration.default_plan_name).first
   end
 end

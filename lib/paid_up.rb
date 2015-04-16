@@ -10,4 +10,7 @@ module PaidUp
   require 'paid_up/mixins'
 
   require 'haml-rails'
+
+  require 'cancan'
+  require 'devise'
 end
