@@ -154,6 +154,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<chronic>, [">= 0"])
       s.add_runtime_dependency(%q<devise>, [">= 0"])
       s.add_runtime_dependency(%q<cancan>, [">= 0"])
+      s.add_runtime_dependency(%q<bootswitch>, [">= 0"])
       s.add_runtime_dependency(%q<paid_up>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
       s.add_development_dependency(%q<rspec-collection_matchers>, [">= 0"])
@@ -161,7 +162,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_development_dependency(%q<high_voltage>, [">= 0"])
       s.add_development_dependency(%q<forgery>, [">= 0"])
-      s.add_development_dependency(%q<bootswitch>, [">= 0"])
     else
       s.add_dependency(%q<rails>, [">= 4.2"])
       s.add_dependency(%q<rails-i18n>, [">= 0"])
@@ -172,6 +172,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<chronic>, [">= 0"])
       s.add_dependency(%q<devise>, [">= 0"])
       s.add_dependency(%q<cancan>, [">= 0"])
+      s.add_dependency(%q<bootswitch>, [">= 0"])
       s.add_dependency(%q<paid_up>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
       s.add_dependency(%q<rspec-collection_matchers>, [">= 0"])
@@ -179,7 +180,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<high_voltage>, [">= 0"])
       s.add_dependency(%q<forgery>, [">= 0"])
-      s.add_dependency(%q<bootswitch>, [">= 0"])
     end
   else
     s.add_dependency(%q<rails>, [">= 4.2"])
@@ -191,6 +191,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<chronic>, [">= 0"])
     s.add_dependency(%q<devise>, [">= 0"])
     s.add_dependency(%q<cancan>, [">= 0"])
+    s.add_dependency(%q<bootswitch>, [">= 0"])
     s.add_dependency(%q<paid_up>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
     s.add_dependency(%q<rspec-collection_matchers>, [">= 0"])
@@ -198,7 +199,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<high_voltage>, [">= 0"])
     s.add_dependency(%q<forgery>, [">= 0"])
-    s.add_dependency(%q<bootswitch>, [">= 0"])
   end
 end
 

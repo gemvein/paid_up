@@ -4,6 +4,7 @@ source "https://rubygems.org"
 # gem 'rails-i18n'
 # gem 'haml-rails'
 # gem 'jeweler'
+# gem 'bootswitch'
 # gem 'bootstrap_leather'
 # gem 'seedbank'
 # gem 'chronic'
@@ -17,7 +18,6 @@ group :test, :development do
   # gem 'sqlite3'
   # gem 'high_voltage'
   # gem 'forgery'
-  # gem 'bootswitch'
 end
 
 group :test do
