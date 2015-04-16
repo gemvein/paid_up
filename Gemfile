@@ -1,23 +1,23 @@
 source "https://rubygems.org"
 
-gem 'rails', '>= 4.2'
-gem 'rails-i18n'
-gem 'haml-rails'
-gem 'jeweler'
-gem 'bootstrap_leather'
-gem 'seedbank'
-gem 'chronic'
-gem 'devise'
-gem 'cancan'
+# gem 'rails', '>= 4.2'
+# gem 'rails-i18n'
+# gem 'haml-rails'
+# gem 'jeweler'
+# gem 'bootstrap_leather'
+# gem 'seedbank'
+# gem 'chronic'
+# gem 'devise'
+# gem 'cancan'
 
 group :test, :development do
-  gem 'rspec-rails'
-  gem 'rspec-collection_matchers'
-  gem 'database_cleaner'
-  gem 'sqlite3'
-  gem 'high_voltage'
-  gem 'forgery'
-  gem 'bootswitch'
+  # gem 'rspec-rails'
+  # gem 'rspec-collection_matchers'
+  # gem 'database_cleaner'
+  # gem 'sqlite3'
+  # gem 'high_voltage'
+  # gem 'forgery'
+  # gem 'bootswitch'
 end
 
 group :test do
