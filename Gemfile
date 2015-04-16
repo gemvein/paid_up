@@ -26,6 +26,7 @@ group :test do
   gem 'minitest', '~>5.5.1'
   gem "launchy", "~> 2.1.2", require: false
   gem 'factory_girl_rails', require: false
+  gem 'coveralls', require: false
 end
 
 # Declare your gem's dependencies in paid_up.gemspec.
