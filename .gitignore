@@ -3,3 +3,6 @@ log/*.log
 pkg/
 .ruby-version
 .ruby-gemset
+spec/dummy/tmp
+spec/dummy/log
+.idea
