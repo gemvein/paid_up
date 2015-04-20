@@ -8,28 +8,26 @@ module PaidUp
         has_many :features_plans, through: :plans, class_name: 'PaidUp::FeaturesPlan'
         has_many :features, through: :features_plans, class_name: 'PaidUp::Feature'
 
+
+        self.send(:define_method, :subscription) {
+          subscriptions.find_by_plan_id(plan.id)
+        }
         self.send(:define_method, :plan) {
           plans.highest || PaidUp::Plan.default
         }
-        self.send(:define_method, :plan=) { |plan|
-          subscriptions.build(plan: plan, valid_until: plan.valid_date.to_s(:db))
+        self.send(:define_method, :subscribe_to_plan) { |plan_to_set|
+          save
+          subscriptions.create(plan: plan_to_set, valid_until: plan_to_set.valid_date.to_s(:db))
+          reload
         }
         self.send(:define_method, :is_subscribed_to?) { |plan_to_check|
-          if plans.empty?
-            plan_to_check == PaidUp::Plan.default
-          else
-            plans.find_by_id(plan_to_check.id).exists?
-          end
+          subscriptions.find_by_plan_id(plan_to_check.id).present?
         }
         self.send(:define_method, :can_upgrade_to?) { |plan_to_check|
-          if plan.nil?
-            true
-          else
-            !is_subscribed_to? plan_to_check && (plan_to_check.sort > plan.sort)
-          end
+          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort > plan.sort)
         }
         self.send(:define_method, :can_downgrade_to?) { |plan_to_check|
-          !plan.nil? && (!is_subscribed_to? plan_to_check) && (plan_to_check.sort < plan.sort)
+          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort < plan.sort)
         }
 
         PaidUp::Plan.subscribed_to(self)

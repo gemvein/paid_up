@@ -8,33 +8,34 @@ shared_context 'subscribers' do
   let!(:free_subscriber) {
     FactoryGirl.create(
       :subscriber,
-      name: 'Free Subscriber',
-      plan: free_plan
+      name: 'Free Subscriber'
     )
-
   }
 
   let!(:no_ads_subscriber) {
     FactoryGirl.create(
       :subscriber,
-      name: 'No Ads Subscriber',
-      plan: no_ads_plan
+      name: 'No Ads Subscriber'
     )
   }
 
   let!(:group_leader_subscriber) {
     FactoryGirl.create(
       :subscriber,
-      name: 'Group Leader Subscriber',
-      plan: group_leader_plan
+      name: 'Group Leader Subscriber'
     )
   }
 
   let!(:professional_subscriber) {
     FactoryGirl.create(
       :subscriber,
-      name: 'Professional Subscriber',
-      plan: professional_plan
+      name: 'Professional Subscriber'
     )
   }
+
+  before(:each) do
+    no_ads_subscriber.subscribe_to_plan no_ads_plan
+    group_leader_subscriber.subscribe_to_plan group_leader_plan
+    professional_subscriber.subscribe_to_plan professional_plan
+  end
 end

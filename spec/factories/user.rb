@@ -6,7 +6,7 @@ FactoryGirl.define do
 
     factory :subscriber do
       after(:create) do |subscriber|
-        subscriber.plan= subscriber.plan
+        subscriber.subscribe_to_plan subscriber.plan
       end
     end
   end

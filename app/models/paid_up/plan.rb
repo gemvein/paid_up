@@ -47,6 +47,6 @@ class PaidUp::Plan < ActiveRecord::Base
   end
 
   def self.default
-    where(name: PaidUp.configuration.default_plan_name).first
+    find_by_name(PaidUp.configuration.default_plan_name)
   end
 end
