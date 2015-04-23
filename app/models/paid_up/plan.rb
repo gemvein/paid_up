@@ -47,6 +47,6 @@ class PaidUp::Plan < ActiveRecord::Base
   end
 
   def self.default
-    find_by_name(PaidUp.configuration.default_plan_name)
+    find_by_name(PaidUp.configuration.default_plan_name) || raise(:default_plan_not_found.l)
   end
 end

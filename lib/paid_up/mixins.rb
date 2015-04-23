@@ -3,31 +3,28 @@ module PaidUp
     extend ActiveSupport::Concern
     class_methods do
       def subscriber
-        has_many :subscriptions, as: :subscriber, class_name: 'PaidUp::Subscription'
-        has_many :plans, through: :subscriptions, class_name: 'PaidUp::Plan'
-        has_many :features_plans, through: :plans, class_name: 'PaidUp::FeaturesPlan'
+        has_one :subscription, as: :subscriber, class_name: 'PaidUp::Subscription'
+        has_one :plan, through: :subscription, class_name: 'PaidUp::Plan'
+        has_many :features_plans, through: :plan, class_name: 'PaidUp::FeaturesPlan'
         has_many :features, through: :features_plans, class_name: 'PaidUp::Feature'
 
-
-        self.send(:define_method, :subscription) {
-          subscriptions.find_by_plan_id(plan.id)
-        }
-        self.send(:define_method, :plan) {
-          plans.highest || PaidUp::Plan.default
-        }
         self.send(:define_method, :subscribe_to_plan) { |plan_to_set|
-          save
-          subscriptions.create(plan: plan_to_set, valid_until: plan_to_set.valid_date.to_s(:db))
-          reload
+          create_subscription!(plan: plan_to_set, valid_until: plan_to_set.valid_date.to_s(:db))
         }
         self.send(:define_method, :is_subscribed_to?) { |plan_to_check|
-          subscriptions.find_by_plan_id(plan_to_check.id).present?
+          plan == plan_to_check
         }
         self.send(:define_method, :can_upgrade_to?) { |plan_to_check|
           !is_subscribed_to?(plan_to_check) && (plan_to_check.sort > plan.sort)
         }
         self.send(:define_method, :can_downgrade_to?) { |plan_to_check|
           !is_subscribed_to?(plan_to_check) && (plan_to_check.sort < plan.sort)
+        }
+        self.send(:define_method, :using_default_plan?) {
+          plan.name == PaidUp.configuration.default_plan_name
+        }
+        self.send(:define_method, :effective_plan) {
+          plan || PaidUp::Plan.default
         }
 
         PaidUp::Plan.subscribed_to(self)

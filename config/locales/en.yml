@@ -24,3 +24,5 @@ en:
   already_subscribed: "Already Subscribed"
   error: "Error"
   subscribe: "Subscribe"
+  default_plan_not_found: "The default plan could not be found. Please check configs/paid_up.rb"
+  plan_to_check_not_found: "Cannot compare against plan; plan not found."
