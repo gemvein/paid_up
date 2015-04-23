@@ -16675,3 +16675,468 @@ DEPRECATION WARNING: `#timestamp` was called without specifying an option for `n
   [1m[36m (123.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150416214222')[0m
   [1m[35m (91.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150416214224')
   [1m[36m (107.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-20 08:56:04 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HighVoltage::PagesController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendered pages/index.html.haml within layouts/application (15.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (186.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.6ms)
+Completed 200 OK in 255ms (Views: 254.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-04-20 08:56:12 -0600
+Processing by PaidUp::PlansController#index as HTML
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT "paid_up_plans".* FROM "paid_up_plans"
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (3.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (11.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
+Completed 200 OK in 362ms (Views: 22.8ms | ActiveRecord: 0.6ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (92.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (89.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "paid_up_plans" ("name", "charge", "period", "cycles", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Free"], ["charge", 0.0], ["period", "Month"], ["cycles", 1], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-04-20 14:58:05.172695"], ["updated_at", "2015-04-20 14:58:05.172695"]]
+  [1m[36m (91.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "charge", "period", "cycles", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["charge", 1.0], ["period", "Month"], ["cycles", 1], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-04-20 14:58:05.269023"], ["updated_at", "2015-04-20 14:58:05.269023"]]
+  [1m[35m (85.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_plans" ("name", "charge", "period", "cycles", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Group Leader"], ["charge", 5.0], ["period", "Month"], ["cycles", 1], ["description", "For leaders of single groups, with log configuration."], ["sort", 2], ["created_at", "2015-04-20 14:58:05.359071"], ["updated_at", "2015-04-20 14:58:05.359071"]]
+  [1m[36m (86.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "charge", "period", "cycles", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Professional"], ["charge", 10.0], ["period", "Month"], ["cycles", 1], ["description", "Designed for professional trainers with multiple classes, calendar and a discussion forum."], ["sort", 3], ["created_at", "2015-04-20 14:58:05.450889"], ["updated_at", "2015-04-20 14:58:05.450889"]]
+  [1m[35m (86.5ms)[0m  commit transaction
+  [1m[36mPaidUp::Feature Load (0.2ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "ad-free"]]
+  [1m[35mPaidUp::Feature Load (0.0ms)[0m  SELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1  [["name", "groups"]]
+  [1m[36mPaidUp::Feature Load (0.0ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "calendar"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "No Ads"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Group Leader"]]
+  [1m[36mPaidUp::Plan Load (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Professional"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 2], ["setting", 1]]
+  [1m[35m (84.2ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 1], ["plan_id", 3], ["setting", 1]]
+  [1m[36m (95.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 2], ["plan_id", 3], ["setting", 1]]
+  [1m[35m (87.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[36m (87.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (87.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 2], ["plan_id", 4], ["setting", -1]]
+  [1m[36m (72.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (89.0ms)[0m  commit transaction
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-04-20 08:58:10 -0600
+Processing by PaidUp::PlansController#index as HTML
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT "paid_up_plans".* FROM "paid_up_plans"[0m
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.8ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (51.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (11.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
+Completed 200 OK in 71ms (Views: 69.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-580ee6df9e7462fa979aeaaf782bd0b38a130009774237798bea1e52a8f6cf53.css?body=1" for 127.0.0.1 at 2015-04-20 08:58:10 -0600
+
+
+Started GET "/plans/2/subscriptions/new" for 127.0.0.1 at 2015-04-20 08:58:20 -0600
+Processing by PaidUp::SubscriptionsController#new as HTML
+  Parameters: {"plan_id"=>"2"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-04-20 08:58:20 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/devise-3.4.1/app/views/devise/shared/_links.html.erb (1.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/devise-3.4.1/app/views/devise/sessions/new.html.erb within layouts/application (28.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (11.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 69ms (Views: 58.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-04-21 08:15:25 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PaidUp::PlansController#index as HTML
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT "paid_up_plans".* FROM "paid_up_plans"
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.8ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (47.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (109.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.5ms)
+Completed 200 OK in 482ms (Views: 169.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-580ee6df9e7462fa979aeaaf782bd0b38a130009774237798bea1e52a8f6cf53.css?body=1" for 127.0.0.1 at 2015-04-21 08:15:26 -0600
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-04-22 09:31:13 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PaidUp::PlansController#index as HTML
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT "paid_up_plans".* FROM "paid_up_plans"
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.8ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (46.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (104.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.6ms)
+Completed 200 OK in 467ms (Views: 163.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-580ee6df9e7462fa979aeaaf782bd0b38a130009774237798bea1e52a8f6cf53.css?body=1" for 127.0.0.1 at 2015-04-22 09:31:14 -0600
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-04-23 08:54:20 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PaidUp::PlansController#index as HTML
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT "paid_up_plans".* FROM "paid_up_plans"
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.8ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (49.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (110.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.5ms)
+Completed 200 OK in 481ms (Views: 172.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-580ee6df9e7462fa979aeaaf782bd0b38a130009774237798bea1e52a8f6cf53.css?body=1" for 127.0.0.1 at 2015-04-23 08:54:20 -0600
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-04-23 08:55:26 -0600
+Processing by PaidUp::PlansController#index as HTML
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT "paid_up_plans".* FROM "paid_up_plans"[0m
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Free"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (29.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (11.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 415ms (Views: 48.4ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-580ee6df9e7462fa979aeaaf782bd0b38a130009774237798bea1e52a8f6cf53.css?body=1" for 127.0.0.1 at 2015-04-23 08:55:27 -0600
+
+
+Started GET "/plans/1/subscriptions/new" for 127.0.0.1 at 2015-04-23 08:56:40 -0600
+Processing by PaidUp::SubscriptionsController#new as HTML
+  Parameters: {"plan_id"=>"1"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-04-23 08:56:40 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/devise-3.4.1/app/views/devise/shared/_links.html.erb (1.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/devise-3.4.1/app/views/devise/sessions/new.html.erb within layouts/application (9.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (12.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 32ms (Views: 29.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-04-23 08:56:42 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"r/egANlBMa1vXMKBnbqmqeZjdXJ2MPVlQk3m9lMw5NUlG0tcIx1f1l7EBYXG5AjHCZTPcYXEVRuRHHZnAYhQOw==", "user"=>{"email"=>"webmaster@dogtraininglog.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "webmaster@dogtraininglog.com"]]
+Completed 401 Unauthorized in 34ms (ActiveRecord: 0.2ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"r/egANlBMa1vXMKBnbqmqeZjdXJ2MPVlQk3m9lMw5NUlG0tcIx1f1l7EBYXG5AjHCZTPcYXEVRuRHHZnAYhQOw==", "user"=>{"email"=>"webmaster@dogtraininglog.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/devise-3.4.1/app/views/devise/shared/_links.html.erb (0.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/devise-3.4.1/app/views/devise/sessions/new.html.erb within layouts/application (2.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (11.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 87ms (Views: 21.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-04-23 08:56:44 -0600
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/devise-3.4.1/app/views/devise/shared/_links.html.erb (0.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/devise-3.4.1/app/views/devise/registrations/new.html.erb within layouts/application (3.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (11.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 26ms (Views: 24.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-04-23 08:57:20 -0600
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"c8xiL7cRkFWeeXavmASVuc3mK+kAd3Emd1TwCk7EXnH5IIlzTU3+Lq/hsavDWjvXIhGR6vOD0VikBWCbHHzqnw==", "user"=>{"email"=>"sara@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'sara@example.com' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("email", "encrypted_password") VALUES (?, ?)[0m  [["email", "sara@example.com"], ["encrypted_password", "$2a$10$MQcAiluIRwE/SShTA7eece5W0ebmqIe78kqEpmRjsN1.RVYyS5JUC"]]
+  [1m[35m (99.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2015-04-23 14:57:21.039833"], ["current_sign_in_at", "2015-04-23 14:57:21.039833"], ["last_sign_in_ip", "127.0.0.1"], ["current_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["id", 1]]
+  [1m[36m (87.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/plans/1/subscriptions/new
+Completed 302 Found in 272ms (ActiveRecord: 187.8ms)
+
+
+Started GET "/plans/1/subscriptions/new" for 127.0.0.1 at 2015-04-23 08:57:21 -0600
+Processing by PaidUp::SubscriptionsController#new as HTML
+  Parameters: {"plan_id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/new.html.haml within layouts/application (2.5ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.4ms)
+
+ActionView::Template::Error (undefined method `title' for #<PaidUp::Plan:0x00000004579ac8>):
+    1: - add_title :subscribe_to_path.l @plan.title
+    2: 
+    3: -#%h2
+    4: -#  = plan.name
+  activemodel (4.2.1) lib/active_model/attribute_methods.rb:433:in `method_missing'
+  /home/work/Gems/paid_up/app/views/paid_up/subscriptions/new.html.haml:1:in `__home_work__ems_paid_up_app_views_paid_up_subscriptions_new_html_haml___3419700622045293953_36356920'
+  actionview (4.2.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.1) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.1) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `public_send'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `method_missing'
+  actionpack (4.2.1) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (35.8ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mPaidUp::Plan Load (0.4ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."sort" = ? LIMIT 1  [["sort", 0]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_subscriptions" ("plan_id", "valid_until", "subscriber_id", "subscriber_type", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["plan_id", 1], ["valid_until", "2015-05-23 08:59:04.000000"], ["subscriber_id", 1], ["subscriber_type", "User"], ["created_at", "2015-04-23 14:59:04.752535"], ["updated_at", "2015-04-23 14:59:04.752535"]]
+  [1m[36m (97.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-04-23 08:59:27 -0600
+Processing by PaidUp::PlansController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT "paid_up_plans".* FROM "paid_up_plans"[0m
+  [1m[35mPaidUp::Subscription Load (0.2ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:27') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:27') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 1]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mPaidUp::Subscription Load (0.1ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:27') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 2]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" INNER JOIN "paid_up_subscriptions" ON "paid_up_plans"."id" = "paid_up_subscriptions"."plan_id" WHERE (valid_until > '2015-04-23 08:59:27') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ?  ORDER BY charge DESC LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mPaidUp::Subscription Load (0.0ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:27') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" INNER JOIN "paid_up_subscriptions" ON "paid_up_plans"."id" = "paid_up_subscriptions"."plan_id" WHERE (valid_until > '2015-04-23 08:59:27') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ?  ORDER BY charge DESC LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mPaidUp::Subscription Load (0.1ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:27') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 4]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" INNER JOIN "paid_up_subscriptions" ON "paid_up_plans"."id" = "paid_up_subscriptions"."plan_id" WHERE (valid_until > '2015-04-23 08:59:27') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ?  ORDER BY charge DESC LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (17.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (11.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 40ms (Views: 37.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-580ee6df9e7462fa979aeaaf782bd0b38a130009774237798bea1e52a8f6cf53.css?body=1" for 127.0.0.1 at 2015-04-23 08:59:27 -0600
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."sort" = ? LIMIT 1[0m  [["sort", 2]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_subscriptions" ("plan_id", "valid_until", "subscriber_id", "subscriber_type", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["plan_id", 3], ["valid_until", "2015-05-23 08:59:49.000000"], ["subscriber_id", 1], ["subscriber_type", "User"], ["created_at", "2015-04-23 14:59:49.465832"], ["updated_at", "2015-04-23 14:59:49.465832"]]
+  [1m[35m (119.2ms)[0m  commit transaction
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-04-23 08:59:53 -0600
+Processing by PaidUp::PlansController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT "paid_up_plans".* FROM "paid_up_plans"[0m
+  [1m[35mPaidUp::Subscription Load (0.1ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 1]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mPaidUp::Subscription Load (0.0ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 2]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" INNER JOIN "paid_up_subscriptions" ON "paid_up_plans"."id" = "paid_up_subscriptions"."plan_id" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ?  ORDER BY charge DESC LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" INNER JOIN "paid_up_subscriptions" ON "paid_up_plans"."id" = "paid_up_subscriptions"."plan_id" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ?  ORDER BY charge DESC LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mPaidUp::Subscription Load (0.1ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 3]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mPaidUp::Subscription Load (0.1ms)[0m  SELECT  "paid_up_subscriptions".* FROM "paid_up_subscriptions" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ? AND "paid_up_subscriptions"."plan_id" = ? LIMIT 1  [["subscriber_id", 1], ["subscriber_type", "User"], ["plan_id", 4]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" INNER JOIN "paid_up_subscriptions" ON "paid_up_plans"."id" = "paid_up_subscriptions"."plan_id" WHERE (valid_until > '2015-04-23 08:59:53') AND "paid_up_subscriptions"."subscriber_id" = ? AND "paid_up_subscriptions"."subscriber_type" = ?  ORDER BY charge DESC LIMIT 1[0m  [["subscriber_id", 1], ["subscriber_type", "User"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (14.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.5.0/app/views/theme/_stylesheet_link_tag.html.haml (11.0ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.0/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
+Completed 200 OK in 34ms (Views: 31.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-580ee6df9e7462fa979aeaaf782bd0b38a130009774237798bea1e52a8f6cf53.css?body=1" for 127.0.0.1 at 2015-04-23 08:59:53 -0600

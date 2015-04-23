@@ -20,5 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  subscribe: "Subscribe"
+  sign_up: "Sign Up"
+  already_subscribed: "Already Subscribed"
   error: "Error"
+  subscribe: "Subscribe"

@@ -59,4 +59,7 @@ RSpec.configure do |config|
   config.include PaidUp::Engine.routes.url_helpers
 
   config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, type: :view
+  config.include ControllerMacros, type: :controller
+  config.include ControllerMacros, type: :view
 end
