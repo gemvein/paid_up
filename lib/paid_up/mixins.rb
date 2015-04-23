@@ -12,16 +12,16 @@ module PaidUp
           create_subscription!(plan: plan_to_set, valid_until: plan_to_set.valid_date.to_s(:db))
         }
         self.send(:define_method, :is_subscribed_to?) { |plan_to_check|
-          plan == plan_to_check
+          effective_plan == plan_to_check
         }
         self.send(:define_method, :can_upgrade_to?) { |plan_to_check|
-          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort > plan.sort)
+          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort > effective_plan.sort)
         }
         self.send(:define_method, :can_downgrade_to?) { |plan_to_check|
-          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort < plan.sort)
+          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort < effective_plan.sort)
         }
         self.send(:define_method, :using_default_plan?) {
-          plan.name == PaidUp.configuration.default_plan_name
+          effective_plan.name == PaidUp.configuration.default_plan_name
         }
         self.send(:define_method, :effective_plan) {
           plan || PaidUp::Plan.default
