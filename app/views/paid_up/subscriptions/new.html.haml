@@ -1,18 +1,7 @@
-- add_title :subscribe_to_path.l @plan.title
+- add_title :subscribe_to_plan.l plan_name: @plan.name
 
--#%h2
--#  = plan.name
--#  .small= plan_charge_human plan
--#%p= plan.description.html_safe
--#- if @current_subscriber.is_subscribed_to?(plan)
--#  .btn.btn-info.disabled
--#    = link_to (icon('check') + :subscribe.l).html_safe, '#'
--#- elsif @current_subscriber.can_upgrade_to?(plan)
--#  .btn.btn-success
--#    = link_to (icon('upload') + :subscribe.l).html_safe, paid_up.subscribe_plan_path(plan)
--#- elsif @current_subscriber.can_downgrade_to?(plan)
--#  .btn.btn-danger
--#    = link_to (icon('download') + :subscribe.l).html_safe, paid_up.subscribe_plan_path(plan)
--#- else
--#  .badge.badge-warning
--#    = :error.l
+%p= @plan.description
+%h2= plan_charge_human @plan
+
+= form_tag plan_subscriptions_path method: :post do
+  %script{ class: 'stripe-button', src: 'https://checkout.stripe.com/checkout.js', data: subscription_data(@plan) }

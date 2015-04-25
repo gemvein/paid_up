@@ -21,8 +21,13 @@
 
 en:
   already_subscribed: "Already Subscribed"
-  default_plan_not_found: "The default plan could not be found. Please check configs/paid_up.rb"
+  currency_unit: '$'
+  default_currency: 'usd'
+  default_interval: 'life'
   error: "Error"
-  plan_to_check_not_found: "Cannot compare against plan; plan not found."
+  my_subscription_information: 'My Subscription Information'
   sign_up: "Sign Up"
   subscribe: "Subscribe"
+  subscribe_to_plan: "Subscribe to %{plan_name} Plan"
+  thank_you: "Thank You"
+  you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"

@@ -5,10 +5,8 @@ module ControllerMacros
   end
 
   def login_subscriber(subscriber)
-    include_context 'subscribers'
-    before(:each) do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      sign_in subscriber
-    end
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    sign_in subscriber
+    assign(:current_subscriber, subscriber)
   end
 end

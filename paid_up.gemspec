@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-04-16"
+  s.date = "2015-04-24"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
   s.executables = ["rails"]
@@ -42,6 +42,9 @@ Gem::Specification.new do |s|
     "bin/rails",
     "config/locales/en.yml",
     "config/routes.rb",
+    "coverage/.last_run.json",
+    "coverage/.resultset.json",
+    "coverage/.resultset.json.lock",
     "db/migrate/20150407105900_create_paid_up_features_plans_table.rb",
     "db/migrate/20150407110100_create_paid_up_features_table.rb",
     "db/migrate/20150407110101_create_paid_up_plans_table.rb",
@@ -110,7 +113,6 @@ Gem::Specification.new do |s|
     "spec/dummy/lib/assets/.keep",
     "spec/dummy/log/.keep",
     "spec/dummy/log/development.log",
-    "spec/dummy/log/test.log",
     "spec/dummy/public/404.html",
     "spec/dummy/public/422.html",
     "spec/dummy/public/500.html",
@@ -130,6 +132,7 @@ Gem::Specification.new do |s|
     "spec/routing/paid_up/plans_spec.rb",
     "spec/routing/paid_up/subscription_spec.rb",
     "spec/spec_helper.rb",
+    "spec/support/controller_macros.rb",
     "spec/support/factory_girl.rb",
     "spec/support/plans_and_features.rb",
     "spec/support/subscribers.rb",
@@ -149,13 +152,20 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rails-i18n>, [">= 0"])
       s.add_runtime_dependency(%q<haml-rails>, [">= 0"])
       s.add_runtime_dependency(%q<jeweler>, [">= 0"])
+      s.add_runtime_dependency(%q<bootswitch>, [">= 0"])
       s.add_runtime_dependency(%q<bootstrap_leather>, [">= 0"])
       s.add_runtime_dependency(%q<seedbank>, [">= 0"])
       s.add_runtime_dependency(%q<chronic>, [">= 0"])
       s.add_runtime_dependency(%q<devise>, [">= 0"])
       s.add_runtime_dependency(%q<cancan>, [">= 0"])
-      s.add_runtime_dependency(%q<bootswitch>, [">= 0"])
+      s.add_runtime_dependency(%q<stripe>, [">= 0"])
       s.add_runtime_dependency(%q<paid_up>, [">= 0"])
+      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_development_dependency(%q<rspec-collection_matchers>, [">= 0"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<high_voltage>, [">= 0"])
+      s.add_development_dependency(%q<forgery>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
       s.add_development_dependency(%q<rspec-collection_matchers>, [">= 0"])
       s.add_development_dependency(%q<database_cleaner>, [">= 0"])
@@ -167,13 +177,20 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rails-i18n>, [">= 0"])
       s.add_dependency(%q<haml-rails>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<bootswitch>, [">= 0"])
       s.add_dependency(%q<bootstrap_leather>, [">= 0"])
       s.add_dependency(%q<seedbank>, [">= 0"])
       s.add_dependency(%q<chronic>, [">= 0"])
       s.add_dependency(%q<devise>, [">= 0"])
       s.add_dependency(%q<cancan>, [">= 0"])
-      s.add_dependency(%q<bootswitch>, [">= 0"])
+      s.add_dependency(%q<stripe>, [">= 0"])
       s.add_dependency(%q<paid_up>, [">= 0"])
+      s.add_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_dependency(%q<rspec-collection_matchers>, [">= 0"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<high_voltage>, [">= 0"])
+      s.add_dependency(%q<forgery>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
       s.add_dependency(%q<rspec-collection_matchers>, [">= 0"])
       s.add_dependency(%q<database_cleaner>, [">= 0"])
@@ -186,13 +203,20 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rails-i18n>, [">= 0"])
     s.add_dependency(%q<haml-rails>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<bootswitch>, [">= 0"])
     s.add_dependency(%q<bootstrap_leather>, [">= 0"])
     s.add_dependency(%q<seedbank>, [">= 0"])
     s.add_dependency(%q<chronic>, [">= 0"])
     s.add_dependency(%q<devise>, [">= 0"])
     s.add_dependency(%q<cancan>, [">= 0"])
-    s.add_dependency(%q<bootswitch>, [">= 0"])
+    s.add_dependency(%q<stripe>, [">= 0"])
     s.add_dependency(%q<paid_up>, [">= 0"])
+    s.add_dependency(%q<rspec-rails>, [">= 0"])
+    s.add_dependency(%q<rspec-collection_matchers>, [">= 0"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<high_voltage>, [">= 0"])
+    s.add_dependency(%q<forgery>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
     s.add_dependency(%q<rspec-collection_matchers>, [">= 0"])
     s.add_dependency(%q<database_cleaner>, [">= 0"])

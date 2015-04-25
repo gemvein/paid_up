@@ -96,6 +96,7 @@ shared_context "plans and features" do
     FactoryGirl.create(
       :plan,
       name: 'Professional',
+      description: 'This is the description of the Professional plan.',
       charge: '10.00',
       sort: 3
     )

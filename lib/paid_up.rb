@@ -10,7 +10,14 @@ module PaidUp
   require 'paid_up/mixins'
 
   require 'haml-rails'
+  require 'bootswitch'
+  require 'bootstrap_leather'
 
-  require 'cancan'
   require 'devise'
+  require 'cancan'
+
+  require 'stripe'
+
+  require 'seedbank'
+  require 'chronic'
 end

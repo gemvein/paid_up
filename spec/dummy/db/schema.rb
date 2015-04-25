@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416214225) do
+ActiveRecord::Schema.define(version: 20150424233014) do
 
   create_table "paid_up_features", force: :cascade do |t|
     t.string "name"
@@ -31,9 +31,7 @@ ActiveRecord::Schema.define(version: 20150416214225) do
   add_index "paid_up_features_plans", ["plan_id"], name: "index_paid_up_features_plans_on_plan_id"
 
   create_table "paid_up_plans", force: :cascade do |t|
-    t.decimal  "charge"
-    t.string   "period"
-    t.integer  "cycles"
+    t.string   "stripe_id"
     t.string   "name"
     t.text     "description"
     t.integer  "sort"
@@ -42,22 +40,11 @@ ActiveRecord::Schema.define(version: 20150416214225) do
   end
 
   add_index "paid_up_plans", ["name"], name: "index_paid_up_plans_on_name", unique: true
-
-  create_table "paid_up_subscriptions", force: :cascade do |t|
-    t.integer  "plan_id"
-    t.integer  "subscriber_id"
-    t.string   "subscriber_type"
-    t.datetime "valid_until"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "paid_up_subscriptions", ["plan_id"], name: "index_paid_up_subscriptions_on_plan_id"
-  add_index "paid_up_subscriptions", ["subscriber_type", "subscriber_id"], name: "subscriber"
-  add_index "paid_up_subscriptions", ["valid_until"], name: "index_paid_up_subscriptions_on_valid_until"
+  add_index "paid_up_plans", ["stripe_id"], name: "index_paid_up_plans_on_stripe_id", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
+    t.string   "stripe_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -72,5 +59,6 @@ ActiveRecord::Schema.define(version: 20150416214225) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["stripe_id"], name: "index_users_on_stripe_id"
 
 end

@@ -17,6 +17,11 @@ Next, install it by executing these commands:
     rails g paid_up:install [USER_MODEL_NAME]
     rake db:migrate
 
+Edit your config file at `config/initializers/paid_up.rb` to set up your connection to Stripe, as well as some other key details.
+
+Set your environment variables with your STRIPE_PUBLISHABLE_KEY and your STRIPE_SECRET_KEY. (Check your operating system or IDE's documentation for details)
+
+
 
 Contributing to Paid Up
 ----------------------------

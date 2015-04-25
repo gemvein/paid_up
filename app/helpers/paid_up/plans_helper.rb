@@ -8,11 +8,11 @@ module PaidUp
 
     def plan_period_phrase(plan)
       period_phrase = ''
-      if plan.cycles > 1
-        period_phrase += plan.cycles.to_s
+      if plan.interval_count > 1
+        period_phrase += plan.interval_count.to_s
         period_phrase += ' '
       end
-      period_phrase += plan.period
+      period_phrase + plan.interval.capitalize
     end
 
   end

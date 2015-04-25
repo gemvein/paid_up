@@ -10,6 +10,7 @@ gem 'seedbank'
 gem 'chronic'
 gem 'devise'
 gem 'cancan'
+gem 'stripe'
 
 group :test, :development do
   gem 'rspec-rails'

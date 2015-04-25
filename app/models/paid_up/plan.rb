@@ -1,12 +1,14 @@
 class PaidUp::Plan < ActiveRecord::Base
   has_many :features_plans, class_name: 'PaidUp::FeaturesPlan'
   has_many :features, :through => :features_plans, class_name: 'PaidUp::Feature'
-  has_many :subscriptions, class_name: 'PaidUp::Subscription'
-  has_many :subscribers, :through => :subscriptions
 
-  validates_presence_of :charge, :description, :name, :period, :cycles
+  validates_presence_of :description, :name
 
-  scope :free, -> { where(charge: 0.00) }
+  after_find :load_stripe_data
+
+  attr_accessor :stripe_data
+
+  scope :default, -> { where('stripe_id IS NULL').first }
 
   def feature_setting(name)
     feature = PaidUp::Feature.find_by_name(name)
@@ -34,19 +36,46 @@ class PaidUp::Plan < ActiveRecord::Base
     feature_setting(name) == -1
   end
 
-  def valid_date_phrase
-    cycles.to_s + ' ' + period + ' from now'
+  def load_stripe_data
+    if stripe_id.present?
+      self.stripe_data = Stripe::Plan.retrieve stripe_id
+    end
   end
 
-  def valid_date
-    Chronic.parse(valid_date_phrase)
+  def interval
+    if stripe_id.present?
+      stripe_data.interval
+    else
+      :default_interval.l
+    end
   end
 
-  def self.highest
-    order('charge DESC').first
+  def interval_count
+    if stripe_id.present?
+      stripe_data.interval_count
+    else
+      1
+    end
   end
 
-  def self.default
-    find_by_name(PaidUp.configuration.default_plan_name) || raise(:default_plan_not_found.l)
+  def amount
+    if stripe_id.present?
+      stripe_data.amount
+    else
+      0
+    end
   end
+
+  def charge
+    amount/100
+  end
+
+  def currency
+    if stripe_id.present?
+      stripe_data.currency
+    else
+      :currency_unit.l
+    end
+  end
+
 end

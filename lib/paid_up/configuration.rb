@@ -11,12 +11,12 @@ module PaidUp
   end
   
   class Configuration
-    attr_accessor :current_subscriber_method, :default_subscriber_method, :default_plan_name
+    attr_accessor :current_subscriber_method, :default_subscriber_method, :currency
     
     def initialize
       self.current_subscriber_method = "TODO"
       self.default_subscriber_method = "TODO"
-      self.default_plan_name = "TODO"
+      self.currency = "TODO"
     end
   end
 end

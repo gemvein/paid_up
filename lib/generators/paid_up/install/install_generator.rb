@@ -12,27 +12,23 @@ module PaidUp
 
     # all public methods in here will be run in order
 
+    def install_devise
+      output "To start with, Devise is used to authenticate #{user_model_name.pluralize}. No need to install it separately, I'll do that now.", :magenta
+      generate("devise:install")
+      generate("devise #{user_model_name}")
+    end
+
     def add_initializer
-      output "To start with, you'll need an initializer.  This is where you put your configuration options.", :magenta
+      output "Next, you'll need an initializer.  This is where you put your configuration options.", :magenta
       template "initializer.rb.erb", "config/initializers/paid_up.rb", assigns: { user_model: ('::' + user_model_name).constantize.new }
     end
 
     def add_migrations
       output "Next come migrations.", :magenta
       rake 'paid_up:install:migrations'
-      PaidUp::Engine.load_seed
-      # unless ActiveRecord::Base.connection.table_exists? 'features'
-      #   migration_template 'migrate/create_features_table.rb', 'db/migrate/create_features_table.rb' rescue output $!.message
-      # end
-      # unless ActiveRecord::Base.connection.table_exists? 'features_plans'
-      #   migration_template 'migrate/create_features_plans_table.rb', 'db/migrate/create_features_plans_table.rb' rescue output $!.message
-      # end
-      # unless ActiveRecord::Base.connection.table_exists? 'plans'
-      #   migration_template 'migrate/create_plans_table.rb', 'db/migrate/create_plans_table.rb' rescue output $!.message
-      # end
-      # unless ActiveRecord::Base.connection.table_exists? 'subscriptions'
-      #   migration_template 'migrate/create_subscriptions_table.rb', 'db/migrate/create_subscriptions_table.rb' rescue output $!.message
-      # end
+      unless self.class.migration_exists?('db/migrate', 'add_customer_stripe_id.rb')
+        generate("migration AddStripeIdColumnTo#{user_model_name} stripe_id:string:index")
+      end
     end
 
     def add_to_model
