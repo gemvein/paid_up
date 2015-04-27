@@ -12,6 +12,7 @@ module PaidUp
   require 'haml-rails'
   require 'bootswitch'
   require 'bootstrap_leather'
+  require 'high_voltage'
 
   require 'devise'
   require 'cancan'
