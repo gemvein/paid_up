@@ -6,7 +6,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'uglifier'
 gem 'jeweler'
-gem 'bootswitch', path: '~/Gems/bootswitch'
+gem 'bootswitch'
 gem 'bootstrap_leather'
 gem 'seedbank'
 gem 'chronic'
@@ -30,7 +30,6 @@ group :test do
   gem "launchy", "~> 2.1.2", require: false
   gem 'factory_girl_rails', require: false
   gem 'coveralls', require: false
-  gem 'stripe-ruby-mock', '~> 2.1.1', :require => 'stripe_mock'
 end
 
 # Declare your gem's dependencies in paid_up.gemspec.
