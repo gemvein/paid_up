@@ -1,5 +1,6 @@
 shared_context "plans and features" do
-
+  include_context 'stripe'
+  
   ############
   # Features #
   ############
@@ -41,7 +42,7 @@ shared_context "plans and features" do
     FactoryGirl.create(
       :plan,
       name: 'Free',
-      charge: '0.00',
+      stripe_id: nil,
       sort: 0
     )
   }
@@ -49,7 +50,7 @@ shared_context "plans and features" do
     FactoryGirl.create(
       :plan,
       name: 'No Ads',
-      charge: '1.00',
+      stripe_id: 'no-ads-plan',
       sort: 1
     )
   }
@@ -64,7 +65,7 @@ shared_context "plans and features" do
     FactoryGirl.create(
       :plan,
       name: 'Group Leader',
-      charge: '5.00',
+      stripe_id: 'group-leader-plan',
       sort: 2
     )
   }
@@ -97,7 +98,7 @@ shared_context "plans and features" do
       :plan,
       name: 'Professional',
       description: 'This is the description of the Professional plan.',
-      charge: '10.00',
+      stripe_id: 'professional-plan',
       sort: 3
     )
   }

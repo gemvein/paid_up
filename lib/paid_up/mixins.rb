@@ -3,9 +3,6 @@ module PaidUp
     extend ActiveSupport::Concern
     class_methods do
       def subscriber
-        has_many :features_plans, through: :plan, class_name: 'PaidUp::FeaturesPlan'
-        has_many :features, through: :features_plans, class_name: 'PaidUp::Feature'
-
         attr_accessor :stripe_data
 
         after_find :load_stripe_data
@@ -15,12 +12,36 @@ module PaidUp
             @customer_stripe_data = Stripe::Customer.retrieve stripe_id
           end
         }
+        self.send(:define_method, :subscribe_to_plan) { |stripe_token, plan|
+          if plan.stripe_id.present?
+            customer = Stripe::Customer.create(
+                :source => stripe_token,
+                :plan => plan.stripe_id,
+                :email => email
+            )
+
+            update_attributes(stripe_id: customer.id)
+          elsif stripe_id.present?
+              customer = Stripe::Customer.retrieve(stripe_id)
+              customer.at_period_end = true
+              customer.save
+          else
+            #nothing to do
+          end
+          reload
+        }
         self.send(:define_method, :plan) {
           if stripe_id.present?
-            PaidUp::Plan.find_by_stripe_id(@customer_stripe_data.subscriptions.data.first.plan.id)
+            PaidUp::Plan.find_by_stripe_id(plan_stripe_id)
           else
             PaidUp::Plan.default
           end
+        }
+        self.send(:define_method, :plan_stripe_id) {
+          if @customer_stripe_data.nil?
+            load_stripe_data
+          end
+          @customer_stripe_data.subscriptions.data.first.plan.id
         }
         self.send(:define_method, :is_subscribed_to?) { |plan_to_check|
           plan == plan_to_check

@@ -59,15 +59,18 @@ class PaidUp::Plan < ActiveRecord::Base
   end
 
   def amount
-    if stripe_id.present?
+    if stripe_data.present?
       stripe_data.amount
+    elsif stripe_id.present?
+      load_stripe_data
+      amount
     else
       0
     end
   end
 
   def charge
-    amount/100
+    amount / 100
   end
 
   def currency

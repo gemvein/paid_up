@@ -1,16 +1,11 @@
 require 'rails_helper'
 
 describe User do
-  it { should have_one(:subscription).class_name('PaidUp::Subscription') }
-  it { should have_one(:plan).class_name('PaidUp::Plan').through(:subscription) }
-  it { should have_many(:features_plans).class_name('PaidUp::FeaturesPlan').through(:plan) }
-  it { should have_many(:features).class_name('PaidUp::Feature').through(:features_plans) }
-
   include_context 'subscribers'
 
   context '#subscribe_to_plan' do
     before do
-      free_subscriber.subscribe_to_plan no_ads_plan
+      free_subscriber.subscribe_to_plan default_card_data, no_ads_plan
     end
     subject { free_subscriber.plan }
     it { should eq(no_ads_plan) }
@@ -81,17 +76,6 @@ describe User do
     context 'when true' do
       subject { free_subscriber.using_default_plan? }
       it { should be true }
-    end
-  end
-
-  context '#effective_plan' do
-    context 'when plan is set' do
-      subject { no_ads_subscriber.effective_plan }
-      it { should eq(no_ads_plan) }
-    end
-    context 'when plan is not set' do
-      subject { free_subscriber.effective_plan }
-      it { should eq(PaidUp::Plan.default) }
     end
   end
 end

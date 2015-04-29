@@ -2,25 +2,26 @@
 
 .plans.row
   - for plan in @plans
-    .plan.col-md-2
-      %h2
-        = plan.name
-        .small= plan_charge_human plan
-      %p= plan.description.html_safe
-      %div{class:plan.name.gsub(' ',"_").downcase+'_subscribe_button'}
-        - if @current_subscriber.can_upgrade_to?(plan)
-          .btn.btn-success
-            = link_to (icon('arrow-up') + :subscribe.l).html_safe, paid_up.new_plan_subscription_path(plan)
-        - elsif @current_subscriber.can_downgrade_to?(plan)
-          .btn.btn-danger
-            = link_to (icon('arrow-down') + :subscribe.l).html_safe, paid_up.new_plan_subscription_path(plan)
-        - else
-          -if user_signed_in?
-            .btn.btn-disabled.disabled
-              = link_to (icon('ok') + :already_subscribed.l).html_safe, '#'
-          -elsif plan == PaidUp::Plan.default
-            .btn.btn-info
-              = link_to (icon('upload') + :sign_up.l).html_safe, paid_up.new_plan_subscription_path(plan)
-          -else
-            .btn.btn-disabled.disabled
-              = link_to (icon('remove') + :error.l).html_safe, '#'
+    .plan.col-md-3
+      .well
+        %h2
+          = plan.name
+          .small= plan_charge_human plan
+        %p= plan.description.html_safe
+        %div{class:plan.name.gsub(' ',"_").downcase+'_subscribe_button'}
+          - if @current_subscriber.can_upgrade_to?(plan)
+            .btn.btn-success
+              = link_to (icon('arrow-up') + :subscribe.l).html_safe, paid_up.new_plan_subscription_path(plan)
+          - elsif @current_subscriber.can_downgrade_to?(plan)
+            .btn.btn-danger
+              = link_to (icon('arrow-down') + :subscribe.l).html_safe, paid_up.new_plan_subscription_path(plan)
+          - else
+            -if user_signed_in?
+              .btn.btn-disabled.disabled
+                = link_to (icon('ok') + :already_subscribed.l).html_safe, '#'
+            -elsif plan == PaidUp::Plan.default
+              .btn.btn-info
+                = link_to (icon('upload') + :sign_up.l).html_safe, paid_up.new_plan_subscription_path(plan)
+            -else
+              .btn.btn-disabled.disabled
+                = link_to (icon('remove') + :error.l).html_safe, '#'

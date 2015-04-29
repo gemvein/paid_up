@@ -3,5 +3,5 @@
 %p= @plan.description
 %h2= plan_charge_human @plan
 
-= form_tag plan_subscriptions_path method: :post do
+= form_tag paid_up.plan_subscriptions_path(@plan) do
   %script{ class: 'stripe-button', src: 'https://checkout.stripe.com/checkout.js', data: subscription_data(@plan) }

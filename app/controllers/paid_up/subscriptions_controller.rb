@@ -3,21 +3,12 @@ module PaidUp
     before_filter :authenticate_user!
     before_filter :set_plan, only: [:new, :create]
     def new
-      # nothing to do, plan set by #set_plan
+      # nothing to do, @plan set by #set_plan
     end
 
     def create
-      # nothing to do, plan set by #set_plan
-
-      customer = Stripe::Customer.create(
-          :source => params[:stripeToken],
-          :plan => @plan.stripe_id,
-          :email => @current_subscriber.email
-      )
-
-      @current_subscriber.update_attributes(stripe_id: customer.id)
-
-      @current_subscriber.load_stripe_data
+      # @plan set by #set_plan
+      @current_subscriber.subscribe_to_plan(params[:stripeToken], @plan)
 
     rescue Stripe::InvalidRequestError => e
       flash[:error] = e.message
