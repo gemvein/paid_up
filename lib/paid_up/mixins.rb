@@ -3,13 +3,18 @@ module PaidUp
     extend ActiveSupport::Concern
     class_methods do
       def subscriber
-        attr_accessor :stripe_data
+        attr_reader :stripe_data
 
         after_find :load_stripe_data
 
         self.send(:define_method, :load_stripe_data) {
           if stripe_id.present?
             @customer_stripe_data = Stripe::Customer.retrieve stripe_id
+          end
+        }
+        self.send(:define_method, :stripe_data) {
+          if stripe_id.present?
+            @customer_stripe_data
           end
         }
         self.send(:define_method, :subscribe_to_plan) { |stripe_token, plan|
@@ -29,6 +34,7 @@ module PaidUp
             #nothing to do
           end
           reload
+          load_stripe_data
         }
         self.send(:define_method, :plan) {
           if stripe_id.present?
@@ -38,10 +44,13 @@ module PaidUp
           end
         }
         self.send(:define_method, :plan_stripe_id) {
-          if @customer_stripe_data.nil?
+          subscription.plan.id
+        }
+        self.send(:define_method, :subscription) {
+          if stripe_data.nil?
             load_stripe_data
           end
-          @customer_stripe_data.subscriptions.data.first.plan.id
+          stripe_data.subscriptions.data.first
         }
         self.send(:define_method, :is_subscribed_to?) { |plan_to_check|
           plan == plan_to_check
@@ -53,7 +62,7 @@ module PaidUp
           !is_subscribed_to?(plan_to_check) && (plan_to_check.sort < plan.sort)
         }
         self.send(:define_method, :using_default_plan?) {
-          !plan.stripe_id.present? || @customer_stripe_data.delinquent
+          !plan.stripe_id.present? || stripe_data.delinquent
         }
 
         PaidUp::Plan.subscribed_to(self)

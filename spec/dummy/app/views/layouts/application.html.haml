@@ -11,8 +11,10 @@
 
 %body
   .container
+    = alert_flash_messages
     = render_h1         # For the h1 tag containing the title alone
     = yield
 
   %footer
   = render_footer_javascript
+  = javascript_include_tag 'application'

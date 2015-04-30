@@ -8,6 +8,7 @@ module PaidUp
   require 'paid_up/localization'
   require 'paid_up/version'
   require 'paid_up/mixins'
+  require 'paid_up/integer'
 
   require 'haml-rails'
   require 'bootswitch'

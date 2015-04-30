@@ -21,13 +21,17 @@
 
 en:
   already_subscribed: "Already Subscribed"
+  canceled: "Canceled"
   currency_unit: '$'
   default_currency: 'usd'
   default_interval: 'life'
   error: "Error"
   my_subscription_information: 'My Subscription Information'
+  paid_thru: "Paid Thru"
   sign_up: "Sign Up"
+  status: "Status"
   subscribe: "Subscribe"
   subscribe_to_plan: "Subscribe to %{plan_name} Plan"
   thank_you: "Thank You"
+  trial_period: "Trial Period"
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"

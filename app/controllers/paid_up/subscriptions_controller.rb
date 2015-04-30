@@ -10,6 +10,7 @@ module PaidUp
       # @plan set by #set_plan
       @current_subscriber.subscribe_to_plan(params[:stripeToken], @plan)
 
+      redirect_to subscriptions_path, flash: { notice: :you_are_now_subscribed_to_the_plan.l(plan_name: @current_subscriber.plan.name) }
     rescue Stripe::InvalidRequestError => e
       flash[:error] = e.message
       redirect_to plans_path

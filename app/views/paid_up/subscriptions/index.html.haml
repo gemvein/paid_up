@@ -1,1 +1,10 @@
 - add_title :my_subscription_information.l
+
+%h2
+  = @current_subscriber.plan.name
+  .small= plan_charge_human @current_subscriber.plan
+
+= subscription_dl @current_subscriber.subscription
+
+- if @current_subscriber.subscription.cancel_at_period_end
+  %h3= :canceled.l

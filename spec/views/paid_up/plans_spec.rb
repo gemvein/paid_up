@@ -5,7 +5,7 @@ RSpec.describe "paid_up/plans/index" do
 
   context 'when user is anonymous' do
     before do
-      access_anonymous
+      assign(:current_subscriber, access_anonymous)
       assign(:plans, PaidUp::Plan.all)
       render
     end
@@ -25,8 +25,7 @@ RSpec.describe "paid_up/plans/index" do
 
   context 'when user is logged in as professional subscriber' do
     before do
-      sign_in professional_subscriber
-      assign(:current_subscriber, professional_subscriber)
+      assign(:current_subscriber, sign_in(professional_subscriber))
       assign(:plans, PaidUp::Plan.all)
       render
     end
