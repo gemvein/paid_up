@@ -25,7 +25,7 @@ RSpec.describe "paid_up/plans/index" do
 
   context 'when user is logged in as professional subscriber' do
     before do
-      assign(:current_subscriber, sign_in(professional_subscriber))
+      assign(:current_subscriber, login_subscriber(professional_subscriber))
       assign(:plans, PaidUp::Plan.all)
       render
     end
