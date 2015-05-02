@@ -7,11 +7,6 @@ module PaidUp
 
         after_find :load_stripe_data
 
-        self.send(:define_method, :load_stripe_data) {
-          if stripe_id.present?
-            @customer_stripe_data = Stripe::Customer.retrieve stripe_id
-          end
-        }
         self.send(:define_method, :stripe_data) {
           if stripe_id.present?
             @customer_stripe_data
@@ -44,11 +39,14 @@ module PaidUp
           end
         }
         self.send(:define_method, :plan_stripe_id) {
+          if subscription.nil?
+            return nil
+          end
           subscription.plan.id
         }
         self.send(:define_method, :subscription) {
           if stripe_data.nil?
-            load_stripe_data
+            return nil
           end
           stripe_data.subscriptions.data.first
         }
@@ -64,6 +62,13 @@ module PaidUp
         self.send(:define_method, :using_default_plan?) {
           !plan.stripe_id.present? || stripe_data.delinquent
         }
+
+        self.send(:define_method, :load_stripe_data) {
+          if stripe_id.present?
+            @customer_stripe_data = Stripe::Customer.retrieve stripe_id
+          end
+        }
+        self.send(:private, :load_stripe_data)
 
         PaidUp::Plan.subscribed_to(self)
       end

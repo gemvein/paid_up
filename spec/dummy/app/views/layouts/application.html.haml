@@ -16,5 +16,12 @@
     = yield
 
   %footer
+    = nav_list :class => 'nav-pills' do
+      = nav_item :pricing.l, paid_up.plans_path
+      - if signed_in?
+        = nav_item :my_subscription.l, paid_up.subscriptions_path
+      - else
+        = nav_item :sign_in.l, new_user_session_path
+        = nav_item :sign_up.l, new_user_registration_path
   = render_footer_javascript
   = javascript_include_tag 'application'

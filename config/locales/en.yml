@@ -26,8 +26,10 @@ en:
   default_currency: 'usd'
   default_interval: 'life'
   error: "Error"
+  my_subscription: 'My Subscription'
   my_subscription_information: 'My Subscription Information'
   paid_thru: "Paid Thru"
+  pricing: "Pricing"
   sign_up: "Sign Up"
   status: "Status"
   subscribe: "Subscribe"
