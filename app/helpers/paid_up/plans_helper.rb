@@ -3,7 +3,7 @@ module PaidUp
     include ::ActionView::Helpers::NumberHelper
 
     def plan_charge_human(plan)
-      number_to_currency(plan.charge) + '/' + plan_period_phrase(plan)
+      plan.money.format + '/' + plan_period_phrase(plan)
     end
 
     def plan_period_phrase(plan)

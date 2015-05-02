@@ -19,6 +19,7 @@ module PaidUp
   require 'cancan'
 
   require 'stripe'
+  require 'money'
 
   require 'seedbank'
   require 'chronic'

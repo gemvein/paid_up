@@ -13,6 +13,7 @@ gem 'chronic'
 gem 'devise'
 gem 'cancan'
 gem 'stripe'
+gem 'money'
 
 group :test, :development do
   gem 'rspec-rails'

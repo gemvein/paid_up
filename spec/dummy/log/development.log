@@ -38674,3 +38674,191 @@ Processing by PaidUp::SubscriptionsController#index as HTML
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
 Completed 200 OK in 1314ms (Views: 829.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/plans" for 127.0.0.1 at 2015-05-02 06:46:03 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PaidUp::PlansController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT "paid_up_plans".* FROM "paid_up_plans"[0m
+  [1m[35mPaidUp::Plan Load (0.3ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "group-leader-plan"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1[0m  [["stripe_id", "group-leader-plan"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "group-leader-plan"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1[0m  [["stripe_id", "group-leader-plan"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_icon.html.haml (1.1ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "group-leader-plan"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1[0m  [["stripe_id", "group-leader-plan"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "group-leader-plan"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1[0m  [["stripe_id", "group-leader-plan"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "group-leader-plan"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1[0m  [["stripe_id", "group-leader-plan"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "group-leader-plan"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1[0m  [["stripe_id", "group-leader-plan"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_icon.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/plans/index.html.haml within layouts/application (8104.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (21.0ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_head_css.html.haml (0.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_item.html.haml (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_list.html.haml (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_footer_javascript.html.haml (0.5ms)
+Completed 200 OK in 8974ms (Views: 8277.7ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/plans/2/subscriptions/new" for 127.0.0.1 at 2015-05-02 06:46:20 -0600
+Processing by PaidUp::SubscriptionsController#new as HTML
+  Parameters: {"plan_id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.3ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/new.html.haml within layouts/application (7.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (14.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
+Completed 200 OK in 766ms (Views: 57.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/128x128.png" for 127.0.0.1 at 2015-05-02 06:46:22 -0600
+
+ActionController::RoutingError (No route matches [GET] "/128x128.png"):
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (28.7ms)
+
+
+Started GET "/128x128.png" for 127.0.0.1 at 2015-05-02 06:46:23 -0600
+
+ActionController::RoutingError (No route matches [GET] "/128x128.png"):
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (7.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (35.7ms)
+
+
+Started POST "/plans/2/subscriptions" for 127.0.0.1 at 2015-05-02 06:46:39 -0600
+Processing by PaidUp::SubscriptionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2QzhjKkWUS8RSjOhWDpnEtQW2u9uXza8HeSQtoLH9/pT4ArQU0o/VCDS9KUDZMl8O+Fg7J2rlsLOtQAn0H9DFA==", "stripeToken"=>"tok_15y00uDz4VtlhGogQvUdwhts", "stripeTokenType"=>"card", "stripeEmail"=>"webmaster@gemvein.com", "plan_id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "stripe_id" = ? WHERE "users"."id" = ?[0m  [["stripe_id", "cus_6AKgovtu4ZnrCe"], ["id", 1]]
+  [1m[35m (165.7ms)[0m  commit transaction
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mPaidUp::Plan Load (0.3ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "no-ads-plan"]]
+Redirected to http://localhost:3000/subscriptions
+Completed 302 Found in 3557ms (ActiveRecord: 167.0ms)
+
+
+Started GET "/128x128.png" for 127.0.0.1 at 2015-05-02 06:46:42 -0600
+
+ActionController::RoutingError (No route matches [GET] "/128x128.png"):
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (31.9ms)
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-02 06:46:42 -0600
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "no-ads-plan"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1[0m  [["stripe_id", "no-ads-plan"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_definition_list.html.haml (6.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml within layouts/application (924.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (18.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_alert.html.haml (2.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_alert_flash_messages.html.haml (4.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_nav_list.html.haml (0.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.5/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 1500ms (Views: 985.9ms | ActiveRecord: 0.3ms)

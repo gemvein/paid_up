@@ -5,6 +5,7 @@ class PaidUp::Plan < ActiveRecord::Base
   validates_presence_of :description, :name
 
   after_find :load_stripe_data
+  after_create :load_stripe_data
 
   attr_accessor :stripe_data
 
@@ -36,14 +37,8 @@ class PaidUp::Plan < ActiveRecord::Base
     feature_setting(name) == -1
   end
 
-  def load_stripe_data
-    if stripe_id.present?
-      self.stripe_data = Stripe::Plan.retrieve stripe_id
-    end
-  end
-
   def interval
-    if stripe_id.present?
+    if stripe_data.present?
       stripe_data.interval
     else
       :default_interval.l
@@ -51,7 +46,7 @@ class PaidUp::Plan < ActiveRecord::Base
   end
 
   def interval_count
-    if stripe_id.present?
+    if stripe_data.present?
       stripe_data.interval_count
     else
       1
@@ -61,23 +56,32 @@ class PaidUp::Plan < ActiveRecord::Base
   def amount
     if stripe_data.present?
       stripe_data.amount
-    elsif stripe_id.present?
-      load_stripe_data
-      amount
     else
       0
     end
   end
 
+  def money
+    Money.new(amount, currency)
+  end
+
   def charge
-    amount / 100
+    money.amount
   end
 
   def currency
-    if stripe_id.present?
-      stripe_data.currency
+    if stripe_data.present?
+      stripe_data.currency.upcase
     else
-      :currency_unit.l
+      :default_currency.l.upcase
+    end
+  end
+
+  private
+
+  def load_stripe_data
+    if stripe_id.present?
+      self.stripe_data = Stripe::Plan.retrieve stripe_id
     end
   end
 

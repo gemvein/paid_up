@@ -55,4 +55,71 @@ describe PaidUp::Plan do
     end
   end
 
+  describe '#interval' do
+    context 'on default plan' do
+      subject { free_plan.interval }
+      it { should eq 'life' }
+    end
+    context 'on a regular plan' do
+      subject { no_ads_plan.interval }
+      it { should eq 'month' }
+    end
+  end
+
+  describe '#interval_count' do
+    context 'on default plan' do
+      subject { free_plan.interval_count }
+      it { should eq 1 }
+    end
+    context 'on a regular plan' do
+      subject { no_ads_plan.interval_count }
+      it { should eq 1 }
+    end
+  end
+
+  describe '#amount' do
+    context 'on default plan' do
+      subject { free_plan.amount }
+      it { should eq 0 }
+    end
+    context 'on a regular plan' do
+      subject { no_ads_plan.amount }
+      it { should eq 100 }
+    end
+  end
+
+  describe '#money' do
+    context 'on default plan' do
+      subject { free_plan.money }
+      it { should be_a Money }
+    end
+    context 'on a regular plan' do
+      subject { no_ads_plan.money }
+      it { should be_a Money }
+    end
+  end
+
+  describe '#charge' do
+    context 'on default plan' do
+      subject { free_plan.charge }
+      it { should eq 0 }
+    end
+    context 'on a regular plan' do
+      subject { no_ads_plan.charge }
+      it { should eq 1 }
+    end
+  end
+
+  describe '#currency' do
+    context 'on default plan' do
+      subject { free_plan.currency }
+      it { should eq 'USD' }
+    end
+    context 'on a regular plan' do
+      subject { no_ads_plan.currency }
+      it { should eq 'USD' }
+    end
+  end
+
+
 end
