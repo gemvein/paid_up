@@ -12,24 +12,56 @@ module PaidUp
             @customer_stripe_data
           end
         }
-        self.send(:define_method, :subscribe_to_plan) { |stripe_token, plan|
-          if plan.stripe_id.present?
+        self.send(:define_method, :cards) {
+          if stripe_data.present?
+            stripe_data.sources.all(:object => "card")
+          else
+            nil
+          end
+        }
+        self.send(:define_method, :card_from_token) { |token_id|
+          Stripe::Token.retrieve(token_id).card
+        }
+        self.send(:define_method, :subscribe_to_plan) { |card_to_set, plan_to_set|
+          if stripe_id.present?
+            if plan_to_set.stripe_id.present?
+              Stripe::Charge.create(
+                amount: plan_to_set.amount,
+                currency: plan_to_set.currency,
+                customer: stripe_id,
+                card: card_to_set
+              )
+            else # Cancel at period end
+              customer = Stripe::Customer.retrieve(stripe_id)
+              customer.at_period_end = true
+              customer.save
+            end
+          else
             customer = Stripe::Customer.create(
-                :source => stripe_token,
-                :plan => plan.stripe_id,
+                :card => card_to_set,
+                :plan => plan_to_set.stripe_id,
                 :email => email
             )
 
             update_attributes(stripe_id: customer.id)
-          elsif stripe_id.present?
-              customer = Stripe::Customer.retrieve(stripe_id)
-              customer.at_period_end = true
-              customer.save
-          else
-            #nothing to do
           end
-          reload
           load_stripe_data
+        }
+        self.send(:define_method, :update_card) { |token|
+          if stripe_id.present?
+            customer = Stripe::Customer.retrieve(stripe_id)
+            customer.source = token
+            customer.save
+          else
+            customer = Stripe::Customer.create(
+                :source => token,
+                :email => email
+            )
+
+            update_attributes(stripe_id: customer.id)
+          end
+          load_stripe_data
+          card_from_token token
         }
         self.send(:define_method, :plan) {
           if stripe_id.present?

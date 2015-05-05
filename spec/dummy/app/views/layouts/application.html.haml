@@ -8,6 +8,7 @@
   = theme_stylesheet_link_tag
 
   = render_head_css
+  = javascript_include_tag 'application'
 
 %body
   .container
@@ -24,4 +25,3 @@
         = nav_item :sign_in.l, new_user_session_path
         = nav_item :sign_up.l, new_user_registration_path
   = render_footer_javascript
-  = javascript_include_tag 'application'

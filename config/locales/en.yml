@@ -22,10 +22,15 @@
 en:
   already_subscribed: "Already Subscribed"
   canceled: "Canceled"
+  card: 'Card'
+  card_ending_with: "%{brand} ending with %{last4}"
+  card_number: 'Card Number'
+  cvc: 'CVC'
   default_currency: 'usd'
-  default_currency_unit: '$'
   default_interval: 'life'
+  enter_new_card: 'Enter New Card'
   error: "Error"
+  expiration: 'Expiration'
   my_subscription: 'My Subscription'
   my_subscription_information: 'My Subscription Information'
   paid_thru: "Paid Thru"

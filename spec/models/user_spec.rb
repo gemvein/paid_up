@@ -8,12 +8,27 @@ describe User do
     it { should be_a Stripe::Customer }
   end
 
+  context '#cards' do
+    subject { no_ads_subscriber.cards.first }
+    it { should be_a Stripe::Card }
+  end
+
+  context '#card_from_token' do
+    subject { no_ads_subscriber.card_from_token working_stripe_token }
+    it { should be_a Stripe::Card }
+  end
+
   context '#subscribe_to_plan' do
     before do
       free_subscriber.subscribe_to_plan default_card_data, no_ads_plan
     end
     subject { free_subscriber.plan }
     it { should eq(no_ads_plan) }
+  end
+
+  context '#update_card' do
+    subject { no_ads_subscriber.update_card working_stripe_token }
+    it { should be_a Stripe::Card }
   end
 
   context '#plan' do

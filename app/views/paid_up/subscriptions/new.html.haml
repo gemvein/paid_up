@@ -3,5 +3,81 @@
 %p= @plan.description
 %h2= plan_charge_human @plan
 
-= form_tag paid_up.plan_subscriptions_path(@plan) do
-  %script{ class: 'stripe-button', src: 'https://checkout.stripe.com/checkout.js', data: subscription_data(@plan) }
+= form_tag paid_up.plan_subscriptions_path(@plan), class: 'form-horizontal', id: 'payment-form' do
+  %script{ src: 'https://js.stripe.com/v2/' }
+  %input{ name: 'plan_id', value: @plan.id, type: 'hidden' }
+  .payment-errors
+  -if @current_subscriber.stripe_id
+    .form-group
+      %label.control-label.col-sm-2= :card.l
+      .col-sm-3
+        %select#card.form-control{name: 'card'}
+          %option
+          %option{ value: 'stripeToken'}
+            = :enter_new_card.l
+          - for card in @current_subscriber.cards
+            %option{ value: card.id }
+              = :card_ending_with.l brand: card.brand, last4: card.last4
+  #new-card
+    .form-group
+      %label.control-label.col-sm-2{for: 'number'}= :card_number.l
+      .col-sm-3
+        %input.form-control#number{ size: '16', data: { stripe: 'number' } }
+    .form-group
+      %label.control-label.col-sm-2{for: 'cvc'}= :cvc.l
+      .col-xs-1
+        %input.form-control#cvc{ size: '3', data: { stripe: 'cvc' } }
+    .form-group
+      %label.control-label.col-sm-2{for: 'exp-month'}
+        = :expiration.l
+        (MM/YYYY)
+      .col-xs-1
+        %input.form-control#exp-month{ size: '2', data: { stripe: 'exp-month' } }
+      .col-xs-1
+        /
+        %input.form-control#exp-year.col-xs-1{ size: '4', data: { stripe: 'exp-year' } }
+  .form-group
+    .col-xs-2.col-xs-offset-2
+      %button#submit-button.form-control.btn.btn-info
+        =:subscribe.l
+
+  :javascript
+    function stripeResponseHandler(status, response) {
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+        // Insert the token into the form so it gets submitted to the server
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        // and submit
+        $form.get(0).submit();
+      }
+    };
+    // This identifies your website in the createToken call below
+    $('#payment-form').submit(function() {
+      var $form = $(this);
+
+      // Disable the submit button to prevent repeated clicks
+      $('#submit-button').prop('disabled', true);
+
+      Stripe.card.createToken($form, stripeResponseHandler);
+
+      // Prevent the form from submitting with the default action
+      return false;
+    });
+    $( document ).ready(function() {
+      Stripe.setPublishableKey('#{Rails.configuration.stripe[:publishable_key]}');
+      $('#new-card').hide();
+      $('#card').change(function() {
+        if($(this).find(":selected").val() == 'stripeToken') {
+          $('#new-card').show();
+        } else {
+          $('#new-card').hide();
+        }
+      });
+    });
