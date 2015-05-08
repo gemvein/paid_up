@@ -23,6 +23,7 @@ module PaidUp
 
     rescue Stripe::InvalidRequestError => e
       flash[:error] = e.message
+      abort e.message
       redirect_to plans_path
     rescue Stripe::CardError => e
       flash[:error] = e.message

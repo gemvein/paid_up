@@ -25,6 +25,9 @@ en:
   card: 'Card'
   card_ending_with: "%{brand} ending with %{last4}"
   card_number: 'Card Number'
+  could_not_cancel_subscription: 'Could not cancel subscription'
+  could_not_create_subscription: 'Could not create subscription'
+  could_not_update_subscription: 'Could not update subscription'
   cvc: 'CVC'
   default_currency: 'usd'
   default_interval: 'life'

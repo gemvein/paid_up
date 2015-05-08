@@ -1,6 +1,7 @@
 module PaidUp
   require 'rails/all'
   require 'rails-i18n'
+  require 'stripe' # Needs to be required before paid_up/stripe_extensions
 
   require 'paid_up/configuration'
   require 'paid_up/railtie'
@@ -9,6 +10,7 @@ module PaidUp
   require 'paid_up/version'
   require 'paid_up/mixins'
   require 'paid_up/integer'
+  require 'paid_up/stripe_extensions'
 
   require 'haml-rails'
   require 'bootswitch'
@@ -18,7 +20,6 @@ module PaidUp
   require 'devise'
   require 'cancan'
 
-  require 'stripe'
   require 'money'
 
   require 'seedbank'

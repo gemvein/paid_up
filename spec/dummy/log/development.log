@@ -42323,3 +42323,1086 @@ Processing by PaidUp::PlansController#index as HTML
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.6/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.6/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
 Completed 200 OK in 6485ms (Views: 5871.4ms | ActiveRecord: 0.8ms)
+  [1m[36m (235.4ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (245.5ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (279.2ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (263.6ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.3ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (262.9ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (288.1ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (262.8ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (271.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (315.8ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (303.9ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (261.9ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (286.5ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (301.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (303.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (262.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (263.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (321.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (298.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (297.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (354.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (236.3ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (245.9ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (270.7ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (255.3ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (245.8ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (271.2ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (246.1ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (253.7ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (296.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (295.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (254.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (270.0ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (296.4ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (295.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (271.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (247.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (247.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (255.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (247.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (247.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (1545.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (237.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (236.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Free"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-07 21:09:28.623100"], ["updated_at", "2015-05-07 21:09:28.623100"]]
+  [1m[36m (272.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-05-07 21:09:28.898352"], ["updated_at", "2015-05-07 21:09:28.898352"]]
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (78.2ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (89.5ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (106.3ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (90.4ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (72.7ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (107.3ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (115.5ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (211.2ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (112.9ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (106.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (81.7ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.3ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (90.3ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (95.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (90.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (73.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (91.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (90.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (99.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (99.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (99.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (96.8ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (97.7ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (81.5ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (83.9ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (81.1ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (82.2ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (74.0ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (73.6ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (98.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (107.0ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (105.7ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (114.3ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (90.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (90.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (90.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (92.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (107.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (107.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (107.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (91.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (83.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (81.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (80.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Free"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-07 21:13:45.586348"], ["updated_at", "2015-05-07 21:13:45.586348"]]
+  [1m[36m (98.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-05-07 21:13:45.687466"], ["updated_at", "2015-05-07 21:13:45.687466"]]
+  [1m[35m (0.4ms)[0m  rollback transaction
+  [1m[36m (82.6ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (74.0ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (89.7ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (90.3ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (89.3ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (89.5ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (73.9ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (73.0ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (102.2ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (108.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (98.5ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (96.9ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (80.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (110.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (226.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (82.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (82.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (90.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (91.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (91.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (80.2ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (74.7ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (73.8ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (82.1ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (90.1ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (73.9ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (74.0ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (73.6ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (73.5ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (74.0ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (73.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (106.3ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (90.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (107.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (83.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (82.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (82.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (90.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (91.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (90.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (79.4ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (138.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (79.8ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Free"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-07 21:15:11.727283"], ["updated_at", "2015-05-07 21:15:11.727283"]]
+  [1m[36m (75.1ms)[0m  [1mcommit transaction[0m
+  [1m[36m (108.0ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (73.7ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (73.7ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (74.0ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (72.9ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (82.0ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (74.0ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (98.6ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (87.7ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (83.6ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (82.0ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (106.2ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (96.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (90.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (74.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (74.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (74.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (74.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (74.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (82.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (71.7ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (72.9ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (83.0ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (98.0ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (81.8ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (89.8ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (74.0ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (81.1ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (81.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (82.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (81.8ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (81.6ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (98.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (82.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (82.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (92.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (91.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (107.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (91.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (82.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (93.2ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (71.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (72.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Free"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-07 21:20:29.613050"], ["updated_at", "2015-05-07 21:20:29.613050"]]
+  [1m[36m (96.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-05-07 21:20:30.664467"], ["updated_at", "2015-05-07 21:20:30.664467"]]
+  [1m[35m (76.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with log configuration."], ["sort", 2], ["created_at", "2015-05-07 21:20:31.997311"], ["updated_at", "2015-05-07 21:20:31.997311"]]
+  [1m[36m (88.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professional trainers with multiple classes, calendar and a discussion forum."], ["sort", 3], ["created_at", "2015-05-07 21:20:33.419245"], ["updated_at", "2015-05-07 21:20:33.419245"]]
+  [1m[35m (97.5ms)[0m  commit transaction
+  [1m[36mPaidUp::Feature Load (0.2ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "ad-free"]]
+  [1m[35mPaidUp::Feature Load (0.1ms)[0m  SELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1  [["name", "groups"]]
+  [1m[36mPaidUp::Feature Load (0.0ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "calendar"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mPaidUp::Plan Load (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "No Ads"]]
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Group Leader"]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Professional"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 2], ["setting", 1]]
+  [1m[35m (82.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 1], ["plan_id", 3], ["setting", 1]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 2], ["plan_id", 3], ["setting", 1]]
+  [1m[35m (88.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[36m (72.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (89.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 2], ["plan_id", 4], ["setting", -1]]
+  [1m[36m (80.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (80.3ms)[0m  commit transaction
+  [1m[36m (120.3ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (98.9ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (98.0ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (98.3ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (97.8ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (106.7ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (106.9ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (122.5ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (104.5ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (122.9ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (124.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (123.0ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (122.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (115.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (98.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (99.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (360.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (538.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (107.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (124.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (121.2ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (122.5ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (132.3ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (131.8ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (131.6ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (158.0ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+SQLite3::IOException: disk I/O error: CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (181.1ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (122.6ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (122.8ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (123.2ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (81.0ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (97.9ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (98.2ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.3ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (123.1ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (113.5ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (115.3ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (115.5ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (123.3ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (122.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (115.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (90.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (91.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (107.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (107.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (107.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (133.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (121.9ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (123.1ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (115.2ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (114.7ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (106.6ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (98.9ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (90.4ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (115.1ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (98.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (98.7ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (122.5ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (280.7ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (123.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (123.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (90.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (82.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (82.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (99.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (99.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (99.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (107.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (114.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (97.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Free"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-07 23:09:03.200863"], ["updated_at", "2015-05-07 23:09:03.200863"]]
+  [1m[36m (120.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-05-07 23:09:03.729138"], ["updated_at", "2015-05-07 23:09:03.729138"]]
+  [1m[35m (108.3ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with log configuration."], ["sort", 2], ["created_at", "2015-05-07 23:09:04.547843"], ["updated_at", "2015-05-07 23:09:04.547843"]]
+  [1m[36m (99.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professional trainers with multiple classes, calendar and a discussion forum."], ["sort", 3], ["created_at", "2015-05-07 23:09:05.542108"], ["updated_at", "2015-05-07 23:09:05.542108"]]
+  [1m[35m (101.5ms)[0m  commit transaction
+  [1m[36mPaidUp::Feature Load (0.4ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "ad-free"]]
+  [1m[35mPaidUp::Feature Load (0.1ms)[0m  SELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1  [["name", "groups"]]
+  [1m[36mPaidUp::Feature Load (0.1ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "calendar"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "No Ads"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Group Leader"]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Professional"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 2], ["setting", 1]]
+  [1m[35m (102.9ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 1], ["plan_id", 3], ["setting", 1]]
+  [1m[36m (96.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 2], ["plan_id", 3], ["setting", 1]]
+  [1m[35m (104.4ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[36m (104.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (120.7ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 2], ["plan_id", 4], ["setting", -1]]
+  [1m[36m (121.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (120.9ms)[0m  commit transaction
+  [1m[36m (90.0ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (72.8ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (90.7ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (98.9ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (98.2ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (114.8ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (131.6ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (131.7ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (99.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (130.8ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (98.5ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (115.0ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (112.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (115.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (115.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (116.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (132.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (132.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (99.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (99.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (105.7ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (99.2ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+SQLite3::IOException: disk I/O error: CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (141.0ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (106.1ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (98.4ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (124.0ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (98.5ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (115.5ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (115.3ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (130.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (121.6ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (140.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (115.0ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (81.6ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (114.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (98.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (99.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (100.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (91.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (91.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (91.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (116.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (122.1ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (123.0ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (123.5ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (123.4ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (90.2ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (98.8ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (98.7ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (98.0ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (124.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (123.5ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (122.9ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (131.6ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (131.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (131.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (131.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (132.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (99.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (115.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (107.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (107.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (74.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (73.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (105.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Free"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-07 23:14:57.592444"], ["updated_at", "2015-05-07 23:14:57.592444"]]
+  [1m[36m (100.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-05-07 23:14:58.128841"], ["updated_at", "2015-05-07 23:14:58.128841"]]
+  [1m[35m (142.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with log configuration."], ["sort", 2], ["created_at", "2015-05-07 23:14:59.129741"], ["updated_at", "2015-05-07 23:14:59.129741"]]
+  [1m[36m (138.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professional trainers with multiple classes, calendar and a discussion forum."], ["sort", 3], ["created_at", "2015-05-07 23:15:00.160749"], ["updated_at", "2015-05-07 23:15:00.160749"]]
+  [1m[35m (142.9ms)[0m  commit transaction
+  [1m[36mPaidUp::Feature Load (0.2ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "ad-free"]]
+  [1m[35mPaidUp::Feature Load (0.1ms)[0m  SELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1  [["name", "groups"]]
+  [1m[36mPaidUp::Feature Load (0.0ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "calendar"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mPaidUp::Plan Load (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "No Ads"]]
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Group Leader"]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Professional"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 2], ["setting", 1]]
+  [1m[35m (144.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 1], ["plan_id", 3], ["setting", 1]]
+  [1m[36m (112.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 2], ["plan_id", 3], ["setting", 1]]
+  [1m[35m (112.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[36m (113.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (114.5ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 2], ["plan_id", 4], ["setting", -1]]
+  [1m[36m (129.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (131.1ms)[0m  commit transaction

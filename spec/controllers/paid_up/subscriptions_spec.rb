@@ -57,7 +57,8 @@ RSpec.describe PaidUp::SubscriptionsController do
         include_context 'subscribers'
         before :each do
           sign_in free_subscriber
-          post :create, plan_id: professional_plan.id, stripeToken: working_stripe_token
+          card = working_stripe_token free_subscriber
+          post :create, plan_id: professional_plan.id, card: card
         end
         context "redirects to the subscriptions index page" do
           subject { response }
@@ -74,7 +75,7 @@ RSpec.describe PaidUp::SubscriptionsController do
         include_context 'subscribers'
         before :each do
           sign_in no_ads_subscriber
-          post :create, plan_id: professional_plan.id, stripeToken: working_stripe_token
+          post :create, plan_id: professional_plan.id, card: no_ads_card_id
         end
         context "redirects to the subscriptions index page" do
           subject { response }

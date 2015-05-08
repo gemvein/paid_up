@@ -34,19 +34,18 @@ shared_context 'subscribers' do
     )
   }
 
-  let(:default_card_data) {
-    {
-        object: 'card',
-        number: '4242424242424242',
-        exp_month: '12',
-        exp_year: '15',
-        cvc: '111'
-    }
+  let!(:no_ads_card_id) {
+    no_ads_subscriber.subscribe_to_plan default_card_data, no_ads_plan
+    no_ads_subscriber.cards.first.id
   }
 
-  before(:each) do
-    no_ads_subscriber.subscribe_to_plan default_card_data, no_ads_plan
+  let!(:group_leader_card_id) {
     group_leader_subscriber.subscribe_to_plan default_card_data, group_leader_plan
+    group_leader_subscriber.cards.first.id
+  }
+
+  let!(:professional_card_id) {
     professional_subscriber.subscribe_to_plan default_card_data, professional_plan
-  end
+    professional_subscriber.cards.first.id
+  }
 end

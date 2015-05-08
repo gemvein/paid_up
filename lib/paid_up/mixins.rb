@@ -7,6 +7,10 @@ module PaidUp
 
         after_find :load_stripe_data
 
+        self.send(:define_method, :reload) { |*args, &blk|
+          super *args, &blk
+          load_stripe_data
+        }
         self.send(:define_method, :stripe_data) {
           if stripe_id.present?
             @customer_stripe_data
@@ -23,18 +27,14 @@ module PaidUp
           Stripe::Token.retrieve(token_id).card
         }
         self.send(:define_method, :subscribe_to_plan) { |card_to_set, plan_to_set|
-          if stripe_id.present?
+          if stripe_id.present? && !subscription.nil?
             if plan_to_set.stripe_id.present?
-              Stripe::Charge.create(
-                amount: plan_to_set.amount,
-                currency: plan_to_set.currency,
-                customer: stripe_id,
-                card: card_to_set
-              )
+              subscription.plan = plan_to_set.stripe_id
+              subscription.card = card_to_set
+              result = subscription.save || ( raise(:could_not_update_subscription.l) && false )
             else # Cancel at period end
-              customer = Stripe::Customer.retrieve(stripe_id)
-              customer.at_period_end = true
-              customer.save
+              stripe_data.at_period_end = true
+              result = stripe_data.save || ( raise(:could_not_cancel_subscription).l && false )
             end
           else
             customer = Stripe::Customer.create(
@@ -43,9 +43,14 @@ module PaidUp
                 :email => email
             )
 
-            update_attributes(stripe_id: customer.id)
+            result = update_attributes(stripe_id: customer.id) || ( raise(:could_not_create_subscription.l) && false )
           end
-          load_stripe_data
+          if result
+            reload
+            return true
+          else
+            return false
+          end
         }
         self.send(:define_method, :update_card) { |token|
           if stripe_id.present?
@@ -60,7 +65,7 @@ module PaidUp
 
             update_attributes(stripe_id: customer.id)
           end
-          load_stripe_data
+          reload
           card_from_token token
         }
         self.send(:define_method, :plan) {
@@ -111,5 +116,7 @@ module PaidUp
     end
   end
 end
+
+
 
 ActiveRecord::Base.send(:include, PaidUp::Mixins)

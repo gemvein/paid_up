@@ -47,6 +47,16 @@ shared_context "plans and features" do
     )
   }
   let!(:no_ads_plan) {
+    Stripe::Plan.find_or_create_by_id(
+        'no-ads-plan',
+        {
+            :amount => 100,
+            :interval => 'month',
+            :name => 'No Ads Plan',
+            :currency => 'usd',
+            :id => 'no-ads-plan'
+        }
+    )
     FactoryGirl.create(
       :plan,
       name: 'No Ads',
@@ -62,6 +72,16 @@ shared_context "plans and features" do
     )
   }
   let!(:group_leader_plan) {
+    Stripe::Plan.find_or_create_by_id(
+      'group-leader-plan',
+        {
+        :amount => 500,
+        :interval => 'month',
+        :name => 'Group Leader Plan',
+        :currency => 'usd',
+        :id => 'group-leader-plan'
+      }
+    )
     FactoryGirl.create(
       :plan,
       name: 'Group Leader',
@@ -94,6 +114,16 @@ shared_context "plans and features" do
     )
   }
   let!(:professional_plan) {
+    Stripe::Plan.find_or_create_by_id(
+        'professional-plan',
+        {
+            :amount => 1000,
+            :interval => 'month',
+            :name => 'Professional Plan',
+            :currency => 'usd',
+            :id => 'professional-plan'
+        }
+    )
     FactoryGirl.create(
       :plan,
       name: 'Professional',

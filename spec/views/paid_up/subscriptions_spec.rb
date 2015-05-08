@@ -23,7 +23,7 @@ RSpec.describe "paid_up/subscriptions/new" do
       before do
         view.extend PaidUp::PlansHelper
 
-        assign(:current_subscriber, no_ads_subscriber(free_subscriber))
+        assign(:current_subscriber, login_subscriber(no_ads_subscriber))
         assign(:plan, professional_plan)
         render
       end

@@ -14,20 +14,66 @@ describe User do
   end
 
   context '#card_from_token' do
-    subject { no_ads_subscriber.card_from_token working_stripe_token }
+    subject {
+      token = working_stripe_token no_ads_subscriber
+      no_ads_subscriber.card_from_token token
+    }
     it { should be_a Stripe::Card }
   end
 
   context '#subscribe_to_plan' do
-    before do
-      free_subscriber.subscribe_to_plan default_card_data, no_ads_plan
+    context 'starting from no subscription' do
+      before do
+        free_subscriber.subscribe_to_plan default_card_data, no_ads_plan
+      end
+      subject { free_subscriber.plan }
+      it { should eq(no_ads_plan) }
     end
-    subject { free_subscriber.plan }
-    it { should eq(no_ads_plan) }
+
+    context 'starting from lower subscription' do
+      context 'with saved card' do
+        before do
+          no_ads_subscriber.subscribe_to_plan no_ads_card_id, group_leader_plan
+        end
+        subject { no_ads_subscriber.plan }
+        it { should eq(group_leader_plan) }
+      end
+      context 'with new token' do
+        before do
+          token = working_stripe_token no_ads_subscriber
+          no_ads_subscriber.subscribe_to_plan token, group_leader_plan
+        end
+        subject { no_ads_subscriber.plan }
+        it { should eq(group_leader_plan) }
+      end
+    end
+
+
+    context 'starting from higher subscription' do
+      context 'with saved card' do
+        before do
+          professional_subscriber.subscribe_to_plan professional_card_id, no_ads_plan
+        end
+        subject { professional_subscriber.plan }
+        it { should eq(no_ads_plan) }
+      end
+      context 'with new token' do
+        before do
+          token = working_stripe_token professional_subscriber
+          professional_subscriber.subscribe_to_plan token, no_ads_plan
+        end
+        subject { professional_subscriber.plan }
+        it { should eq(no_ads_plan) }
+      end
+    end
+
   end
 
   context '#update_card' do
-    subject { no_ads_subscriber.update_card working_stripe_token }
+    subject {
+      token = working_stripe_token no_ads_subscriber
+      no_ads_subscriber.update_card token
+    }
     it { should be_a Stripe::Card }
   end
 
