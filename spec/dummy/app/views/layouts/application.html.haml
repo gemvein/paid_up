@@ -9,6 +9,7 @@
 
   = render_head_css
   = javascript_include_tag 'application'
+  = csrf_meta_tags
 
 %body
   .container
@@ -17,11 +18,15 @@
     = yield
 
   %footer
-    = nav_list :class => 'nav-pills' do
-      = nav_item :pricing.l, paid_up.plans_path
-      - if signed_in?
-        = nav_item :my_subscription.l, paid_up.subscriptions_path
-      - else
-        = nav_item :sign_in.l, new_user_session_path
-        = nav_item :sign_up.l, new_user_registration_path
+    - add_widget do
+      .clearfix
+        = nav_list :class => 'nav-pills nav-stacked' do
+          = nav_item :pricing.l, paid_up.plans_path
+          - if signed_in?
+            = nav_item :my_subscription.l, paid_up.subscriptions_path
+            = nav_item :sign_out.l, main_app.destroy_user_session_path, method: :delete
+          - else
+            = nav_item :sign_in.l, main_app.new_user_session_path
+            = nav_item :sign_up.l, main_app.new_user_registration_path
+    = render_widgets 'md', 3
   = render_footer_javascript

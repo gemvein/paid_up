@@ -21,27 +21,42 @@
 
 en:
   already_subscribed: "Already Subscribed"
+  are_you_sure: "Are you sure?"
+  cancel_my_account: 'Cancel My Account'
   canceled: "Canceled"
   card: 'Card'
   card_ending_with: "%{brand} ending with %{last4}"
   card_number: 'Card Number'
+  change_your_password: 'Change your password'
   could_not_cancel_subscription: 'Could not cancel subscription'
   could_not_create_subscription: 'Could not create subscription'
   could_not_update_subscription: 'Could not update subscription'
+  currently_awaiting_confirmation_for_resource: "Currently awaiting confirmation for %{resource}"
   cvc: 'CVC'
   default_currency: 'usd'
   default_interval: 'life'
+  edit_resource: "Edit %{resource}"
   enter_new_card: 'Enter New Card'
   error: "Error"
   expiration: 'Expiration'
+  forgot_your_password: 'Forgot your password?'
+  leave_blank_if_you_dont_want_to_change_it: "(leave blank if you don't want to change it)"
+  length_characters_minimum: "(%{length} characters minimum)"
   my_subscription: 'My Subscription'
   my_subscription_information: 'My Subscription Information'
   paid_thru: "Paid Thru"
   pricing: "Pricing"
+  resend_confirmation_instructions: 'Resend confirmation instructions'
+  send_me_reset_password_instructions: "Send me reset password instructions"
+  sign_in: "Sign In"
+  sign_out: "Sign Out"
   sign_up: "Sign Up"
   status: "Status"
   subscribe: "Subscribe"
   subscribe_to_plan: "Subscribe to %{plan_name} Plan"
   thank_you: "Thank You"
   trial_period: "Trial Period"
+  unhappy: "Unhappy?"
+  update_account: 'Update Account'
+  we_need_your_current_password_to_confirm_your_changes: '(we need your current password to confirm your changes)'
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"

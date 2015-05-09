@@ -6,8 +6,10 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'uglifier'
 gem 'jeweler'
+
 gem 'bootswitch'
 gem 'bootstrap_leather'
+
 gem 'seedbank'
 gem 'chronic'
 gem 'devise'
