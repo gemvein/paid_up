@@ -35,6 +35,8 @@ en:
   cvc: 'CVC'
   default_currency: 'usd'
   default_interval: 'life'
+  didnt_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
+  didnt_receive_unlock_instructions: "Didn't receive unlock instructions?"
   edit_resource: "Edit %{resource}"
   enter_new_card: 'Enter New Card'
   error: "Error"
@@ -47,8 +49,10 @@ en:
   paid_thru: "Paid Thru"
   pricing: "Pricing"
   resend_confirmation_instructions: 'Resend confirmation instructions'
+  resend_unlock_instructions: 'Resend unlock instructions'
   send_me_reset_password_instructions: "Send me reset password instructions"
   sign_in: "Sign In"
+  sign_in_with_provider: "Sign in with %{provider}"
   sign_out: "Sign Out"
   sign_up: "Sign Up"
   status: "Status"

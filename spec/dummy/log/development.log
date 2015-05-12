@@ -48949,3 +48949,373 @@ Processing by HighVoltage::PagesController#show as HTML
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.1ms)
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
 Completed 200 OK in 40ms (Views: 39.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-05-11 08:47:48 -0600
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 704ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-05-11 08:47:49 -0600
+Processing by HighVoltage::PagesController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendered pages/index.html.haml within layouts/application (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (49.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (7.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 282ms (Views: 281.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-b9fc6427cb84d27131ef3fce3e726af7ae200bd2792bfc6ec51589671f122e73.css?body=1" for 127.0.0.1 at 2015-05-11 08:47:49 -0600
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-05-11 08:47:50 -0600
+
+
+Started GET "/assets/application.self-27f004bb902952dbbaad25f0f28c312f29ffee315c94fa51dea6b5ec6dc993e6.css?body=1" for 127.0.0.1 at 2015-05-11 08:47:50 -0600
+
+
+Started GET "/assets/bootstrap.self-2bbd2c0465f01b1f8270958ddfc2e62a08915f295a35d22df2971eb936cf3c64.js?body=1" for 127.0.0.1 at 2015-05-11 08:47:50 -0600
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-05-11 08:47:50 -0600
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2015-05-11 08:47:50 -0600
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2015-05-11 08:47:52 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"xmLVASpEV+juijYyNDHMsFARjLRdxpPAb3usEvxgmJ9Xl6aL9ouyvhuCDDQ2KXlA8kU1NoM8ezC0lEpMpQqpCQ=="}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-05-11 08:47:52 -0600
+Processing by HighVoltage::PagesController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendered pages/index.html.haml within layouts/application (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (16.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (1.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
+Completed 200 OK in 58ms (Views: 57.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-05-11 08:47:55 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (1.9ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/sessions/new.html.haml within layouts/application (4.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (14.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 47ms (Views: 45.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-05-11 08:49:10 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (6.9ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/sessions/new.html.haml within layouts/application (10.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (14.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 57ms (Views: 55.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootswatch/slate/theme.self-b9fc6427cb84d27131ef3fce3e726af7ae200bd2792bfc6ec51589671f122e73.css?body=1" for 127.0.0.1 at 2015-05-11 08:49:10 -0600
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-05-11 08:49:10 -0600
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-05-11 08:49:10 -0600
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2015-05-11 08:49:10 -0600
+
+
+Started GET "/assets/bootstrap.self-2bbd2c0465f01b1f8270958ddfc2e62a08915f295a35d22df2971eb936cf3c64.js?body=1" for 127.0.0.1 at 2015-05-11 08:49:10 -0600
+
+
+Started GET "/assets/application.self-27f004bb902952dbbaad25f0f28c312f29ffee315c94fa51dea6b5ec6dc993e6.css?body=1" for 127.0.0.1 at 2015-05-11 08:49:10 -0600
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-05-11 08:49:17 -0600
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (2.9ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/registrations/new.html.haml within layouts/application (6.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (13.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
+Completed 200 OK in 63ms (Views: 62.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-05-11 08:53:56 -0600
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (4.6ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/registrations/new.html.haml within layouts/application (278.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (14.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.0ms)
+Completed 200 OK in 329ms (Views: 321.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.self-27f004bb902952dbbaad25f0f28c312f29ffee315c94fa51dea6b5ec6dc993e6.css?body=1" for 127.0.0.1 at 2015-05-11 08:53:57 -0600
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-05-11 08:53:57 -0600
+
+
+Started GET "/assets/bootswatch/slate/theme.self-b9fc6427cb84d27131ef3fce3e726af7ae200bd2792bfc6ec51589671f122e73.css?body=1" for 127.0.0.1 at 2015-05-11 08:53:57 -0600
+
+
+Started GET "/assets/bootstrap.self-2bbd2c0465f01b1f8270958ddfc2e62a08915f295a35d22df2971eb936cf3c64.js?body=1" for 127.0.0.1 at 2015-05-11 08:53:57 -0600
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-05-11 08:53:57 -0600
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2015-05-11 08:53:57 -0600
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-05-11 08:53:59 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (4.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/sessions/new.html.haml within layouts/application (6.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (14.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 52ms (Views: 50.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-05-11 08:54:03 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Q5whgzls90ksTq3KDIRfZ5IqmtdCLQxwT4i0TqP19poWpEW8owi9MG4RhNAwqjzRckHYhit618kt6BPje+OiNg==", "user"=>{"email"=>"webmaster@gemvein.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "webmaster@gemvein.com"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "sign_in_count" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2015-05-09 20:22:52.850447"], ["current_sign_in_at", "2015-05-11 14:54:04.072501"], ["sign_in_count", 4], ["id", 1]]
+  [1m[36m (252.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 330ms (ActiveRecord: 253.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-05-11 08:54:04 -0600
+Processing by HighVoltage::PagesController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendered pages/index.html.haml within layouts/application (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (14.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (1.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 45ms (Views: 44.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-11 08:54:22 -0600
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1[0m
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml within layouts/application (9.6ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (undefined method `status' for nil:NilClass):
+    4:   = @current_subscriber.plan.name
+    5:   .small= plan_charge_human @current_subscriber.plan
+    6: 
+    7: = subscription_dl @current_subscriber.subscription
+    8: 
+    9: - if @current_subscriber.subscription.cancel_at_period_end
+   10:   %h3= :canceled.l
+  /home/work/Gems/paid_up/app/helpers/paid_up/subscriptions_helper.rb:8:in `subscription_dl'
+  /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml:7:in `__home_work__ems_paid_up_app_views_paid_up_subscriptions_index_html_haml___2000765129812691116_70036790753960'
+  actionview (4.2.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.1) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.1) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `public_send'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `method_missing'
+  actionpack (4.2.1) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (20.1ms)
