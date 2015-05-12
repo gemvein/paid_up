@@ -9,7 +9,7 @@ class PaidUp::Plan < ActiveRecord::Base
 
   attr_accessor :stripe_data
 
-  scope :default, -> { where('stripe_id IS NULL').first }
+  scope :default, -> { where(sort: 0).first }
 
   def feature_setting(name)
     feature = PaidUp::Feature.find_by_name(name)

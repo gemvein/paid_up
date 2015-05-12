@@ -1,5 +1,16 @@
+Stripe::Plan.find_or_create_by_id(
+    'free-plan',
+    {
+        :amount => 0,
+        :interval => 'month',
+        :name => 'Free Plan',
+        :currency => 'usd',
+        :id => 'free-plan'
+    }
+)
 PaidUp::Plan.create(
         name: 'Free',
+        stripe_id: 'free-plan',
         description: "Can't beat the price!",
         sort: 0
 )

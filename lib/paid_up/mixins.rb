@@ -5,6 +5,7 @@ module PaidUp
       def subscriber
         attr_reader :stripe_data
 
+        after_create :subscribe_to_default_plan
         after_find :load_stripe_data
 
         self.send(:define_method, :reload) { |*args, &blk|
@@ -52,6 +53,13 @@ module PaidUp
             return false
           end
         }
+        self.send(:define_method, :subscribe_to_default_plan) {
+          if subscribe_to_plan nil, PaidUp::Plan.default
+            PaidUp::Plan.default
+          else
+            nil
+          end
+        }
         self.send(:define_method, :update_card) { |token|
           if stripe_id.present?
             customer = Stripe::Customer.retrieve(stripe_id)
@@ -72,7 +80,7 @@ module PaidUp
           if stripe_id.present?
             PaidUp::Plan.find_by_stripe_id(plan_stripe_id)
           else
-            PaidUp::Plan.default
+            subscribe_to_default_plan
           end
         }
         self.send(:define_method, :plan_stripe_id) {
@@ -83,7 +91,7 @@ module PaidUp
         }
         self.send(:define_method, :subscription) {
           if stripe_data.nil?
-            return nil
+            subscribe_to_default_plan
           end
           stripe_data.subscriptions.data.first
         }

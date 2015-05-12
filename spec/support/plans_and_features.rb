@@ -39,6 +39,16 @@ shared_context "plans and features" do
   # Plans #
   #########
   let!(:free_plan) {
+    Stripe::Plan.find_or_create_by_id(
+        'free-plan',
+        {
+            :amount => 0,
+            :interval => 'month',
+            :name => 'Free Plan',
+            :currency => 'usd',
+            :id => 'free-plan'
+        }
+    )
     FactoryGirl.create(
       :plan,
       name: 'Free',

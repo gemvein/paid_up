@@ -49319,3 +49319,1837 @@ ActionView::Template::Error (undefined method `status' for nil:NilClass):
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
   Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (20.1ms)
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-12 08:59:40 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml within layouts/application (10.9ms)
+Completed 500 Internal Server Error in 374ms (ActiveRecord: 1.0ms)
+
+ActionView::Template::Error (undefined method `status' for nil:NilClass):
+    4:   = @current_subscriber.plan.name
+    5:   .small= plan_charge_human @current_subscriber.plan
+    6: 
+    7: = subscription_dl @current_subscriber.subscription
+    8: 
+    9: - if @current_subscriber.subscription.cancel_at_period_end
+   10:   %h3= :canceled.l
+  /home/work/Gems/paid_up/app/helpers/paid_up/subscriptions_helper.rb:8:in `subscription_dl'
+  /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml:7:in `__home_work__ems_paid_up_app_views_paid_up_subscriptions_index_html_haml__2988228134008762242_69901515878480'
+  actionview (4.2.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.1) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.1) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `public_send'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `method_missing'
+  actionpack (4.2.1) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (19.1ms)
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-12 09:07:22 -0600
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1[0m
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml within layouts/application (1.9ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (undefined method `status' for nil:NilClass):
+    4:   = @current_subscriber.plan.name
+    5:   .small= plan_charge_human @current_subscriber.plan
+    6: 
+    7: = subscription_dl @current_subscriber.subscription
+    8: 
+    9: - if @current_subscriber.subscription.cancel_at_period_end
+   10:   %h3= :canceled.l
+  /home/work/Gems/paid_up/app/helpers/paid_up/subscriptions_helper.rb:8:in `subscription_dl'
+  /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml:7:in `__home_work__ems_paid_up_app_views_paid_up_subscriptions_index_html_haml__2988228134008762242_69901515878480'
+  actionview (4.2.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.1) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.1) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `public_send'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `method_missing'
+  actionpack (4.2.1) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (20.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-05-12 09:07:28 -0600
+Processing by HighVoltage::PagesController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendered pages/index.html.haml within layouts/application (1.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (134.0ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.9ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (1.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.5ms)
+Completed 200 OK in 446ms (Views: 445.7ms | ActiveRecord: 0.1ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2015-05-12 09:07:31 -0600
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"QEZf/hTaJS0aKfGdP/bBjryUoChrghoG7NE9kUpgx1E+ZIEhZZH5j/NcS9G5r4/dduxeK8qmAhTvJEY2K6jkBA=="}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 31ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-05-12 09:07:31 -0600
+Processing by HighVoltage::PagesController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendered pages/index.html.haml within layouts/application (0.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (16.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert.html.haml (1.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (2.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 55ms (Views: 55.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-05-12 09:07:33 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (6.6ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/sessions/new.html.haml within layouts/application (19.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (32.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 112ms (Views: 94.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-05-12 09:07:35 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WhGuocVDmig6fZDA7LBIEjTSMDtP9GargRmex3JvRVCBSBYvhF0DO7IYF5jrCzvh+0iba+kIxo1G3WCwTM9u9Q==", "user"=>{"email"=>"webmaster@gemvein.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "webmaster@gemvein.com"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "sign_in_count" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2015-05-11 14:54:04.072501"], ["current_sign_in_at", "2015-05-12 15:07:35.208551"], ["sign_in_count", 5], ["id", 1]]
+  [1m[36m (106.2ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 225ms (ActiveRecord: 107.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-05-12 09:07:35 -0600
+Processing by HighVoltage::PagesController#show as HTML
+  Parameters: {"id"=>"index"}
+  Rendered pages/index.html.haml within layouts/application (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (25.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert.html.haml (0.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (1.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 70ms (Views: 69.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-12 09:07:38 -0600
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1[0m
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml within layouts/application (2.8ms)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (undefined method `status' for nil:NilClass):
+    4:   = @current_subscriber.plan.name
+    5:   .small= plan_charge_human @current_subscriber.plan
+    6: 
+    7: = subscription_dl @current_subscriber.subscription
+    8: 
+    9: - if @current_subscriber.subscription.cancel_at_period_end
+   10:   %h3= :canceled.l
+  /home/work/Gems/paid_up/app/helpers/paid_up/subscriptions_helper.rb:8:in `subscription_dl'
+  /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml:7:in `__home_work__ems_paid_up_app_views_paid_up_subscriptions_index_html_haml__2988228134008762242_69901515878480'
+  actionview (4.2.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.1) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.1) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `public_send'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `method_missing'
+  actionpack (4.2.1) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (19.0ms)
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-12 09:08:13 -0600
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml within layouts/application (2.6ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (undefined method `status' for nil:NilClass):
+    4:   = @current_subscriber.plan.name
+    5:   .small= plan_charge_human @current_subscriber.plan
+    6: 
+    7: = subscription_dl @current_subscriber.subscription
+    8: 
+    9: - if @current_subscriber.subscription.cancel_at_period_end
+   10:   %h3= :canceled.l
+  /home/work/Gems/paid_up/app/helpers/paid_up/subscriptions_helper.rb:8:in `subscription_dl'
+  /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml:7:in `__home_work__ems_paid_up_app_views_paid_up_subscriptions_index_html_haml__2988228134008762242_69901515878480'
+  actionview (4.2.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.1) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.1) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `public_send'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `method_missing'
+  actionpack (4.2.1) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (19.4ms)
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-12 09:10:09 -0600
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE (stripe_id IS NULL)  ORDER BY "paid_up_plans"."id" ASC LIMIT 1[0m
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml within layouts/application (2.3ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (undefined method `status' for nil:NilClass):
+    4:   = @current_subscriber.plan.name
+    5:   .small= plan_charge_human @current_subscriber.plan
+    6: 
+    7: = subscription_dl @current_subscriber.subscription
+    8: 
+    9: - if @current_subscriber.subscription.cancel_at_period_end
+   10:   %h3= :canceled.l
+  /home/work/Gems/paid_up/app/helpers/paid_up/subscriptions_helper.rb:8:in `subscription_dl'
+  /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml:7:in `__home_work__ems_paid_up_app_views_paid_up_subscriptions_index_html_haml__2988228134008762242_69901515878480'
+  actionview (4.2.1) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.1) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.1) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.1) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.1) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.1) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (4.2.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `public_send'
+  railties (4.2.1) lib/rails/railtie.rb:194:in `method_missing'
+  actionpack (4.2.1) lib/action_dispatch/routing/mapper.rb:51:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/work/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.0ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (19.0ms)
+  [1m[36m (100.3ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (122.6ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (115.2ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (131.6ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (130.6ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (133.0ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (98.7ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (106.7ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (127.0ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (156.0ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (205.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (122.1ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (137.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (123.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (123.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (123.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (124.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (92.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (124.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (124.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (260.2ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (132.1ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (106.2ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (123.3ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (90.4ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (123.5ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (123.0ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (122.5ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (122.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (116.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (122.9ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (122.1ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (123.2ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (123.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.2ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (107.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (124.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (124.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (123.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (90.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (123.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (90.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (105.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (122.4ms)[0m  commit transaction
+  [1m[36m (113.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (123.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsersTable (20150406154440)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150406154440"]]
+  [1m[35m (106.7ms)[0m  commit transaction
+Migrating to CreatePaidUpFeaturesPlansTable (20150424175804)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150424175804"]]
+  [1m[36m (94.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePaidUpFeaturesTable (20150424175805)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150424175805"]]
+  [1m[35m (104.8ms)[0m  commit transaction
+Migrating to CreatePaidUpPlansTable (20150424175806)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /home/work/Gems/paid_up/spec/dummy/db/migrate/20150424175806_create_paid_up_plans_table.paid_up.rb:10)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150424175806"]]
+  [1m[36m (86.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddStripeIdColumnToUser (20150424231107)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "stripe_id" varchar[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150424231107"]]
+  [1m[35m (137.0ms)[0m  commit transaction
+Migrating to AddDeviseToUsers (20150424233014)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "reset_password_token" varchar
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "reset_password_sent_at" datetime[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "remember_created_at" datetime
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "current_sign_in_at" datetime
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "last_sign_in_at" datetime[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "current_sign_in_ip" varchar
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "last_sign_in_ip" varchar[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_stripe_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_stripe_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_stripe_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_stripe_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150424233014"]]
+  [1m[35m (110.5ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_plan_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_plan_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_stripe_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_stripe_id' AND type='index'
+[0m
+  [1m[36m (117.4ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (122.1ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (98.8ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (98.1ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (106.9ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (123.3ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (123.5ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (135.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (324.4ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (123.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (123.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (114.5ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (97.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (98.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (107.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (124.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (123.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (99.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (99.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (91.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (122.8ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (122.8ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (98.8ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (98.5ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (97.9ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (123.2ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (106.9ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (123.1ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (131.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (131.7ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (131.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (123.1ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (141.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (148.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (107.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (99.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (91.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (124.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (124.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (123.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (127.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (121.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (114.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_plans" ("name", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Free"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-12 15:12:22.871000"], ["updated_at", "2015-05-12 15:12:22.871000"]]
+  [1m[36m (113.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-05-12 15:12:24.009215"], ["updated_at", "2015-05-12 15:12:24.009215"]]
+  [1m[35m (107.6ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with log configuration."], ["sort", 2], ["created_at", "2015-05-12 15:12:25.417273"], ["updated_at", "2015-05-12 15:12:25.417273"]]
+  [1m[36m (105.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professional trainers with multiple classes, calendar and a discussion forum."], ["sort", 3], ["created_at", "2015-05-12 15:12:27.491821"], ["updated_at", "2015-05-12 15:12:27.491821"]]
+  [1m[35m (137.4ms)[0m  commit transaction
+  [1m[36mPaidUp::Feature Load (0.2ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "ad-free"]]
+  [1m[35mPaidUp::Feature Load (0.1ms)[0m  SELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1  [["name", "groups"]]
+  [1m[36mPaidUp::Feature Load (0.1ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "calendar"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "No Ads"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Group Leader"]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Professional"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 2], ["setting", 1]]
+  [1m[35m (100.9ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 1], ["plan_id", 3], ["setting", 1]]
+  [1m[36m (120.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 2], ["plan_id", 3], ["setting", 1]]
+  [1m[35m (89.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[36m (122.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (121.6ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 2], ["plan_id", 4], ["setting", -1]]
+  [1m[36m (112.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (112.3ms)[0m  commit transaction
+  [1m[36m (105.9ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (114.2ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (114.6ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (131.9ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.3ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (121.8ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (170.4ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (93.9ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (89.2ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (143.2ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (147.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.3ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (130.3ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (138.0ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (136.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (156.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (148.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (124.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (107.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (125.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (123.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (123.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[36m (113.0ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (97.6ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (98.1ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (98.0ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (97.5ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (115.0ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (116.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (114.9ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (121.2ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (106.9ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (98.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (98.1ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (97.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (98.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (98.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (132.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (198.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (100.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (124.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (107.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (97.8ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (123.5ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (98.9ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (98.6ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (98.2ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (98.7ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (98.9ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (97.7ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (98.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (98.3ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (99.7ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (106.5ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (107.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (106.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (107.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (107.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (107.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (107.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (107.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (107.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (107.7ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (96.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (115.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Free"], ["stripe_id", "free-plan"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-12 15:14:25.344530"], ["updated_at", "2015-05-12 15:14:25.344530"]]
+  [1m[36m (107.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-05-12 15:14:26.564021"], ["updated_at", "2015-05-12 15:14:26.564021"]]
+  [1m[35m (107.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with log configuration."], ["sort", 2], ["created_at", "2015-05-12 15:14:28.213727"], ["updated_at", "2015-05-12 15:14:28.213727"]]
+  [1m[36m (105.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professional trainers with multiple classes, calendar and a discussion forum."], ["sort", 3], ["created_at", "2015-05-12 15:14:29.170808"], ["updated_at", "2015-05-12 15:14:29.170808"]]
+  [1m[35m (110.5ms)[0m  commit transaction
+  [1m[36mPaidUp::Feature Load (0.2ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "ad-free"]]
+  [1m[35mPaidUp::Feature Load (0.1ms)[0m  SELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1  [["name", "groups"]]
+  [1m[36mPaidUp::Feature Load (0.1ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "calendar"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "No Ads"]]
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Group Leader"]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Professional"]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 2], ["setting", 1]]
+  [1m[35m (113.5ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 1], ["plan_id", 3], ["setting", 1]]
+  [1m[36m (112.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 2], ["plan_id", 3], ["setting", 1]]
+  [1m[35m (120.7ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[36m (112.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (112.5ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 2], ["plan_id", 4], ["setting", -1]]
+  [1m[36m (112.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (112.7ms)[0m  commit transaction
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-12 09:15:50 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 401 Unauthorized in 301ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-05-12 09:15:51 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.6ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (7.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/sessions/new.html.haml within layouts/application (19.8ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (40.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert.html.haml (1.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (3.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (1.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.6ms)
+Completed 200 OK in 188ms (Views: 186.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-27f004bb902952dbbaad25f0f28c312f29ffee315c94fa51dea6b5ec6dc993e6.css?body=1" for 127.0.0.1 at 2015-05-12 09:15:51 -0600
+
+
+Started GET "/assets/bootswatch/slate/theme.self-b9fc6427cb84d27131ef3fce3e726af7ae200bd2792bfc6ec51589671f122e73.css?body=1" for 127.0.0.1 at 2015-05-12 09:15:51 -0600
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-05-12 09:15:51 -0600
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2015-05-12 09:15:51 -0600
+
+
+Started GET "/assets/bootstrap.self-2bbd2c0465f01b1f8270958ddfc2e62a08915f295a35d22df2971eb936cf3c64.js?body=1" for 127.0.0.1 at 2015-05-12 09:15:51 -0600
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-05-12 09:15:51 -0600
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-05-12 09:15:53 -0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ka9asbN5IqNG0NY2vdCaYHww8Moebbqh5wlujx4Uwiag8MS0p0ZNY5WTolY/tg9SioE9oBa66sFVRcm/GCWIbA==", "user"=>{"email"=>"webmaster@gemvein.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "webmaster@gemvein.com"]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.3ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ka9asbN5IqNG0NY2vdCaYHww8Moebbqh5wlujx4Uwiag8MS0p0ZNY5WTolY/tg9SioE9oBa66sFVRcm/GCWIbA==", "user"=>{"email"=>"webmaster@gemvein.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.2ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (4.8ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/sessions/new.html.haml within layouts/application (8.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (21.9ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (2.0ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 148ms (Views: 79.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-05-12 09:16:00 -0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.6ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (7.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/sessions/new.html.haml within layouts/application (11.6ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (26.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.5ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 78ms (Views: 77.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-05-12 09:16:03 -0600
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/shared/_links.html.haml (3.6ms)
+  Rendered /home/work/Gems/paid_up/app/views/devise/registrations/new.html.haml within layouts/application (13.0ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (28.4ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 73ms (Views: 72.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-05-12 09:16:13 -0600
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gkkIJdh8ej/CAMHDEKNN2h7Giu9MjZMYM9aarL+h5UOzFpYgzEMV/xFDtaOSxdjo6HdHhURaw3iBmj2cuZCvCQ==", "user"=>{"email"=>"webmaster@gemvein.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'webmaster@gemvein.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("email", "encrypted_password") VALUES (?, ?)  [["email", "webmaster@gemvein.com"], ["encrypted_password", "$2a$10$fP2qnTEVyAKcczgLzlGwQOtaWQ7Z/AB86OTIxQ5YeR1Zg0IJrX/8W"]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."sort" = ?  ORDER BY "paid_up_plans"."id" ASC LIMIT 1[0m  [["sort", 0]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE ("users"."email" = 'webmaster@gemvein.com' AND "users"."id" != 1) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "email" = ?, "encrypted_password" = ?, "id" = ?, "stripe_id" = ? WHERE "users"."id" = ?[0m  [["email", "webmaster@gemvein.com"], ["encrypted_password", "$2a$10$fP2qnTEVyAKcczgLzlGwQOtaWQ7Z/AB86OTIxQ5YeR1Zg0IJrX/8W"], ["id", 1], ["stripe_id", "cus_6E7Lw9Z8zYLUlG"], ["id", 1]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.1ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."sort" = ?  ORDER BY "paid_up_plans"."id" ASC LIMIT 1[0m  [["sort", 0]]
+  [1m[35m (93.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2015-05-12 15:16:16.272097"], ["current_sign_in_at", "2015-05-12 15:16:16.272097"], ["last_sign_in_ip", "127.0.0.1"], ["current_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["id", 1]]
+  [1m[36m (113.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/subscriptions
+Completed 302 Found in 2598ms (ActiveRecord: 208.6ms)
+
+
+Started GET "/subscriptions" for 127.0.0.1 at 2015-05-12 09:16:16 -0600
+Processing by PaidUp::SubscriptionsController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1[0m  [["stripe_id", "free-plan"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."stripe_id" = ? LIMIT 1  [["stripe_id", "free-plan"]]
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_definition_list.html.haml (2.2ms)
+  Rendered /home/work/Gems/paid_up/app/views/paid_up/subscriptions/index.html.haml within layouts/application (733.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootswitch-0.6.0/app/views/theme/_stylesheet_link_tag.html.haml (19.7ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_head_css.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_alert_flash_messages.html.haml (1.3ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.2ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_item.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_nav_list.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_widgets.html.haml (0.1ms)
+  Rendered /home/work/.rvm/gems/ruby-2.2.1@paid_up/gems/bootstrap_leather-0.4.7/app/views/bootstrap_leather/_footer_javascript.html.haml (0.1ms)
+Completed 200 OK in 1226ms (Views: 786.2ms | ActiveRecord: 0.3ms)
+  [1m[36m (135.5ms)[0m  [1mCREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (122.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")[0m
+  [1m[35m (140.0ms)[0m  CREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) 
+  [1m[36m (115.3ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+
+  [1m[36m (114.9ms)[0m  [1mCREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")[0m
+  [1m[35m (114.7ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (123.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+
+  [1m[36m (90.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (170.9ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) 
+  [1m[36m (139.3ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (122.8ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (124.3ms)[0m  CREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")
+  [1m[36m (121.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (107.0ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (98.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424233014')
+  [1m[36m (157.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175804')[0m
+  [1m[35m (91.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175805')
+  [1m[36m (107.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424231107')[0m
+  [1m[35m (140.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175806')
+  [1m[36m (107.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
+  [1m[35m (96.3ms)[0m  CREATE TABLE "paid_up_features" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "setting_type" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (98.6ms)[0m  CREATE UNIQUE INDEX "index_paid_up_features_on_name" ON "paid_up_features" ("name")
+  [1m[36m (123.3ms)[0m  [1mCREATE TABLE "paid_up_features_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feature_id" integer, "plan_id" integer, "setting" integer) [0m
+  [1m[35m (116.4ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_feature_id" ON "paid_up_features_plans" ("feature_id")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_features_plans_on_feature_id' AND type='index'
+[0m
+  [1m[35m (114.6ms)[0m  CREATE  INDEX "index_paid_up_features_plans_on_plan_id" ON "paid_up_features_plans" ("plan_id")
+  [1m[36m (123.5ms)[0m  [1mCREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "name" varchar, "description" text, "sort" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (107.1ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_name" ON "paid_up_plans" ("name")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_name' AND type='index'
+[0m
+  [1m[35m (123.1ms)[0m  CREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")
+  [1m[36m (139.5ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "stripe_id" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar) [0m
+  [1m[35m (148.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (122.7ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (147.7ms)[0m  [1mCREATE  INDEX "index_users_on_stripe_id" ON "users" ("stripe_id")[0m
+  [1m[35m (148.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (140.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (289.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424233014')[0m
+  [1m[35m (91.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424175804')
+  [1m[36m (91.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175805')[0m
+  [1m[35m (91.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150424231107')
+  [1m[36m (124.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150424175806')[0m
+  [1m[35m (91.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "ad-free"], ["description", "Are ads removed from the site with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (96.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)  [["name", "groups"], ["description", "How many groups are allowed with this plan?"], ["setting_type", "integer"]]
+  [1m[36m (89.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features" ("name", "description", "setting_type") VALUES (?, ?, ?)[0m  [["name", "calendar"], ["description", "Is an event calendar included with this plan?"], ["setting_type", "boolean"]]
+  [1m[35m (104.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Free"], ["stripe_id", "free-plan"], ["description", "Can't beat the price!"], ["sort", 0], ["created_at", "2015-05-12 15:22:31.299386"], ["updated_at", "2015-05-12 15:22:31.299386"]]
+  [1m[36m (112.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort", 1], ["created_at", "2015-05-12 15:22:32.073541"], ["updated_at", "2015-05-12 15:22:32.073541"]]
+  [1m[35m (103.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with log configuration."], ["sort", 2], ["created_at", "2015-05-12 15:22:33.092813"], ["updated_at", "2015-05-12 15:22:33.092813"]]
+  [1m[36m (106.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_plans" ("name", "stripe_id", "description", "sort", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professional trainers with multiple classes, calendar and a discussion forum."], ["sort", 3], ["created_at", "2015-05-12 15:22:33.956161"], ["updated_at", "2015-05-12 15:22:33.956161"]]
+  [1m[35m (98.4ms)[0m  commit transaction
+  [1m[36mPaidUp::Feature Load (0.2ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "ad-free"]]
+  [1m[35mPaidUp::Feature Load (0.1ms)[0m  SELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1  [["name", "groups"]]
+  [1m[36mPaidUp::Feature Load (0.1ms)[0m  [1mSELECT  "paid_up_features".* FROM "paid_up_features" WHERE "paid_up_features"."name" = ? LIMIT 1[0m  [["name", "calendar"]]
+  [1m[35mPaidUp::Plan Load (0.1ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Free"]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "No Ads"]]
+  [1m[35mPaidUp::Plan Load (0.2ms)[0m  SELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1  [["name", "Group Leader"]]
+  [1m[36mPaidUp::Plan Load (0.2ms)[0m  [1mSELECT  "paid_up_plans".* FROM "paid_up_plans" WHERE "paid_up_plans"."name" = ? LIMIT 1[0m  [["name", "Professional"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 2], ["setting", 1]]
+  [1m[35m (117.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 1], ["plan_id", 3], ["setting", 1]]
+  [1m[36m (104.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 2], ["plan_id", 3], ["setting", 1]]
+  [1m[35m (105.1ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[36m (104.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 1], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (104.3ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)  [["feature_id", 2], ["plan_id", 4], ["setting", -1]]
+  [1m[36m (112.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_features_plans" ("feature_id", "plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature_id", 3], ["plan_id", 4], ["setting", 1]]
+  [1m[35m (112.8ms)[0m  commit transaction
