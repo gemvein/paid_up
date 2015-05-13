@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150424233014) do
     t.string   "stripe_id"
     t.string   "name"
     t.text     "description"
-    t.integer  "sort"
+    t.integer  "sort_order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

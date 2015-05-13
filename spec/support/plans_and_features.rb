@@ -53,7 +53,7 @@ shared_context "plans and features" do
       :plan,
       name: 'Free',
       stripe_id: nil,
-      sort: 0
+      sort_order: 0
     )
   }
   let!(:no_ads_plan) {
@@ -71,7 +71,7 @@ shared_context "plans and features" do
       :plan,
       name: 'No Ads',
       stripe_id: 'no-ads-plan',
-      sort: 1
+      sort_order: 1
     )
   }
   let!(:ad_free_no_ads_features_plan) {
@@ -96,7 +96,7 @@ shared_context "plans and features" do
       :plan,
       name: 'Group Leader',
       stripe_id: 'group-leader-plan',
-      sort: 2
+      sort_order: 2
     )
   }
   let!(:ad_free_group_leader_features_plan) {
@@ -139,7 +139,7 @@ shared_context "plans and features" do
       name: 'Professional',
       description: 'This is the description of the Professional plan.',
       stripe_id: 'professional-plan',
-      sort: 3
+      sort_order: 3
     )
   }
   let!(:ad_free_professional_features_plan) {

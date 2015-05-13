@@ -48,9 +48,9 @@ describe PaidUp::Plan do
     end
   end
 
-  describe '#default' do
-    context 'returns the default plan' do
-      subject { PaidUp::Plan.default }
+  describe '#free' do
+    context 'returns the free plan' do
+      subject { PaidUp::Plan.free }
       it { should eq free_plan }
     end
   end

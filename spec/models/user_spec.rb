@@ -167,13 +167,13 @@ describe User do
     end
   end
 
-  context '#using_default_plan?' do
+  context '#using_free_plan?' do
     context 'when false' do
-      subject { no_ads_subscriber.using_default_plan?  }
+      subject { no_ads_subscriber.using_free_plan?  }
       it { should be false }
     end
     context 'when true' do
-      subject { free_subscriber.using_default_plan? }
+      subject { free_subscriber.using_free_plan? }
       it { should be true }
     end
   end

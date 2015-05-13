@@ -28,7 +28,9 @@ en:
   card_ending_with: "%{brand} ending with %{last4}"
   card_number: 'Card Number'
   change_your_password: 'Change your password'
+  cost: 'Cost'
   could_not_cancel_subscription: 'Could not cancel subscription'
+  could_not_associate_subscription: 'Could not associate subscription'
   could_not_create_subscription: 'Could not create subscription'
   could_not_update_subscription: 'Could not update subscription'
   currently_awaiting_confirmation_for_resource: "Currently awaiting confirmation for %{resource}"
@@ -47,6 +49,7 @@ en:
   my_subscription: 'My Subscription'
   my_subscription_information: 'My Subscription Information'
   paid_thru: "Paid Thru"
+  plan_name: "Plan Name"
   pricing: "Pricing"
   resend_confirmation_instructions: 'Resend confirmation instructions'
   resend_unlock_instructions: 'Resend unlock instructions'

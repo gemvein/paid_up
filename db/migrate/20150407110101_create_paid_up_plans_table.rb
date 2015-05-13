@@ -4,7 +4,7 @@ class CreatePaidUpPlansTable < ActiveRecord::Migration
       t.string :stripe_id
       t.string :name
       t.text :description
-      t.integer :sort
+      t.integer :sort_order
 
       t.timestamps
     end

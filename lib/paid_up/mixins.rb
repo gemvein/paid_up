@@ -5,15 +5,14 @@ module PaidUp
       def subscriber
         attr_reader :stripe_data
 
-        after_create :subscribe_to_default_plan
-        after_find :load_stripe_data
+        after_initialize :load_stripe_data
 
         self.send(:define_method, :reload) { |*args, &blk|
           super *args, &blk
           load_stripe_data
         }
         self.send(:define_method, :stripe_data) {
-          if stripe_id.present?
+          if stripe_id.present? || new_record?
             @customer_stripe_data
           end
         }
@@ -42,9 +41,13 @@ module PaidUp
                 :card => card_to_set,
                 :plan => plan_to_set.stripe_id,
                 :email => email
-            )
+            ) || ( raise(:could_not_create_subscription.l) && false )
 
-            result = update_attributes(stripe_id: customer.id) || ( raise(:could_not_create_subscription.l) && false )
+            if stripe_id == customer.id
+              result = update_attributes(stripe_id: customer.id) || ( raise(:could_not_associate_subscription.l) && false )
+            else
+              true
+            end
           end
           if result
             reload
@@ -53,12 +56,8 @@ module PaidUp
             return false
           end
         }
-        self.send(:define_method, :subscribe_to_default_plan) {
-          if subscribe_to_plan nil, PaidUp::Plan.default
-            PaidUp::Plan.default
-          else
-            nil
-          end
+        self.send(:define_method, :subscribe_to_free_plan) {
+          subscribe_to_plan nil, PaidUp::Plan.free
         }
         self.send(:define_method, :update_card) { |token|
           if stripe_id.present?
@@ -77,11 +76,7 @@ module PaidUp
           card_from_token token
         }
         self.send(:define_method, :plan) {
-          if stripe_id.present?
-            PaidUp::Plan.find_by_stripe_id(plan_stripe_id)
-          else
-            subscribe_to_default_plan
-          end
+          PaidUp::Plan.find_by_stripe_id(subscription.plan.id)
         }
         self.send(:define_method, :plan_stripe_id) {
           if subscription.nil?
@@ -91,7 +86,7 @@ module PaidUp
         }
         self.send(:define_method, :subscription) {
           if stripe_data.nil?
-            subscribe_to_default_plan
+            subscribe_to_free_plan
           end
           stripe_data.subscriptions.data.first
         }
@@ -99,18 +94,27 @@ module PaidUp
           plan == plan_to_check
         }
         self.send(:define_method, :can_upgrade_to?) { |plan_to_check|
-          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort > plan.sort)
+          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort_order > plan.sort_order)
         }
         self.send(:define_method, :can_downgrade_to?) { |plan_to_check|
-          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort < plan.sort)
+          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort_order < plan.sort_order)
         }
-        self.send(:define_method, :using_default_plan?) {
-          !plan.stripe_id.present? || stripe_data.delinquent
+        self.send(:define_method, :using_free_plan?) {
+          plan.stripe_id == PaidUp.configuration.free_plan_stripe_id || stripe_data.delinquent
         }
 
         self.send(:define_method, :load_stripe_data) {
-          if stripe_id.present?
-            @customer_stripe_data = Stripe::Customer.retrieve stripe_id
+          if new_record?
+            working_stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
+          else
+            unless stripe_id.present?
+              subscribe_to_free_plan
+            end
+            working_stripe_id = stripe_id
+          end
+          @customer_stripe_data = Stripe::Customer.retrieve working_stripe_id
+          if @customer_stripe_data.nil?
+            raise :could_not_load_subscription.l
           end
         }
         self.send(:private, :load_stripe_data)

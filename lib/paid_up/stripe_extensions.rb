@@ -13,4 +13,5 @@ module PaidUp
   end
 end
 
+Stripe::Customer.send(:include, PaidUp::StripeExtensions)
 Stripe::Plan.send(:include, PaidUp::StripeExtensions)
