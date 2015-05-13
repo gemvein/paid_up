@@ -43,7 +43,7 @@ module PaidUp
                 :email => email
             ) || ( raise(:could_not_create_subscription.l) && false )
 
-            if stripe_id == customer.id
+            if stripe_id != customer.id
               result = update_attributes(stripe_id: customer.id) || ( raise(:could_not_associate_subscription.l) && false )
             else
               true
@@ -109,6 +109,7 @@ module PaidUp
           else
             unless stripe_id.present?
               subscribe_to_free_plan
+              puts stripe_id.to_yaml
             end
             working_stripe_id = stripe_id
           end

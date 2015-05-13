@@ -9,7 +9,9 @@ class PaidUp::Plan < ActiveRecord::Base
 
   attr_accessor :stripe_data
 
+  default_scope { order('sort_order ASC') }
   scope :free, -> { where(stripe_id: PaidUp.configuration.free_plan_stripe_id).first }
+  scope :subscribable, -> { where('sort_order >=  ?', 0) }
 
   def feature_setting(name)
     feature = PaidUp::Feature.find_by_name(name)

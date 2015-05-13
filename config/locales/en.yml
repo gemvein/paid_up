@@ -48,6 +48,8 @@ en:
   length_characters_minimum: "(%{length} characters minimum)"
   my_subscription: 'My Subscription'
   my_subscription_information: 'My Subscription Information'
+  or_sign_in: "Or, Sign In"
+  or_sign_up: "Or, Sign Up"
   paid_thru: "Paid Thru"
   plan_name: "Plan Name"
   pricing: "Pricing"

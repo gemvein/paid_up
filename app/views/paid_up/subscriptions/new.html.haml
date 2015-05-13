@@ -7,7 +7,7 @@
   %script{ src: 'https://js.stripe.com/v2/' }
   %input{ name: 'plan_id', value: @plan.id, type: 'hidden' }
   .payment-errors
-  -if @current_subscriber.stripe_id
+  - if @current_subscriber.cards.count > 0
     .form-group
       %label.control-label.col-sm-2= :card.l
       .col-sm-3
@@ -18,6 +18,8 @@
           - for card in @current_subscriber.cards
             %option{ value: card.id }
               = :card_ending_with.l brand: card.brand, last4: card.last4
+  -else
+    %input{ type: 'hidden', name: 'card', value: 'stripeToken'}
   #new-card
     .form-group
       %label.control-label.col-sm-2{for: 'number'}= :card_number.l
@@ -41,35 +43,41 @@
       %button#submit-button.form-control.btn.btn-info
         =:subscribe.l
 
-  :javascript
-    function stripeResponseHandler(status, response) {
-      var $form = $('#payment-form');
+:javascript
+  function stripeResponseHandler(status, response) {
+    var $form = $('#payment-form');
 
-      if (response.error) {
-        // Show the errors on the form
-        $form.find('.payment-errors').text(response.error.message);
-        $form.find('button').prop('disabled', false);
-      } else {
-        // response contains id and card, which contains additional card details
-        var token = response.id;
-        // Insert the token into the form so it gets submitted to the server
-        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-        // and submit
-        $form.get(0).submit();
-      }
-    };
-    // This identifies your website in the createToken call below
-    $('#payment-form').submit(function() {
+    if (response.error) {
+      // Show the errors on the form
+      $form.find('.payment-errors').text(response.error.message);
+      $form.find('button').prop('disabled', false);
+    } else {
+      // response contains id and card, which contains additional card details
+      var token = response.id;
+      // Insert the token into the form so it gets submitted to the server
+      $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+      // and submit
+      $form.get(0).submit();
+    }
+  };
+  // This identifies your website in the createToken call below
+  $('#payment-form').submit(function() {
+    if($('#card').val() == 'stripeToken') {
       var $form = $(this);
 
       // Disable the submit button to prevent repeated clicks
       $('#submit-button').prop('disabled', true);
+      Stripe.setPublishableKey('#{Rails.configuration.stripe[:publishable_key]}')
 
       Stripe.card.createToken($form, stripeResponseHandler);
 
       // Prevent the form from submitting with the default action
       return false;
-    });
+    }
+  });
+
+- if @current_subscriber.cards.count > 0
+  :javascript
     $( document ).ready(function() {
       Stripe.setPublishableKey('#{Rails.configuration.stripe[:publishable_key]}');
       $('#new-card').hide();

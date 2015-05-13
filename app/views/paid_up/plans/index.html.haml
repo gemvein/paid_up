@@ -30,5 +30,6 @@
     %th= :plan_name.l
     %th= :cost.l
   - for plan in @plans
-    %tr= plan.name
-    %tr= plan_charge_human plan
+    %tr
+      %td= plan.name
+      %td= plan_charge_human plan

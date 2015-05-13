@@ -20,6 +20,7 @@ RSpec.describe "paid_up/plans/index" do
       it { should match /Professional/ }
       it { should have_css '.professional_subscribe_button .btn-success' }
       it { should_not match /Error/}
+      it { should_not match /Anonymous/}
     end
   end
 
