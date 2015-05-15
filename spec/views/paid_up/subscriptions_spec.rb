@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "paid_up/subscriptions/new" do
-  context 'when user is logged in as new customer' do
+  context 'when user is logged in as free customer' do
     include_context 'subscribers'
     context "displays a payment form" do
       before do
@@ -17,7 +17,7 @@ RSpec.describe "paid_up/subscriptions/new" do
       it { should match /#{paid_up.plan_subscriptions_path(professional_plan.id)}/ }
     end
   end
-  context 'when user is logged in as established customer' do
+  context 'when user is logged in as a paid customer' do
     include_context 'subscribers'
     context "displays a payment form" do
       before do

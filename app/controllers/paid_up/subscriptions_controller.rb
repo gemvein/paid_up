@@ -3,6 +3,10 @@ module PaidUp
     before_filter :authenticate_user!
     before_filter :set_plan, only: [:new, :create]
 
+    def index
+      # nothing to do, everything we need is in @current_subscriber
+    end
+
     def new
       # nothing to do, @plan set by #set_plan
       if @plan.stripe_id == PaidUp.configuration.free_plan_stripe_id

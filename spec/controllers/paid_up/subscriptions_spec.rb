@@ -5,6 +5,40 @@ RSpec.describe PaidUp::SubscriptionsController do
   include_context 'plans and features'
   routes { PaidUp::Engine.routes }
 
+  describe 'GET #index' do
+    context 'when the user is anonymous' do
+      before :each do
+        access_anonymous
+        get :index
+      end
+      context 'redirects to the user sign up page' do
+        subject { response }
+        it { should redirect_to '/users/sign_in' }
+        it { should have_http_status(302) }
+      end
+    end
+    context 'when the user is signed in as a subscriber' do
+      include_context 'subscribers'
+      before :each do
+        sign_in free_subscriber
+        get :index
+      end
+      context "responds successfully with an HTTP 200 status code" do
+        subject { response }
+        it { should be_success }
+        it { should have_http_status(200) }
+      end
+      context "renders the index template" do
+        subject { response }
+        it { should render_template("index") }
+      end
+      context "loads the requested subscriber info into @current_subscriber" do
+        subject { assigns(:current_subscriber) }
+        it { should eq(free_subscriber) }
+      end
+    end
+  end
+
   describe "GET #new" do
     context "when the user is anonymous" do
       before :each do
@@ -18,23 +52,45 @@ RSpec.describe PaidUp::SubscriptionsController do
       end
     end
     context "when the user is signed in" do
-      include_context 'subscribers'
-      before :each do
-        sign_in free_subscriber
-        get :new, plan_id: professional_plan.id
+      context 'with a paid plan' do
+        include_context 'subscribers'
+        before :each do
+          sign_in free_subscriber
+          get :new, plan_id: professional_plan.id
+        end
+        context "responds successfully with an HTTP 200 status code" do
+          subject { response }
+          it { should be_success }
+          it { should have_http_status(200) }
+        end
+        context "renders the new template" do
+          subject { response }
+          it { should render_template("new") }
+        end
+        context "loads the requested plan into @plan" do
+          subject { assigns(:plan) }
+          it { should eq(professional_plan) }
+        end
       end
-      context "responds successfully with an HTTP 200 status code" do
-        subject { response }
-        it { should be_success }
-        it { should have_http_status(200) }
-      end
-      context "renders the new template" do
-        subject { response }
-        it { should render_template("new") }
-      end
-      context "loads the requested plan into @plan" do
-        subject { assigns(:plan) }
-        it { should eq(professional_plan) }
+      context 'with the free plan' do
+        include_context 'subscribers'
+        before :each do
+          anonymous_user = FactoryGirl.create(
+            :user,
+            name: 'Test User'
+          )
+          login_subscriber anonymous_user
+          get :new, plan_id: free_plan.id
+        end
+        context "redirects to the subscriptions index page" do
+          subject { response }
+          it { should redirect_to subscriptions_path }
+          it { should have_http_status(302) }
+        end
+        context "sets a flash message" do
+          subject { flash[:notice] }
+          it { should match /You are now subscribed to the #{free_plan.name} Plan/ }
+        end
       end
     end
   end

@@ -17,30 +17,23 @@ module PaidUp
             @customer_stripe_data
           end
         }
-        self.send(:define_method, :cards) {
-          if stripe_data.present?
-            stripe_data.sources.all(:object => "card")
-          else
-            nil
-          end
-        }
         self.send(:define_method, :subscribe_to_plan) { |plan_to_set, stripeToken = nil|
-          if stripe_id.present? && !subscription.nil?
-            if stripeToken.present?
+          if stripe_id.present? && !subscription.nil? # There is an existing subscription
+            if stripeToken.present? # The customer has entered a new card
               subscription.source = stripeToken
               subscription.save
               reload
             end
             subscription.plan = plan_to_set.stripe_id
             result = subscription.save || ( raise(:could_not_update_subscription.l) && false )
-          else
+          else # Totally new subscription
             customer = Stripe::Customer.create(
                 :source => stripeToken,
                 :plan => plan_to_set.stripe_id,
                 :email => email
             ) || ( raise(:could_not_create_subscription.l) && false )
 
-            if stripe_id != customer.id
+            if stripe_id != customer.id # There is an update to be made, so we go ahead
               result = update_attributes(stripe_id: customer.id) || ( raise(:could_not_associate_subscription.l) && false )
             else
               result = true

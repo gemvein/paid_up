@@ -9,6 +9,20 @@ describe PaidUp::Plan do
 
   include_context 'plans and features'
 
+  describe '.subscribable' do
+    context 'returns all subscribable plans' do
+      subject { PaidUp::Plan.subscribable }
+      it { should eq [free_plan, no_ads_plan, group_leader_plan, professional_plan]}
+    end
+  end
+
+  describe '.free' do
+    context 'returns the free plan' do
+      subject { PaidUp::Plan.free }
+      it { should eq free_plan}
+    end
+  end
+
   describe '#feature_setting' do
     describe 'when setting_type is integer' do
       context 'returns the setting value if available' do
@@ -45,13 +59,6 @@ describe PaidUp::Plan do
     context 'returns false if not found' do
       subject { free_plan.feature_unlimited?(groups_feature.id) }
       it { should eq(false) }
-    end
-  end
-
-  describe '#free' do
-    context 'returns the free plan' do
-      subject { PaidUp::Plan.free }
-      it { should eq free_plan }
     end
   end
 

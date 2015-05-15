@@ -8,11 +8,6 @@ describe User do
     it { should be_a Stripe::Customer }
   end
 
-  context '#cards' do
-    subject { no_ads_subscriber.cards.first }
-    it { should be_a Stripe::Card }
-  end
-
   context '#subscribe_to_plan' do
     context 'starting from no subscription' do
       before do
@@ -41,25 +36,28 @@ describe User do
       end
     end
 
-
-    context 'starting from higher subscription' do
-      context 'with saved card' do
-        before do
-          professional_subscriber.subscribe_to_plan no_ads_plan
-        end
-        subject { professional_subscriber.plan }
-        it { should eq(no_ads_plan) }
+    context '#subscribe_to_free_plan' do
+      context 'starting from no subscription' do
+        let(:test_user) {
+          user = FactoryGirl.create(
+            :user,
+            name: 'Test User'
+          )
+          user.subscribe_to_free_plan
+          user
+        }
+        subject { test_user.plan }
+        it { should eq(free_plan) }
       end
-      context 'with new token' do
+
+      context 'starting from higher subscription' do
         before do
-          token = working_stripe_token professional_subscriber
-          professional_subscriber.subscribe_to_plan no_ads_plan, token
+          professional_subscriber.subscribe_to_free_plan
         end
         subject { professional_subscriber.plan }
-        it { should eq(no_ads_plan) }
+        it { should eq(free_plan) }
       end
     end
-
   end
 
   context '#plan' do

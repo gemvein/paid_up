@@ -36,8 +36,8 @@ class PaidUp::Plan < ActiveRecord::Base
     end
   end
 
-  def feature_unlimited?(name)
-    feature_setting(name) == -1
+  def feature_unlimited?(feature_id)
+    feature_setting(feature_id) == -1
   end
 
   def interval

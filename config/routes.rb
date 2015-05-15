@@ -3,5 +3,5 @@ PaidUp::Engine.routes.draw do
     resources :subscriptions, only: [:new, :create]
   end
 
-  resources :subscriptions, only: [:index, :edit, :update, :delete]
+  resources :subscriptions, only: [:index]
 end
