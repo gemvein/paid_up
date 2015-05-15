@@ -10,27 +10,28 @@ class PaidUp::Plan < ActiveRecord::Base
   attr_accessor :stripe_data
 
   default_scope { order('sort_order ASC') }
-  scope :free, -> { where(stripe_id: PaidUp.configuration.free_plan_stripe_id).first }
   scope :subscribable, -> { where('sort_order >=  ?', 0) }
+  scope :free, -> { find_by_stripe_id(PaidUp.configuration.free_plan_stripe_id) }
 
-  def feature_setting(name)
-    feature = PaidUp::Feature.find_by_name(name)
-    raw = features_plans.find_by_feature_name(name)
-    if raw.nil?
+  def feature_setting(feature_id)
+    feature = PaidUp::Feature.find(feature_id) || raise(:feature_not_found.l)
+    raw = features_plans.where(feature_id: feature_id)
+    if raw.empty?
       if feature.setting_type == 'boolean'
         false
       else
         0
       end
     else
+      record = raw.first
       if feature.setting_type == 'boolean'
-        if raw.setting > 0 || raw.setting == -1
+        if record.setting > 0 || record.setting == -1
           true
         else
           false
         end
       else
-        raw.setting
+        record.setting
       end
     end
   end

@@ -13,18 +13,11 @@ describe User do
     it { should be_a Stripe::Card }
   end
 
-  context '#card_from_token' do
-    subject {
-      token = working_stripe_token no_ads_subscriber
-      no_ads_subscriber.card_from_token token
-    }
-    it { should be_a Stripe::Card }
-  end
-
   context '#subscribe_to_plan' do
     context 'starting from no subscription' do
       before do
-        free_subscriber.subscribe_to_plan default_card_data, no_ads_plan
+        token = working_stripe_token free_subscriber
+        free_subscriber.subscribe_to_plan no_ads_plan, token
       end
       subject { free_subscriber.plan }
       it { should eq(no_ads_plan) }
@@ -33,7 +26,7 @@ describe User do
     context 'starting from lower subscription' do
       context 'with saved card' do
         before do
-          no_ads_subscriber.subscribe_to_plan no_ads_card_id, group_leader_plan
+          no_ads_subscriber.subscribe_to_plan group_leader_plan
         end
         subject { no_ads_subscriber.plan }
         it { should eq(group_leader_plan) }
@@ -41,7 +34,7 @@ describe User do
       context 'with new token' do
         before do
           token = working_stripe_token no_ads_subscriber
-          no_ads_subscriber.subscribe_to_plan token, group_leader_plan
+          no_ads_subscriber.subscribe_to_plan group_leader_plan, token
         end
         subject { no_ads_subscriber.plan }
         it { should eq(group_leader_plan) }
@@ -52,7 +45,7 @@ describe User do
     context 'starting from higher subscription' do
       context 'with saved card' do
         before do
-          professional_subscriber.subscribe_to_plan professional_card_id, no_ads_plan
+          professional_subscriber.subscribe_to_plan no_ads_plan
         end
         subject { professional_subscriber.plan }
         it { should eq(no_ads_plan) }
@@ -60,7 +53,7 @@ describe User do
       context 'with new token' do
         before do
           token = working_stripe_token professional_subscriber
-          professional_subscriber.subscribe_to_plan token, no_ads_plan
+          professional_subscriber.subscribe_to_plan no_ads_plan, token
         end
         subject { professional_subscriber.plan }
         it { should eq(no_ads_plan) }
@@ -69,16 +62,8 @@ describe User do
 
   end
 
-  context '#update_card' do
-    subject {
-      token = working_stripe_token no_ads_subscriber
-      no_ads_subscriber.update_card token
-    }
-    it { should be_a Stripe::Card }
-  end
-
   context '#plan' do
-    context 'when using default plan' do
+    context 'when using free plan' do
       subject { free_subscriber.plan }
       it { should eq free_plan }
     end
@@ -89,9 +74,9 @@ describe User do
   end
 
   context '#plan_stripe_id' do
-    context 'when using default plan' do
+    context 'when using free plan' do
       subject { free_subscriber.plan_stripe_id }
-      it { should be nil }
+      it { should eq 'free-plan' }
     end
     context 'when subscribed to a plan' do
       subject { no_ads_subscriber.plan_stripe_id }
@@ -100,9 +85,9 @@ describe User do
   end
 
   context '#subscription' do
-    context 'when using default plan' do
+    context 'when using free plan' do
       subject { free_subscriber.subscription }
-      it { should be nil }
+      it { should be_a Stripe::Subscription }
     end
     context 'when subscribed to a plan' do
       subject { no_ads_subscriber.subscription }
@@ -111,7 +96,7 @@ describe User do
   end
 
   context '#is_subscribed_to?' do
-    context 'when using default plan' do
+    context 'when using free plan' do
       subject { free_subscriber.is_subscribed_to? free_plan }
       it { should be true }
     end
@@ -126,8 +111,8 @@ describe User do
   end
 
   context '#can_upgrade_to?' do
-    context 'when using default plan' do
-      context 'checking against default plan' do
+    context 'when using free plan' do
+      context 'checking against free plan' do
         subject { free_subscriber.can_upgrade_to? free_plan }
         it { should be false }
       end
@@ -147,8 +132,8 @@ describe User do
   end
 
   context '#can_downgrade_to?' do
-    context 'when using default plan' do
-      context 'checking against default plan' do
+    context 'when using free plan' do
+      context 'checking against free plan' do
         subject { free_subscriber.can_downgrade_to? free_plan }
         it { should be false }
       end

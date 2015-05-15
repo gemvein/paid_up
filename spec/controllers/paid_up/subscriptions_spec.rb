@@ -2,11 +2,11 @@ require 'rails_helper'
 
 
 RSpec.describe PaidUp::SubscriptionsController do
+  include_context 'plans and features'
   routes { PaidUp::Engine.routes }
 
   describe "GET #new" do
     context "when the user is anonymous" do
-      include_context 'plans and features'
       before :each do
         access_anonymous
         get :new, plan_id: professional_plan.id
@@ -41,7 +41,6 @@ RSpec.describe PaidUp::SubscriptionsController do
 
   describe "POST #create" do
     context "when the user is anonymous" do
-      include_context 'plans and features'
       before :each do
         access_anonymous
         get :index
@@ -53,12 +52,12 @@ RSpec.describe PaidUp::SubscriptionsController do
       end
     end
     context "when the user is signed in" do
-      context "upgrading from the default plan" do
+      context "upgrading from the free plan" do
         include_context 'subscribers'
         before :each do
           sign_in free_subscriber
-          card = working_stripe_token free_subscriber
-          post :create, plan_id: professional_plan.id, card: card
+          token = working_stripe_token free_subscriber
+          post :create, plan_id: professional_plan.id, stripeToken: token
         end
         context "redirects to the subscriptions index page" do
           subject { response }
@@ -75,7 +74,7 @@ RSpec.describe PaidUp::SubscriptionsController do
         include_context 'subscribers'
         before :each do
           sign_in no_ads_subscriber
-          post :create, plan_id: professional_plan.id, card: no_ads_card_id
+          post :create, plan_id: professional_plan.id
         end
         context "redirects to the subscriptions index page" do
           subject { response }
@@ -92,7 +91,6 @@ RSpec.describe PaidUp::SubscriptionsController do
 
   describe "GET #index" do
     context "when the user is anonymous" do
-      include_context 'plans and features'
       before :each do
         access_anonymous
         get :index

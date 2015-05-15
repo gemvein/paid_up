@@ -19,8 +19,12 @@ RSpec.describe PaidUp::PlansController do
     end
     context "loads all of the plans into @plans" do
       subject { assigns(:plans) }
-      it { should eq(PaidUp::Plan.all) }
+      it { should eq(PaidUp::Plan.subscribable) }
       it { should have(4).items }
+    end
+    context "loads all of the features into @features" do
+      subject { assigns(:features) }
+      it { should eq(PaidUp::Feature.all) }
     end
   end
 end

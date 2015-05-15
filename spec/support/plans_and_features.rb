@@ -8,36 +8,59 @@ shared_context "plans and features" do
   let!(:ad_free_feature) { FactoryGirl.create(
       :feature,
       name: 'ad-free',
+      title: 'Ad Free',
       setting_type: 'boolean'
   ) }
 
   let!(:groups_feature) { FactoryGirl.create(
       :feature,
       name: 'groups',
+      title: 'Groups',
       setting_type: 'integer'
   ) }
 
   let!(:configuration_feature) { FactoryGirl.create(
       :feature,
       name: 'configuration',
+      title: 'Configuration',
       setting_type: 'boolean'
   ) }
 
   let!(:theme_feature) { FactoryGirl.create(
       :feature,
       name: 'theme',
+      title: 'Theme',
       setting_type: 'boolean'
   ) }
 
   let!(:calendar_feature) { FactoryGirl.create(
       :feature,
       name: 'calendar',
+      title: 'Calendar',
       setting_type: 'boolean'
   ) }
 
   #########
   # Plans #
   #########
+  let!(:anonymous_plan) {
+    Stripe::Plan.find_or_create_by_id(
+        'anonymous-plan',
+        {
+            :amount => 0,
+            :interval => 'month',
+            :name => 'Anonymous Plan',
+            :currency => 'usd',
+            :id => 'anonymous-plan'
+        }
+    )
+    FactoryGirl.create(
+        :plan,
+        name: 'Anonymous',
+        stripe_id: 'anonymous-plan',
+        sort_order: -1
+    )
+  }
   let!(:free_plan) {
     Stripe::Plan.find_or_create_by_id(
         'free-plan',
@@ -52,7 +75,7 @@ shared_context "plans and features" do
     FactoryGirl.create(
       :plan,
       name: 'Free',
-      stripe_id: nil,
+      stripe_id: 'free-plan',
       sort_order: 0
     )
   }

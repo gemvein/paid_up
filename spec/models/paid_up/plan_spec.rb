@@ -12,22 +12,22 @@ describe PaidUp::Plan do
   describe '#feature_setting' do
     describe 'when setting_type is integer' do
       context 'returns the setting value if available' do
-        subject { group_leader_plan.feature_setting('groups') }
+        subject { group_leader_plan.feature_setting(groups_feature.id) }
         it { should eq(1) }
       end
       context 'returns 0 if not available' do
-        subject { free_plan.feature_setting('groups') }
+        subject { free_plan.feature_setting(groups_feature.id) }
         it { should eq(0) }
       end
     end
 
     describe 'when setting_type is boolean' do
       context 'returns the setting value if available' do
-        subject { group_leader_plan.feature_setting('configuration') }
+        subject { group_leader_plan.feature_setting(configuration_feature.id) }
         it { should eq(true) }
       end
       context 'returns false if not available' do
-        subject { free_plan.feature_setting('configuration') }
+        subject { free_plan.feature_setting(configuration_feature.id) }
         it { should eq(false) }
       end
     end
@@ -35,15 +35,15 @@ describe PaidUp::Plan do
 
   describe '#feature_unlimited?' do
     context 'returns true if unlimited' do
-      subject { professional_plan.feature_unlimited?('groups') }
+      subject { professional_plan.feature_unlimited?(groups_feature.id) }
       it { should eq(true) }
     end
     context 'returns false if an integer' do
-      subject { group_leader_plan.feature_unlimited?('groups') }
+      subject { group_leader_plan.feature_unlimited?(groups_feature.id) }
       it { should eq(false) }
     end
     context 'returns false if not found' do
-      subject { free_plan.feature_unlimited?('groups') }
+      subject { free_plan.feature_unlimited?(groups_feature.id) }
       it { should eq(false) }
     end
   end
@@ -56,9 +56,9 @@ describe PaidUp::Plan do
   end
 
   describe '#interval' do
-    context 'on default plan' do
+    context 'on free plan' do
       subject { free_plan.interval }
-      it { should eq 'life' }
+      it { should eq 'month' }
     end
     context 'on a regular plan' do
       subject { no_ads_plan.interval }
@@ -67,7 +67,7 @@ describe PaidUp::Plan do
   end
 
   describe '#interval_count' do
-    context 'on default plan' do
+    context 'on free plan' do
       subject { free_plan.interval_count }
       it { should eq 1 }
     end

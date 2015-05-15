@@ -32,6 +32,7 @@ en:
   could_not_cancel_subscription: 'Could not cancel subscription'
   could_not_associate_subscription: 'Could not associate subscription'
   could_not_create_subscription: 'Could not create subscription'
+  could_not_subscribe_to_plan: "Could not subscribe to %{plan}"
   could_not_update_subscription: 'Could not update subscription'
   currently_awaiting_confirmation_for_resource: "Currently awaiting confirmation for %{resource}"
   cvc: 'CVC'
@@ -43,6 +44,7 @@ en:
   enter_new_card: 'Enter New Card'
   error: "Error"
   expiration: 'Expiration'
+  feature_not_found: "Feature Not Found"
   forgot_your_password: 'Forgot your password?'
   leave_blank_if_you_dont_want_to_change_it: "(leave blank if you don't want to change it)"
   length_characters_minimum: "(%{length} characters minimum)"
@@ -66,6 +68,7 @@ en:
   thank_you: "Thank You"
   trial_period: "Trial Period"
   unhappy: "Unhappy?"
+  unlimited: 'Unlimited'
   update_account: 'Update Account'
   we_need_your_current_password_to_confirm_your_changes: '(we need your current password to confirm your changes)'
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"

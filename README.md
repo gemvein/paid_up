@@ -21,7 +21,9 @@ Edit your config file at `config/initializers/paid_up.rb` to set up your connect
 
 Set your environment variables with your STRIPE_PUBLISHABLE_KEY and your STRIPE_SECRET_KEY. (Check your operating system or IDE's documentation for details)
 
+Using your own code or Stripe's convenient web interface, add the plans you intend to offer. Each will also need a record in your own database. For each Stripe::Plan you create, note the `id` and use it as the `stripe_id` in the corresponding `PaidUp::Plan`. At a minimum, you will need an anonymous plan, a free plan, both with a cost amount of `0`; and also at least one paid plan.
 
+Next, add a `Stripe::Customer` to serve as the Anonymous User, and subscribe that customer to the anonymous plan. Note the customer's `id` and copy that into your stripe configuration file.
 
 Contributing to Paid Up
 ----------------------------

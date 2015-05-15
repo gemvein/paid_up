@@ -1,15 +1,17 @@
 require "rails_helper"
 
 RSpec.describe "paid_up/plans/index" do
+  include_context 'plans and features'
   include_context 'subscribers'
 
   context 'when user is anonymous' do
     before do
       assign(:current_subscriber, access_anonymous)
-      assign(:plans, PaidUp::Plan.all)
+      assign(:features, PaidUp::Feature.all)
+      assign(:plans, PaidUp::Plan.subscribable)
       render
     end
-    context "displays all the plans" do
+    context "displays the subscribable plans" do
       subject { rendered }
       it { should match /Free/ }
       it { should have_css '.free_subscribe_button .btn-info' }
@@ -27,7 +29,8 @@ RSpec.describe "paid_up/plans/index" do
   context 'when user is logged in as professional subscriber' do
     before do
       assign(:current_subscriber, login_subscriber(professional_subscriber))
-      assign(:plans, PaidUp::Plan.all)
+      assign(:features, PaidUp::Feature.all)
+      assign(:plans, PaidUp::Plan.subscribable)
       render
     end
     context "displays all the plans" do
@@ -41,6 +44,7 @@ RSpec.describe "paid_up/plans/index" do
       it { should match /Professional/ }
       it { should have_css '.professional_subscribe_button .btn-disabled' }
       it { should_not match /Error/}
+      it { should_not match /Anonymous/}
     end
   end
 end

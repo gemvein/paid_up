@@ -7,45 +7,38 @@ shared_context 'subscribers' do
   ############
 
   let!(:free_subscriber) {
-    FactoryGirl.create(
+    subscriber = FactoryGirl.create(
       :subscriber,
       name: 'Free Subscriber'
     )
+    subscriber.subscribe_to_free_plan
+    subscriber
   }
 
   let!(:no_ads_subscriber) {
-    FactoryGirl.create(
+    subscriber = FactoryGirl.create(
       :subscriber,
       name: 'No Ads Subscriber'
     )
+    subscriber.subscribe_to_plan no_ads_plan, working_stripe_token(subscriber)
+    subscriber
   }
 
   let!(:group_leader_subscriber) {
-    FactoryGirl.create(
+    subscriber = FactoryGirl.create(
       :subscriber,
       name: 'Group Leader Subscriber'
     )
+    subscriber.subscribe_to_plan group_leader_plan, working_stripe_token(subscriber)
+    subscriber
   }
 
   let!(:professional_subscriber) {
-    FactoryGirl.create(
+    subscriber = FactoryGirl.create(
       :subscriber,
       name: 'Professional Subscriber'
     )
-  }
-
-  let!(:no_ads_card_id) {
-    no_ads_subscriber.subscribe_to_plan default_card_data, no_ads_plan
-    no_ads_subscriber.cards.first.id
-  }
-
-  let!(:group_leader_card_id) {
-    group_leader_subscriber.subscribe_to_plan default_card_data, group_leader_plan
-    group_leader_subscriber.cards.first.id
-  }
-
-  let!(:professional_card_id) {
-    professional_subscriber.subscribe_to_plan default_card_data, professional_plan
-    professional_subscriber.cards.first.id
+    subscriber.subscribe_to_plan professional_plan, working_stripe_token(subscriber)
+    subscriber
   }
 end

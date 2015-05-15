@@ -2,6 +2,7 @@ class CreatePaidUpFeaturesTable < ActiveRecord::Migration
   def change
     create_table :paid_up_features do |t|
       t.string :name
+      t.string :title
       t.string :setting_type
       t.text :description
     end

@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150424233014) do
 
   create_table "paid_up_features", force: :cascade do |t|
     t.string "name"
+    t.string "title"
     t.string "setting_type"
     t.text   "description"
   end
