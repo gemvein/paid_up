@@ -5,7 +5,6 @@
   = responsive_meta_tag   # If you're using the responsive features, you need this in your head
 
   = stylesheet_link_tag 'application'
-  = theme_stylesheet_link_tag
 
   = render_head_css
   = javascript_include_tag 'application'
@@ -13,15 +12,15 @@
 
 %body
   .container
-    = alert_flash_messages
     = render_h1         # For the h1 tag containing the title alone
+    = alert_flash_messages
     = yield
 
   %footer
     - add_widget do
       .clearfix
         = nav_list :class => 'nav-pills nav-stacked' do
-          = nav_item :pricing.l, paid_up.plans_path
+          = nav_item :plans.l, paid_up.plans_path
           - if signed_in?
             = nav_item :my_subscription.l, paid_up.subscriptions_path
             = nav_item :sign_out.l, main_app.destroy_user_session_path, method: :delete

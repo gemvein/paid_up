@@ -11,6 +11,7 @@ module PaidUp
   require 'paid_up/mixins'
   require 'paid_up/integer'
   require 'paid_up/stripe_extensions'
+  require 'paid_up/table_validator'
 
   require 'haml-rails'
   require 'bootswitch'

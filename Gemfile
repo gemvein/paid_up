@@ -7,15 +7,15 @@ gem 'jquery-rails'
 gem 'uglifier'
 gem 'jeweler'
 
-gem 'bootswitch'
 gem 'bootstrap_leather'
 
 gem 'seedbank'
 gem 'chronic'
+gem 'money'
+
 gem 'devise'
 gem 'cancan'
 gem 'stripe'
-gem 'money'
 
 group :test, :development do
   gem 'rspec-rails'
@@ -24,6 +24,8 @@ group :test, :development do
   gem 'sqlite3'
   gem 'high_voltage'
   gem 'forgery'
+  gem 'bootstrap-sass', '~> 3.3.4'
+  gem 'sass-rails', '>= 3.2'
 end
 
 group :test do

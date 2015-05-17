@@ -9,10 +9,8 @@ module PaidUp
 
     def new
       # nothing to do, @plan set by #set_plan
-      if @plan.stripe_id == PaidUp.configuration.free_plan_stripe_id
-        if @current_subscriber.subscribe_to_free_plan
-          redirect_to subscriptions_path, flash: { notice: :you_are_now_subscribed_to_the_plan.l(plan_name: @current_subscriber.plan.name) }
-        end
+      if @current_subscriber.can_downgrade_to? @plan || @plan.amount == 0
+        create
       end
     end
 

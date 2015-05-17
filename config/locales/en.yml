@@ -44,6 +44,7 @@ en:
   enter_new_card: 'Enter New Card'
   error: "Error"
   expiration: 'Expiration'
+  features: 'Features'
   feature_not_found: "Feature Not Found"
   forgot_your_password: 'Forgot your password?'
   leave_blank_if_you_dont_want_to_change_it: "(leave blank if you don't want to change it)"
@@ -54,9 +55,11 @@ en:
   or_sign_up: "Or, Sign Up"
   paid_thru: "Paid Thru"
   plan_name: "Plan Name"
+  plans: "Plans"
   pricing: "Pricing"
   resend_confirmation_instructions: 'Resend confirmation instructions'
   resend_unlock_instructions: 'Resend unlock instructions'
+  select_payment_info: "Select Payment Info"
   send_me_reset_password_instructions: "Send me reset password instructions"
   sign_in: "Sign In"
   sign_in_with_provider: "Sign in with %{provider}"
@@ -65,10 +68,13 @@ en:
   status: "Status"
   subscribe: "Subscribe"
   subscribe_to_plan: "Subscribe to %{plan_name} Plan"
+  switch_plans: "Switch Plans"
   thank_you: "Thank You"
   trial_period: "Trial Period"
   unhappy: "Unhappy?"
   unlimited: 'Unlimited'
   update_account: 'Update Account'
   we_need_your_current_password_to_confirm_your_changes: '(we need your current password to confirm your changes)'
+  when_using_table_rows_table_must_exist: 'When using table_rows, the table must exist.'
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"
+  you_will_be_charged: "You will be charged %{charge_amount}."

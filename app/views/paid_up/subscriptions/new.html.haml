@@ -1,47 +1,55 @@
 - add_title :subscribe_to_plan.l plan_name: @plan.name
 
 %p= @plan.description
-%h2= plan_charge_human @plan
+= features_table only: @plan, should_add_buttons: false
 
-= form_tag paid_up.plan_subscriptions_path(@plan), class: 'form-horizontal', id: 'payment-form' do
-  %script{ src: 'https://js.stripe.com/v2/' }
-  %input{ name: 'plan_id', value: @plan.id, type: 'hidden' }
-  .payment-errors
-  - if @current_subscriber.cards.count > 0
-    .form-group
-      %label.control-label.col-sm-2= :card.l
-      .col-sm-3
-        %select#card.form-control
-          %option
-          %option{ value: 'stripeToken'}
-            = :enter_new_card.l
-          - for card in @current_subscriber.cards
-            %option{ value: card.id }
-              = :card_ending_with.l brand: card.brand, last4: card.last4
-  - else
-    %input#card{ type: 'hidden', value: 'stripeToken' }
-  #new-card
-    .form-group
-      %label.control-label.col-sm-2{for: 'number'}= :card_number.l
-      .col-sm-3
-        %input.form-control#number{ size: '16', data: { stripe: 'number' } }
-    .form-group
-      %label.control-label.col-sm-2{for: 'cvc'}= :cvc.l
-      .col-xs-1
-        %input.form-control#cvc{ size: '3', data: { stripe: 'cvc' } }
-    .form-group
-      %label.control-label.col-sm-2{for: 'exp-month'}
-        = :expiration.l
-        (MM/YYYY)
-      .col-xs-1
-        %input.form-control#exp-month{ size: '2', data: { stripe: 'exp-month' } }
-      .col-xs-1
-        /
-        %input.form-control#exp-year.col-xs-1{ size: '4', data: { stripe: 'exp-year' } }
-  .form-group
-    .col-xs-2.col-xs-offset-2
-      %button#submit-button.form-control.btn.btn-info
-        =:subscribe.l
+%h2= :select_payment_info.l
+%p= :you_will_be_charged.l charge_amount: plan_charge_human(@plan)
+.row
+  .col-md-6
+    = form_tag paid_up.plan_subscriptions_path(@plan), class: 'form-horizontal', id: 'payment-form' do
+      %script{ src: 'https://js.stripe.com/v2/' }
+      %input{ name: 'plan_id', value: @plan.id, type: 'hidden' }
+      .payment-errors
+        .form-group
+          .control-label.col-xs-2= :card.l
+          .col-md-10
+            .group
+              - if @current_subscriber.cards.count > 0
+                - @current_subscriber.cards.each_with_index do |card, index|
+                  .radio
+                    %label
+                      - if index == 0
+                        %input{ type: :radio, name: 'card', value: card.id, checked: 'checked' }
+                      - else
+                        %input{ type: :radio, name: 'card', value: card.id }
+                      = :card_ending_with.l brand: card.brand, last4: card.last4
+              .radio
+                %label
+                  %input{ type: :radio, name: 'card', value: 'stripeToken' }
+                  = :enter_new_card.l
+      #new-card
+        .form-group
+          %label.control-label.col-xs-2{for: 'number'}= :card_number.l
+          .col-md-10
+            %input.form-control#number{ size: '16', data: { stripe: 'number' } }
+        .form-group
+          %label.control-label.col-xs-2{for: 'cvc'}= :cvc.l
+          .col-xs-4
+            %input.form-control#cvc{ size: '3', data: { stripe: 'cvc' } }
+        .form-group
+          %label.control-label.col-xs-2{for: 'exp-month'}
+            = :expiration.l
+            (MM/YYYY)
+          .col-xs-2
+            %input.form-control#exp-month{ size: '2', data: { stripe: 'exp-month' } }
+          .col-xs-2
+            /
+            %input.form-control#exp-year.col-xs-1{ size: '4', data: { stripe: 'exp-year' } }
+      .form-group
+        .col-xs-10.col-xs-offset-2
+          %button#submit-button.form-control.btn.btn-info
+            =:subscribe.l
 
 :javascript
   function stripeResponseHandler(status, response) {
@@ -50,7 +58,7 @@
     if (response.error) {
       // Show the errors on the form
       $form.find('.payment-errors').text(response.error.message);
-      $form.find('submit').prop('disabled', false);
+      $('#submit-button').prop('disabled', false);
     } else {
       // response contains id and card, which contains additional card details
       var token = response.id;
@@ -62,11 +70,11 @@
   };
   // This identifies your website in the createToken call below
   $('#payment-form').submit(function() {
-    if($('#card').val() == 'stripeToken' || $('#card').find(":selected").val() == 'stripeToken') {
-      var $form = $(this);
+    // Disable the submit button to prevent repeated clicks
+    $('#submit-button').prop('disabled', true);
 
-      // Disable the submit button to prevent repeated clicks
-      $('#submit-button').prop('disabled', true);
+    if($("input:radio[name='card']:checked").val() == 'stripeToken') {
+      var $form = $(this);
 
       Stripe.setPublishableKey('#{Rails.configuration.stripe[:publishable_key]}')
       Stripe.card.createToken($form, stripeResponseHandler);
@@ -79,12 +87,12 @@
 - if @current_subscriber.cards.count > 0
   :javascript
     $( document ).ready(function() {
-      $('#new-card').hide();
-      $('#card').change(function() {
-        if($(this).find(":selected").val() == 'stripeToken') {
+      $("input:radio[name='card']").change(function() {
+        if($("input:radio[name='card']:checked").val() == 'stripeToken') {
           $('#new-card').show();
         } else {
           $('#new-card').hide();
         }
       });
+      $('#new-card').hide();
     });

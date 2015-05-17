@@ -17,6 +17,13 @@ module PaidUp
             @customer_stripe_data
           end
         }
+        self.send(:define_method, :cards) {
+          if stripe_data.present?
+            stripe_data.sources.all(:object => "card")
+          else
+            nil
+          end
+        }
         self.send(:define_method, :subscribe_to_plan) { |plan_to_set, stripeToken = nil|
           if stripe_id.present? && !subscription.nil? # There is an existing subscription
             if stripeToken.present? # The customer has entered a new card
@@ -65,7 +72,7 @@ module PaidUp
           stripe_data.subscriptions.data.first
         }
         self.send(:define_method, :is_subscribed_to?) { |plan_to_check|
-          plan == plan_to_check
+          plan.id == plan_to_check.id
         }
         self.send(:define_method, :can_upgrade_to?) { |plan_to_check|
           !is_subscribed_to?(plan_to_check) && (plan_to_check.sort_order.to_i > plan.sort_order.to_i)

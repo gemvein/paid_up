@@ -6,6 +6,7 @@ RSpec.describe "paid_up/subscriptions/new" do
     context "displays a payment form" do
       before do
         view.extend PaidUp::PlansHelper
+        view.extend PaidUp::FeaturesHelper
 
         assign(:current_subscriber, login_subscriber(free_subscriber))
         assign(:plan, professional_plan)
@@ -22,6 +23,7 @@ RSpec.describe "paid_up/subscriptions/new" do
     context "displays a payment form" do
       before do
         view.extend PaidUp::PlansHelper
+        view.extend PaidUp::FeaturesHelper
 
         assign(:current_subscriber, login_subscriber(no_ads_subscriber))
         assign(:plan, professional_plan)
@@ -41,6 +43,7 @@ RSpec.describe "paid_up/subscriptions/index" do
     context "displays the details of a user's subscriptions" do
       before do
         view.extend PaidUp::PlansHelper
+        view.extend PaidUp::FeaturesHelper
 
         assign(:current_subscriber, login_subscriber(professional_subscriber))
         render

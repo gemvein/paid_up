@@ -3,4 +3,6 @@ class PaidUp::Feature < ActiveRecord::Base
   has_many :plans, :through => :features_plans, class_name: 'PaidUp::Plan'
 
   validates_presence_of :name, :title, :setting_type
+
+  validates_with PaidUp::TableValidator, field: 'setting_type', comparison: 'table_rows', found_in: 'name'
 end

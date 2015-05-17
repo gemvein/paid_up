@@ -52,44 +52,58 @@ RSpec.describe PaidUp::SubscriptionsController do
       end
     end
     context "when the user is signed in" do
-      context 'with a paid plan' do
-        include_context 'subscribers'
-        before :each do
-          sign_in free_subscriber
-          get :new, plan_id: professional_plan.id
+      context 'when upgrading' do
+        context 'with a paid plan' do
+          include_context 'subscribers'
+          before :each do
+            sign_in free_subscriber
+            get :new, plan_id: professional_plan.id
+          end
+          context "responds successfully with an HTTP 200 status code" do
+            subject { response }
+            it { should be_success }
+            it { should have_http_status(200) }
+          end
+          context "renders the new template" do
+            subject { response }
+            it { should render_template("new") }
+          end
+          context "loads the requested plan into @plan" do
+            subject { assigns(:plan) }
+            it { should eq(professional_plan) }
+          end
         end
-        context "responds successfully with an HTTP 200 status code" do
-          subject { response }
-          it { should be_success }
-          it { should have_http_status(200) }
+        context 'with the free plan' do
+          include_context 'subscribers'
+          before :each do
+            login_subscriber no_ads_subscriber
+            get :new, plan_id: free_plan.id
+          end
+          context "redirects to the subscriptions index page" do
+            subject { response }
+            it { should redirect_to subscriptions_path }
+            it { should have_http_status(302) }
+          end
+          context "sets a flash message" do
+            subject { flash[:notice] }
+            it { should match /You are now subscribed to the #{free_plan.name} Plan/ }
+          end
         end
-        context "renders the new template" do
-          subject { response }
-          it { should render_template("new") }
-        end
-        context "loads the requested plan into @plan" do
-          subject { assigns(:plan) }
-          it { should eq(professional_plan) }
-        end
-      end
-      context 'with the free plan' do
-        include_context 'subscribers'
-        before :each do
-          anonymous_user = FactoryGirl.create(
-            :user,
-            name: 'Test User'
-          )
-          login_subscriber anonymous_user
-          get :new, plan_id: free_plan.id
-        end
-        context "redirects to the subscriptions index page" do
-          subject { response }
-          it { should redirect_to subscriptions_path }
-          it { should have_http_status(302) }
-        end
-        context "sets a flash message" do
-          subject { flash[:notice] }
-          it { should match /You are now subscribed to the #{free_plan.name} Plan/ }
+        context 'when downgrading' do
+          include_context 'subscribers'
+          before :each do
+            sign_in professional_subscriber
+            get :new, plan_id: no_ads_plan.id
+          end
+          context "redirects to the subscriptions index page" do
+            subject { response }
+            it { should redirect_to subscriptions_path }
+            it { should have_http_status(302) }
+          end
+          context "sets a flash message" do
+            subject { flash[:notice] }
+            it { should match /You are now subscribed to the #{no_ads_plan.name} Plan/ }
+          end
         end
       end
     end

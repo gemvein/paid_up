@@ -1,0 +1,16 @@
+%table.feature_comparison.table.table-bordered{ html_options }
+  %tr
+    %th= :plan_name.l
+    %th= :cost.l
+    - for feature in features
+      %th= feature.title
+    - if should_add_buttons
+      %th= :subscribe.l
+  - for plan in plans
+    %tr{ class: highlight_plan == plan ? 'info' : ''}
+      %td= plan.name
+      %td= plan_charge_human plan
+      - for feature in features
+        %td= feature_display feature, plan
+      - if should_add_buttons
+        %td= plan_button plan

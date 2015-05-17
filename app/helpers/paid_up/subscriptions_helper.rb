@@ -15,7 +15,7 @@ module PaidUp
         data[:trial_period.l]= date_range(subscription.trial_start, subscription.trial_end)
       end
 
-      dl data, class: 'dl-horizontal'
+      dl data
     end
   end
 end

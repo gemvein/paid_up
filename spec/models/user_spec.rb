@@ -8,6 +8,11 @@ describe User do
     it { should be_a Stripe::Customer }
   end
 
+  context '#cards' do
+    subject { professional_subscriber.cards.first }
+    it { should be_a Stripe::Card }
+  end
+
   context '#subscribe_to_plan' do
     context 'starting from no subscription' do
       before do

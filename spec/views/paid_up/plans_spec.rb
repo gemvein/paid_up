@@ -6,15 +6,17 @@ RSpec.describe "paid_up/plans/index" do
 
   context 'when user is anonymous' do
     before do
+      view.extend PaidUp::PlansHelper
+      view.extend PaidUp::FeaturesHelper
+
       assign(:current_subscriber, access_anonymous)
-      assign(:features, PaidUp::Feature.all)
       assign(:plans, PaidUp::Plan.subscribable)
       render
     end
     context "displays the subscribable plans" do
       subject { rendered }
       it { should match /Free/ }
-      it { should have_css '.free_subscribe_button .btn-info' }
+      it { should have_css '.free_subscribe_button .btn-success' }
       it { should match /No Ads/ }
       it { should have_css '.no_ads_subscribe_button .btn-success' }
       it { should match /Group Leader/ }
@@ -28,8 +30,10 @@ RSpec.describe "paid_up/plans/index" do
 
   context 'when user is logged in as professional subscriber' do
     before do
+      view.extend PaidUp::PlansHelper
+      view.extend PaidUp::FeaturesHelper
+
       assign(:current_subscriber, login_subscriber(professional_subscriber))
-      assign(:features, PaidUp::Feature.all)
       assign(:plans, PaidUp::Plan.subscribable)
       render
     end

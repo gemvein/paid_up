@@ -59,7 +59,7 @@ Stripe::Plan.find_or_create_by_id(
 PaidUp::Plan.create(
     name: 'Group Leader',
     stripe_id: 'group-leader-plan',
-    description: "For leaders of single groups, with log configuration.",
+    description: "For leaders of single groups, with configuration.",
     sort_order: 2
 )
 Stripe::Plan.find_or_create_by_id(
@@ -75,7 +75,7 @@ Stripe::Plan.find_or_create_by_id(
 PaidUp::Plan.create(
     name: 'Professional',
     stripe_id: 'professional-plan',
-    description: "Designed for professional trainers with multiple classes, calendar and a discussion forum.",
+    description: "Designed for professionals with unlimited groups, a calendar and configuration.",
     sort_order: 3
 )
 ######################

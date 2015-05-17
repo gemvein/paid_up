@@ -8,3 +8,9 @@
 
 - if @current_subscriber.subscription.cancel_at_period_end
   %h3= :canceled.l
+
+%h3= :features.l
+= features_table only: @current_subscriber.plan, should_add_buttons: false
+
+%p
+  = icon_button_to 'btn-info btn-lg', 'arrow-right', :switch_plans.l, paid_up.plans_path, method: :get

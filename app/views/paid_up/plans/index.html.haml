@@ -9,42 +9,6 @@
           .small= plan_charge_human plan
         %p= plan.description.html_safe
         %div{class:plan.name.gsub(' ',"_").downcase+'_subscribe_button'}
-          - if @current_subscriber.can_upgrade_to?(plan)
-            .btn.btn-success
-              - if user_signed_in?
-                = link_to (icon('arrow-up') + :subscribe.l).html_safe, paid_up.new_plan_subscription_path(plan)
-              - else
-                = link_to (icon('upload') + :sign_up.l).html_safe, paid_up.new_plan_subscription_path(plan)
-          - elsif @current_subscriber.can_downgrade_to?(plan)
-            .btn.btn-danger
-              = link_to (icon('arrow-down') + :subscribe.l).html_safe, paid_up.new_plan_subscription_path(plan)
-          - else
-            -if user_signed_in?
-              .btn.btn-disabled.disabled
-                = link_to (icon('ok') + :already_subscribed.l).html_safe, '#'
-            -elsif plan.stripe_id == PaidUp.configuration.free_plan_stripe_id
-              .btn.btn-info
-                = link_to (icon('upload') + :sign_up.l).html_safe, paid_up.new_plan_subscription_path(plan)
-            -else
-              .btn.btn-disabled.disabled
-                = link_to (icon('remove') + :error.l).html_safe, '#'
-%table.feature_comparison.table.table-bordered.table-striped
-  %tr
-    %th= :plan_name.l
-    %th= :cost.l
-    - for feature in @features
-      %th= feature.title
-  - for plan in @plans
-    %tr
-      %td= plan.name
-      %td= plan_charge_human plan
-      - for feature in @features
-        %td
-          - if feature.setting_type == 'boolean'
-            - if plan.feature_setting feature.id
-              = icon 'ok'
-          - else
-            - if plan.feature_unlimited? feature.id
-              = :unlimited.l
-            - else
-              = plan.feature_setting feature.id
+          = plan_button plan
+%h2= :features.l
+= features_table highlight: @current_subscriber.plan

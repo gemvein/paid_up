@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150424233014) do
+ActiveRecord::Schema.define(version: 20150517175135) do
 
   create_table "paid_up_features", force: :cascade do |t|
     t.string "name"
