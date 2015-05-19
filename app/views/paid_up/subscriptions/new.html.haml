@@ -12,11 +12,11 @@
       %input{ name: 'plan_id', value: @plan.id, type: 'hidden' }
       .payment-errors
         .form-group
-          .control-label.col-xs-2= :card.l
+          %label.control-label.col-xs-2= :card.l
           .col-md-10
             .group
-              - if @current_subscriber.cards.count > 0
-                - @current_subscriber.cards.each_with_index do |card, index|
+              - if current_user.cards.count > 0
+                - current_user.cards.each_with_index do |card, index|
                   .radio
                     %label
                       - if index == 0
@@ -26,7 +26,10 @@
                       = :card_ending_with.l brand: card.brand, last4: card.last4
               .radio
                 %label
-                  %input{ type: :radio, name: 'card', value: 'stripeToken' }
+                  - if current_user.cards.count == 0
+                    %input{ type: :radio, name: 'card', value: 'stripeToken', checked: 'checked' }
+                  - else
+                    %input{ type: :radio, name: 'card', value: 'stripeToken' }
                   = :enter_new_card.l
       #new-card
         .form-group
@@ -84,7 +87,7 @@
     }
   });
 
-- if @current_subscriber.cards.count > 0
+- if current_user.cards.count > 0
   :javascript
     $( document ).ready(function() {
       $("input:radio[name='card']").change(function() {

@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  abilities: "Abilities"
   already_subscribed: "Already Subscribed"
   are_you_sure: "Are you sure?"
   cancel_my_account: 'Cancel My Account'
@@ -37,12 +38,13 @@ en:
   currently_awaiting_confirmation_for_resource: "Currently awaiting confirmation for %{resource}"
   cvc: 'CVC'
   default_currency: 'usd'
-  default_interval: 'life'
+  default_interval: 'month'
   didnt_receive_confirmation_instructions: "Didn't receive confirmation instructions?"
   didnt_receive_unlock_instructions: "Didn't receive unlock instructions?"
   edit_resource: "Edit %{resource}"
   enter_new_card: 'Enter New Card'
   error: "Error"
+  error_handling_feature_setting: "Error handling %{feature} setting"
   expiration: 'Expiration'
   features: 'Features'
   feature_not_found: "Feature Not Found"
@@ -51,6 +53,7 @@ en:
   length_characters_minimum: "(%{length} characters minimum)"
   my_subscription: 'My Subscription'
   my_subscription_information: 'My Subscription Information'
+  no_conversion_of_type_features_to_table_rows: 'No conversion of %{type} Features to table_rows'
   or_sign_in: "Or, Sign In"
   or_sign_up: "Or, Sign Up"
   paid_thru: "Paid Thru"
@@ -72,9 +75,11 @@ en:
   thank_you: "Thank You"
   trial_period: "Trial Period"
   unhappy: "Unhappy?"
+  unknown_feature_type: 'Unknown Feature Type'
   unlimited: 'Unlimited'
   update_account: 'Update Account'
   we_need_your_current_password_to_confirm_your_changes: '(we need your current password to confirm your changes)'
   when_using_table_rows_table_must_exist: 'When using table_rows, the table must exist.'
+  x_of_y_remaining: '%{x} of %{y} remaining'
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"
   you_will_be_charged: "You will be charged %{charge_amount}."

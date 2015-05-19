@@ -6,7 +6,7 @@ shared_context 'subscribers' do
   # Subscribers    #
   ############
 
-  let!(:free_subscriber) {
+  let(:free_subscriber) {
     subscriber = FactoryGirl.create(
       :subscriber,
       name: 'Free Subscriber'
@@ -15,7 +15,7 @@ shared_context 'subscribers' do
     subscriber
   }
 
-  let!(:no_ads_subscriber) {
+  let(:no_ads_subscriber) {
     subscriber = FactoryGirl.create(
       :subscriber,
       name: 'No Ads Subscriber'
@@ -24,7 +24,7 @@ shared_context 'subscribers' do
     subscriber
   }
 
-  let!(:group_leader_subscriber) {
+  let(:group_leader_subscriber) {
     subscriber = FactoryGirl.create(
       :subscriber,
       name: 'Group Leader Subscriber'
@@ -33,7 +33,7 @@ shared_context 'subscribers' do
     subscriber
   }
 
-  let!(:professional_subscriber) {
+  let(:professional_subscriber) {
     subscriber = FactoryGirl.create(
       :subscriber,
       name: 'Professional Subscriber'

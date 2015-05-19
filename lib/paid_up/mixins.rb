@@ -11,6 +11,7 @@ module PaidUp
         self.send(:define_method, :reload) { |*args, &blk|
           super *args, &blk
           load_stripe_data
+          self
         }
         self.send(:define_method, :stripe_data) {
           if stripe_id.present? || new_record?
@@ -59,8 +60,20 @@ module PaidUp
         self.send(:define_method, :plan) {
           PaidUp::Plan.find_by_stripe_id(subscription.plan.id)
         }
+        self.send(:define_method, :table_rows_unlimited?) { |table_name|
+          table_rows_allowed(table_name) == PaidUp::Unlimited.to_i
+        }
+        self.send(:define_method, :table_rows_remaining) { |table_name|
+          table_rows_allowed(table_name) - table_rows(table_name)
+        }
+        self.send(:define_method, :table_rows_allowed) { |table_name|
+          plan.feature_setting_by_name table_name
+        }
+        self.send(:define_method, :table_rows) { |table_name|
+          send(table_name).count
+        }
         self.send(:define_method, :plan_stripe_id) {
-          if subscription.nil?
+         if subscription.nil?
             return nil
           end
           subscription.plan.id

@@ -8,7 +8,7 @@ RSpec.describe "paid_up/subscriptions/new" do
         view.extend PaidUp::PlansHelper
         view.extend PaidUp::FeaturesHelper
 
-        assign(:current_subscriber, login_subscriber(free_subscriber))
+        assign(:current_user, login_subscriber(free_subscriber))
         assign(:plan, professional_plan)
         render
       end
@@ -25,7 +25,7 @@ RSpec.describe "paid_up/subscriptions/new" do
         view.extend PaidUp::PlansHelper
         view.extend PaidUp::FeaturesHelper
 
-        assign(:current_subscriber, login_subscriber(no_ads_subscriber))
+        assign(:current_user, login_subscriber(no_ads_subscriber))
         assign(:plan, professional_plan)
         render
       end
@@ -45,11 +45,14 @@ RSpec.describe "paid_up/subscriptions/index" do
         view.extend PaidUp::PlansHelper
         view.extend PaidUp::FeaturesHelper
 
-        assign(:current_subscriber, login_subscriber(professional_subscriber))
+        assign(:current_user, login_subscriber(group_leader_subscriber))
         render
       end
       subject { rendered }
-      it { should match /Professional/ }
+      it { should match /Group Leader/ }
+      it { should have_selector 'table.abilities #ad_free_ability .glyphicon-ok'}
+      it { should have_selector 'table.abilities #groups_ability .glyphicon-ok'}
+      it { should have_selector 'table.abilities #calendar_ability .glyphicon-remove'}
     end
   end
 end

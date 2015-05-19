@@ -1,5 +1,5 @@
 PaidUp::Feature.create(
-    name: 'ad-free',
+    name: 'ad_free',
     title: 'Ad Free',
     description: 'Are ads removed from the site with this plan?',
     setting_type: 'boolean'

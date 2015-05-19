@@ -47,6 +47,30 @@ describe PaidUp::Plan do
     end
   end
 
+  describe '#feature_setting_by_name' do
+    describe 'when setting_type is integer' do
+      context 'returns the setting value if available' do
+        subject { group_leader_plan.feature_setting_by_name('groups') }
+        it { should eq(1) }
+      end
+      context 'returns 0 if not available' do
+        subject { free_plan.feature_setting_by_name('groups') }
+        it { should eq(0) }
+      end
+    end
+
+    describe 'when setting_type is boolean' do
+      context 'returns the setting value if available' do
+        subject { group_leader_plan.feature_setting_by_name('ad_free') }
+        it { should eq(true) }
+      end
+      context 'returns false if not available' do
+        subject { free_plan.feature_setting_by_name('ad_free') }
+        it { should eq(false) }
+      end
+    end
+  end
+
   describe '#feature_unlimited?' do
     context 'returns true if unlimited' do
       subject { professional_plan.feature_unlimited?(groups_feature.id) }

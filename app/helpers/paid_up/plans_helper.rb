@@ -20,23 +20,29 @@ module PaidUp
       css_class = 'btn '
       disabled_state = false
       link = paid_up.new_plan_subscription_path(plan)
-      text ||= :subscribe.l
-      if @current_subscriber.can_upgrade_to? plan
-        icon_class = 'arrow-up'
-        css_class += 'btn-success'
-      elsif @current_subscriber.can_downgrade_to? plan
-        icon_class = 'arrow-down'
-        css_class += 'btn-danger'
-        data[:confirm] = :are_you_sure.l
-      elsif @current_subscriber.is_subscribed_to? plan
-        icon_class = 'ok'
-        css_class += 'btn-disabled'
-        disabled_state = true
-        link = '#'
-        text = :already_subscribed.l
-      else # Plans are equal in sort_order
+      if user_signed_in?
+        text ||= :subscribe.l
+        if current_user.can_upgrade_to? plan
+          icon_class = 'arrow-up'
+          css_class += 'btn-success'
+        elsif current_user.can_downgrade_to? plan
+          icon_class = 'arrow-down'
+          css_class += 'btn-danger'
+          data[:confirm] = :are_you_sure.l
+        elsif current_user.is_subscribed_to? plan
+          icon_class = 'ok'
+          css_class += 'btn-disabled'
+          disabled_state = true
+          link = '#'
+          text = :already_subscribed.l
+        else # Plans are equal in sort_order
+          icon_class = 'arrow-right'
+          css_class += 'btn-info'
+        end
+      else
+        text ||= :sign_up.l
         icon_class = 'arrow-right'
-        css_class += 'btn-info'
+        css_class += 'btn-success'
       end
       html_options[:method] ||= :get
       html_options[:disabled] ||= disabled_state

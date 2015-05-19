@@ -56,5 +56,10 @@ module PaidUp
 
       render(partial: 'paid_up/features/table', locals: { should_add_buttons: should_add_buttons, plans: plans, features: features, highlight_plan: highlight_plan, html_options: options})
     end
+
+    def feature_abilities_table(options = {})
+      features = PaidUp::Feature.all
+      render(partial: 'paid_up/features/abilities_table', locals: { features: features, html_options: options})
+    end
   end
 end

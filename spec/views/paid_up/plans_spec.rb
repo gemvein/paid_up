@@ -9,7 +9,7 @@ RSpec.describe "paid_up/plans/index" do
       view.extend PaidUp::PlansHelper
       view.extend PaidUp::FeaturesHelper
 
-      assign(:current_subscriber, access_anonymous)
+      assign(:current_user, access_anonymous)
       assign(:plans, PaidUp::Plan.subscribable)
       render
     end
@@ -33,7 +33,7 @@ RSpec.describe "paid_up/plans/index" do
       view.extend PaidUp::PlansHelper
       view.extend PaidUp::FeaturesHelper
 
-      assign(:current_subscriber, login_subscriber(professional_subscriber))
+      assign(:current_user, login_subscriber(professional_subscriber))
       assign(:plans, PaidUp::Plan.subscribable)
       render
     end

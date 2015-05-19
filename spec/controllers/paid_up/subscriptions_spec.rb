@@ -32,10 +32,6 @@ RSpec.describe PaidUp::SubscriptionsController do
         subject { response }
         it { should render_template("index") }
       end
-      context "loads the requested subscriber info into @current_subscriber" do
-        subject { assigns(:current_subscriber) }
-        it { should eq(free_subscriber) }
-      end
     end
   end
 

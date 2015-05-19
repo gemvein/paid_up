@@ -4,8 +4,7 @@ class PaidUp::Plan < ActiveRecord::Base
 
   validates_presence_of :description, :name
 
-  after_find :load_stripe_data
-  after_create :load_stripe_data
+  after_initialize :load_stripe_data
 
   attr_accessor :stripe_data
 
@@ -13,31 +12,40 @@ class PaidUp::Plan < ActiveRecord::Base
   scope :subscribable, -> { where('sort_order >=  ?', 0) }
   scope :free, -> { find_by_stripe_id(PaidUp.configuration.free_plan_stripe_id) }
 
+  def reload(*args, &blk)
+    super *args, &blk
+    load_stripe_data
+    self
+  end
+
+  def feature_setting_by_name(feature_name)
+    feature = PaidUp::Feature.find_by_name(feature_name) || raise(:feature_not_found.l)
+    feature_setting(feature.id)
+  end
+
   def feature_setting(feature_id)
     feature = PaidUp::Feature.find(feature_id) || raise(:feature_not_found.l)
     raw = features_plans.where(feature_id: feature_id)
-    if raw.empty?
-      if feature.setting_type == 'boolean'
-        false
-      else
-        0
-      end
-    else
-      record = raw.first
-      if feature.setting_type == 'boolean'
-        if record.setting > 0 || record.setting == -1
-          true
-        else
+    case feature.setting_type
+      when 'boolean'
+        if raw.empty?
           false
+        else
+          raw.first.setting != 0
+        end
+      when 'table_rows'
+        if raw.empty?
+          0
+        else
+          raw.first.setting
         end
       else
-        record.setting
-      end
+        raise :error_handling_feature_setting.l feature: feature
     end
   end
 
   def feature_unlimited?(feature_id)
-    feature_setting(feature_id) == -1
+    feature_setting(feature_id) == PaidUp::Unlimited.to_i
   end
 
   def interval

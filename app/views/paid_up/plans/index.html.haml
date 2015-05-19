@@ -11,4 +11,8 @@
         %div{class:plan.name.gsub(' ',"_").downcase+'_subscribe_button'}
           = plan_button plan
 %h2= :features.l
-= features_table highlight: @current_subscriber.plan
+.table-responsive
+  - if user_signed_in?
+    = features_table highlight: current_user.plan
+  - else
+    = features_table

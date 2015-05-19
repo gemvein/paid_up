@@ -1,5 +1,5 @@
 module PaidUp
-  class InstallGenerator < Rails::Generators::NamedBase
+  class InstallGenerator < Rails::Generators::Base
     argument :user_model_name, :type => :string, :default => "User"
     source_root File.expand_path("../templates", __FILE__)
     require File.expand_path('../../utils', __FILE__)
@@ -13,28 +13,28 @@ module PaidUp
     # all public methods in here will be run in order
 
     def install_devise
-      output "To start with, Devise is used to authenticate #{user_model_name.pluralize}. No need to install it separately, I'll do that now.", :magenta
+      output "To start with, Devise is used to authenticate users. No need to install it separately, I'll do that now.", :magenta
       generate("devise:install")
-      generate("devise #{user_model_name}")
+      generate("devise User")
     end
 
     def add_initializer
       output "Next, you'll need an initializer.  This is where you put your configuration options.", :magenta
-      template "initializer.rb.erb", "config/initializers/paid_up.rb", assigns: { user_model: ('::' + user_model_name).constantize.new }
+      template "initializer.rb.erb", "config/initializers/paid_up.rb"
     end
 
     def add_migrations
       output "Next come migrations.", :magenta
       rake 'paid_up:install:migrations'
       unless self.class.migration_exists?('db/migrate', 'add_customer_stripe_id.rb')
-        generate("migration AddStripeIdColumnTo#{user_model_name} stripe_id:string:index")
+        generate("migration AddStripeIdColumnToUser stripe_id:string:index")
       end
     end
 
     def add_to_model
-      output "Adding PaidUp to your #{user_model_name} model", :magenta
-      gsub_file "app/models/#{user_model_name.downcase}.rb", /^\n  subscriber$/, ''
-      inject_into_file "app/models/#{user_model_name.downcase}.rb", "\n  subscriber", after: "class #{user_model_name} < ActiveRecord::Base"
+      output "Adding PaidUp to your User model", :magenta
+      gsub_file "app/models/user.rb", /^\n  subscriber$/, ''
+      inject_into_file "app/models/user.rb", "\n  subscriber", after: "class User < ActiveRecord::Base"
     end
 
     def add_route

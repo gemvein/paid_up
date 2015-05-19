@@ -7,7 +7,7 @@ shared_context "plans and features" do
 
   let!(:ad_free_feature) { FactoryGirl.create(
       :feature,
-      name: 'ad-free',
+      name: 'ad_free',
       title: 'Ad Free',
       setting_type: 'boolean'
   ) }
@@ -16,7 +16,7 @@ shared_context "plans and features" do
       :feature,
       name: 'groups',
       title: 'Groups',
-      setting_type: 'integer'
+      setting_type: 'table_rows'
   ) }
 
   let!(:configuration_feature) { FactoryGirl.create(
@@ -59,7 +59,7 @@ shared_context "plans and features" do
         name: 'Anonymous',
         stripe_id: 'anonymous-plan',
         sort_order: -1
-    )
+    ).reload
   }
   let!(:free_plan) {
     Stripe::Plan.find_or_create_by_id(
@@ -77,7 +77,7 @@ shared_context "plans and features" do
       name: 'Free',
       stripe_id: 'free-plan',
       sort_order: 0
-    )
+    ).reload
   }
   let!(:no_ads_plan) {
     Stripe::Plan.find_or_create_by_id(
@@ -95,7 +95,7 @@ shared_context "plans and features" do
       name: 'No Ads',
       stripe_id: 'no-ads-plan',
       sort_order: 1
-    )
+    ).reload
   }
   let!(:ad_free_no_ads_features_plan) {
     FactoryGirl.create(
@@ -120,7 +120,7 @@ shared_context "plans and features" do
       name: 'Group Leader',
       stripe_id: 'group-leader-plan',
       sort_order: 2
-    )
+    ).reload
   }
   let!(:ad_free_group_leader_features_plan) {
     FactoryGirl.create(
@@ -163,7 +163,7 @@ shared_context "plans and features" do
       description: 'This is the description of the Professional plan.',
       stripe_id: 'professional-plan',
       sort_order: 3
-    )
+    ).reload
   }
   let!(:ad_free_professional_features_plan) {
     FactoryGirl.create(
@@ -178,7 +178,7 @@ shared_context "plans and features" do
         :features_plan,
         plan_id: professional_plan.id,
         feature_id: groups_feature.id,
-        setting: -1
+        setting: PaidUp::Unlimited.to_i(:db)
     )
   }
   let!(:configuration_professional_features_plan) {

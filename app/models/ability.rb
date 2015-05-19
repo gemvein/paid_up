@@ -2,36 +2,36 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
+    user ||= User.new # anonymous user (not logged in)
 
-    can :create, PaidUp::Subscription do |subscription|
-      !user.new_record?
+    # Rails Application's initialization could go here.
+
+    initialize_paid_up(user)
+  end
+
+  def initialize_paid_up(user)
+    features = PaidUp::Feature.all
+
+    for feature in features
+
+      case feature.setting_type
+        when 'table_rows'
+          model = feature.name.classify.constantize
+          if user.table_rows_allowed(feature.name) > 0 || user.table_rows_allowed(feature.name) == -1
+            can :manage, model, :user => user
+            can :own, model
+            unless user.table_rows_remaining(feature.name) > 0
+              cannot :create, model
+            end
+          end
+          can :read, model
+        when 'boolean'
+          if user.plan.feature_setting feature.id
+            can :use, feature.name.to_sym
+          end
+        else
+          raise(:unknown_feature_type.l)
+      end
     end
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
-    # The first argument to `can` is the action you are giving the user 
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on. 
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
 end

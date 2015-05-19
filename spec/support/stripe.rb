@@ -1,5 +1,5 @@
 shared_context 'stripe' do
-  let!(:default_card_data) {
+  let(:default_card_data) {
     {
         number: '4242424242424242',
         exp_month: 1,

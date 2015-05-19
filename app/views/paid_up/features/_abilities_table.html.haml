@@ -1,0 +1,22 @@
+%table.abilities.table.table-bordered{ html_options }
+  - for feature in features
+    %tr{ id: feature.name + '_ability'}
+      %th= feature.title
+      %td
+      - case feature.setting_type
+        - when 'boolean'
+          - if can? :use, feature.name.to_sym
+            = icon 'ok'
+          - else
+            = icon 'remove'
+        - when 'table_rows'
+          - if can? :own, feature.feature_model
+            = icon 'ok'
+          - else
+            = icon 'remove'
+          - if current_user.table_rows_unlimited?(feature.name)
+            = :unlimited.l
+          - else
+            = :x_of_y_remaining.l x: current_user.table_rows_remaining(feature.name), y: current_user.table_rows_allowed(feature.name)
+        - else
+          = :error.l

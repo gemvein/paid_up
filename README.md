@@ -15,16 +15,16 @@ Paid Up is a start-to-finish Stripe subscription engine. You set up the plans yo
 
 Installation
 ----------------------------
-First you need a working user-type model, with any authentication system you like. I recommend the gem 'devise' for this. Once you have your model in place, add paid_up to your `Gemfile`:
+First, add paid_up to your `Gemfile`:
 
     gem 'paid_up'
     
-If you do not have a table and model for your users/subscribers, now would be the time to create one. You can name it as you like; `User` would be logical. You do not need to include columns for authentication functionality, as those will be included when Devise is installed, which happens automatically during the upcoming steps. Just put in the fields that relate to your own functionality, such as profile columns.
+To start with, you will need a User model and the corresponding table, set up with your business rules for users, such as profile fields or theme configuration.
 
 Next, install PaidUp for your user model by executing these commands:
 
     bundle install
-    rails g paid_up:install [USER_MODEL_NAME]
+    rails g paid_up:install
     rake db:migrate
     
 Configuration

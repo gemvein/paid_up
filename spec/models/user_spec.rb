@@ -1,4 +1,5 @@
 require 'rails_helper'
+require "cancan/matchers"
 
 describe User do
   include_context 'subscribers'
@@ -73,6 +74,67 @@ describe User do
     context 'when subscribed to a plan' do
       subject { no_ads_subscriber.plan }
       it { should eq no_ads_plan }
+    end
+  end
+
+  context '#table_rows_remaining' do
+    context 'when using a plan without the feature' do
+      subject { no_ads_subscriber.table_rows_remaining 'groups' }
+      it { should eq 0 }
+    end
+    context 'when subscribed to a plan with the feature limited' do
+      subject { group_leader_subscriber.table_rows_remaining 'groups' }
+      it { should eq 1 }
+    end
+    context 'when subscribed to a plan with the feature unlimited' do
+      subject { professional_subscriber.table_rows_remaining 'groups' }
+      it { should eq PaidUp::Unlimited.to_i }
+    end
+  end
+
+  context '#table_rows_unlimited?' do
+    context 'when using a plan without the feature' do
+      subject { no_ads_subscriber.table_rows_unlimited? 'groups' }
+      it { should eq false }
+    end
+    context 'when subscribed to a plan with the feature limited' do
+      subject { group_leader_subscriber.table_rows_unlimited? 'groups' }
+      it { should eq false }
+    end
+    context 'when subscribed to a plan with the feature unlimited' do
+      subject { professional_subscriber.table_rows_unlimited? 'groups' }
+      it { should eq true }
+    end
+  end
+
+  context '#table_rows_allowed' do
+    context 'when using a plan without the feature' do
+      subject { no_ads_subscriber.table_rows_allowed 'groups' }
+      it { should eq 0 }
+    end
+    context 'when subscribed to a plan with the feature limited' do
+      subject { group_leader_subscriber.table_rows_allowed 'groups' }
+      it { should eq 1 }
+    end
+    context 'when subscribed to a plan with the feature unlimited' do
+      subject { professional_subscriber.table_rows_allowed 'groups' }
+      it { should eq PaidUp::Unlimited.to_i }
+    end
+  end
+
+  context '#table_rows' do
+    context 'when possessing no rows' do
+      subject { professional_subscriber.table_rows 'groups' }
+      it { should eq 0 }
+    end
+    context 'when possessing 3 rows' do
+      subject {
+        professional_subscriber.groups.create! name: 'Test Group'
+        professional_subscriber.groups.create! name: 'Test Group'
+        professional_subscriber.groups.create! name: 'Test Group'
+        professional_subscriber.table_rows 'groups'
+      }
+      it { should eq 3 }
     end
   end
 
@@ -163,6 +225,80 @@ describe User do
     context 'when true' do
       subject { free_subscriber.using_free_plan? }
       it { should be true }
+    end
+  end
+
+  ####################
+  # Abilities        #
+  ####################
+
+
+  describe "Abilities" do
+    subject(:ability){ Ability.new(user) }
+
+    context "when anonymous" do
+      let(:user){ User.new }
+      it{ should be_able_to(:read, Group) }
+      it{ should_not be_able_to(:manage, Group) }
+      it{ should_not be_able_to(:own, Group) }
+      it{ should_not be_able_to(:create, Group) }
+      it{ should_not be_able_to(:use, :ad_free) }
+      it{ should_not be_able_to(:use, :calendar) }
+    end
+    context "when on free plan" do
+      let(:user){ free_subscriber }
+      it{ should be_able_to(:read, Group) }
+      it{ should_not be_able_to(:manage, Group) }
+      it{ should_not be_able_to(:own, Group) }
+      it{ should_not be_able_to(:create, Group) }
+      it{ should_not be_able_to(:use, :ad_free) }
+      it{ should_not be_able_to(:use, :calendar) }
+    end
+    context "when on group plan" do
+      context "given no groups are owned" do
+        let(:user){ group_leader_subscriber }
+        it{ should be_able_to(:read, Group) }
+        it{ should be_able_to(:manage, Group) }
+        it{ should be_able_to(:own, Group) }
+        it{ should be_able_to(:create, Group) }
+        it{ should be_able_to(:use, :ad_free) }
+        it{ should_not be_able_to(:use, :calendar) }
+      end
+      context "given one group is owned" do
+        let(:user){
+          group_leader_subscriber.groups.create!(name: 'Test Group')
+          group_leader_subscriber.reload
+        }
+        it{ should be_able_to(:read, Group) }
+        it{ should be_able_to(:manage, Group) }
+        it{ should be_able_to(:own, Group) }
+        it{ should_not be_able_to(:create, Group) }
+        it{ should be_able_to(:use, :ad_free) }
+        it{ should_not be_able_to(:use, :calendar) }
+      end
+    end
+    context "when on professional plan" do
+      context "given no groups are owned" do
+        let(:user){ professional_subscriber }
+        it{ should be_able_to(:read, Group) }
+        it{ should be_able_to(:manage, Group) }
+        it{ should be_able_to(:own, Group) }
+        it{ should be_able_to(:create, Group) }
+        it{ should be_able_to(:use, :ad_free) }
+        it{ should be_able_to(:use, :calendar) }
+      end
+      context "given one group is owned" do
+        let(:user){
+          professional_subscriber.groups.create!(name: 'Test Group')
+          professional_subscriber.reload
+        }
+        it{ should be_able_to(:read, Group) }
+        it{ should be_able_to(:manage, Group) }
+        it{ should be_able_to(:own, Group) }
+        it{ should be_able_to(:create, Group) }
+        it{ should be_able_to(:use, :ad_free) }
+        it{ should be_able_to(:use, :calendar) }
+      end
     end
   end
 end

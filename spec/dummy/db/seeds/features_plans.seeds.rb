@@ -1,5 +1,5 @@
 after :features, :plans do
-  ad_free = PaidUp::Feature.find_by_name 'ad-free'
+  ad_free = PaidUp::Feature.find_by_name 'ad_free'
   groups = PaidUp::Feature.find_by_name 'groups'
   calendar = PaidUp::Feature.find_by_name 'calendar'
 
@@ -41,7 +41,7 @@ after :features, :plans do
   PaidUp::FeaturesPlan.create(
       feature: groups,
       plan: professional,
-      setting: -1 # -1 to indicate unlimited
+      setting: PaidUp::Unlimited.to_i(:db)
   )
   PaidUp::FeaturesPlan.create(
       feature: calendar,
