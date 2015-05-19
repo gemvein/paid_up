@@ -18,8 +18,6 @@ gem 'cancan', '~> 1.6'
 gem 'stripe', '~> 1.21'
 
 group :test, :development do
-  gem 'rspec-rails', '~> 3.2'
-  gem 'rspec-collection_matchers', '~> 1.1'
   gem 'database_cleaner', '~> 1.4'
   gem 'sqlite3', '~> 1.3'
   gem 'high_voltage', '~> 2.3'
@@ -29,6 +27,8 @@ group :test, :development do
 end
 
 group :test do
+  gem 'rspec-rails', '~> 3.2'
+  gem 'rspec-collection_matchers', '~> 1.1'
   gem 'shoulda-matchers', '~> 2.8'
   gem 'minitest', '~>5.5.1'
   gem "launchy", "~> 2.1.2", require: false
