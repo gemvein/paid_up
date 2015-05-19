@@ -25,7 +25,7 @@ group :test, :development do
   gem 'high_voltage', '~> 2.3'
   gem 'forgery', '~> 0.6'
   gem 'bootstrap-sass', '~> 3.3'
-  gem 'sass-rails', '>= 3.2'
+  gem 'sass-rails', '~> 5.0'
 end
 
 group :test do
