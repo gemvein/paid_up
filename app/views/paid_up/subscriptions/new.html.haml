@@ -55,7 +55,7 @@
             =:subscribe.l
 
 - add_footer_javascript do
-  javascript:
+  :javascript
     function stripeResponseHandler(status, response) {
       var $form = $('#payment-form');
 
@@ -99,4 +99,4 @@
           }
         });
         $('#new-card').hide();
-    });
+      });
