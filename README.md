@@ -46,6 +46,13 @@ Features Setup
 
 Set up each `PaidUp::Feature` using your own admin, the console, or seed data. Associate the features with the corresponding plans using the `PaidUp::FeaturesPlan` joining table model. For example, check out the seeds files in [`spec/dummy/db/seeds/`](spec/dummy/db/seeds/)
 
+Enabling Javascript
+----------------------------
+
+In order for PaidUp's AJAX functionality to work, you will need to add this to your layout file, preferably at the very end of the <body> element (for speed reasons):
+
+    = render_footer_javascript
+
 Contributing to Paid Up
 ----------------------------
  
