@@ -52,6 +52,25 @@ Enabling Javascript
 In order for PaidUp's AJAX functionality to work, you will need to add this to your layout file, preferably at the very end of the <body> element (for speed reasons):
 
     = render_footer_javascript
+    
+Abilities
+-----------------------------
+
+Abilities corresponding to features you have defined will be generated automatically for you if you include the PaidUp::Ability module and use the `initialize_paid_up(user)` command, like this:
+
+    class Ability
+      include CanCan::Ability
+      include PaidUp::Ability
+    
+      def initialize(user)
+        user ||= User.new # anonymous user (not logged in)
+    
+        # Rails Application's initialization could go here.
+        can :manage, Group, user: user
+    
+        initialize_paid_up(user)
+      end
+    end
 
 Contributing to Paid Up
 ----------------------------
