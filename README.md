@@ -21,6 +21,8 @@ First, add paid_up to your `Gemfile`:
     
 To start with, you will need a User model and the corresponding table, set up with your business rules for users, such as profile fields or theme configuration.
 
+    rails generate model User name:string:unique bio:text
+
 Next, install PaidUp for your user model by executing these commands:
 
     bundle install

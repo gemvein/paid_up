@@ -17,7 +17,6 @@ module PaidUp
 
   require 'haml-rails'
   require 'bootstrap_leather'
-  require 'high_voltage'
   require 'cancan'
 
   require 'money'
