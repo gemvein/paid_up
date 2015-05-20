@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-05-19"
+  s.date = "2015-05-20"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
   s.executables = ["rails"]
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
     "app/helpers/paid_up/paid_up_helper.rb",
     "app/helpers/paid_up/plans_helper.rb",
     "app/helpers/paid_up/subscriptions_helper.rb",
-    "app/models/ability.rb",
+    "app/models/paid_up/ability.rb",
     "app/models/paid_up/feature.rb",
     "app/models/paid_up/features_plan.rb",
     "app/models/paid_up/plan.rb",
@@ -86,6 +86,7 @@ Gem::Specification.new do |s|
     "spec/dummy/app/assets/javascripts/application.js",
     "spec/dummy/app/assets/stylesheets/application.css.scss",
     "spec/dummy/app/controllers/application_controller.rb",
+    "spec/dummy/app/models/ability.rb",
     "spec/dummy/app/models/group.rb",
     "spec/dummy/app/models/user.rb",
     "spec/dummy/app/views/layouts/application.html.haml",
