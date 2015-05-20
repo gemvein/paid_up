@@ -191,12 +191,10 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<devise>, ["~> 3.4"])
       s.add_runtime_dependency(%q<cancan>, ["~> 1.6"])
       s.add_runtime_dependency(%q<stripe>, ["~> 1.21"])
-      s.add_development_dependency(%q<database_cleaner>, ["~> 1.4"])
       s.add_development_dependency(%q<sqlite3>, ["~> 1.3"])
       s.add_development_dependency(%q<forgery>, ["~> 0.6"])
       s.add_development_dependency(%q<bootstrap-sass>, ["~> 3.3"])
       s.add_development_dependency(%q<sass-rails>, ["~> 5.0"])
-      s.add_development_dependency(%q<rspec-rails>, ["~> 3.2"])
     else
       s.add_dependency(%q<rails>, ["~> 4"])
       s.add_dependency(%q<rails-i18n>, ["~> 4"])
@@ -211,12 +209,10 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<devise>, ["~> 3.4"])
       s.add_dependency(%q<cancan>, ["~> 1.6"])
       s.add_dependency(%q<stripe>, ["~> 1.21"])
-      s.add_dependency(%q<database_cleaner>, ["~> 1.4"])
       s.add_dependency(%q<sqlite3>, ["~> 1.3"])
       s.add_dependency(%q<forgery>, ["~> 0.6"])
       s.add_dependency(%q<bootstrap-sass>, ["~> 3.3"])
       s.add_dependency(%q<sass-rails>, ["~> 5.0"])
-      s.add_dependency(%q<rspec-rails>, ["~> 3.2"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 4"])
@@ -232,12 +228,10 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<devise>, ["~> 3.4"])
     s.add_dependency(%q<cancan>, ["~> 1.6"])
     s.add_dependency(%q<stripe>, ["~> 1.21"])
-    s.add_dependency(%q<database_cleaner>, ["~> 1.4"])
     s.add_dependency(%q<sqlite3>, ["~> 1.3"])
     s.add_dependency(%q<forgery>, ["~> 0.6"])
     s.add_dependency(%q<bootstrap-sass>, ["~> 3.3"])
     s.add_dependency(%q<sass-rails>, ["~> 5.0"])
-    s.add_dependency(%q<rspec-rails>, ["~> 3.2"])
   end
 end
 
