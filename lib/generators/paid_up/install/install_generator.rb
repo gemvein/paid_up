@@ -26,9 +26,6 @@ module PaidUp
     def add_migrations
       output "Next come migrations.", :magenta
       rake 'paid_up:install:migrations'
-      unless self.class.migration_exists?('db/migrate', 'add_customer_stripe_id.rb')
-        generate("migration AddStripeIdColumnToUser stripe_id:string:index")
-      end
     end
 
     def add_to_model
