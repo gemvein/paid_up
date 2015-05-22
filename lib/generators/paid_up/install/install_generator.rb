@@ -18,9 +18,14 @@ module PaidUp
       generate("devise User")
     end
 
+    def install_cancan
+      output "For authorization, PaidUp uses CanCan. Let's get you started with a customizable ability.rb file.", :magenta
+      template "ability.rb", "app/models/ability.rb"
+    end
+
     def add_initializer
       output "Next, you'll need an initializer.  This is where you put your configuration options.", :magenta
-      template "initializer.rb.erb", "config/initializers/paid_up.rb"
+      template "initializer.rb", "config/initializers/paid_up.rb"
     end
 
     def add_migrations

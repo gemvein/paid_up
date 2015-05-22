@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-05-20"
+  s.date = "2015-05-22"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
   s.executables = ["rails"]
@@ -66,7 +66,8 @@ Gem::Specification.new do |s|
     "db/migrate/20150407110101_create_paid_up_plans_table.rb",
     "db/migrate/20150519164237_add_stripe_id_column_to_users.rb",
     "lib/generators/paid_up/install/install_generator.rb",
-    "lib/generators/paid_up/install/templates/initializer.rb.erb",
+    "lib/generators/paid_up/install/templates/ability.rb",
+    "lib/generators/paid_up/install/templates/initializer.rb",
     "lib/generators/paid_up/utils.rb",
     "lib/paid_up.rb",
     "lib/paid_up/configuration.rb",
