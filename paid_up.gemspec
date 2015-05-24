@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-05-22"
+  s.date = "2015-05-24"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
   s.executables = ["rails"]
@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
     "app/models/paid_up/feature.rb",
     "app/models/paid_up/features_plan.rb",
     "app/models/paid_up/plan.rb",
+    "app/models/paid_up/unlimited.rb",
     "app/views/devise/confirmations/new.html.haml",
     "app/views/devise/passwords/edit.html.haml",
     "app/views/devise/passwords/new.html.haml",
@@ -62,7 +63,6 @@ Gem::Specification.new do |s|
     "coverage/.resultset.json",
     "coverage/.resultset.json.lock",
     "db/migrate/20150407105900_create_paid_up_features_plans_table.rb",
-    "db/migrate/20150407110100_create_paid_up_features_table.rb",
     "db/migrate/20150407110101_create_paid_up_plans_table.rb",
     "db/migrate/20150519164237_add_stripe_id_column_to_users.rb",
     "lib/generators/paid_up/install/install_generator.rb",
@@ -72,13 +72,14 @@ Gem::Specification.new do |s|
     "lib/paid_up.rb",
     "lib/paid_up/configuration.rb",
     "lib/paid_up/engine.rb",
-    "lib/paid_up/integer.rb",
+    "lib/paid_up/extensions/integer.rb",
+    "lib/paid_up/extensions/stripe.rb",
     "lib/paid_up/localization.rb",
-    "lib/paid_up/subscriber.rb",
+    "lib/paid_up/mixins/paid_for.rb",
+    "lib/paid_up/mixins/subscriber.rb",
     "lib/paid_up/railtie.rb",
-    "lib/paid_up/stripe.rb",
-    "lib/paid_up/table_rows.rb",
-    "lib/paid_up/unlimited.rb",
+    "lib/paid_up/validators/rolify_rows.rb",
+    "lib/paid_up/validators/table_rows.rb",
     "lib/paid_up/version.rb",
     "paid_up.gemspec",
     "spec/controllers/paid_up/plans_spec.rb",
@@ -88,13 +89,16 @@ Gem::Specification.new do |s|
     "spec/dummy/app/assets/stylesheets/application.css.scss",
     "spec/dummy/app/controllers/application_controller.rb",
     "spec/dummy/app/models/ability.rb",
+    "spec/dummy/app/models/doodad.rb",
     "spec/dummy/app/models/group.rb",
+    "spec/dummy/app/models/role.rb",
     "spec/dummy/app/models/user.rb",
     "spec/dummy/app/views/layouts/application.html.haml",
     "spec/dummy/app/views/pages/index.html.haml",
     "spec/dummy/bin/bundle",
     "spec/dummy/bin/rails",
     "spec/dummy/bin/rake",
+    "spec/dummy/bin/rspec",
     "spec/dummy/bin/setup",
     "spec/dummy/config.ru",
     "spec/dummy/config/application.rb",
@@ -113,6 +117,7 @@ Gem::Specification.new do |s|
     "spec/dummy/config/initializers/inflections.rb",
     "spec/dummy/config/initializers/mime_types.rb",
     "spec/dummy/config/initializers/paid_up.rb",
+    "spec/dummy/config/initializers/rolify.rb",
     "spec/dummy/config/initializers/session_store.rb",
     "spec/dummy/config/initializers/wrap_parameters.rb",
     "spec/dummy/config/locales/devise.en.yml",
@@ -122,14 +127,14 @@ Gem::Specification.new do |s|
     "spec/dummy/db/development.sqlite3",
     "spec/dummy/db/migrate/20150406154440_create_users_table.rb",
     "spec/dummy/db/migrate/20150517175135_create_groups_table.rb",
-    "spec/dummy/db/migrate/20150518000915_add_devise_to_users.rb",
-    "spec/dummy/db/migrate/20150518000917_create_paid_up_features_plans_table.paid_up.rb",
-    "spec/dummy/db/migrate/20150518000918_create_paid_up_features_table.paid_up.rb",
-    "spec/dummy/db/migrate/20150518000919_create_paid_up_plans_table.paid_up.rb",
-    "spec/dummy/db/migrate/20150519164355_add_stripe_id_column_to_users.paid_up.rb",
+    "spec/dummy/db/migrate/20150517175136_create_doodads_table.rb",
+    "spec/dummy/db/migrate/20150523010827_add_devise_to_users.rb",
+    "spec/dummy/db/migrate/20150523010837_rolify_create_roles.rb",
+    "spec/dummy/db/migrate/20150523010838_create_paid_up_features_plans_table.paid_up.rb",
+    "spec/dummy/db/migrate/20150523010839_create_paid_up_plans_table.paid_up.rb",
+    "spec/dummy/db/migrate/20150523010840_add_stripe_id_column_to_users.paid_up.rb",
     "spec/dummy/db/schema.rb",
     "spec/dummy/db/seeds.rb",
-    "spec/dummy/db/seeds/features.seeds.rb",
     "spec/dummy/db/seeds/features_plans.seeds.rb",
     "spec/dummy/db/seeds/plans.seeds.rb",
     "spec/dummy/db/test.sqlite3",
@@ -148,7 +153,6 @@ Gem::Specification.new do |s|
     "spec/dummy/public/assets/bootstrap/glyphicons-halflings-regular-e395044093757d82afcb138957d06a1ea9361bdcf0b442d06a18a8051af57456.ttf",
     "spec/dummy/public/assets/bootstrap/glyphicons-halflings-regular-fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c.woff2",
     "spec/dummy/public/favicon.ico",
-    "spec/dummy/test/controllers/plans_controller_controller_test.rb",
     "spec/factories/feature.rb",
     "spec/factories/features_plan.rb",
     "spec/factories/plan.rb",
@@ -191,11 +195,13 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<money>, ["~> 6.5"])
       s.add_runtime_dependency(%q<devise>, ["~> 3.4"])
       s.add_runtime_dependency(%q<cancan>, ["~> 1.6"])
+      s.add_runtime_dependency(%q<rolify>, ["~> 4"])
       s.add_runtime_dependency(%q<stripe>, ["~> 1.21"])
       s.add_development_dependency(%q<sqlite3>, ["~> 1.3"])
       s.add_development_dependency(%q<forgery>, ["~> 0.6"])
       s.add_development_dependency(%q<bootstrap-sass>, ["~> 3.3"])
       s.add_development_dependency(%q<sass-rails>, ["~> 5.0"])
+      s.add_development_dependency(%q<high_voltage>, ["~> 2.3"])
     else
       s.add_dependency(%q<rails>, ["~> 4"])
       s.add_dependency(%q<rails-i18n>, ["~> 4"])
@@ -209,11 +215,13 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<money>, ["~> 6.5"])
       s.add_dependency(%q<devise>, ["~> 3.4"])
       s.add_dependency(%q<cancan>, ["~> 1.6"])
+      s.add_dependency(%q<rolify>, ["~> 4"])
       s.add_dependency(%q<stripe>, ["~> 1.21"])
       s.add_dependency(%q<sqlite3>, ["~> 1.3"])
       s.add_dependency(%q<forgery>, ["~> 0.6"])
       s.add_dependency(%q<bootstrap-sass>, ["~> 3.3"])
       s.add_dependency(%q<sass-rails>, ["~> 5.0"])
+      s.add_dependency(%q<high_voltage>, ["~> 2.3"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 4"])
@@ -228,11 +236,13 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<money>, ["~> 6.5"])
     s.add_dependency(%q<devise>, ["~> 3.4"])
     s.add_dependency(%q<cancan>, ["~> 1.6"])
+    s.add_dependency(%q<rolify>, ["~> 4"])
     s.add_dependency(%q<stripe>, ["~> 1.21"])
     s.add_dependency(%q<sqlite3>, ["~> 1.3"])
     s.add_dependency(%q<forgery>, ["~> 0.6"])
     s.add_dependency(%q<bootstrap-sass>, ["~> 3.3"])
     s.add_dependency(%q<sass-rails>, ["~> 5.0"])
+    s.add_dependency(%q<high_voltage>, ["~> 2.3"])
   end
 end
 
