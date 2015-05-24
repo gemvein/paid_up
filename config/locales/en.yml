@@ -48,12 +48,13 @@ en:
   expiration: 'Expiration'
   features: 'Features'
   feature_not_found: "Feature Not Found"
+  feature_not_found_feature: "Feature Not Found: %{feature}"
   forgot_your_password: 'Forgot your password?'
   leave_blank_if_you_dont_want_to_change_it: "(leave blank if you don't want to change it)"
   length_characters_minimum: "(%{length} characters minimum)"
   my_subscription: 'My Subscription'
   my_subscription_information: 'My Subscription Information'
-  no_conversion_of_type_features_to_table_rows: 'No conversion of %{type} Features to table_rows'
+  no_implicit_conversion_of_type_features: 'No implicit conversion of %{type} Features'
   or_sign_in: "Or, Sign In"
   or_sign_up: "Or, Sign Up"
   paid_thru: "Paid Thru"
@@ -78,8 +79,10 @@ en:
   unknown_feature_type: 'Unknown Feature Type'
   unlimited: 'Unlimited'
   update_account: 'Update Account'
+  value_is_not_a_valid_setting_type: "%{value} is not a valid setting_type. Must be one of: boolean, table_rows, rolify_rows"
   we_need_your_current_password_to_confirm_your_changes: '(we need your current password to confirm your changes)'
   when_using_table_rows_table_must_exist: 'When using table_rows, the table must exist.'
+  when_using_rolify_rows_table_must_exist: 'When using rolify_rows, the table must exist.'
   x_of_y_remaining: '%{x} of %{y} remaining'
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"
   you_will_be_charged: "You will be charged %{charge_amount}."

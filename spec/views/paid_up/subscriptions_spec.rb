@@ -52,7 +52,7 @@ RSpec.describe "paid_up/subscriptions/index" do
       it { should match /Group Leader/ }
       it { should have_selector 'table.abilities #ad_free_ability .glyphicon-ok'}
       it { should have_selector 'table.abilities #groups_ability .glyphicon-ok'}
-      it { should have_selector 'table.abilities #calendar_ability .glyphicon-remove'}
+      it { should have_selector 'table.abilities #doodads_ability .glyphicon-ok'}
     end
   end
 end

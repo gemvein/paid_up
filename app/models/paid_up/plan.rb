@@ -1,12 +1,13 @@
 class PaidUp::Plan < ActiveRecord::Base
   has_many :features_plans, class_name: 'PaidUp::FeaturesPlan'
   has_many :features, :through => :features_plans, class_name: 'PaidUp::Feature'
-
-  validates_presence_of :description, :name
+  has_many :subscribers, :through => :subscriptions, :source => :subscriber, :source_type => 'User'
 
   after_initialize :load_stripe_data
 
   attr_accessor :stripe_data
+
+  validates_presence_of :name, :stripe_id
 
   default_scope { order('sort_order ASC') }
   scope :subscribable, -> { where('sort_order >=  ?', 0) }
@@ -18,14 +19,9 @@ class PaidUp::Plan < ActiveRecord::Base
     self
   end
 
-  def feature_setting_by_name(feature_name)
-    feature = PaidUp::Feature.find_by_name(feature_name) || raise(:feature_not_found.l)
-    feature_setting(feature.id)
-  end
-
-  def feature_setting(feature_id)
-    feature = PaidUp::Feature.find(feature_id) || raise(:feature_not_found.l)
-    raw = features_plans.where(feature_id: feature_id)
+  def feature_setting(feature_name)
+    feature = PaidUp::Feature.find_by_slug(feature_name) || raise(:feature_not_found.l)
+    raw = features_plans.where(feature: feature_name)
     case feature.setting_type
       when 'boolean'
         if raw.empty?
@@ -33,7 +29,7 @@ class PaidUp::Plan < ActiveRecord::Base
         else
           raw.first.setting != 0
         end
-      when 'table_rows'
+      when 'table_rows', 'rolify_rows'
         if raw.empty?
           0
         else
@@ -44,8 +40,8 @@ class PaidUp::Plan < ActiveRecord::Base
     end
   end
 
-  def feature_unlimited?(feature_id)
-    feature_setting(feature_id) == PaidUp::Unlimited.to_i
+  def feature_unlimited?(feature_name)
+    feature_setting(feature_name) == PaidUp::Unlimited.to_i
   end
 
   def interval

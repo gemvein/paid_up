@@ -1,9 +1,12 @@
-module PaidUp
-  module Mixins
+module PaidUp::Mixins
+  module Subscriber
     extend ActiveSupport::Concern
     class_methods do
       def subscriber
-        attr_reader :stripe_data
+        features = PaidUp::Feature.find_all_by_setting_type('table_rows')
+        for feature in features
+          has_many feature.slug.to_sym
+        end
 
         after_initialize :set_default_attributes, :load_stripe_data
         before_save :remove_anonymous_association
@@ -67,10 +70,23 @@ module PaidUp
           table_rows_allowed(table_name) - table_rows(table_name)
         }
         self.send(:define_method, :table_rows_allowed) { |table_name|
-          plan.feature_setting_by_name table_name
+          plan.feature_setting table_name
         }
         self.send(:define_method, :table_rows) { |table_name|
-          send(table_name).count
+          send(table_name).size
+        }
+        self.send(:define_method, :rolify_rows_unlimited?) { |table_name|
+          rolify_rows_allowed(table_name) == PaidUp::Unlimited.to_i
+        }
+        self.send(:define_method, :rolify_rows_remaining) { |table_name|
+          rolify_rows_allowed(table_name) - rolify_rows(table_name)
+        }
+        self.send(:define_method, :rolify_rows_allowed) { |table_name|
+          plan.feature_setting table_name
+        }
+        self.send(:define_method, :rolify_rows) { |table_name|
+          records = table_name.classify.constantize.with_role(:owner, self)
+          records.size
         }
         self.send(:define_method, :plan_stripe_id) {
          if subscription.nil?
@@ -96,6 +112,12 @@ module PaidUp
         self.send(:define_method, :using_free_plan?) {
           plan.stripe_id == PaidUp.configuration.free_plan_stripe_id || stripe_data.delinquent
         }
+        self.send(:define_method, :set_default_attributes) {
+          if new_record?
+            self.stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
+          end
+        }
+        self.send(:private, :set_default_attributes)
         self.send(:define_method, :load_stripe_data) {
           if new_record?
             working_stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
@@ -111,29 +133,13 @@ module PaidUp
           end
         }
         self.send(:private, :load_stripe_data)
-        self.send(:define_method, :set_default_attributes) {
-          if new_record?
-            self.stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
-          end
-        }
-        self.send(:private, :set_default_attributes)
         self.send(:define_method, :remove_anonymous_association) {
           if stripe_id == PaidUp.configuration.anonymous_customer_stripe_id
             self.stripe_id = nil
           end
         }
         self.send(:private, :remove_anonymous_association)
-
-        PaidUp::Plan.subscribed_to(self)
-      end
-
-      def subscribed_to(model)
-        has_many :subscribers, :through => :subscriptions, :source => :subscriber, :source_type => model.model_name
       end
     end
   end
 end
-
-
-
-ActiveRecord::Base.send(:include, PaidUp::Mixins)

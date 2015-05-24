@@ -15,6 +15,7 @@ gem 'money', '~> 6.5'
 
 gem 'devise', '~> 3.4'
 gem 'cancan', '~> 1.6'
+gem 'rolify', '~> 4'
 gem 'stripe', '~> 1.21'
 
 group :test, :development do
@@ -22,9 +23,11 @@ group :test, :development do
   gem 'forgery', '~> 0.6'
   gem 'bootstrap-sass', '~> 3.3'
   gem 'sass-rails', '~> 5.0'
+  gem 'high_voltage', '~> 2.3'
 end
 
 group :test do
+  gem 'capybara', '~> 2.4'
   gem 'rspec-rails', '~> 3.2'
   gem 'database_cleaner', '~> 1.4'
   gem 'rspec-collection_matchers', '~> 1.1'

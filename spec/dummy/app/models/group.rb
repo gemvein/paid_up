@@ -1,3 +1,3 @@
 class Group < ActiveRecord::Base
-  belongs_to :user
+  paid_for
 end

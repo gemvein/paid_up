@@ -1,5 +1,5 @@
-module PaidUp
-  module StripeExtensions
+module PaidUp::Extensions
+  module Stripe
     extend ActiveSupport::Concern
     class_methods do
       def find_or_create_by_id(id, item)
@@ -12,6 +12,3 @@ module PaidUp
     end
   end
 end
-
-Stripe::Customer.send(:include, PaidUp::StripeExtensions)
-Stripe::Plan.send(:include, PaidUp::StripeExtensions)

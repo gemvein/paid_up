@@ -11,34 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519164355) do
+ActiveRecord::Schema.define(version: 20150523010840) do
+
+  create_table "doodads", force: :cascade do |t|
+    t.string "user_id"
+    t.string "name"
+    t.text   "description"
+  end
+
+  add_index "doodads", ["user_id"], name: "index_doodads_on_user_id"
 
   create_table "groups", force: :cascade do |t|
-    t.string   "user_id"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
-
-  create_table "paid_up_features", force: :cascade do |t|
-    t.string "name"
-    t.string "title"
-    t.string "setting_type"
-    t.text   "description"
-  end
-
-  add_index "paid_up_features", ["name"], name: "index_paid_up_features_on_name", unique: true
-
   create_table "paid_up_features_plans", force: :cascade do |t|
-    t.integer "feature_id"
     t.integer "plan_id"
+    t.string  "feature"
     t.integer "setting"
   end
 
-  add_index "paid_up_features_plans", ["feature_id"], name: "index_paid_up_features_plans_on_feature_id"
+  add_index "paid_up_features_plans", ["feature"], name: "index_paid_up_features_plans_on_feature"
   add_index "paid_up_features_plans", ["plan_id"], name: "index_paid_up_features_plans_on_plan_id"
 
   create_table "paid_up_plans", force: :cascade do |t|
@@ -52,6 +48,17 @@ ActiveRecord::Schema.define(version: 20150519164355) do
 
   add_index "paid_up_plans", ["name"], name: "index_paid_up_plans_on_name", unique: true
   add_index "paid_up_plans", ["stripe_id"], name: "index_paid_up_plans_on_stripe_id", unique: true
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -70,5 +77,12 @@ ActiveRecord::Schema.define(version: 20150519164355) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
 
 end

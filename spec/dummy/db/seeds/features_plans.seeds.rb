@@ -1,7 +1,7 @@
-after :features, :plans do
-  ad_free = PaidUp::Feature.find_by_name 'ad_free'
-  groups = PaidUp::Feature.find_by_name 'groups'
-  calendar = PaidUp::Feature.find_by_name 'calendar'
+after :plans do
+  ad_free = PaidUp::Feature.find_by_slug 'ad_free'
+  groups = PaidUp::Feature.find_by_slug 'groups'
+  doodads = PaidUp::Feature.find_by_slug 'doodads'
 
   free = PaidUp::Plan.find_by_name 'Free'
   no_ads = PaidUp::Plan.find_by_name 'No Ads'
@@ -27,9 +27,9 @@ after :features, :plans do
       setting: 1
   )
   PaidUp::FeaturesPlan.create(
-      feature: calendar,
-      plan: professional,
-      setting: 1
+      feature: doodads,
+      plan: group_leader,
+      setting: 5
   )
 
   # Professional
@@ -44,8 +44,8 @@ after :features, :plans do
       setting: PaidUp::Unlimited.to_i(:db)
   )
   PaidUp::FeaturesPlan.create(
-      feature: calendar,
+      feature: doodads,
       plan: professional,
-      setting: 1
+      setting: PaidUp::Unlimited.to_i(:db)
   )
 end

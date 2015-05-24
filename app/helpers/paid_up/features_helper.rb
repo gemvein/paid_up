@@ -15,15 +15,15 @@ module PaidUp
 
     def feature_display(feature, plan)
       if feature.setting_type == 'boolean'
-        if plan.feature_setting(feature.id)
+        if plan.feature_setting(feature.slug)
           icon 'ok'
         else
           icon 'remove'
         end
-      elsif plan.feature_unlimited?(feature.id)
+      elsif plan.feature_unlimited?(feature.slug)
         :unlimited.l
       else
-        plan.feature_setting(feature.id)
+        plan.feature_setting(feature.slug)
       end
     end
 

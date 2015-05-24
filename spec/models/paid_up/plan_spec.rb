@@ -4,8 +4,8 @@ describe PaidUp::Plan do
   it { should have_many(:features_plans).class_name('PaidUp::FeaturesPlan') }
   it { should have_many(:features).class_name('PaidUp::Feature').through(:features_plans) }
 
-  it { should validate_presence_of(:description) }
   it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:stripe_id) }
 
   include_context 'plans and features'
 
@@ -26,46 +26,22 @@ describe PaidUp::Plan do
   describe '#feature_setting' do
     describe 'when setting_type is integer' do
       context 'returns the setting value if available' do
-        subject { group_leader_plan.feature_setting(groups_feature.id) }
+        subject { group_leader_plan.feature_setting('groups') }
         it { should eq(1) }
       end
       context 'returns 0 if not available' do
-        subject { free_plan.feature_setting(groups_feature.id) }
+        subject { free_plan.feature_setting('groups') }
         it { should eq(0) }
       end
     end
 
     describe 'when setting_type is boolean' do
       context 'returns the setting value if available' do
-        subject { group_leader_plan.feature_setting(configuration_feature.id) }
+        subject { group_leader_plan.feature_setting('ad_free') }
         it { should eq(true) }
       end
       context 'returns false if not available' do
-        subject { free_plan.feature_setting(configuration_feature.id) }
-        it { should eq(false) }
-      end
-    end
-  end
-
-  describe '#feature_setting_by_name' do
-    describe 'when setting_type is integer' do
-      context 'returns the setting value if available' do
-        subject { group_leader_plan.feature_setting_by_name('groups') }
-        it { should eq(1) }
-      end
-      context 'returns 0 if not available' do
-        subject { free_plan.feature_setting_by_name('groups') }
-        it { should eq(0) }
-      end
-    end
-
-    describe 'when setting_type is boolean' do
-      context 'returns the setting value if available' do
-        subject { group_leader_plan.feature_setting_by_name('ad_free') }
-        it { should eq(true) }
-      end
-      context 'returns false if not available' do
-        subject { free_plan.feature_setting_by_name('ad_free') }
+        subject { free_plan.feature_setting('ad_free') }
         it { should eq(false) }
       end
     end
@@ -73,15 +49,15 @@ describe PaidUp::Plan do
 
   describe '#feature_unlimited?' do
     context 'returns true if unlimited' do
-      subject { professional_plan.feature_unlimited?(groups_feature.id) }
+      subject { professional_plan.feature_unlimited?('groups') }
       it { should eq(true) }
     end
     context 'returns false if an integer' do
-      subject { group_leader_plan.feature_unlimited?(groups_feature.id) }
+      subject { group_leader_plan.feature_unlimited?('groups') }
       it { should eq(false) }
     end
     context 'returns false if not found' do
-      subject { free_plan.feature_unlimited?(groups_feature.id) }
+      subject { free_plan.feature_unlimited?('groups') }
       it { should eq(false) }
     end
   end

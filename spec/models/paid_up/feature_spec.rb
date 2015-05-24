@@ -1,21 +1,39 @@
 require 'rails_helper'
 
 describe PaidUp::Feature do
-  it { should have_many(:features_plans).class_name('PaidUp::FeaturesPlan') }
-  it { should have_many(:plans).class_name('PaidUp::Plan').through(:features_plans) }
-  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:slug) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:setting_type) }
+  it { should validate_inclusion_of(:setting_type).in_array(%w(boolean table_rows rolify_rows))}
 
+  include_context 'plans and features'
   context '#feature_model' do
-    include_context 'plans and features'
     subject { groups_feature.feature_model }
     it { should eq Group }
   end
 
   context '#feature_model_name' do
-    include_context 'plans and features'
     subject { groups_feature.feature_model_name }
     it { should eq 'Group' }
+  end
+
+  context '.all' do
+    subject { PaidUp::Feature.all }
+    it { should eq [ad_free_feature, groups_feature, doodads_feature] }
+  end
+
+  context '.find_by_slug' do
+    subject { PaidUp::Feature.find_by_slug('groups') }
+    it { should be_a PaidUp::Feature }
+  end
+
+  context '.find_all' do
+    subject { PaidUp::Feature.find_all( setting_type: 'rolify_rows') }
+    it { should be_an Array }
+  end
+
+  context '.find' do
+    subject { PaidUp::Feature.find(setting_type: 'rolify_rows') }
+    it { should be_a PaidUp::Feature }
   end
 end

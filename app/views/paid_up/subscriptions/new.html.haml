@@ -11,26 +11,26 @@
       %script{ src: 'https://js.stripe.com/v2/' }
       %input{ name: 'plan_id', value: @plan.id, type: 'hidden' }
       .payment-errors
-        .form-group
-          %label.control-label.col-xs-2= :card.l
-          .col-md-10
-            .group
-              - if current_user.cards.count > 0
-                - current_user.cards.each_with_index do |card, index|
-                  .radio
-                    %label
-                      - if index == 0
-                        %input{ type: :radio, name: 'card', value: card.id, checked: 'checked' }
-                      - else
-                        %input{ type: :radio, name: 'card', value: card.id }
-                      = :card_ending_with.l brand: card.brand, last4: card.last4
-              .radio
-                %label
-                  - if current_user.cards.count == 0
-                    %input{ type: :radio, name: 'card', value: 'stripeToken', checked: 'checked' }
-                  - else
-                    %input{ type: :radio, name: 'card', value: 'stripeToken' }
-                  = :enter_new_card.l
+      .form-group
+        %label.control-label.col-xs-2= :card.l
+        .col-md-10
+          .group
+            - if current_user.cards.count > 0
+              - current_user.cards.each_with_index do |card, index|
+                .radio
+                  %label
+                    - if index == 0
+                      %input{ type: :radio, name: 'card', value: card.id, checked: 'checked' }
+                    - else
+                      %input{ type: :radio, name: 'card', value: card.id }
+                    = :card_ending_with.l brand: card.brand, last4: card.last4
+            .radio
+              %label
+                - if current_user.cards.count == 0
+                  %input{ type: :radio, name: 'card', value: 'stripeToken', checked: 'checked' }
+                - else
+                  %input{ type: :radio, name: 'card', value: 'stripeToken' }
+                = :enter_new_card.l
       #new-card
         .form-group
           %label.control-label.col-xs-2{for: 'number'}= :card_number.l

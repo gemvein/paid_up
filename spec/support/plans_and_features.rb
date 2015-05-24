@@ -1,44 +1,13 @@
 shared_context "plans and features" do
   include_context 'stripe'
-  
+
   ############
   # Features #
   ############
 
-  let!(:ad_free_feature) { FactoryGirl.create(
-      :feature,
-      name: 'ad_free',
-      title: 'Ad Free',
-      setting_type: 'boolean'
-  ) }
-
-  let!(:groups_feature) { FactoryGirl.create(
-      :feature,
-      name: 'groups',
-      title: 'Groups',
-      setting_type: 'table_rows'
-  ) }
-
-  let!(:configuration_feature) { FactoryGirl.create(
-      :feature,
-      name: 'configuration',
-      title: 'Configuration',
-      setting_type: 'boolean'
-  ) }
-
-  let!(:theme_feature) { FactoryGirl.create(
-      :feature,
-      name: 'theme',
-      title: 'Theme',
-      setting_type: 'boolean'
-  ) }
-
-  let!(:calendar_feature) { FactoryGirl.create(
-      :feature,
-      name: 'calendar',
-      title: 'Calendar',
-      setting_type: 'boolean'
-  ) }
+  let!(:ad_free_feature) { PaidUp::Feature.find_by_slug('ad_free') }
+  let!(:groups_feature) { PaidUp::Feature.find_by_slug('groups') }
+  let!(:doodads_feature) { PaidUp::Feature.find_by_slug('doodads') }
 
   #########
   # Plans #
@@ -101,7 +70,8 @@ shared_context "plans and features" do
     FactoryGirl.create(
        :features_plan,
        plan_id: no_ads_plan.id,
-       feature_id: ad_free_feature.id
+       feature: 'ad_free',
+       setting: true
     )
   }
   let!(:group_leader_plan) {
@@ -126,7 +96,7 @@ shared_context "plans and features" do
     FactoryGirl.create(
         :features_plan,
         plan_id: group_leader_plan.id,
-        feature_id: ad_free_feature.id,
+        feature: 'ad_free',
         setting: true
     )
   }
@@ -134,16 +104,16 @@ shared_context "plans and features" do
     FactoryGirl.create(
         :features_plan,
         plan_id: group_leader_plan.id,
-        feature_id: groups_feature.id,
+        feature: 'groups',
         setting: 1
     )
   }
-  let!(:configuration_group_leader_features_plan) {
+  let!(:doodads_group_leader_features_plan) {
     FactoryGirl.create(
         :features_plan,
         plan_id: group_leader_plan.id,
-        feature_id: configuration_feature.id,
-        setting: true
+        feature: 'doodads',
+        setting: 5
     )
   }
   let!(:professional_plan) {
@@ -169,7 +139,7 @@ shared_context "plans and features" do
     FactoryGirl.create(
         :features_plan,
         plan_id: professional_plan.id,
-        feature_id: ad_free_feature.id,
+        feature: 'ad_free',
         setting: true
     )
   }
@@ -177,32 +147,16 @@ shared_context "plans and features" do
     FactoryGirl.create(
         :features_plan,
         plan_id: professional_plan.id,
-        feature_id: groups_feature.id,
+        feature: 'groups',
         setting: PaidUp::Unlimited.to_i(:db)
     )
   }
-  let!(:configuration_professional_features_plan) {
+  let!(:doodads_professional_features_plan) {
     FactoryGirl.create(
         :features_plan,
         plan_id: professional_plan.id,
-        feature_id: configuration_feature.id,
-        setting: true
-    )
-  }
-  let!(:theme_professional_features_plan) {
-    FactoryGirl.create(
-        :features_plan,
-        plan_id: professional_plan.id,
-        feature_id: theme_feature.id,
-        setting: true
-    )
-  }
-  let!(:calendar_professional_features_plan) {
-    FactoryGirl.create(
-        :features_plan,
-        plan_id: professional_plan.id,
-        feature_id: calendar_feature.id,
-        setting: true
+        feature: 'doodads',
+        setting: PaidUp::Unlimited.to_i(:db)
     )
   }
 
