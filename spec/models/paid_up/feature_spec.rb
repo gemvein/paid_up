@@ -22,18 +22,13 @@ describe PaidUp::Feature do
     it { should eq [ad_free_feature, groups_feature, doodads_feature] }
   end
 
-  context '.find_by_slug' do
-    subject { PaidUp::Feature.find_by_slug('groups') }
-    it { should be_a PaidUp::Feature }
-  end
-
   context '.find_all' do
     subject { PaidUp::Feature.find_all( setting_type: 'rolify_rows') }
     it { should be_an Array }
   end
 
   context '.find' do
-    subject { PaidUp::Feature.find(setting_type: 'rolify_rows') }
+    subject { PaidUp::Feature.find(slug: 'groups') }
     it { should be_a PaidUp::Feature }
   end
 end

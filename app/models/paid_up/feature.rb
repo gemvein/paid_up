@@ -2,7 +2,7 @@ class PaidUp::Feature
   include ActiveModel::Model
   include ActiveModel::AttributeMethods
 
-  @@instance_collector = {}
+  @@instance_collector = []
 
   attr_accessor :slug, :title, :setting_type, :description
 
@@ -13,9 +13,7 @@ class PaidUp::Feature
 
   def initialize(attributes = {})
     super attributes
-    if self.slug.present?
-      @@instance_collector[self.slug.to_sym] = self
-    end
+    @@instance_collector << self
   end
 
   def to_s
@@ -35,11 +33,7 @@ class PaidUp::Feature
   end
 
   def self.all
-    @@instance_collector.values
-  end
-
-  def self.find_by_slug(slug)
-    @@instance_collector[slug.to_sym]
+    @@instance_collector
   end
 
   def self.find_all(**conditions)
