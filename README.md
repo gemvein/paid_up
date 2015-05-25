@@ -43,7 +43,7 @@ Next, add a `Stripe::Customer` to serve as the Anonymous User, and subscribe tha
 
 ## Features Setup
 
-Set up each `PaidUp::Feature` using the config file. (A config file is used rather than using records in an `ActiveRecord::Base` model because relationships cannot be created at runtime.) Associate the features with the corresponding plans using the `PaidUp::PlanFeatureSetting` model. For an example, check out the seeds files in [`spec/dummy/db/seeds/`](spec/dummy/db/seeds/)
+Set up each `PaidUp::Feature` using the config file. (A config file is used rather than using records in an `ActiveRecord::Base` model because relationships cannot be created at runtime.) Associate the features with the corresponding plans using the `PaidUp::PlanFeatureSetting` model. For an example, check out the seeds file at [`spec/dummy/db/seeds.db`](spec/dummy/db/seeds.db)
 
 Possible `:setting_type` values are: `boolean`, `table_rows`, `rolify_rows`. The latter two require that a table corresponding to the feature's `:name` value. 
 
