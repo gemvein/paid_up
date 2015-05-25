@@ -1,6 +1,6 @@
 class PaidUp::Plan < ActiveRecord::Base
-  has_many :features_plans, class_name: 'PaidUp::FeaturesPlan'
-  has_many :features, :through => :features_plans, class_name: 'PaidUp::Feature'
+  has_many :plan_feature_settings, class_name: 'PaidUp::PlanFeatureSetting'
+  has_many :features, :through => :plan_feature_settings, class_name: 'PaidUp::Feature'
   has_many :subscribers, :through => :subscriptions, :source => :subscriber, :source_type => 'User'
 
   after_initialize :load_stripe_data
@@ -21,7 +21,7 @@ class PaidUp::Plan < ActiveRecord::Base
 
   def feature_setting(feature_name)
     feature = PaidUp::Feature.find_by_slug(feature_name) || raise(:feature_not_found.l)
-    raw = features_plans.where(feature: feature_name)
+    raw = plan_feature_settings.where(feature: feature_name)
     case feature.setting_type
       when 'boolean'
         if raw.empty?

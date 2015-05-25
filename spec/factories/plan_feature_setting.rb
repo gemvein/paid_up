@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :features_plan, class: 'PaidUp::FeaturesPlan' do
+  factory :plan_feature_setting, class: 'PaidUp::PlanFeatureSetting' do
     feature nil
     plan nil
     setting 1

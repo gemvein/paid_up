@@ -15,7 +15,7 @@ PaidUp::Feature.new(
   title: 'Groups',
   description: 'How many groups are allowed with this plan?',
   setting_type: 'table_rows'  # Enables table row counting that is enabled by a positive value
-# for the PaidUp::FeaturesPlan.setting associated with this PaidUp::Feature
+# for the PaidUp::PlanFeatureSetting.setting associated with this PaidUp::Feature
 )
 PaidUp::Feature.new(
   slug: 'doodads',

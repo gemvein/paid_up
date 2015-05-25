@@ -10,6 +10,7 @@ Paid Up is a start-to-finish Stripe subscription engine. You set up the plans yo
 * Authentication by Devise
 * Authorization by CanCan
 * Subscription by Stripe
+* Roles by Rolify
 * Assumes you will be using some variety of Bootstrap, and designed to be quite responsive out of the box, but included views can be overridden with custom views.
 
 ## Installation
@@ -43,7 +44,7 @@ Next, add a `Stripe::Customer` to serve as the Anonymous User, and subscribe tha
 
 ## Features Setup
 
-Set up each `PaidUp::Feature` using the config file. (A config file is used rather than using records in an `ActiveRecord::Base` model because relationships cannot be created at runtime.) Associate the features with the corresponding plans using the `PaidUp::FeaturesPlan` model. For an example, check out the seeds files in [`spec/dummy/db/seeds/`](spec/dummy/db/seeds/)
+Set up each `PaidUp::Feature` using the config file. (A config file is used rather than using records in an `ActiveRecord::Base` model because relationships cannot be created at runtime.) Associate the features with the corresponding plans using the `PaidUp::PlanFeatureSetting` model. For an example, check out the seeds files in [`spec/dummy/db/seeds/`](spec/dummy/db/seeds/)
 
 Possible `:setting_type` values are: `boolean`, `table_rows`, `rolify_rows`. The latter two require that a table corresponding to the feature's `:name` value. 
 
@@ -63,7 +64,7 @@ In order for PaidUp's AJAX functionality to work (which is required because Stri
     
 ## Abilities
 
-Abilities corresponding to features you have defined will be generated automatically, as an `:own` ability on the specified tables, if you include the PaidUp::Ability module and use the `initialize_paid_up(user)` command, like this:
+Abilities corresponding to features you have defined will be generated automatically, as an `:own` ability on the specified tables, plus rational defaults for `:manage` and `:read` permissions, if you include the `PaidUp::Ability` module and use the `initialize_paid_up(user)` command, like this:
 
     # /app/models/ability.rb
     class Ability
@@ -74,16 +75,12 @@ Abilities corresponding to features you have defined will be generated automatic
         user ||= User.new # anonymous user (not logged in)
     
         # Rails Application's initialization could go here.
-        can :manage, Group, user: user
     
         initialize_paid_up(user)
       end
     end
 
-Note that you will probably need to set up `:manage` and `:read` , according to your business rules.
-
 ## Contributing to Paid Up
-
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.

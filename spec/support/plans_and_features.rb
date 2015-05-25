@@ -66,9 +66,9 @@ shared_context "plans and features" do
       sort_order: 1
     ).reload
   }
-  let!(:ad_free_no_ads_features_plan) {
+  let!(:ad_free_no_ads_plan_feature_setting) {
     FactoryGirl.create(
-       :features_plan,
+       :plan_feature_setting,
        plan_id: no_ads_plan.id,
        feature: 'ad_free',
        setting: true
@@ -92,25 +92,25 @@ shared_context "plans and features" do
       sort_order: 2
     ).reload
   }
-  let!(:ad_free_group_leader_features_plan) {
+  let!(:ad_free_group_leader_plan_feature_setting) {
     FactoryGirl.create(
-        :features_plan,
+        :plan_feature_setting,
         plan_id: group_leader_plan.id,
         feature: 'ad_free',
         setting: true
     )
   }
-  let!(:groups_group_leader_features_plan) {
+  let!(:groups_group_leader_plan_feature_setting) {
     FactoryGirl.create(
-        :features_plan,
+        :plan_feature_setting,
         plan_id: group_leader_plan.id,
         feature: 'groups',
         setting: 1
     )
   }
-  let!(:doodads_group_leader_features_plan) {
+  let!(:doodads_group_leader_plan_feature_setting) {
     FactoryGirl.create(
-        :features_plan,
+        :plan_feature_setting,
         plan_id: group_leader_plan.id,
         feature: 'doodads',
         setting: 5
@@ -135,25 +135,25 @@ shared_context "plans and features" do
       sort_order: 3
     ).reload
   }
-  let!(:ad_free_professional_features_plan) {
+  let!(:ad_free_professional_plan_feature_setting) {
     FactoryGirl.create(
-        :features_plan,
+        :plan_feature_setting,
         plan_id: professional_plan.id,
         feature: 'ad_free',
         setting: true
     )
   }
-  let!(:groups_professional_features_plan) {
+  let!(:groups_professional_plan_feature_setting) {
     FactoryGirl.create(
-        :features_plan,
+        :plan_feature_setting,
         plan_id: professional_plan.id,
         feature: 'groups',
         setting: PaidUp::Unlimited.to_i(:db)
     )
   }
-  let!(:doodads_professional_features_plan) {
+  let!(:doodads_professional_plan_feature_setting) {
     FactoryGirl.create(
-        :features_plan,
+        :plan_feature_setting,
         plan_id: professional_plan.id,
         feature: 'doodads',
         setting: PaidUp::Unlimited.to_i(:db)

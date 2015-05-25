@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-05-24"
+  s.date = "2015-05-25"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
   s.executables = ["rails"]
@@ -37,8 +37,8 @@ Gem::Specification.new do |s|
     "app/helpers/paid_up/subscriptions_helper.rb",
     "app/models/paid_up/ability.rb",
     "app/models/paid_up/feature.rb",
-    "app/models/paid_up/features_plan.rb",
     "app/models/paid_up/plan.rb",
+    "app/models/paid_up/plan_feature_setting.rb",
     "app/models/paid_up/unlimited.rb",
     "app/views/devise/confirmations/new.html.haml",
     "app/views/devise/passwords/edit.html.haml",
@@ -62,7 +62,7 @@ Gem::Specification.new do |s|
     "coverage/.last_run.json",
     "coverage/.resultset.json",
     "coverage/.resultset.json.lock",
-    "db/migrate/20150407105900_create_paid_up_features_plans_table.rb",
+    "db/migrate/20150407105900_create_paid_up_plan_feature_settings_table.rb",
     "db/migrate/20150407110101_create_paid_up_plans_table.rb",
     "db/migrate/20150519164237_add_stripe_id_column_to_users.rb",
     "lib/generators/paid_up/install/install_generator.rb",
@@ -130,12 +130,12 @@ Gem::Specification.new do |s|
     "spec/dummy/db/migrate/20150517175136_create_doodads_table.rb",
     "spec/dummy/db/migrate/20150523010827_add_devise_to_users.rb",
     "spec/dummy/db/migrate/20150523010837_rolify_create_roles.rb",
-    "spec/dummy/db/migrate/20150523010838_create_paid_up_features_plans_table.paid_up.rb",
+    "spec/dummy/db/migrate/20150523010838_create_paid_up_plan_feature_settings_table.paid_up.rb",
     "spec/dummy/db/migrate/20150523010839_create_paid_up_plans_table.paid_up.rb",
     "spec/dummy/db/migrate/20150523010840_add_stripe_id_column_to_users.paid_up.rb",
     "spec/dummy/db/schema.rb",
     "spec/dummy/db/seeds.rb",
-    "spec/dummy/db/seeds/features_plans.seeds.rb",
+    "spec/dummy/db/seeds/plan_feature_settings.seeds.rb",
     "spec/dummy/db/seeds/plans.seeds.rb",
     "spec/dummy/db/test.sqlite3",
     "spec/dummy/lib/assets/.keep",
@@ -154,11 +154,11 @@ Gem::Specification.new do |s|
     "spec/dummy/public/assets/bootstrap/glyphicons-halflings-regular-fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c.woff2",
     "spec/dummy/public/favicon.ico",
     "spec/factories/feature.rb",
-    "spec/factories/features_plan.rb",
     "spec/factories/plan.rb",
+    "spec/factories/plan_feature_setting.rb",
     "spec/factories/user.rb",
     "spec/models/paid_up/feature_spec.rb",
-    "spec/models/paid_up/features_plan_spec.rb",
+    "spec/models/paid_up/plan_feature_setting_spec.rb",
     "spec/models/paid_up/plan_spec.rb",
     "spec/models/user_spec.rb",
     "spec/paid_up_spec.rb",

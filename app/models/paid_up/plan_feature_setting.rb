@@ -1,4 +1,4 @@
-class PaidUp::FeaturesPlan < ActiveRecord::Base
+class PaidUp::PlanFeatureSetting < ActiveRecord::Base
   belongs_to :plan, class_name: 'PaidUp::Plan'
   validates_presence_of :setting, :plan, :feature
 

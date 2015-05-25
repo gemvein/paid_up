@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(version: 20150523010840) do
     t.datetime "updated_at"
   end
 
-  create_table "paid_up_features_plans", force: :cascade do |t|
+  create_table "paid_up_plan_feature_settings", force: :cascade do |t|
     t.integer "plan_id"
     t.string  "feature"
     t.integer "setting"
   end
 
-  add_index "paid_up_features_plans", ["feature"], name: "index_paid_up_features_plans_on_feature"
-  add_index "paid_up_features_plans", ["plan_id"], name: "index_paid_up_features_plans_on_plan_id"
+  add_index "paid_up_plan_feature_settings", ["feature"], name: "index_paid_up_plan_feature_settings_on_feature"
+  add_index "paid_up_plan_feature_settings", ["plan_id"], name: "index_paid_up_plan_feature_settings_on_plan_id"
 
   create_table "paid_up_plans", force: :cascade do |t|
     t.string   "stripe_id"
