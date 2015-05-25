@@ -31,7 +31,6 @@ Next, install PaidUp for your user model by executing these commands:
     
 ## Configuration
     
-
 Edit your config file at `config/initializers/paid_up.rb` to set up some other key details.
 
 Set your environment variables with your STRIPE_PUBLISHABLE_KEY and your STRIPE_SECRET_KEY. (Check your operating system or IDE's documentation for details)

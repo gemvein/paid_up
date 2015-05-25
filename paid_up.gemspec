@@ -135,8 +135,6 @@ Gem::Specification.new do |s|
     "spec/dummy/db/migrate/20150523010840_add_stripe_id_column_to_users.paid_up.rb",
     "spec/dummy/db/schema.rb",
     "spec/dummy/db/seeds.rb",
-    "spec/dummy/db/seeds/plan_feature_settings.seeds.rb",
-    "spec/dummy/db/seeds/plans.seeds.rb",
     "spec/dummy/db/test.sqlite3",
     "spec/dummy/lib/assets/.keep",
     "spec/dummy/log/.keep",
@@ -176,7 +174,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://www.gemvein.com/museum/cases/paid_up"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.6"
+  s.rubygems_version = "2.4.5"
   s.summary = "Allows a model of your choosing to subscribe to a plan, which enables features."
 
   if s.respond_to? :specification_version then
@@ -190,7 +188,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<uglifier>, ["~> 2.7"])
       s.add_runtime_dependency(%q<jeweler>, ["~> 2"])
       s.add_runtime_dependency(%q<bootstrap_leather>, ["~> 0.5"])
-      s.add_runtime_dependency(%q<seedbank>, ["~> 0.3"])
       s.add_runtime_dependency(%q<chronic>, ["~> 0.10"])
       s.add_runtime_dependency(%q<money>, ["~> 6.5"])
       s.add_runtime_dependency(%q<devise>, ["~> 3.4"])
@@ -210,7 +207,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<uglifier>, ["~> 2.7"])
       s.add_dependency(%q<jeweler>, ["~> 2"])
       s.add_dependency(%q<bootstrap_leather>, ["~> 0.5"])
-      s.add_dependency(%q<seedbank>, ["~> 0.3"])
       s.add_dependency(%q<chronic>, ["~> 0.10"])
       s.add_dependency(%q<money>, ["~> 6.5"])
       s.add_dependency(%q<devise>, ["~> 3.4"])
@@ -231,7 +227,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<uglifier>, ["~> 2.7"])
     s.add_dependency(%q<jeweler>, ["~> 2"])
     s.add_dependency(%q<bootstrap_leather>, ["~> 0.5"])
-    s.add_dependency(%q<seedbank>, ["~> 0.3"])
     s.add_dependency(%q<chronic>, ["~> 0.10"])
     s.add_dependency(%q<money>, ["~> 6.5"])
     s.add_dependency(%q<devise>, ["~> 3.4"])

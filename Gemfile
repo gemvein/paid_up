@@ -9,7 +9,6 @@ gem 'jeweler', '~> 2'
 
 gem 'bootstrap_leather', '~> 0.5'
 
-gem 'seedbank', '~> 0.3'
 gem 'chronic', '~> 0.10'
 gem 'money', '~> 6.5'
 
