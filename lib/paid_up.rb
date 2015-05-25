@@ -12,6 +12,7 @@ module PaidUp
   require 'stripe' # Needs to be required before paid_up/stripe_extensions
   require 'devise' # Needs to be required before paid_up/mixins
   require 'cancan'
+  require 'rolify'
 
   require 'paid_up/configuration'
   require 'paid_up/railtie'
