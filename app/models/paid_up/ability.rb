@@ -27,7 +27,9 @@ module PaidUp
                 user.has_role? :owner, record
               end
               can :own, feature.feature_model
-              unless user.rolify_rows_remaining(feature.slug) > 0
+              if user.rolify_rows_remaining(feature.slug) > 0
+                can :create, feature.feature_model
+              else
                 cannot :create, feature.feature_model
               end
             else
