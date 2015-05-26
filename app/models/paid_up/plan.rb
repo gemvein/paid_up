@@ -1,6 +1,5 @@
 class PaidUp::Plan < ActiveRecord::Base
   has_many :plan_feature_settings, class_name: 'PaidUp::PlanFeatureSetting'
-  has_many :features, :through => :plan_feature_settings, class_name: 'PaidUp::Feature'
   has_many :subscribers, :through => :subscriptions, :source => :subscriber, :source_type => 'User'
 
   after_initialize :load_stripe_data
