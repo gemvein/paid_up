@@ -14,7 +14,11 @@ module PaidUp
   require 'cancan'
   require 'rolify'
 
+  require 'paid_up/validators/table_rows'
+  require 'paid_up/validators/rolify_rows'
+
   require 'paid_up/configuration'
+  require 'paid_up/feature'
   require 'paid_up/railtie'
   require 'paid_up/engine'
   require 'paid_up/localization'
@@ -25,9 +29,6 @@ module PaidUp
 
   require 'paid_up/mixins/subscriber'
   require 'paid_up/mixins/paid_for'
-
-  require 'paid_up/validators/table_rows'
-  require 'paid_up/validators/rolify_rows'
 
   require 'haml-rails'
   require 'bootstrap_leather'

@@ -39,7 +39,4 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-
-  # We need to serve static files since there's no webserver to do it.
-  config.serve_static_files = true
 end

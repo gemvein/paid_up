@@ -17,6 +17,11 @@ describe PaidUp::Feature do
     it { should eq 'Group' }
   end
 
+  context '.raw' do
+    subject { PaidUp::Feature.raw }
+    it { should eq( { ad_free: ad_free_feature, groups: groups_feature, doodads: doodads_feature } ) }
+  end
+
   context '.all' do
     subject { PaidUp::Feature.all }
     it { should eq [ad_free_feature, groups_feature, doodads_feature] }

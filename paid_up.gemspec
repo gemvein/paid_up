@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.date = "2015-05-25"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
-  s.executables = ["rails"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"
@@ -36,7 +35,6 @@ Gem::Specification.new do |s|
     "app/helpers/paid_up/plans_helper.rb",
     "app/helpers/paid_up/subscriptions_helper.rb",
     "app/models/paid_up/ability.rb",
-    "app/models/paid_up/feature.rb",
     "app/models/paid_up/plan.rb",
     "app/models/paid_up/plan_feature_setting.rb",
     "app/models/paid_up/unlimited.rb",
@@ -55,7 +53,6 @@ Gem::Specification.new do |s|
     "app/views/paid_up/plans/index.html.haml",
     "app/views/paid_up/subscriptions/index.html.haml",
     "app/views/paid_up/subscriptions/new.html.haml",
-    "bin/rails",
     "config/initializers/stripe.rb",
     "config/locales/en.yml",
     "config/routes.rb",
@@ -74,6 +71,7 @@ Gem::Specification.new do |s|
     "lib/paid_up/engine.rb",
     "lib/paid_up/extensions/integer.rb",
     "lib/paid_up/extensions/stripe.rb",
+    "lib/paid_up/feature.rb",
     "lib/paid_up/localization.rb",
     "lib/paid_up/mixins/paid_for.rb",
     "lib/paid_up/mixins/subscriber.rb",
@@ -95,11 +93,6 @@ Gem::Specification.new do |s|
     "spec/dummy/app/models/user.rb",
     "spec/dummy/app/views/layouts/application.html.haml",
     "spec/dummy/app/views/pages/index.html.haml",
-    "spec/dummy/bin/bundle",
-    "spec/dummy/bin/rails",
-    "spec/dummy/bin/rake",
-    "spec/dummy/bin/rspec",
-    "spec/dummy/bin/setup",
     "spec/dummy/config.ru",
     "spec/dummy/config/application.rb",
     "spec/dummy/config/boot.rb",

@@ -23,11 +23,11 @@ group :test, :development do
   gem 'bootstrap-sass', '~> 3.3'
   gem 'sass-rails', '~> 5.0'
   gem 'high_voltage', '~> 2.3'
+  gem 'rspec-rails', '~> 3.2'
 end
 
 group :test do
   gem 'capybara', '~> 2.4'
-  gem 'rspec-rails', '~> 3.2'
   gem 'database_cleaner', '~> 1.4'
   gem 'rspec-collection_matchers', '~> 1.1'
   gem 'shoulda-matchers', '~> 2.8'
