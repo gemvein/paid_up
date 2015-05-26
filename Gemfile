@@ -13,7 +13,7 @@ gem 'chronic', '~> 0.10'
 gem 'money', '~> 6.5'
 
 gem 'devise', '~> 3.4'
-gem 'cancan', '~> 1.6'
+gem 'cancancan', '~> 1.10'
 gem 'rolify', '~> 4'
 gem 'stripe', '~> 1.21'
 

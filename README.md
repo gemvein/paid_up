@@ -8,7 +8,7 @@ Paid Up is a start-to-finish Stripe subscription engine. You set up the plans yo
 
 * Ruby 2, Rails 4
 * Authentication by Devise
-* Authorization by CanCan
+* Authorization by CanCanCan
 * Subscription by Stripe
 * Roles by Rolify
 * Assumes you will be using some variety of Bootstrap, and designed to be quite responsive out of the box, but included views can be overridden with custom views.
