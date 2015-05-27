@@ -2,9 +2,8 @@ require 'rails_helper'
 
 describe PaidUp::Plan do
   it { should have_many(:plan_feature_settings).class_name('PaidUp::PlanFeatureSetting') }
-  it { should have_many(:features).class_name('PaidUp::Feature').through(:plan_feature_settings) }
 
-  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:title) }
   it { should validate_presence_of(:stripe_id) }
 
   include_context 'plans and features'
