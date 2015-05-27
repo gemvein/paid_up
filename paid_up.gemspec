@@ -148,7 +148,6 @@ Gem::Specification.new do |s|
     "spec/dummy/public/assets/bootstrap/glyphicons-halflings-regular-e395044093757d82afcb138957d06a1ea9361bdcf0b442d06a18a8051af57456.ttf",
     "spec/dummy/public/assets/bootstrap/glyphicons-halflings-regular-fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c.woff2",
     "spec/dummy/public/favicon.ico",
-    "spec/factories/feature.rb",
     "spec/factories/plan.rb",
     "spec/factories/plan_feature_setting.rb",
     "spec/factories/user.rb",
