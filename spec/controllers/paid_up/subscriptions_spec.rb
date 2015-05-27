@@ -82,7 +82,7 @@ RSpec.describe PaidUp::SubscriptionsController do
           end
           context "sets a flash message" do
             subject { flash[:notice] }
-            it { should match /You are now subscribed to the #{free_plan.name} Plan/ }
+            it { should match /You are now subscribed to the #{free_plan.title} Plan/ }
           end
         end
         context 'when downgrading' do
@@ -98,7 +98,7 @@ RSpec.describe PaidUp::SubscriptionsController do
           end
           context "sets a flash message" do
             subject { flash[:notice] }
-            it { should match /You are now subscribed to the #{no_ads_plan.name} Plan/ }
+            it { should match /You are now subscribed to the #{no_ads_plan.title} Plan/ }
           end
         end
       end
@@ -132,7 +132,7 @@ RSpec.describe PaidUp::SubscriptionsController do
         end
         context "sets a flash message" do
           subject { flash[:notice] }
-          it { should match /You are now subscribed to the #{professional_plan.name} Plan/ }
+          it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
         end
       end
 
@@ -149,7 +149,7 @@ RSpec.describe PaidUp::SubscriptionsController do
         end
         context "sets a flash message" do
           subject { flash[:notice] }
-          it { should match /You are now subscribed to the #{professional_plan.name} Plan/ }
+          it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
         end
       end
     end

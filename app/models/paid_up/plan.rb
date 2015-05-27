@@ -1,12 +1,12 @@
 class PaidUp::Plan < ActiveRecord::Base
-  has_many :plan_feature_settings, class_name: 'PaidUp::PlanFeatureSetting'
+  has_many :plan_feature_settings, class_name: 'PaidUp::PlanFeatureSetting', foreign_key: 'plan_id', inverse_of: :plan
   has_many :subscribers, :through => :subscriptions, :source => :subscriber, :source_type => 'User'
 
   after_initialize :load_stripe_data
 
   attr_accessor :stripe_data
 
-  validates_presence_of :name, :stripe_id
+  validates_presence_of :title, :stripe_id
 
   default_scope { order('sort_order ASC') }
   scope :subscribable, -> { where('sort_order >=  ?', 0) }

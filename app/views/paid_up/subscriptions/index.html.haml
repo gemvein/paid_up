@@ -1,7 +1,7 @@
 - add_title :my_subscription_information.l
 
 %h2
-  = current_user.plan.name
+  = current_user.plan.title
   .small= plan_charge_human current_user.plan
 
 = subscription_dl current_user.subscription

@@ -8,7 +8,7 @@
       %th= :subscribe.l
   - for plan in plans
     %tr{ class: highlight_plan == plan ? 'info' : ''}
-      %td= plan.name
+      %td= plan.title
       %td= plan_charge_human plan
       - for feature in features
         %td= feature_display feature, plan

@@ -5,10 +5,10 @@
     .plan.col-md-3
       .well
         %h2
-          = plan.name
+          = plan.title
           .small= plan_charge_human plan
         %p= plan.description.html_safe
-        %div{class:plan.name.gsub(' ',"_").downcase+'_subscribe_button'}
+        %div{class:plan.title.gsub(' ',"_").downcase+'_subscribe_button'}
           = plan_button plan
 %h2= :features.l
 .table-responsive
