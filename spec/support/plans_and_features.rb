@@ -25,7 +25,7 @@ shared_context "plans and features" do
     )
     FactoryGirl.create(
         :plan,
-        name: 'Anonymous',
+        title: 'Anonymous',
         stripe_id: 'anonymous-plan',
         sort_order: -1
     ).reload
@@ -43,7 +43,7 @@ shared_context "plans and features" do
     )
     FactoryGirl.create(
       :plan,
-      name: 'Free',
+      title: 'Free',
       stripe_id: 'free-plan',
       sort_order: 0
     ).reload
@@ -61,7 +61,7 @@ shared_context "plans and features" do
     )
     FactoryGirl.create(
       :plan,
-      name: 'No Ads',
+      title: 'No Ads',
       stripe_id: 'no-ads-plan',
       sort_order: 1
     ).reload
@@ -87,7 +87,7 @@ shared_context "plans and features" do
     )
     FactoryGirl.create(
       :plan,
-      name: 'Group Leader',
+      title: 'Group Leader',
       stripe_id: 'group-leader-plan',
       sort_order: 2
     ).reload
@@ -129,7 +129,7 @@ shared_context "plans and features" do
     )
     FactoryGirl.create(
       :plan,
-      name: 'Professional',
+      title: 'Professional',
       description: 'This is the description of the Professional plan.',
       stripe_id: 'professional-plan',
       sort_order: 3

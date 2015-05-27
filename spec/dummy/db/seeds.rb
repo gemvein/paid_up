@@ -13,7 +13,7 @@ Stripe::Plan.find_or_create_by_id(
     }
 )
 anonymous = PaidUp::Plan.create(
-    name: 'Anonymous',
+    title: 'Anonymous',
     stripe_id: 'anonymous-plan',
     description: "What you can do without logging in.",
     sort_order: -1
@@ -29,7 +29,7 @@ Stripe::Plan.find_or_create_by_id(
     }
 )
 free = PaidUp::Plan.create(
-    name: 'Free',
+    title: 'Free',
     stripe_id: 'free-plan',
     description: "Can't beat the price!",
     sort_order: 0
@@ -45,7 +45,7 @@ Stripe::Plan.find_or_create_by_id(
     }
 )
 no_ads = PaidUp::Plan.create(
-    name: 'No Ads',
+    title: 'No Ads',
     stripe_id: 'no-ads-plan',
     description: "No frills, just removes the ads.",
     sort_order: 1
@@ -61,7 +61,7 @@ Stripe::Plan.find_or_create_by_id(
     }
 )
 group_leader = PaidUp::Plan.create(
-    name: 'Group Leader',
+    title: 'Group Leader',
     stripe_id: 'group-leader-plan',
     description: "For leaders of single groups, with configuration.",
     sort_order: 2
@@ -77,7 +77,7 @@ Stripe::Plan.find_or_create_by_id(
     }
 )
 professional = PaidUp::Plan.create(
-    name: 'Professional',
+    title: 'Professional',
     stripe_id: 'professional-plan',
     description: "Designed for professionals with unlimited groups, a calendar and configuration.",
     sort_order: 3

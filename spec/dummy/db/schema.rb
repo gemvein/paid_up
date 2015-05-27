@@ -39,15 +39,15 @@ ActiveRecord::Schema.define(version: 20150523010840) do
 
   create_table "paid_up_plans", force: :cascade do |t|
     t.string   "stripe_id"
-    t.string   "name"
+    t.string   "title"
     t.text     "description"
     t.integer  "sort_order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "paid_up_plans", ["name"], name: "index_paid_up_plans_on_name", unique: true
   add_index "paid_up_plans", ["stripe_id"], name: "index_paid_up_plans_on_stripe_id", unique: true
+  add_index "paid_up_plans", ["title"], name: "index_paid_up_plans_on_title", unique: true
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
