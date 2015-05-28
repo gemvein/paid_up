@@ -49,11 +49,11 @@ Possible `:setting_type` values are: `boolean`, `table_rows`, `rolify_rows`. The
 
 #### Setting Type: Table Rows
 
-In the `table_rows` case, the table and its model must exist. the table should have a `:user_id` column, and from there the appropriate `has_many` and `belongs_to` relationships will be created for you.
+In the `table_rows` case, the table and its model must exist. the table should have a `:user_id` column, then you need to add `paid_for` to the model, and from there the appropriate `has_many` and `belongs_to` relationships will be created for you.
 
 #### Setting Type: Rolify Rows
     
-In the `rolify_rows` case, the table and its model must also exist. Once that is done and the corresponding `PaidUp::Feature` is created, the resource model will run the `resourcify` method, and the User method will have had the `rolify` method added to it during install, so no further setup is required.
+In the `rolify_rows` case, the table and its model must also exist. Once that is done and the corresponding `PaidUp::Feature` is created, add `paid_for` to the model. This means the resource model will run the `resourcify` method, and the User method will have had the `rolify` method added to it during install, so no further setup is required.
 
 ## Enabling Javascript
 
