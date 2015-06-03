@@ -191,7 +191,7 @@ describe User do
     context 'when possessing 3 rows' do
       before do
         3.times do
-          group = Group.create! name: 'Test Group'
+          group = Group.create! title: Forgery('name').company_name
           professional_subscriber.add_role(:owner, group)
         end
       end
@@ -298,7 +298,7 @@ describe User do
   describe "Abilities" do
 
     context "when anonymous" do
-      let(:group) { Group.create!(name: 'Test Group') }
+      let(:group) { Group.create!(title: 'Test Group') }
       let(:user){ nil }
       subject(:ability){ Ability.new(user) }
       it{ should be_able_to(:read, Group) }
@@ -309,7 +309,7 @@ describe User do
       it{ should_not be_able_to(:create, Doodad) }
     end
     context "when on free plan" do
-      let(:group) { Group.create!(name: 'Test Group') }
+      let(:group) { Group.create!(title: 'Test Group') }
       let(:user){ free_subscriber }
       subject(:ability){ Ability.new(user) }
       it{ should be_able_to(:read, Group) }
@@ -321,7 +321,7 @@ describe User do
     end
     context "when on group plan" do
       context "given no groups are owned" do
-        let(:group) { Group.create!(name: 'Test Group') }
+        let(:group) { Group.create!(title: 'Test Group') }
         let(:user){ group_leader_subscriber }
         subject(:ability){ Ability.new(user) }
         it{ should be_able_to(:read, Group) }
@@ -332,7 +332,7 @@ describe User do
         it{ should be_able_to(:create, Doodad) }
       end
       context "given one group is owned" do
-        let(:group) { Group.create!(name: 'Test Group') }
+        let(:group) { Group.create!(title: 'Test Group') }
         let(:user) {
           group_leader_subscriber.add_role(:owner, group)
           group_leader_subscriber
@@ -348,7 +348,7 @@ describe User do
     end
     context "when on professional plan" do
       context "given no groups are owned" do
-        let(:group) { Group.create!(name: 'Test Group') }
+        let(:group) { Group.create!(title: 'Test Group') }
         let(:user){ professional_subscriber }
         subject(:ability){ Ability.new(user) }
         it{ should be_able_to(:read, Group) }
@@ -359,7 +359,7 @@ describe User do
         it{ should be_able_to(:create, Doodad) }
       end
       context "given one group is owned" do
-        let(:group){ Group.create!(name: 'Test Group') }
+        let(:group){ Group.create!(title: 'Test Group') }
         let(:user){
           professional_subscriber.add_role(:owner, group)
           professional_subscriber
