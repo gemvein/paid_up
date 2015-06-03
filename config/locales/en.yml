@@ -55,6 +55,7 @@ en:
   my_subscription: 'My Subscription'
   my_subscription_information: 'My Subscription Information'
   no_implicit_conversion_of_type_features: 'No implicit conversion of %{type} Features'
+  no_features_associated_with_table: 'No features associated with %{table} table.'
   or_sign_in: "Or, Sign In"
   or_sign_up: "Or, Sign Up"
   paid_thru: "Paid Thru"

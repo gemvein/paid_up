@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20150523010840) do
   add_index "doodads", ["user_id"], name: "index_doodads_on_user_id"
 
   create_table "groups", force: :cascade do |t|
-    t.string   "name"
+    t.string   "title"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

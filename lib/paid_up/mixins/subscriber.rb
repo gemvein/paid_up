@@ -51,6 +51,7 @@ module PaidUp::Mixins
             end
           end
           if result
+            Rails.cache.delete("#{stripe_id}/stripe_data")
             reload
             return true
           else
@@ -127,7 +128,11 @@ module PaidUp::Mixins
             end
             working_stripe_id = stripe_id
           end
-          @customer_stripe_data = Stripe::Customer.retrieve working_stripe_id
+
+          @customer_stripe_data = Rails.cache.fetch("#{working_stripe_id}/stripe_data", expires_in: 12.hours) do
+            Stripe::Customer.retrieve working_stripe_id
+          end
+
           if @customer_stripe_data.nil?
             raise :could_not_load_subscription.l
           end

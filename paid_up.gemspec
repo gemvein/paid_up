@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-05-28"
+  s.date = "2015-06-03"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
   s.extra_rdoc_files = [
@@ -148,9 +148,11 @@ Gem::Specification.new do |s|
     "spec/dummy/public/assets/bootstrap/glyphicons-halflings-regular-e395044093757d82afcb138957d06a1ea9361bdcf0b442d06a18a8051af57456.ttf",
     "spec/dummy/public/assets/bootstrap/glyphicons-halflings-regular-fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c.woff2",
     "spec/dummy/public/favicon.ico",
+    "spec/factories/group.rb",
     "spec/factories/plan.rb",
     "spec/factories/plan_feature_setting.rb",
     "spec/factories/user.rb",
+    "spec/models/group_spec.rb",
     "spec/models/paid_up/feature_spec.rb",
     "spec/models/paid_up/plan_feature_setting_spec.rb",
     "spec/models/paid_up/plan_spec.rb",
@@ -162,6 +164,7 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/support/controller_macros.rb",
     "spec/support/factory_girl.rb",
+    "spec/support/groups.rb",
     "spec/support/plans_and_features.rb",
     "spec/support/stripe.rb",
     "spec/support/subscribers.rb",

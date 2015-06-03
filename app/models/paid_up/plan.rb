@@ -3,6 +3,7 @@ class PaidUp::Plan < ActiveRecord::Base
   accepts_nested_attributes_for :plan_feature_settings
 
   after_initialize :load_stripe_data
+  after_save :expire_stripe_data
 
   attr_accessor :stripe_data
 
@@ -87,8 +88,14 @@ class PaidUp::Plan < ActiveRecord::Base
 
   def load_stripe_data
     if stripe_id.present?
-      self.stripe_data = Stripe::Plan.retrieve stripe_id
+      self.stripe_data = Rails.cache.fetch("#{stripe_id}/stripe_data", expires_in: 12.hours) do
+        Stripe::Plan.retrieve stripe_id
+      end
     end
+  end
+
+  def expire_stripe_data
+    Rails.cache.delete("#{stripe_id}/stripe_data")
   end
 
 end
