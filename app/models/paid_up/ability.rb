@@ -13,7 +13,7 @@ module PaidUp
               can :manage, feature.feature_model, :user => user
               can :own, feature.feature_model
               if user.table_rows_remaining(feature.slug) > 0
-                can :new, feature.feature_model
+                can [:create, :new], feature.feature_model
               else
                 cannot :create, feature.feature_model
               end
@@ -30,7 +30,7 @@ module PaidUp
               can :manage, feature.feature_model, id: Group.with_role(:owner, user).pluck(:id)
               can :own, feature.feature_model
               if user.rolify_rows_remaining(feature.slug) > 0
-                can :new, feature.feature_model
+                can [:create, :new], feature.feature_model
               else
                 cannot :create, feature.feature_model
               end
