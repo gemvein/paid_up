@@ -8,11 +8,13 @@ module PaidUp
         case feature.setting_type
           when 'table_rows'
             can :index, feature.feature_model
-            can :read, feature.feature_model, enabled: true
+            can :show, feature.feature_model, enabled: true
             if user.table_rows_allowed(feature.slug) > 0 || user.table_rows_unlimited?(feature.slug)
               can :manage, feature.feature_model, :user => user
               can :own, feature.feature_model
-              unless user.table_rows_remaining(feature.slug) > 0
+              if user.table_rows_remaining(feature.slug) > 0
+                can :new, feature.feature_model
+              else
                 cannot :create, feature.feature_model
               end
             else
@@ -23,11 +25,13 @@ module PaidUp
             end
           when 'rolify_rows'
             can :index, feature.feature_model
-            can :read, feature.feature_model, enabled: true
+            can :show, feature.feature_model, enabled: true
             if user.rolify_rows_allowed(feature.slug) > 0 || user.rolify_rows_unlimited?(feature.slug)
               can :manage, feature.feature_model, id: Group.with_role(:owner, user).pluck(:id)
               can :own, feature.feature_model
-              unless user.rolify_rows_remaining(feature.slug) > 0
+              if user.rolify_rows_remaining(feature.slug) > 0
+                can :new, feature.feature_model
+              else
                 cannot :create, feature.feature_model
               end
             else
