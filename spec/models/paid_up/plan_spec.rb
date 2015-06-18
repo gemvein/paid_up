@@ -6,6 +6,8 @@ describe PaidUp::Plan do
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:stripe_id) }
 
+  it { should validate_uniqueness_of(:title) }
+
   include_context 'plans and features'
 
   describe '.subscribable' do

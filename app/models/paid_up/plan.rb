@@ -8,6 +8,7 @@ class PaidUp::Plan < ActiveRecord::Base
   attr_accessor :stripe_data
 
   validates_presence_of :title, :stripe_id
+  validates_uniqueness_of :title
 
   default_scope { order('sort_order ASC') }
   scope :subscribable, -> { where('sort_order >=  ?', 0) }
