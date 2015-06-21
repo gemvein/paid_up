@@ -78,6 +78,22 @@ Abilities corresponding to features you have defined will be generated automatic
         initialize_paid_up(user)
       end
     end
+    
+## Controller
+
+Your controller should inherit from PaidUp::PaidUpController, which in turn inherits from your own ApplicationController.
+    
+    class GroupsController < PaidUp::PaidUpController
+    
+### Models
+
+Your user model will need to call the `subscriber` method (this is done for you at install). 
+
+The resources referred to in your config will need to call `paid_for`, like this:
+
+    class Group < ActiveRecord::Base
+      paid_for
+    end
 
 ## Contributing to Paid Up
  
