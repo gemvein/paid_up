@@ -26,6 +26,18 @@ module Dummy
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.generators do |g|
+      g.hidden_namespaces << 'test_unit' << 'erb'
+      g.orm             :active_record
+      g.template_engine :haml
+      g.test_framework  :rspec, fixture: false
+      g.integration_tool :rspec
+      g.stylesheets     false
+      g.javascripts     false
+      g.view_specs      false
+      g.helper_specs    false
+    end
   end
 end
 

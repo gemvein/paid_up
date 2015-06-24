@@ -24,6 +24,7 @@ group :test, :development do
   gem 'sass-rails', '~> 5.0'
   gem 'high_voltage', '~> 2.3'
   gem 'rspec-rails', '~> 3.2'
+  gem 'factory_girl_rails', '~> 4.5'
 end
 
 group :test do
@@ -33,7 +34,6 @@ group :test do
   gem 'shoulda-matchers', '~> 2.8'
   gem 'minitest', '~>5.5.1'
   gem "launchy", "~> 2.1.2", require: false
-  gem 'factory_girl_rails', '~> 4.5', require: false
   gem 'coveralls', '~> 0.8', require: false
 end
 

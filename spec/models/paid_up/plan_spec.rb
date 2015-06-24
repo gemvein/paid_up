@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe PaidUp::Plan do
+  include_context 'loaded site'
+
   it { should have_many(:plan_feature_settings).class_name('PaidUp::PlanFeatureSetting') }
 
   it { should validate_presence_of(:title) }
@@ -8,7 +10,6 @@ describe PaidUp::Plan do
 
   it { should validate_uniqueness_of(:title) }
 
-  include_context 'plans and features'
 
   describe '.subscribable' do
     context 'returns all subscribable plans' do
@@ -28,7 +29,7 @@ describe PaidUp::Plan do
     describe 'when setting_type is integer' do
       context 'returns the setting value if available' do
         subject { group_leader_plan.feature_setting('groups') }
-        it { should eq(1) }
+        it { should eq(5) }
       end
       context 'returns 0 if not available' do
         subject { free_plan.feature_setting('groups') }

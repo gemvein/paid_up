@@ -2,7 +2,7 @@ require 'rails_helper'
 require "cancan/matchers"
 
 describe User do
-  include_context 'subscribers'
+  include_context 'loaded site'
 
   context '#stripe_data' do
     subject { no_ads_subscriber.stripe_data }
@@ -20,6 +20,9 @@ describe User do
         token = working_stripe_token free_subscriber
         free_subscriber.subscribe_to_plan no_ads_plan, token
       end
+      after do
+        free_subscriber.subscribe_to_plan free_plan
+      end
       subject { free_subscriber.plan }
       it { should eq(no_ads_plan) }
     end
@@ -29,6 +32,9 @@ describe User do
         before do
           no_ads_subscriber.subscribe_to_plan group_leader_plan
         end
+        after do
+          no_ads_subscriber.subscribe_to_plan no_ads_plan
+        end
         subject { no_ads_subscriber.plan }
         it { should eq(group_leader_plan) }
       end
@@ -36,6 +42,9 @@ describe User do
         before do
           token = working_stripe_token no_ads_subscriber
           no_ads_subscriber.subscribe_to_plan group_leader_plan, token
+        end
+        after do
+          no_ads_subscriber.subscribe_to_plan no_ads_plan
         end
         subject { no_ads_subscriber.plan }
         it { should eq(group_leader_plan) }
@@ -59,6 +68,10 @@ describe User do
       context 'starting from higher subscription' do
         before do
           professional_subscriber.subscribe_to_free_plan
+        end
+        after do
+          token = working_stripe_token no_ads_subscriber
+          professional_subscriber.subscribe_to_plan professional_plan, token
         end
         subject { professional_subscriber.plan }
         it { should eq(free_plan) }
@@ -84,7 +97,7 @@ describe User do
     end
     context 'when subscribed to a plan with the feature limited' do
       subject { group_leader_subscriber.table_rows_remaining 'doodads' }
-      it { should eq 5 }
+      it { should eq 10 }
     end
     context 'when subscribed to a plan with the feature unlimited' do
       subject { professional_subscriber.table_rows_remaining 'doodads' }
@@ -114,7 +127,7 @@ describe User do
     end
     context 'when subscribed to a plan with the feature limited' do
       subject { group_leader_subscriber.table_rows_allowed 'doodads' }
-      it { should eq 5 }
+      it { should eq 10 }
     end
     context 'when subscribed to a plan with the feature unlimited' do
       subject { professional_subscriber.table_rows_allowed 'doodads' }
@@ -145,11 +158,11 @@ describe User do
     end
     context 'when subscribed to a plan with the feature limited' do
       subject { group_leader_subscriber.rolify_rows_remaining 'groups' }
-      it { should eq 1 }
+      it { should eq 4 }
     end
     context 'when subscribed to a plan with the feature unlimited' do
       subject { professional_subscriber.rolify_rows_remaining 'groups' }
-      it { should eq PaidUp::Unlimited.to_i }
+      it { should be > 99999999 }
     end
   end
 
@@ -175,7 +188,7 @@ describe User do
     end
     context 'when subscribed to a plan with the feature limited' do
       subject { group_leader_subscriber.rolify_rows_allowed 'groups' }
-      it { should eq 1 }
+      it { should eq 5 }
     end
     context 'when subscribed to a plan with the feature unlimited' do
       subject { professional_subscriber.rolify_rows_allowed 'groups' }
@@ -185,17 +198,19 @@ describe User do
 
   context '#rolify_rows' do
     context 'when possessing no rows' do
-      subject { professional_subscriber.rolify_rows 'groups' }
+      subject { blank_subscriber.rolify_rows 'groups' }
       it { should eq 0 }
     end
     context 'when possessing 3 rows' do
       before do
         3.times do
-          group = Group.create! title: Forgery('name').company_name
-          professional_subscriber.add_role(:owner, group)
+          FactoryGirl.create(
+            :group,
+            owner: blank_subscriber
+          )
         end
       end
-      subject { professional_subscriber.rolify_rows 'groups' }
+      subject { blank_subscriber.rolify_rows 'groups' }
       it { should eq 3 }
     end
   end
@@ -298,10 +313,11 @@ describe User do
   describe "Abilities" do
 
     context "when anonymous" do
-      let(:group) { Group.create!(title: 'Test Group') }
+      let(:group){ FactoryGirl.create(:group, owner: professional_subscriber) }
       let(:user){ nil }
       subject(:ability){ Ability.new(user) }
-      it{ should be_able_to(:read, Group) }
+      it{ should be_able_to(:index, group) }
+      it{ should be_able_to(:show, group) }
       it{ should_not be_able_to(:manage, group) }
       it{ should_not be_able_to(:own, Group) }
       it{ should_not be_able_to(:create, Group) }
@@ -309,10 +325,11 @@ describe User do
       it{ should_not be_able_to(:create, Doodad) }
     end
     context "when on free plan" do
-      let(:group) { Group.create!(title: 'Test Group') }
+      let(:group){ FactoryGirl.create(:group, owner: professional_subscriber) }
       let(:user){ free_subscriber }
       subject(:ability){ Ability.new(user) }
-      it{ should be_able_to(:read, Group) }
+      it{ should be_able_to(:index, group) }
+      it{ should be_able_to(:show, group) }
       it{ should_not be_able_to(:manage, group) }
       it{ should_not be_able_to(:own, Group) }
       it{ should_not be_able_to(:create, Group) }
@@ -321,24 +338,23 @@ describe User do
     end
     context "when on group plan" do
       context "given no groups are owned" do
-        let(:group) { Group.create!(title: 'Test Group') }
+        let(:group){ FactoryGirl.create(:group, owner: group_leader_subscriber) }
         let(:user){ group_leader_subscriber }
         subject(:ability){ Ability.new(user) }
-        it{ should be_able_to(:read, Group) }
-        it{ should_not be_able_to(:manage, group) }
+        it{ should be_able_to(:index, group) }
+        it{ should be_able_to(:show, group) }
+        it{ should be_able_to(:manage, group) }
         it{ should be_able_to(:own, Group) }
         it{ should be_able_to(:create, Group) }
         it{ should be_able_to(:use, :ad_free) }
         it{ should be_able_to(:create, Doodad) }
       end
-      context "given one group is owned" do
-        let(:group) { Group.create!(title: 'Test Group') }
-        let(:user) {
-          group_leader_subscriber.add_role(:owner, group)
-          group_leader_subscriber
-        }
+      context "given all allowed groups are owned" do
+        let(:group){ FactoryGirl.create(:group, owner: disabling_subscriber) }
+        let(:user) { disabling_subscriber }
         subject(:ability){ Ability.new(user) }
-        it{ should be_able_to(:read, Group) }
+        it{ should be_able_to(:index, group) }
+        it{ should be_able_to(:show, group) }
         it{ should be_able_to(:manage, group) }
         it{ should be_able_to(:own, Group) }
         it{ should_not be_able_to(:create, Group) }
@@ -348,10 +364,11 @@ describe User do
     end
     context "when on professional plan" do
       context "given no groups are owned" do
-        let(:group) { Group.create!(title: 'Test Group') }
+        let(:group){ FactoryGirl.create(:group, owner: blank_subscriber) }
         let(:user){ professional_subscriber }
         subject(:ability){ Ability.new(user) }
-        it{ should be_able_to(:read, Group) }
+        it{ should be_able_to(:index, group) }
+        it{ should be_able_to(:show, group) }
         it{ should_not be_able_to(:manage, group) }
         it{ should be_able_to(:own, Group) }
         it{ should be_able_to(:create, Group) }
@@ -359,13 +376,11 @@ describe User do
         it{ should be_able_to(:create, Doodad) }
       end
       context "given one group is owned" do
-        let(:group){ Group.create!(title: 'Test Group') }
-        let(:user){
-          professional_subscriber.add_role(:owner, group)
-          professional_subscriber
-        }
+        let(:group){ FactoryGirl.create(:group, owner: professional_subscriber) }
+        let(:user){ professional_subscriber }
         subject(:ability){ Ability.new(user) }
-        it{ should be_able_to(:read, Group) }
+        it{ should be_able_to(:index, group) }
+        it{ should be_able_to(:show, group) }
         it{ should be_able_to(:manage, group) }
         it{ should be_able_to(:own, Group) }
         it{ should be_able_to(:create, Group) }

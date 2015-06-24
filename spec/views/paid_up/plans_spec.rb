@@ -1,8 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "paid_up/plans/index" do
-  include_context 'plans and features'
-  include_context 'subscribers'
+  include_context 'loaded site'
 
   context 'when user is anonymous' do
     before do

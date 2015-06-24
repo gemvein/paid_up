@@ -63,7 +63,7 @@ In order for PaidUp's AJAX functionality to work (which is required because Stri
     
 ## Abilities
 
-Abilities corresponding to features you have defined will be generated automatically, as an `:own` ability on the specified tables, plus rational defaults for `:manage` and `:read` permissions, if you include the `PaidUp::Ability` module and use the `initialize_paid_up(user)` command, like this:
+Abilities corresponding to features you have defined will be generated automatically, as an `:own` ability on the specified tables, plus rational defaults for `:manage`, `:index` and `:show` permissions, if you include the `PaidUp::Ability` module and use the `initialize_paid_up(user)` command, like this:
 
     # /app/models/ability.rb
     class Ability

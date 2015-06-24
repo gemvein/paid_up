@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe PaidUp::PlansController do
-  include_context 'plans and features'
+  include_context 'loaded site'
   routes { PaidUp::Engine.routes }
 
   describe "GET #index" do
-    before :each do
+    before do
       get :index
     end
     context "responds successfully with an HTTP 200 status code" do

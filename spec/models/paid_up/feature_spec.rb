@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 describe PaidUp::Feature do
+  include_context 'loaded site'
+
   it { should validate_presence_of(:slug) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:setting_type) }
   it { should validate_inclusion_of(:setting_type).in_array(%w(boolean table_rows rolify_rows))}
 
-  include_context 'plans and features'
   context '#feature_model' do
     subject { groups_feature.feature_model }
     it { should eq Group }

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'PaidUp::Routing' do
-  include_context 'plans and features'
+  include_context 'loaded site'
   routes { PaidUp::Engine.routes }
 
   describe "routes to the list of all plans" do

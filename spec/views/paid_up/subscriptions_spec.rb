@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "paid_up/subscriptions/new" do
+  include_context 'loaded site'
   context 'when user is logged in as free customer' do
-    include_context 'subscribers'
     context "displays a payment form" do
       before do
         view.extend PaidUp::PlansHelper
@@ -19,7 +19,6 @@ RSpec.describe "paid_up/subscriptions/new" do
     end
   end
   context 'when user is logged in as a paid customer' do
-    include_context 'subscribers'
     context "displays a payment form" do
       before do
         view.extend PaidUp::PlansHelper
@@ -38,8 +37,8 @@ RSpec.describe "paid_up/subscriptions/new" do
 end
 
 RSpec.describe "paid_up/subscriptions/index" do
+  include_context 'loaded site'
   context 'when user is logged in' do
-    include_context 'subscribers'
     context "displays the details of a user's subscriptions" do
       before do
         view.extend PaidUp::PlansHelper

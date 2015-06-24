@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Karen Lundgren"]
-  s.date = "2015-06-21"
+  s.date = "2015-06-24"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features."
   s.email = "karen.e.lundgren@gmail.com"
   s.extra_rdoc_files = [
@@ -121,7 +121,6 @@ Gem::Specification.new do |s|
     "spec/dummy/config/locales/en.yml",
     "spec/dummy/config/routes.rb",
     "spec/dummy/config/secrets.yml",
-    "spec/dummy/db/development.sqlite3",
     "spec/dummy/db/migrate/20150406154440_create_users_table.rb",
     "spec/dummy/db/migrate/20150517175135_create_groups_table.rb",
     "spec/dummy/db/migrate/20150517175136_create_doodads_table.rb",
@@ -130,9 +129,7 @@ Gem::Specification.new do |s|
     "spec/dummy/db/migrate/20150523010838_create_paid_up_plan_feature_settings_table.paid_up.rb",
     "spec/dummy/db/migrate/20150523010839_create_paid_up_plans_table.paid_up.rb",
     "spec/dummy/db/migrate/20150523010840_add_stripe_id_column_to_users.paid_up.rb",
-    "spec/dummy/db/schema.rb",
     "spec/dummy/db/seeds.rb",
-    "spec/dummy/db/test.sqlite3",
     "spec/dummy/lib/assets/.keep",
     "spec/dummy/log/.keep",
     "spec/dummy/log/development.log",
@@ -164,8 +161,10 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/support/controller_macros.rb",
     "spec/support/factory_girl.rb",
+    "spec/support/features.rb",
     "spec/support/groups.rb",
-    "spec/support/plans_and_features.rb",
+    "spec/support/loaded_site.rb",
+    "spec/support/plans.rb",
     "spec/support/stripe.rb",
     "spec/support/subscribers.rb",
     "spec/views/paid_up/plans_spec.rb",
@@ -173,7 +172,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://www.gemvein.com/museum/cases/paid_up"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.5"
+  s.rubygems_version = "2.4.6"
   s.summary = "Allows a model of your choosing to subscribe to a plan, which enables features."
 
   if s.respond_to? :specification_version then
@@ -199,6 +198,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<sass-rails>, ["~> 5.0"])
       s.add_development_dependency(%q<high_voltage>, ["~> 2.3"])
       s.add_development_dependency(%q<rspec-rails>, ["~> 3.2"])
+      s.add_development_dependency(%q<factory_girl_rails>, ["~> 4.5"])
     else
       s.add_dependency(%q<rails>, ["~> 4"])
       s.add_dependency(%q<rails-i18n>, ["~> 4"])
@@ -219,6 +219,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<sass-rails>, ["~> 5.0"])
       s.add_dependency(%q<high_voltage>, ["~> 2.3"])
       s.add_dependency(%q<rspec-rails>, ["~> 3.2"])
+      s.add_dependency(%q<factory_girl_rails>, ["~> 4.5"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 4"])
@@ -240,6 +241,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<sass-rails>, ["~> 5.0"])
     s.add_dependency(%q<high_voltage>, ["~> 2.3"])
     s.add_dependency(%q<rspec-rails>, ["~> 3.2"])
+    s.add_dependency(%q<factory_girl_rails>, ["~> 4.5"])
   end
 end
 

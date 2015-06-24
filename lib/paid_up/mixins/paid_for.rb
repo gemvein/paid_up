@@ -60,7 +60,7 @@ module PaidUp::Mixins
           owners_records.count
         end
 
-        send(:define_method, :enabled?) do
+        send(:define_method, :enabled) do
           if owners_enabled_count >= owners_records_count
             true
           else

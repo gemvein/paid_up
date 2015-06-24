@@ -8,7 +8,9 @@ module PaidUp
         case feature.setting_type
           when 'table_rows'
             can :index, feature.feature_model
-            can :show, feature.feature_model, enabled: true
+            can :show, feature.feature_model do |item|
+              item.enabled
+            end
             if user.table_rows_allowed(feature.slug) > 0 || user.table_rows_unlimited?(feature.slug)
               can :manage, feature.feature_model, :user => user
               can :own, feature.feature_model
@@ -25,9 +27,11 @@ module PaidUp
             end
           when 'rolify_rows'
             can :index, feature.feature_model
-            can :show, feature.feature_model, enabled: true
+            can :show, feature.feature_model do |item|
+              item.enabled
+            end
             if user.rolify_rows_allowed(feature.slug) > 0 || user.rolify_rows_unlimited?(feature.slug)
-              can :manage, feature.feature_model, id: Group.with_role(:owner, user).pluck(:id)
+              can :manage, feature.feature_model, id: feature.feature_model.with_role(:owner, user).pluck(:id)
               can :own, feature.feature_model
               if user.rolify_rows_remaining(feature.slug) > 0
                 can [:create, :new], feature.feature_model

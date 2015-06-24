@@ -2,7 +2,7 @@ require 'rails_helper'
 require "cancan/matchers"
 
 describe Group do
-  include_context 'groups'
+  include_context 'loaded site'
 
   describe '#owners' do
     subject { first_group.owners }
@@ -22,7 +22,7 @@ describe Group do
   describe '#owners_enabled_count' do
     describe 'when limited' do
       subject { first_group.owners_enabled_count }
-      it { should eq 1 }
+      it { should eq 5 }
     end
     describe 'when unlimited' do
       subject { second_group.owners_enabled_count }
@@ -41,13 +41,13 @@ describe Group do
     it { should eq 2 }
   end
 
-  describe '#enabled?' do
+  describe '#enabled' do
     describe 'when true' do
-      subject { first_group.enabled? }
+      subject { first_group.enabled }
       it { should eq true }
     end
     describe 'when false' do
-      subject { disabled_group.enabled? }
+      subject { disabled_group.enabled }
       it { should eq false }
     end
   end

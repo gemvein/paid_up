@@ -1,3 +1,5 @@
+# Dir[Rails.root.join("spec/factories/*.rb")].each {|f| require f}
+
 ###############
 # Plans       #
 ###############
@@ -12,7 +14,7 @@ Stripe::Plan.find_or_create_by_id(
         :id => 'anonymous-plan'
     }
 )
-anonymous = PaidUp::Plan.create(
+anonymous_plan = PaidUp::Plan.create(
     title: 'Anonymous',
     stripe_id: 'anonymous-plan',
     description: "What you can do without logging in.",
@@ -28,7 +30,7 @@ Stripe::Plan.find_or_create_by_id(
         :id => 'free-plan'
     }
 )
-free = PaidUp::Plan.create(
+free_plan = PaidUp::Plan.create(
     title: 'Free',
     stripe_id: 'free-plan',
     description: "Can't beat the price!",
@@ -44,7 +46,7 @@ Stripe::Plan.find_or_create_by_id(
         :id => 'no-ads-plan'
     }
 )
-no_ads = PaidUp::Plan.create(
+no_ads_plan = PaidUp::Plan.create(
     title: 'No Ads',
     stripe_id: 'no-ads-plan',
     description: "No frills, just removes the ads.",
@@ -60,7 +62,7 @@ Stripe::Plan.find_or_create_by_id(
         :id => 'group-leader-plan'
     }
 )
-group_leader = PaidUp::Plan.create(
+group_leader_plan = PaidUp::Plan.create(
     title: 'Group Leader',
     stripe_id: 'group-leader-plan',
     description: "For leaders of single groups, with configuration.",
@@ -76,7 +78,7 @@ Stripe::Plan.find_or_create_by_id(
         :id => 'professional-plan'
     }
 )
-professional = PaidUp::Plan.create(
+professional_plan = PaidUp::Plan.create(
     title: 'Professional',
     stripe_id: 'professional-plan',
     description: "Designed for professionals with unlimited groups, a calendar and configuration.",
@@ -100,40 +102,112 @@ Stripe::Customer.find_or_create_by_id(
 # Ad Free
 PaidUp::PlanFeatureSetting.create(
     feature: 'ad_free',
-    plan: no_ads,
+    plan: no_ads_plan,
     setting: 1
 )
 
 # Group Leader
 PaidUp::PlanFeatureSetting.create(
     feature: 'ad_free',
-    plan: group_leader,
+    plan: group_leader_plan,
     setting: 1
 )
 PaidUp::PlanFeatureSetting.create(
     feature: 'groups',
-    plan: group_leader,
-    setting: 1
+    plan: group_leader_plan,
+    setting: 5
 )
 PaidUp::PlanFeatureSetting.create(
     feature: 'doodads',
-    plan: group_leader,
-    setting: 5
+    plan: group_leader_plan,
+    setting: 10
 )
 
 # Professional
 PaidUp::PlanFeatureSetting.create(
     feature: 'ad_free',
-    plan: professional,
+    plan: professional_plan,
     setting: 1
 )
 PaidUp::PlanFeatureSetting.create(
     feature: 'groups',
-    plan: professional,
+    plan: professional_plan,
     setting: PaidUp::Unlimited.to_i(:db)
 )
 PaidUp::PlanFeatureSetting.create(
     feature: 'doodads',
-    plan: professional,
+    plan: professional_plan,
     setting: PaidUp::Unlimited.to_i(:db)
+)
+
+###############
+# Users       #
+###############
+
+free_subscriber = FactoryGirl.create(
+    :user,
+    name: 'Free Subscriber',
+    plan: free_plan
+)
+
+no_ads_subscriber = FactoryGirl.create(
+    :user,
+    name: 'No Ads Subscriber',
+    plan: no_ads_plan
+)
+
+group_leader_subscriber = FactoryGirl.create(
+    :user,
+    name: 'Group Leader Subscriber',
+    plan: group_leader_plan
+)
+
+disabling_subscriber = FactoryGirl.create(
+    :user,
+    name: 'Disabling Subscriber',
+    plan: group_leader_plan
+)
+
+professional_subscriber = FactoryGirl.create(
+    :user,
+    name: 'Professional Subscriber',
+    plan: professional_plan
+)
+
+blank_subscriber = FactoryGirl.create(
+    :user,
+    name: 'Blank Subscriber',
+    plan: professional_plan
+)
+
+###############
+# Groups      #
+###############
+
+FactoryGirl.create(
+    :group,
+    title: 'First Group',
+    owner: group_leader_subscriber
+)
+
+FactoryGirl.create(
+    :group,
+    title: 'Second Group',
+    owner: professional_subscriber
+)
+
+FactoryGirl.create(
+    :group,
+    title: 'Third Group',
+    owner: professional_subscriber
+)
+
+5.times do
+  FactoryGirl.create(:group, owner: disabling_subscriber)
+end
+
+FactoryGirl.create(
+    :group,
+    title: 'Disabled Group',
+    owner: disabling_subscriber
 )
