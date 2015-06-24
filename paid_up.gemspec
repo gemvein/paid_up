@@ -121,6 +121,10 @@ Gem::Specification.new do |s|
     "spec/dummy/config/locales/en.yml",
     "spec/dummy/config/routes.rb",
     "spec/dummy/config/secrets.yml",
+    "spec/dummy/coverage/.last_run.json",
+    "spec/dummy/coverage/.resultset.json",
+    "spec/dummy/coverage/.resultset.json.lock",
+    "spec/dummy/db/development.sqlite3",
     "spec/dummy/db/migrate/20150406154440_create_users_table.rb",
     "spec/dummy/db/migrate/20150517175135_create_groups_table.rb",
     "spec/dummy/db/migrate/20150517175136_create_doodads_table.rb",
@@ -129,7 +133,9 @@ Gem::Specification.new do |s|
     "spec/dummy/db/migrate/20150523010838_create_paid_up_plan_feature_settings_table.paid_up.rb",
     "spec/dummy/db/migrate/20150523010839_create_paid_up_plans_table.paid_up.rb",
     "spec/dummy/db/migrate/20150523010840_add_stripe_id_column_to_users.paid_up.rb",
+    "spec/dummy/db/schema.rb",
     "spec/dummy/db/seeds.rb",
+    "spec/dummy/db/test.sqlite3",
     "spec/dummy/lib/assets/.keep",
     "spec/dummy/log/.keep",
     "spec/dummy/log/development.log",
@@ -166,13 +172,13 @@ Gem::Specification.new do |s|
     "spec/support/loaded_site.rb",
     "spec/support/plans.rb",
     "spec/support/stripe.rb",
-    "spec/support/subscribers.rb",
+    "spec/support/users.rb",
     "spec/views/paid_up/plans_spec.rb",
     "spec/views/paid_up/subscriptions_spec.rb"
   ]
   s.homepage = "http://www.gemvein.com/museum/cases/paid_up"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.6"
+  s.rubygems_version = "2.4.5"
   s.summary = "Allows a model of your choosing to subscribe to a plan, which enables features."
 
   if s.respond_to? :specification_version then
