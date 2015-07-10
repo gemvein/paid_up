@@ -14,6 +14,7 @@ module PaidUp::Mixins
               # Nothing needs doing
             when 'rolify_rows'
               resourcify
+              attr_accessor :owner
             when 'table_rows'
               belongs_to :user
             else
@@ -26,11 +27,8 @@ module PaidUp::Mixins
         end
 
         send(:define_method, :save_with_owner) do |owner|
-          result = save
-          if result
-            owner.add_role :owner, self
-            result
-          end
+          owner.add_role(:owner, self)
+          save
         end
 
         send(:define_method, :owners_enabled_count) do
