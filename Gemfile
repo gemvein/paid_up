@@ -32,7 +32,6 @@ group :test do
   gem 'database_cleaner', '~> 1.4'
   gem 'rspec-collection_matchers', '~> 1.1'
   gem 'shoulda-matchers', '~> 2.8'
-  gem 'minitest', '~>5.5.1'
   gem "launchy", "~> 2.1.2", require: false
   gem 'coveralls', '~> 0.8', require: false
 end
