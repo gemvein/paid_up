@@ -178,7 +178,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://www.gemvein.com/museum/cases/paid_up"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.5.1"
+  s.rubygems_version = "2.4.5.1"
   s.summary = "Allows a model of your choosing to subscribe to a plan, which enables features."
 
   if s.respond_to? :specification_version then
