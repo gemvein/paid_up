@@ -27,9 +27,12 @@ module PaidUp::Mixins
         end
 
         send(:define_method, :save_with_owner) do |owner|
-          save
-          owner.add_role(:owner, self)
-          self
+          if save
+            owner.add_role(:owner, self)
+            true
+          else
+            false
+          end
         end
 
         send(:define_method, :owners_enabled_count) do
