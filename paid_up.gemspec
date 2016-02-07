@@ -130,6 +130,9 @@ Gem::Specification.new do |s|
     "spec/dummy/db/migrate/20150517175136_create_doodads_table.rb",
     "spec/dummy/db/migrate/20150523010827_add_devise_to_users.rb",
     "spec/dummy/db/migrate/20150523010837_rolify_create_roles.rb",
+    "spec/dummy/db/migrate/20160207184112_create_paid_up_plans_table.paid_up.rb",
+    "spec/dummy/db/migrate/20160207184113_add_stripe_id_column_to_users.paid_up.rb",
+    "spec/dummy/db/migrate/20160207184114_create_paid_up_plan_feature_settings_table.paid_up.rb",
     "spec/dummy/db/schema.rb",
     "spec/dummy/db/seeds.rb",
     "spec/dummy/db/test.sqlite3",
@@ -175,14 +178,14 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://www.gemvein.com/museum/cases/paid_up"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.5.1"
+  s.rubygems_version = "2.5.1"
   s.summary = "Allows a model of your choosing to subscribe to a plan, which enables features."
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["~> 4"])
+      s.add_runtime_dependency(%q<rails>, ["~> 4.2.5"])
       s.add_runtime_dependency(%q<rails-i18n>, ["~> 4"])
       s.add_runtime_dependency(%q<haml-rails>, ["~> 0.9"])
       s.add_runtime_dependency(%q<jquery-rails>, ["~> 4"])
@@ -203,7 +206,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec-rails>, ["~> 3.2"])
       s.add_development_dependency(%q<factory_girl_rails>, ["~> 4.5"])
     else
-      s.add_dependency(%q<rails>, ["~> 4"])
+      s.add_dependency(%q<rails>, ["~> 4.2.5"])
       s.add_dependency(%q<rails-i18n>, ["~> 4"])
       s.add_dependency(%q<haml-rails>, ["~> 0.9"])
       s.add_dependency(%q<jquery-rails>, ["~> 4"])
@@ -225,7 +228,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<factory_girl_rails>, ["~> 4.5"])
     end
   else
-    s.add_dependency(%q<rails>, ["~> 4"])
+    s.add_dependency(%q<rails>, ["~> 4.2.5"])
     s.add_dependency(%q<rails-i18n>, ["~> 4"])
     s.add_dependency(%q<haml-rails>, ["~> 0.9"])
     s.add_dependency(%q<jquery-rails>, ["~> 4"])
