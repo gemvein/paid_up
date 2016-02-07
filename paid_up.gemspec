@@ -185,7 +185,7 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["~> 4.2.5"])
+      s.add_runtime_dependency(%q<rails>, [">= 4.2.5"])
       s.add_runtime_dependency(%q<rails-i18n>, ["~> 4"])
       s.add_runtime_dependency(%q<haml-rails>, ["~> 0.9"])
       s.add_runtime_dependency(%q<jquery-rails>, ["~> 4"])
@@ -198,7 +198,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<rolify>, ["~> 4"])
       s.add_runtime_dependency(%q<stripe>, ["~> 1.21"])
       s.add_development_dependency(%q<jeweler>, ["~> 2"])
-      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1"])
       s.add_development_dependency(%q<sqlite3>, ["~> 1.3"])
       s.add_development_dependency(%q<forgery>, ["~> 0.6"])
       s.add_development_dependency(%q<bootstrap-sass>, ["~> 3.3"])
@@ -207,7 +207,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec-rails>, ["~> 3.2"])
       s.add_development_dependency(%q<factory_girl_rails>, ["~> 4.5"])
     else
-      s.add_dependency(%q<rails>, ["~> 4.2.5"])
+      s.add_dependency(%q<rails>, [">= 4.2.5"])
       s.add_dependency(%q<rails-i18n>, ["~> 4"])
       s.add_dependency(%q<haml-rails>, ["~> 0.9"])
       s.add_dependency(%q<jquery-rails>, ["~> 4"])
@@ -220,7 +220,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rolify>, ["~> 4"])
       s.add_dependency(%q<stripe>, ["~> 1.21"])
       s.add_dependency(%q<jeweler>, ["~> 2"])
-      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<bundler>, ["~> 1"])
       s.add_dependency(%q<sqlite3>, ["~> 1.3"])
       s.add_dependency(%q<forgery>, ["~> 0.6"])
       s.add_dependency(%q<bootstrap-sass>, ["~> 3.3"])
@@ -230,7 +230,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<factory_girl_rails>, ["~> 4.5"])
     end
   else
-    s.add_dependency(%q<rails>, ["~> 4.2.5"])
+    s.add_dependency(%q<rails>, [">= 4.2.5"])
     s.add_dependency(%q<rails-i18n>, ["~> 4"])
     s.add_dependency(%q<haml-rails>, ["~> 0.9"])
     s.add_dependency(%q<jquery-rails>, ["~> 4"])
@@ -243,7 +243,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rolify>, ["~> 4"])
     s.add_dependency(%q<stripe>, ["~> 1.21"])
     s.add_dependency(%q<jeweler>, ["~> 2"])
-    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<bundler>, ["~> 1"])
     s.add_dependency(%q<sqlite3>, ["~> 1.3"])
     s.add_dependency(%q<forgery>, ["~> 0.6"])
     s.add_dependency(%q<bootstrap-sass>, ["~> 3.3"])
