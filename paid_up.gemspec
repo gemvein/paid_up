@@ -190,7 +190,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<haml-rails>, ["~> 0.9"])
       s.add_runtime_dependency(%q<jquery-rails>, ["~> 4"])
       s.add_runtime_dependency(%q<uglifier>, ["~> 2.7"])
-      s.add_runtime_dependency(%q<jeweler>, ["~> 2"])
       s.add_runtime_dependency(%q<bootstrap_leather>, ["~> 0.5"])
       s.add_runtime_dependency(%q<chronic>, ["~> 0.10"])
       s.add_runtime_dependency(%q<money>, ["~> 6.5"])
@@ -205,13 +204,13 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<high_voltage>, ["~> 2.3"])
       s.add_development_dependency(%q<rspec-rails>, ["~> 3.2"])
       s.add_development_dependency(%q<factory_girl_rails>, ["~> 4.5"])
+      s.add_development_dependency(%q<jeweler>, ["~> 2"])
     else
       s.add_dependency(%q<rails>, ["~> 4.2.5"])
       s.add_dependency(%q<rails-i18n>, ["~> 4"])
       s.add_dependency(%q<haml-rails>, ["~> 0.9"])
       s.add_dependency(%q<jquery-rails>, ["~> 4"])
       s.add_dependency(%q<uglifier>, ["~> 2.7"])
-      s.add_dependency(%q<jeweler>, ["~> 2"])
       s.add_dependency(%q<bootstrap_leather>, ["~> 0.5"])
       s.add_dependency(%q<chronic>, ["~> 0.10"])
       s.add_dependency(%q<money>, ["~> 6.5"])
@@ -226,6 +225,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<high_voltage>, ["~> 2.3"])
       s.add_dependency(%q<rspec-rails>, ["~> 3.2"])
       s.add_dependency(%q<factory_girl_rails>, ["~> 4.5"])
+      s.add_dependency(%q<jeweler>, ["~> 2"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 4.2.5"])
@@ -233,7 +233,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<haml-rails>, ["~> 0.9"])
     s.add_dependency(%q<jquery-rails>, ["~> 4"])
     s.add_dependency(%q<uglifier>, ["~> 2.7"])
-    s.add_dependency(%q<jeweler>, ["~> 2"])
     s.add_dependency(%q<bootstrap_leather>, ["~> 0.5"])
     s.add_dependency(%q<chronic>, ["~> 0.10"])
     s.add_dependency(%q<money>, ["~> 6.5"])
@@ -248,6 +247,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<high_voltage>, ["~> 2.3"])
     s.add_dependency(%q<rspec-rails>, ["~> 3.2"])
     s.add_dependency(%q<factory_girl_rails>, ["~> 4.5"])
+    s.add_dependency(%q<jeweler>, ["~> 2"])
   end
 end
 

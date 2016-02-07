@@ -5,7 +5,6 @@ gem 'rails-i18n', '~> 4'
 gem 'haml-rails', '~> 0.9'
 gem 'jquery-rails', '~> 4'
 gem 'uglifier', '~> 2.7'
-gem 'jeweler', '~> 2'
 
 gem 'bootstrap_leather', '~> 0.5'
 
@@ -25,6 +24,7 @@ group :test, :development do
   gem 'high_voltage', '~> 2.3'
   gem 'rspec-rails', '~> 3.2'
   gem 'factory_girl_rails', '~> 4.5'
+  gem 'jeweler', '~> 2'
 end
 
 group :test do
