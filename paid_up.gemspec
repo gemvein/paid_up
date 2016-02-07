@@ -178,7 +178,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://www.gemvein.com/museum/cases/paid_up"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.5.1"
+  s.rubygems_version = "2.4.5.1"
   s.summary = "Allows a model of your choosing to subscribe to a plan, which enables features."
 
   if s.respond_to? :specification_version then
@@ -197,6 +197,8 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<cancancan>, ["~> 1.10"])
       s.add_runtime_dependency(%q<rolify>, ["~> 4"])
       s.add_runtime_dependency(%q<stripe>, ["~> 1.21"])
+      s.add_development_dependency(%q<jeweler>, ["~> 2"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<sqlite3>, ["~> 1.3"])
       s.add_development_dependency(%q<forgery>, ["~> 0.6"])
       s.add_development_dependency(%q<bootstrap-sass>, ["~> 3.3"])
@@ -204,7 +206,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<high_voltage>, ["~> 2.3"])
       s.add_development_dependency(%q<rspec-rails>, ["~> 3.2"])
       s.add_development_dependency(%q<factory_girl_rails>, ["~> 4.5"])
-      s.add_development_dependency(%q<jeweler>, ["~> 2"])
     else
       s.add_dependency(%q<rails>, ["~> 4.2.5"])
       s.add_dependency(%q<rails-i18n>, ["~> 4"])
@@ -218,6 +219,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cancancan>, ["~> 1.10"])
       s.add_dependency(%q<rolify>, ["~> 4"])
       s.add_dependency(%q<stripe>, ["~> 1.21"])
+      s.add_dependency(%q<jeweler>, ["~> 2"])
+      s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<sqlite3>, ["~> 1.3"])
       s.add_dependency(%q<forgery>, ["~> 0.6"])
       s.add_dependency(%q<bootstrap-sass>, ["~> 3.3"])
@@ -225,7 +228,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<high_voltage>, ["~> 2.3"])
       s.add_dependency(%q<rspec-rails>, ["~> 3.2"])
       s.add_dependency(%q<factory_girl_rails>, ["~> 4.5"])
-      s.add_dependency(%q<jeweler>, ["~> 2"])
     end
   else
     s.add_dependency(%q<rails>, ["~> 4.2.5"])
@@ -240,6 +242,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cancancan>, ["~> 1.10"])
     s.add_dependency(%q<rolify>, ["~> 4"])
     s.add_dependency(%q<stripe>, ["~> 1.21"])
+    s.add_dependency(%q<jeweler>, ["~> 2"])
+    s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<sqlite3>, ["~> 1.3"])
     s.add_dependency(%q<forgery>, ["~> 0.6"])
     s.add_dependency(%q<bootstrap-sass>, ["~> 3.3"])
@@ -247,7 +251,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<high_voltage>, ["~> 2.3"])
     s.add_dependency(%q<rspec-rails>, ["~> 3.2"])
     s.add_dependency(%q<factory_girl_rails>, ["~> 4.5"])
-    s.add_dependency(%q<jeweler>, ["~> 2"])
   end
 end
 
