@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.5'
 gem 'rails-i18n', '~> 4'
@@ -16,6 +16,11 @@ gem 'cancancan', '~> 1.10'
 gem 'rolify', '~> 4'
 gem 'stripe', '~> 1.21'
 
+group :development do
+  gem 'jeweler', '~> 2'
+  gem 'bundler', '>= 0'
+end
+
 group :test, :development do
   gem 'sqlite3', '~> 1.3'
   gem 'forgery', '~> 0.6'
@@ -24,7 +29,6 @@ group :test, :development do
   gem 'high_voltage', '~> 2.3'
   gem 'rspec-rails', '~> 3.2'
   gem 'factory_girl_rails', '~> 4.5'
-  gem 'jeweler', '~> 2'
 end
 
 group :test do
@@ -32,7 +36,7 @@ group :test do
   gem 'database_cleaner', '~> 1.4'
   gem 'rspec-collection_matchers', '~> 1.1'
   gem 'shoulda-matchers', '~> 2.8'
-  gem "launchy", "~> 2.1.2", require: false
+  gem 'launchy', '~> 2.1.2', require: false
   gem 'coveralls', '~> 0.8', require: false
 end
 
