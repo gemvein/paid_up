@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150523010840) do
+ActiveRecord::Schema.define(version: 20160207184114) do
 
   create_table "doodads", force: :cascade do |t|
     t.string "user_id"
@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20150523010840) do
   end
 
   create_table "paid_up_plan_feature_settings", force: :cascade do |t|
-    t.integer "plan_id"
+    t.integer "paid_up_plan_id"
     t.string  "feature"
     t.integer "setting"
   end
 
   add_index "paid_up_plan_feature_settings", ["feature"], name: "index_paid_up_plan_feature_settings_on_feature"
-  add_index "paid_up_plan_feature_settings", ["plan_id"], name: "index_paid_up_plan_feature_settings_on_plan_id"
+  add_index "paid_up_plan_feature_settings", ["paid_up_plan_id"], name: "index_paid_up_plan_feature_settings_on_paid_up_plan_id"
 
   create_table "paid_up_plans", force: :cascade do |t|
     t.string   "stripe_id"

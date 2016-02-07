@@ -1,14 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/work/Gems/paid_up/spec/dummy/config/environment.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/application.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/application.rb": [
         1,
         null,
         null,
@@ -53,14 +53,14 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/boot.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/boot.rb": [
         null,
         1,
         null,
         1,
         1
       ],
-      "/home/work/Gems/paid_up/lib/paid_up.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up.rb": [
         1,
         null,
         null,
@@ -108,7 +108,7 @@
         1,
         1
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/validators/table_rows.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/validators/table_rows.rb": [
         1,
         1,
         1,
@@ -119,7 +119,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/validators/rolify_rows.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/validators/rolify_rows.rb": [
         1,
         1,
         1,
@@ -130,7 +130,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/configuration.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/configuration.rb": [
         1,
         1,
         1,
@@ -155,7 +155,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/feature.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/feature.rb": [
         1,
         null,
         1,
@@ -232,12 +232,12 @@
         null,
         1,
         null,
-        3,
+        1,
         0,
-        3,
+        1,
         1,
         null,
-        2,
+        0,
         null,
         null,
         null,
@@ -247,13 +247,13 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/railtie.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/railtie.rb": [
         1,
         1,
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/engine.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/engine.rb": [
         1,
         1,
         1,
@@ -277,7 +277,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/localization.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/localization.rb": [
         1,
         1,
         0,
@@ -310,7 +310,7 @@
         null,
         1
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/version.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/version.rb": [
         1,
         1,
         null,
@@ -319,7 +319,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/extensions/stripe.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/extensions/stripe.rb": [
         1,
         1,
         1,
@@ -335,7 +335,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/extensions/integer.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/extensions/integer.rb": [
         1,
         1,
         1,
@@ -344,7 +344,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/mixins/subscriber.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/mixins/subscriber.rb": [
         1,
         1,
         1,
@@ -496,7 +496,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/lib/paid_up/mixins/paid_for.rb": [
+      "/Users/karen/Gems/paid_up/lib/paid_up/mixins/paid_for.rb": [
         1,
         1,
         1,
@@ -528,6 +528,10 @@
         2,
         1,
         1,
+        1,
+        null,
+        0,
+        null,
         null,
         null,
         2,
@@ -570,7 +574,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/environments/test.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/environments/test.rb": [
         1,
         null,
         null,
@@ -614,7 +618,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/config/initializers/stripe.rb": [
+      "/Users/karen/Gems/paid_up/config/initializers/stripe.rb": [
         1,
         null,
         null,
@@ -622,7 +626,7 @@
         null,
         1
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/assets.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -635,7 +639,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/backtrace_silencers.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -644,12 +648,12 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/cookies_serializer.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/cookies_serializer.rb": [
         null,
         null,
         1
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/devise.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/devise.rb": [
         null,
         null,
         1,
@@ -910,18 +914,18 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/filter_parameter_logging.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/high_voltage.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/high_voltage.rb": [
         1,
         1,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/inflections.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -932,39 +936,6 @@
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/mime_types.rb": [
-        null,
-        null,
-        null,
-        null
-      ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/paid_up.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
         null,
         null,
         null,
@@ -972,7 +943,31 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/rolify.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/mime_types.rb": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/paid_up.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         1,
         null,
         null,
@@ -981,7 +976,16 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/app/models/role.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/rolify.rb": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/karen/Gems/paid_up/spec/dummy/app/models/role.rb": [
         1,
         1,
         1,
@@ -993,12 +997,12 @@
         1,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/session_store.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/session_store.rb": [
         null,
         null,
         1
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/initializers/wrap_parameters.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -1014,7 +1018,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/spec/factories/group.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/spec/factories/group.rb": [
         1,
         1,
         1,
@@ -1031,7 +1035,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/spec/factories/plan.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/spec/factories/plan.rb": [
         1,
         1,
         1,
@@ -1040,7 +1044,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/spec/factories/plan_feature_setting.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/spec/factories/plan_feature_setting.rb": [
         1,
         1,
         1,
@@ -1049,7 +1053,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/spec/factories/user.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/spec/factories/user.rb": [
         1,
         1,
         8,
@@ -1076,8 +1080,9 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/config/routes.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/config/routes.rb": [
         1,
+        null,
         null,
         1,
         1,
@@ -1093,7 +1098,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/app/models/user.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/app/models/user.rb": [
         1,
         1,
         null,
@@ -1103,7 +1108,7 @@
         1,
         null
       ],
-      "/home/work/Gems/paid_up/config/routes.rb": [
+      "/Users/karen/Gems/paid_up/config/routes.rb": [
         1,
         1,
         1,
@@ -1112,7 +1117,7 @@
         1,
         null
       ],
-      "/home/work/Gems/paid_up/spec/support/controller_macros.rb": [
+      "/Users/karen/Gems/paid_up/spec/support/controller_macros.rb": [
         1,
         1,
         16,
@@ -1126,19 +1131,19 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/support/factory_girl.rb": [
+      "/Users/karen/Gems/paid_up/spec/support/factory_girl.rb": [
         1,
         1,
         null
       ],
-      "/home/work/Gems/paid_up/spec/support/features.rb": [
+      "/Users/karen/Gems/paid_up/spec/support/features.rb": [
         1,
         210,
         210,
         210,
         null
       ],
-      "/home/work/Gems/paid_up/spec/support/groups.rb": [
+      "/Users/karen/Gems/paid_up/spec/support/groups.rb": [
         1,
         16,
         15,
@@ -1146,7 +1151,7 @@
         12,
         null
       ],
-      "/home/work/Gems/paid_up/spec/support/loaded_site.rb": [
+      "/Users/karen/Gems/paid_up/spec/support/loaded_site.rb": [
         1,
         11,
         11,
@@ -1155,7 +1160,7 @@
         11,
         null
       ],
-      "/home/work/Gems/paid_up/spec/support/plans.rb": [
+      "/Users/karen/Gems/paid_up/spec/support/plans.rb": [
         1,
         210,
         210,
@@ -1164,7 +1169,7 @@
         210,
         null
       ],
-      "/home/work/Gems/paid_up/spec/support/stripe.rb": [
+      "/Users/karen/Gems/paid_up/spec/support/stripe.rb": [
         1,
         11,
         null,
@@ -1189,7 +1194,7 @@
         6,
         null
       ],
-      "/home/work/Gems/paid_up/spec/support/users.rb": [
+      "/Users/karen/Gems/paid_up/spec/support/users.rb": [
         1,
         41,
         37,
@@ -1199,7 +1204,7 @@
         18,
         null
       ],
-      "/home/work/Gems/paid_up/app/controllers/paid_up/plans_controller.rb": [
+      "/Users/karen/Gems/paid_up/app/controllers/paid_up/plans_controller.rb": [
         1,
         1,
         1,
@@ -1208,7 +1213,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/app/controllers/paid_up/paid_up_controller.rb": [
+      "/Users/karen/Gems/paid_up/app/controllers/paid_up/paid_up_controller.rb": [
         1,
         1,
         1,
@@ -1222,12 +1227,12 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/app/controllers/application_controller.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/app/controllers/application_controller.rb": [
         1,
         1,
         null
       ],
-      "/home/work/Gems/paid_up/app/helpers/paid_up/paid_up_helper.rb": [
+      "/Users/karen/Gems/paid_up/app/helpers/paid_up/paid_up_helper.rb": [
         1,
         1,
         1,
@@ -1243,7 +1248,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/app/helpers/paid_up/features_helper.rb": [
+      "/Users/karen/Gems/paid_up/app/helpers/paid_up/features_helper.rb": [
         1,
         1,
         1,
@@ -1310,7 +1315,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/app/helpers/paid_up/plans_helper.rb": [
+      "/Users/karen/Gems/paid_up/app/helpers/paid_up/plans_helper.rb": [
         1,
         1,
         1,
@@ -1365,7 +1370,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/app/helpers/paid_up/subscriptions_helper.rb": [
+      "/Users/karen/Gems/paid_up/app/helpers/paid_up/subscriptions_helper.rb": [
         1,
         1,
         1,
@@ -1388,7 +1393,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/controllers/paid_up/subscriptions_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/controllers/paid_up/subscriptions_spec.rb": [
         1,
         null,
         null,
@@ -1556,7 +1561,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/app/controllers/paid_up/subscriptions_controller.rb": [
+      "/Users/karen/Gems/paid_up/app/controllers/paid_up/subscriptions_controller.rb": [
         1,
         1,
         1,
@@ -1595,7 +1600,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/models/group_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/models/group_spec.rb": [
         1,
         1,
         null,
@@ -1651,12 +1656,12 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/app/models/group.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/app/models/group.rb": [
         1,
         1,
         null
       ],
-      "/home/work/Gems/paid_up/spec/models/paid_up/feature_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/models/paid_up/feature_spec.rb": [
         1,
         null,
         1,
@@ -1698,7 +1703,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/models/paid_up/plan_feature_setting_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/models/paid_up/plan_feature_setting_spec.rb": [
         1,
         null,
         1,
@@ -1708,7 +1713,7 @@
         2,
         null
       ],
-      "/home/work/Gems/paid_up/app/models/paid_up/plan_feature_setting.rb": [
+      "/Users/karen/Gems/paid_up/app/models/paid_up/plan_feature_setting.rb": [
         1,
         1,
         1,
@@ -1723,7 +1728,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/models/paid_up/plan_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/models/paid_up/plan_spec.rb": [
         1,
         null,
         1,
@@ -1859,7 +1864,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/app/models/paid_up/plan.rb": [
+      "/Users/karen/Gems/paid_up/app/models/paid_up/plan.rb": [
         1,
         1,
         1,
@@ -1952,7 +1957,7 @@
         1,
         1856,
         1851,
-        10,
+        5,
         null,
         null,
         null,
@@ -1963,7 +1968,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/models/user_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/models/user_spec.rb": [
         1,
         1,
         null,
@@ -2357,7 +2362,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/paid_up_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/paid_up_spec.rb": [
         1,
         null,
         1,
@@ -2366,7 +2371,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/routing/paid_up/plans_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/routing/paid_up/plans_spec.rb": [
         1,
         null,
         1,
@@ -2379,7 +2384,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/routing/paid_up/subscription_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/routing/paid_up/subscription_spec.rb": [
         1,
         null,
         1,
@@ -2404,7 +2409,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/views/paid_up/plans_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/views/paid_up/plans_spec.rb": [
         1,
         null,
         1,
@@ -2459,7 +2464,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/views/paid_up/subscriptions_spec.rb": [
+      "/Users/karen/Gems/paid_up/spec/views/paid_up/subscriptions_spec.rb": [
         1,
         null,
         1,
@@ -2518,7 +2523,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/db/seeds.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/db/seeds.rb": [
         null,
         null,
         null,
@@ -2733,7 +2738,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/app/models/paid_up/unlimited.rb": [
+      "/Users/karen/Gems/paid_up/app/models/paid_up/unlimited.rb": [
         1,
         1,
         0,
@@ -2750,12 +2755,12 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/app/models/doodad.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/app/models/doodad.rb": [
         1,
         1,
         null
       ],
-      "/home/work/Gems/paid_up/spec/dummy/app/models/ability.rb": [
+      "/Users/karen/Gems/paid_up/spec/dummy/app/models/ability.rb": [
         1,
         1,
         1,
@@ -2769,7 +2774,7 @@
         null,
         null
       ],
-      "/home/work/Gems/paid_up/app/models/paid_up/ability.rb": [
+      "/Users/karen/Gems/paid_up/app/models/paid_up/ability.rb": [
         1,
         1,
         1,
@@ -2829,6 +2834,6 @@
         null
       ]
     },
-    "timestamp": 1436545315
+    "timestamp": 1454871905
   }
 }

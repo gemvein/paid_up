@@ -6506,3 +6506,844 @@ Migrating to AddTimestampsToUsersRoles (20150710160830)
   [1m[36m (124.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150406154440')[0m
   [1m[35m (117.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150523010837')
   [1m[36m (124.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150523010827')[0m
+  [1m[36m (1.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsersTable (20150406154440)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150406154440"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+Migrating to CreateGroupsTable (20150517175135)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20150517175135_create_groups_table.rb:7)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150517175135"]]
+  [1m[35m (2.0ms)[0m  commit transaction
+Migrating to CreateDoodadsTable (20150517175136)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "doodads" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar, "name" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_doodads_on_user_id" ON "doodads" ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150517175136"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+Migrating to AddDeviseToUsers (20150523010827)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" varchar
+  [1m[36m (0.3ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150523010827"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Migrating to RolifyCreateRoles (20150523010837)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20150523010837_rolify_create_roles.rb:7)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "resource_id" integer, "resource_type" varchar, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "users_roles" ("user_id" integer, "role_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_roles_on_name" ON "roles" ("name")[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" ("name", "resource_type", "resource_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_users_roles_on_user_id_and_role_id" ON "users_roles" ("user_id", "role_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150523010837"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+Migrating to CreatePaidUpPlansTable (20160207184112)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20160207184112_create_paid_up_plans_table.paid_up.rb:10)
+  [1m[35m (0.4ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "title" varchar, "description" text, "sort_order" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_title" ON "paid_up_plans" ("title")[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160207184112"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddStripeIdColumnToUsers (20160207184113)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (1.2ms)[0m  [1mALTER TABLE "users" ADD "stripe_id" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160207184113"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePaidUpPlanFeatureSettingsTable (20160207184114)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "paid_up_plan_feature_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "paid_up_plan_id" integer, "feature" varchar, "setting" integer) [0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "index_paid_up_plan_feature_settings_on_paid_up_plan_id" ON "paid_up_plan_feature_settings" ("paid_up_plan_id")
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_paid_up_plan_feature_settings_on_feature" ON "paid_up_plan_feature_settings" ("feature")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160207184114"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_doodads_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_doodads_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_feature' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_feature' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name_and_resource_type_and_resource_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name_and_resource_type_and_resource_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_roles_on_user_id_and_role_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_roles_on_user_id_and_role_id' AND type='index'
+[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Anonymous' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Anonymous"], ["stripe_id", "anonymous-plan"], ["description", "What you can do without logging in."], ["sort_order", -1], ["created_at", "2016-02-07 18:41:43.731672"], ["updated_at", "2016-02-07 18:41:43.731672"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Free' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Free"], ["stripe_id", "free-plan"], ["description", "Can't beat the price!"], ["sort_order", 0], ["created_at", "2016-02-07 18:41:44.245208"], ["updated_at", "2016-02-07 18:41:44.245208"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'No Ads' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort_order", 1], ["created_at", "2016-02-07 18:41:45.098119"], ["updated_at", "2016-02-07 18:41:45.098119"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.2ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Group Leader' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with configuration."], ["sort_order", 2], ["created_at", "2016-02-07 18:41:45.658744"], ["updated_at", "2016-02-07 18:41:45.658744"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Professional' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professionals with unlimited groups, a calendar and configuration."], ["sort_order", 3], ["created_at", "2016-02-07 18:41:46.177668"], ["updated_at", "2016-02-07 18:41:46.177668"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36m (1.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsersTable (20150406154440)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150406154440"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+Migrating to CreateGroupsTable (20150517175135)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20150517175135_create_groups_table.rb:7)
+  [1m[35m (0.6ms)[0m  CREATE TABLE "groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150517175135"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+Migrating to CreateDoodadsTable (20150517175136)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "doodads" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar, "name" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_doodads_on_user_id" ON "doodads" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150517175136"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddDeviseToUsers (20150523010827)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" varchar[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" varchar
+  [1m[36m (0.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (5.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150523010827"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+Migrating to RolifyCreateRoles (20150523010837)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20150523010837_rolify_create_roles.rb:7)
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "resource_id" integer, "resource_type" varchar, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "users_roles" ("user_id" integer, "role_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_roles_on_name" ON "roles" ("name")[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" ("name", "resource_type", "resource_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_users_roles_on_user_id_and_role_id" ON "users_roles" ("user_id", "role_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150523010837"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+Migrating to CreatePaidUpPlansTable (20160207184112)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20160207184112_create_paid_up_plans_table.paid_up.rb:10)
+  [1m[35m (1.1ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "title" varchar, "description" text, "sort_order" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.4ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_title" ON "paid_up_plans" ("title")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160207184112"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddStripeIdColumnToUsers (20160207184113)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "stripe_id" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160207184113"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePaidUpPlanFeatureSettingsTable (20160207184114)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "paid_up_plan_feature_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "paid_up_plan_id" integer, "feature" varchar, "setting" integer) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_paid_up_plan_feature_settings_on_paid_up_plan_id" ON "paid_up_plan_feature_settings" ("paid_up_plan_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_paid_up_plan_feature_settings_on_feature" ON "paid_up_plan_feature_settings" ("feature")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160207184114"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_doodads_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_doodads_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_feature' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_feature' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name_and_resource_type_and_resource_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name_and_resource_type_and_resource_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_roles_on_user_id_and_role_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_roles_on_user_id_and_role_id' AND type='index'
+[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.2ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Anonymous' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Anonymous"], ["stripe_id", "anonymous-plan"], ["description", "What you can do without logging in."], ["sort_order", -1], ["created_at", "2016-02-07 18:43:22.384335"], ["updated_at", "2016-02-07 18:43:22.384335"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Free' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Free"], ["stripe_id", "free-plan"], ["description", "Can't beat the price!"], ["sort_order", 0], ["created_at", "2016-02-07 18:43:22.952168"], ["updated_at", "2016-02-07 18:43:22.952168"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'No Ads' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort_order", 1], ["created_at", "2016-02-07 18:43:23.474433"], ["updated_at", "2016-02-07 18:43:23.474433"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Group Leader' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with configuration."], ["sort_order", 2], ["created_at", "2016-02-07 18:43:24.018026"], ["updated_at", "2016-02-07 18:43:24.018026"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Professional' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professionals with unlimited groups, a calendar and configuration."], ["sort_order", 3], ["created_at", "2016-02-07 18:43:24.593807"], ["updated_at", "2016-02-07 18:43:24.593807"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (1.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsersTable (20150406154440)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150406154440"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+Migrating to CreateGroupsTable (20150517175135)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20150517175135_create_groups_table.rb:7)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150517175135"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+Migrating to CreateDoodadsTable (20150517175136)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "doodads" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar, "name" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_doodads_on_user_id" ON "doodads" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150517175136"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddDeviseToUsers (20150523010827)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" varchar
+  [1m[36m (0.3ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150523010827"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Migrating to RolifyCreateRoles (20150523010837)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20150523010837_rolify_create_roles.rb:7)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "resource_id" integer, "resource_type" varchar, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "users_roles" ("user_id" integer, "role_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_roles_on_name" ON "roles" ("name")[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" ("name", "resource_type", "resource_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_users_roles_on_user_id_and_role_id" ON "users_roles" ("user_id", "role_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150523010837"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+Migrating to CreatePaidUpPlansTable (20160207184112)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/karen/Gems/paid_up/spec/dummy/db/migrate/20160207184112_create_paid_up_plans_table.paid_up.rb:10)
+  [1m[35m (1.0ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "title" varchar, "description" text, "sort_order" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_title" ON "paid_up_plans" ("title")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160207184112"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+Migrating to AddStripeIdColumnToUsers (20160207184113)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "stripe_id" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160207184113"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePaidUpPlanFeatureSettingsTable (20160207184114)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "paid_up_plan_feature_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "paid_up_plan_id" integer, "feature" varchar, "setting" integer) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_paid_up_plan_feature_settings_on_paid_up_plan_id" ON "paid_up_plan_feature_settings" ("paid_up_plan_id")
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_paid_up_plan_feature_settings_on_feature" ON "paid_up_plan_feature_settings" ("feature")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160207184114"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_doodads_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_doodads_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_feature' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_feature' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_paid_up_plan_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_title' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name_and_resource_type_and_resource_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name_and_resource_type_and_resource_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_roles_on_user_id_and_role_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_roles_on_user_id_and_role_id' AND type='index'
+[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.2ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Anonymous' LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Anonymous"], ["stripe_id", "anonymous-plan"], ["description", "What you can do without logging in."], ["sort_order", -1], ["created_at", "2016-02-07 18:47:11.061175"], ["updated_at", "2016-02-07 18:47:11.061175"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.2ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Free' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Free"], ["stripe_id", "free-plan"], ["description", "Can't beat the price!"], ["sort_order", 0], ["created_at", "2016-02-07 18:47:11.613132"], ["updated_at", "2016-02-07 18:47:11.613132"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.2ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'No Ads' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "No Ads"], ["stripe_id", "no-ads-plan"], ["description", "No frills, just removes the ads."], ["sort_order", 1], ["created_at", "2016-02-07 18:47:12.165268"], ["updated_at", "2016-02-07 18:47:12.165268"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.1ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Group Leader' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Group Leader"], ["stripe_id", "group-leader-plan"], ["description", "For leaders of single groups, with configuration."], ["sort_order", 2], ["created_at", "2016-02-07 18:47:12.668209"], ["updated_at", "2016-02-07 18:47:12.668209"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPaidUp::Plan Exists (0.2ms)[0m  SELECT  1 AS one FROM "paid_up_plans" WHERE "paid_up_plans"."title" = 'Professional' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "paid_up_plans" ("title", "stripe_id", "description", "sort_order", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Professional"], ["stripe_id", "professional-plan"], ["description", "Designed for professionals with unlimited groups, a calendar and configuration."], ["sort_order", 3], ["created_at", "2016-02-07 18:47:13.192495"], ["updated_at", "2016-02-07 18:47:13.192495"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_plan_feature_settings" ("feature", "paid_up_plan_id", "setting") VALUES (?, ?, ?)  [["feature", "ad_free"], ["paid_up_plan_id", 3], ["setting", 1]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plan_feature_settings" ("feature", "paid_up_plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature", "ad_free"], ["paid_up_plan_id", 4], ["setting", 1]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_plan_feature_settings" ("feature", "paid_up_plan_id", "setting") VALUES (?, ?, ?)  [["feature", "groups"], ["paid_up_plan_id", 4], ["setting", 5]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plan_feature_settings" ("feature", "paid_up_plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature", "doodads"], ["paid_up_plan_id", 4], ["setting", 10]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_plan_feature_settings" ("feature", "paid_up_plan_id", "setting") VALUES (?, ?, ?)  [["feature", "ad_free"], ["paid_up_plan_id", 5], ["setting", 1]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "paid_up_plan_feature_settings" ("feature", "paid_up_plan_id", "setting") VALUES (?, ?, ?)[0m  [["feature", "groups"], ["paid_up_plan_id", 5], ["setting", 999999999]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "paid_up_plan_feature_settings" ("feature", "paid_up_plan_id", "setting") VALUES (?, ?, ?)  [["feature", "doodads"], ["paid_up_plan_id", 5], ["setting", 999999999]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'free.subscriber@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "name") VALUES (?, ?, ?)  [["email", "free.subscriber@example.com"], ["encrypted_password", "$2a$10$uBmN.WdnWKnxxCWibewxoO0KOuFT46jxjTqx5MX4hQz8RcauwfUq2"], ["name", "Free Subscriber"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "stripe_id" = ? WHERE "users"."id" = ?[0m  [["stripe_id", "cus_7rgwEPW7fLxSXt"], ["id", 1]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'no.ads.subscriber@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "name") VALUES (?, ?, ?)  [["email", "no.ads.subscriber@example.com"], ["encrypted_password", "$2a$10$ex6HkfCus0CTmfO3Z7sVmeESHBvMp2A3MEbtbqKcX8H3WOTKSalLa"], ["name", "No Ads Subscriber"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "stripe_id" = ? WHERE "users"."id" = ?[0m  [["stripe_id", "cus_7rgw9S8bKJGOrr"], ["id", 2]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'group.leader.subscriber@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "name") VALUES (?, ?, ?)  [["email", "group.leader.subscriber@example.com"], ["encrypted_password", "$2a$10$ON1kxlsImNFm90m96AFMC.R2E6tjb0Zj78pOFJbXLZvk3UWvo7GWy"], ["name", "Group Leader Subscriber"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "stripe_id" = ? WHERE "users"."id" = ?[0m  [["stripe_id", "cus_7rgwXTqaTuvcDy"], ["id", 3]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'disabling.subscriber@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "name") VALUES (?, ?, ?)  [["email", "disabling.subscriber@example.com"], ["encrypted_password", "$2a$10$VpgDZofh5jZ/mLEs0ntMpOH0399jhyH65vlBU2bCwynYrhZb0SAqm"], ["name", "Disabling Subscriber"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "stripe_id" = ? WHERE "users"."id" = ?[0m  [["stripe_id", "cus_7rgxa6GGnqsgB2"], ["id", 4]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'professional.subscriber@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "name") VALUES (?, ?, ?)  [["email", "professional.subscriber@example.com"], ["encrypted_password", "$2a$10$NGohOYfsnYY6LuUKH5wWHe.B1JiaBZxc6yh/.mFJxiLcPgBoQ3Xla"], ["name", "Professional Subscriber"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (2.7ms)[0m  [1mUPDATE "users" SET "stripe_id" = ? WHERE "users"."id" = ?[0m  [["stripe_id", "cus_7rgxYEr7RGqaEW"], ["id", 5]]
+  [1m[35m (3.8ms)[0m  commit transaction
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'blank.subscriber@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "name") VALUES (?, ?, ?)  [["email", "blank.subscriber@example.com"], ["encrypted_password", "$2a$10$37c1htb5D8MpR1ZafhDSIuFBvzu3yJDXdfcNgpls1pvy.KoDo9p9y"], ["name", "Blank Subscriber"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "stripe_id" = ? WHERE "users"."id" = ?[0m  [["stripe_id", "cus_7rgxnj5UquAwuT"], ["id", 6]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "First Group"], ["created_at", "2016-02-07 18:47:25.475057"], ["updated_at", "2016-02-07 18:47:25.475057"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mRole Load (0.1ms)[0m  [1mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 1], ["created_at", "2016-02-07 18:47:25.482685"], ["updated_at", "2016-02-07 18:47:25.482685"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36mRole Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ? AND "roles"."id" = ? LIMIT 1[0m  [["user_id", 3], ["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT "roles".id FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?  [["user_id", 3]]
+  [1m[36mRole Load (0.1ms)[0m  [1mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mRole Load (0.2ms)[0m  SELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?  [["user_id", 3]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)  [["user_id", 3], ["role_id", 1]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Second Group"], ["created_at", "2016-02-07 18:47:25.581926"], ["updated_at", "2016-02-07 18:47:25.581926"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mRole Load (0.1ms)[0m  [1mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 2]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 2], ["created_at", "2016-02-07 18:47:25.585526"], ["updated_at", "2016-02-07 18:47:25.585526"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mRole Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ? AND "roles"."id" = ? LIMIT 1[0m  [["user_id", 5], ["id", 2]]
+  [1m[35m (0.0ms)[0m  SELECT "roles".id FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?  [["user_id", 5]]
+  [1m[36mRole Load (0.0ms)[0m  [1mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mRole Load (0.0ms)[0m  SELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?  [["user_id", 5]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)  [["user_id", 5], ["role_id", 2]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Third Group"], ["created_at", "2016-02-07 18:47:25.599285"], ["updated_at", "2016-02-07 18:47:25.599285"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36mRole Load (0.1ms)[0m  [1mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 3]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 3], ["created_at", "2016-02-07 18:47:25.603419"], ["updated_at", "2016-02-07 18:47:25.603419"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36mRole Load (0.2ms)[0m  [1mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (2, 3)[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 5], ["role_id", 3]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)  [["title", "Test Title"], ["created_at", "2016-02-07 18:47:25.612187"], ["updated_at", "2016-02-07 18:47:25.612187"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mRole Load (0.1ms)[0m  SELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 4]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 4], ["created_at", "2016-02-07 18:47:25.616198"], ["updated_at", "2016-02-07 18:47:25.616198"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mRole Exists (0.1ms)[0m  SELECT  1 AS one FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ? AND "roles"."id" = ? LIMIT 1  [["user_id", 4], ["id", 4]]
+  [1m[36m (0.1ms)[0m  [1mSELECT "roles".id FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?[0m  [["user_id", 4]]
+  [1m[35mRole Load (0.1ms)[0m  SELECT  "roles".* FROM "roles" WHERE "roles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mRole Load (0.0ms)[0m  [1mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = ?[0m  [["user_id", 4]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 4], ["role_id", 4]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)  [["title", "Test Title"], ["created_at", "2016-02-07 18:47:25.625126"], ["updated_at", "2016-02-07 18:47:25.625126"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mRole Load (0.1ms)[0m  SELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 5]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 5], ["created_at", "2016-02-07 18:47:25.629062"], ["updated_at", "2016-02-07 18:47:25.629062"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mRole Load (0.2ms)[0m  SELECT "roles".* FROM "roles" WHERE "roles"."id" IN (4, 5)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)  [["user_id", 4], ["role_id", 5]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Test Title"], ["created_at", "2016-02-07 18:47:25.636981"], ["updated_at", "2016-02-07 18:47:25.636981"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mRole Load (0.1ms)[0m  [1mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 6]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 6], ["created_at", "2016-02-07 18:47:25.640947"], ["updated_at", "2016-02-07 18:47:25.640947"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mRole Load (0.2ms)[0m  [1mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (4, 5, 6)[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 4], ["role_id", 6]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)  [["title", "Test Title"], ["created_at", "2016-02-07 18:47:25.648326"], ["updated_at", "2016-02-07 18:47:25.648326"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mRole Load (0.2ms)[0m  SELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 7]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 7], ["created_at", "2016-02-07 18:47:25.651916"], ["updated_at", "2016-02-07 18:47:25.651916"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mRole Load (0.2ms)[0m  SELECT "roles".* FROM "roles" WHERE "roles"."id" IN (4, 5, 6, 7)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)  [["user_id", 4], ["role_id", 7]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Test Title"], ["created_at", "2016-02-07 18:47:25.660568"], ["updated_at", "2016-02-07 18:47:25.660568"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mRole Load (0.1ms)[0m  [1mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 8]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 8], ["created_at", "2016-02-07 18:47:25.667021"], ["updated_at", "2016-02-07 18:47:25.667021"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mRole Load (0.2ms)[0m  [1mSELECT "roles".* FROM "roles" WHERE "roles"."id" IN (4, 5, 6, 7, 8)[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)[0m  [["user_id", 4], ["role_id", 8]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "groups" ("title", "created_at", "updated_at") VALUES (?, ?, ?)  [["title", "Disabled Group"], ["created_at", "2016-02-07 18:47:25.674887"], ["updated_at", "2016-02-07 18:47:25.674887"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mRole Load (0.1ms)[0m  SELECT  "roles".* FROM "roles" WHERE "roles"."name" = ? AND "roles"."resource_type" = ? AND "roles"."resource_id" = ?  ORDER BY "roles"."id" ASC LIMIT 1  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 9]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "owner"], ["resource_type", "Group"], ["resource_id", 9], ["created_at", "2016-02-07 18:47:25.678933"], ["updated_at", "2016-02-07 18:47:25.678933"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mRole Load (0.2ms)[0m  SELECT "roles".* FROM "roles" WHERE "roles"."id" IN (4, 5, 6, 7, 8, 9)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users_roles" ("user_id", "role_id") VALUES (?, ?)  [["user_id", 4], ["role_id", 9]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (1.6ms)[0m  CREATE TABLE "doodads" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar, "name" varchar, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.1ms)[0m  CREATE  INDEX "index_doodads_on_user_id" ON "doodads" ("user_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "groups" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "paid_up_plan_feature_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "paid_up_plan_id" integer, "feature" varchar, "setting" integer) 
+  [1m[36m (1.4ms)[0m  [1mCREATE  INDEX "index_paid_up_plan_feature_settings_on_feature" ON "paid_up_plan_feature_settings" ("feature")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plan_feature_settings_on_feature' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plan_feature_settings_on_feature' AND type='index'
+
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX "index_paid_up_plan_feature_settings_on_paid_up_plan_id" ON "paid_up_plan_feature_settings" ("paid_up_plan_id")[0m
+  [1m[35m (1.6ms)[0m  CREATE TABLE "paid_up_plans" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stripe_id" varchar, "title" varchar, "description" text, "sort_order" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_stripe_id" ON "paid_up_plans" ("stripe_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_paid_up_plans_on_stripe_id' AND type='index'
+
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX "index_paid_up_plans_on_title" ON "paid_up_plans" ("title")[0m
+  [1m[35m (1.6ms)[0m  CREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "resource_id" integer, "resource_type" varchar, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.6ms)[0m  [1mCREATE  INDEX "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" ("name", "resource_type", "resource_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_roles_on_name_and_resource_type_and_resource_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_roles_on_name_and_resource_type_and_resource_id' AND type='index'
+
+  [1m[36m (1.8ms)[0m  [1mCREATE  INDEX "index_roles_on_name" ON "roles" ("name")[0m
+  [1m[35m (1.6ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "stripe_id" varchar) 
+  [1m[36m (1.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (1.9ms)[0m  CREATE TABLE "users_roles" ("user_id" integer, "role_id" integer) 
+  [1m[36m (1.8ms)[0m  [1mCREATE  INDEX "index_users_roles_on_user_id_and_role_id" ON "users_roles" ("user_id", "role_id")[0m
+  [1m[35m (1.7ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (1.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (1.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160207184114')[0m
+  [1m[35m (1.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150406154440')
+  [1m[36m (1.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150517175135')[0m
+  [1m[35m (1.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150517175136')
+  [1m[36m (0.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150523010827')[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150523010837')
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20160207184112')[0m
+  [1m[35m (0.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20160207184113')

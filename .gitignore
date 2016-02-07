@@ -4,5 +4,6 @@ pkg/
 .ruby-gemset
 spec/dummy/tmp
 spec/dummy/log/*.log
+coverage
 .idea
 Gemfile.lock

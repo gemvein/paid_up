@@ -95,6 +95,10 @@ The resources referred to in your config will need to call `paid_for`, like this
       paid_for
     end
 
+### Upgrading
+
+Version 0.8.0 introduced database changes to the foreign key columns to work with Rails 4.2.5. Let me know if you need help migrating your app to the newly named foreign keys.
+
 ## Contributing to Paid Up
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
