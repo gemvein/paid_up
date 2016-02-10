@@ -124,41 +124,82 @@ RSpec.describe PaidUp::SubscriptionsController do
     end
     context "when the user is signed in" do
       context "upgrading from the free plan" do
-        before do
-          sign_in free_subscriber
-          token = working_stripe_token free_subscriber
-          post :create, plan_id: professional_plan.id, stripeToken: token
+        context 'without a coupon code' do
+          before do
+            sign_in free_subscriber
+            token = working_stripe_token free_subscriber
+            post :create, plan_id: professional_plan.id, stripeToken: token
+          end
+          after do
+            free_subscriber.subscribe_to_plan free_plan
+          end
+          context "redirects to the subscriptions index page" do
+            subject { response }
+            it { should redirect_to subscriptions_path }
+            it { should have_http_status(302) }
+          end
+          context "sets a flash message" do
+            subject { flash[:notice] }
+            it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
+          end
         end
-        after do
-          free_subscriber.subscribe_to_plan free_plan
-        end
-        context "redirects to the subscriptions index page" do
-          subject { response }
-          it { should redirect_to subscriptions_path }
-          it { should have_http_status(302) }
-        end
-        context "sets a flash message" do
-          subject { flash[:notice] }
-          it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
+        context 'with a coupon code' do
+          before do
+            sign_in free_subscriber
+            token = working_stripe_token free_subscriber
+            post :create, plan_id: professional_plan.id, stripeToken: token, coupon_code: '25OFF'
+          end
+          after do
+            free_subscriber.subscribe_to_plan free_plan
+          end
+          context "redirects to the subscriptions index page" do
+            subject { response }
+            it { should redirect_to subscriptions_path }
+            it { should have_http_status(302) }
+          end
+          context "sets a flash message" do
+            subject { flash[:notice] }
+            it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
+          end
         end
       end
 
       context "upgrading from the no ads plan" do
-        before do
-          sign_in no_ads_subscriber
-          post :create, plan_id: professional_plan.id
+        context 'without a coupon code' do
+          before do
+            sign_in no_ads_subscriber
+            post :create, plan_id: professional_plan.id
+          end
+          after do
+            no_ads_subscriber.subscribe_to_plan no_ads_plan
+          end
+          context "redirects to the subscriptions index page" do
+            subject { response }
+            it { should redirect_to subscriptions_path }
+            it { should have_http_status(302) }
+          end
+          context "sets a flash message" do
+            subject { flash[:notice] }
+            it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
+          end
         end
-        after do
-          no_ads_subscriber.subscribe_to_plan no_ads_plan
-        end
-        context "redirects to the subscriptions index page" do
-          subject { response }
-          it { should redirect_to subscriptions_path }
-          it { should have_http_status(302) }
-        end
-        context "sets a flash message" do
-          subject { flash[:notice] }
-          it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
+        context 'with a coupon code' do
+          before do
+            sign_in no_ads_subscriber
+            post :create, plan_id: professional_plan.id, coupon_code: 'MINUS25'
+          end
+          after do
+            no_ads_subscriber.subscribe_to_plan no_ads_plan
+          end
+          context "redirects to the subscriptions index page" do
+            subject { response }
+            it { should redirect_to subscriptions_path }
+            it { should have_http_status(302) }
+          end
+          context "sets a flash message" do
+            subject { flash[:notice] }
+            it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
+          end
         end
       end
     end

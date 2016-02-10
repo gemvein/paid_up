@@ -4,7 +4,7 @@
 = features_table only: @plan, should_add_buttons: false
 
 %h2= :select_payment_info.l
-%p= :you_will_be_charged.l charge_amount: plan_charge_human(@plan)
+%p= :you_will_be_charged.l charge_amount: plan_charge_human(@plan, current_user.stripe_data.discount)
 .row
   .col-md-6
     = form_tag paid_up.plan_subscriptions_path(@plan), class: 'form-horizontal', id: 'payment-form' do
@@ -49,6 +49,11 @@
           .col-xs-2
             /
             %input.form-control#exp-year.col-xs-1{ size: '4', data: { stripe: 'exp-year' } }
+        .form-group
+          %label.control-label.col-xs-2{for: 'coupon_code'}
+            = :coupon_code.l
+          .col-md-10
+            %input.form-control#coupon_code{ size: '16', name: 'coupon_code', value: current_user.coupon_code }
       .form-group
         .col-xs-10.col-xs-offset-2
           %button#submit-button.form-control.btn.btn-info

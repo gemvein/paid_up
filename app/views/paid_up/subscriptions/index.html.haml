@@ -2,7 +2,7 @@
 
 %h2
   = current_user.plan.title
-  .small= plan_charge_human current_user.plan
+  .small= plan_charge_human current_user.plan, current_user.stripe_data.discount
 
 = subscription_dl current_user.subscription
 

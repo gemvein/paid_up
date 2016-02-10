@@ -35,14 +35,22 @@ module PaidUp::Mixins
               subscription.save
               reload
             end
+            if coupon_code.present?
+              stripe_data.coupon = coupon_code
+              stripe_data.save
+            end
             subscription.plan = plan_to_set.stripe_id
             result = subscription.save || ( raise(:could_not_update_subscription.l) && false )
           else # Totally new subscription
-            customer = Stripe::Customer.create(
-                :source => stripeToken,
-                :plan => plan_to_set.stripe_id,
-                :email => email
-            ) || ( raise(:could_not_create_subscription.l) && false )
+            args = {
+              source: stripeToken,
+              plan: plan_to_set.stripe_id,
+              email: email
+            }
+            if coupon_code.present?
+              args[:coupon] = coupon_code
+            end
+            customer = Stripe::Customer.create(args) || ( raise(:could_not_create_subscription.l) && false )
 
             if stripe_id != customer.id # There is an update to be made, so we go ahead
               result = update_attributes(stripe_id: customer.id) || ( raise(:could_not_associate_subscription.l) && false )

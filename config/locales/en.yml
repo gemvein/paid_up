@@ -35,6 +35,7 @@ en:
   could_not_create_subscription: 'Could not create subscription'
   could_not_subscribe_to_plan: "Could not subscribe to %{plan}"
   could_not_update_subscription: 'Could not update subscription'
+  coupon_code: 'Coupon Code'
   currently_awaiting_confirmation_for_resource: "Currently awaiting confirmation for %{resource}"
   cvc: 'CVC'
   default_currency: 'usd'

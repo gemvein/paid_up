@@ -9,7 +9,7 @@
   - for plan in plans
     %tr{ class: highlight_plan == plan ? 'info' : ''}
       %td= plan.title
-      %td= plan_charge_human plan
+      %td= plan_charge_human plan, user_signed_in? ? current_user.stripe_data.discount : nil
       - for feature in features
         %td= feature_display feature, plan
       - if should_add_buttons

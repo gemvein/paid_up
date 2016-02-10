@@ -16,6 +16,7 @@ module PaidUp
 
     def create
       # @plan set by #set_plan
+      current_user.update_attribute(:coupon_code, params[:coupon_code])
       if current_user.subscribe_to_plan(@plan, params[:stripeToken])
         redirect_to subscriptions_path, flash: { notice: :you_are_now_subscribed_to_the_plan.l(plan_name: current_user.plan.title) }
       else

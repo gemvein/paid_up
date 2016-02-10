@@ -2,8 +2,24 @@ module PaidUp
   module PlansHelper
     include ::ActionView::Helpers::NumberHelper
 
-    def plan_charge_human(plan)
-      plan.money.format + '/' + plan_period_phrase(plan)
+    def plan_charge_human(plan, discount)
+      if !discount.nil? and !discount.coupon.nil?
+        orig_amount = plan.amount
+        amount = orig_amount
+        amount -= (discount.coupon.percent_off || 0) * 0.01 * amount
+        amount -= (discount.coupon.amount_off || 0)
+        amount = amount > 0 ? amount : 0
+
+        orig_money = Money.new(orig_amount, plan.currency)
+        money = Money.new(amount, plan.currency)
+
+        html = content_tag :s, (orig_money.format + '/' + plan_period_phrase(plan))
+        html << ' '
+        html << content_tag(:span, (money.format + '/' + plan_period_phrase(plan)), class: 'text-danger')
+      else
+        html = plan.money.format + '/' + plan_period_phrase(plan)
+      end
+      html
     end
 
     def plan_period_phrase(plan)

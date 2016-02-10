@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207184114) do
+ActiveRecord::Schema.define(version: 20160210165341) do
 
   create_table "doodads", force: :cascade do |t|
     t.string "user_id"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160207184114) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "stripe_id"
+    t.string   "coupon_code"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

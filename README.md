@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/gemvein/paid_up.svg)](https://travis-ci.org/gemvein/paid_up)
 [![Coverage Status](https://coveralls.io/repos/gemvein/paid_up/badge.png)](https://coveralls.io/r/gemvein/paid_up)
 
-Paid Up is a start-to-finish Stripe subscription engine. You set up the plans you want on Stripe, and the gem gives you a way to tie those plans to authenticated users, granting them abilities based on the features outlined for their plan.
+Paid Up is a start-to-finish Stripe subscription engine. You set up the plans and coupons you want on Stripe, and the gem gives you a way to tie those plans and coupons to authenticated users, granting them abilities based on the features outlined for their plan.
 
 * Ruby 2, Rails 4
 * Authentication by Devise
@@ -37,7 +37,11 @@ Set your environment variables with your STRIPE_PUBLISHABLE_KEY and your STRIPE_
 
 ## Stripe Setup
 
-Using your own code or Stripe's convenient web interface, add the plans you intend to offer. Each will also need a record in your own database, so for each `Stripe::Plan` you create, note the `id` and use it as the `stripe_id` in the corresponding `PaidUp::Plan`. At a minimum, you will need an anonymous plan, a free plan, both with a cost amount of `0`; and also at least one paid plan.
+Using your own code or Stripe's convenient web interface, add the plans and coupons you intend to offer.
+
+Each plan will also need a record in your own database, so for each `Stripe::Plan` you create, note the `id` and use it as the `stripe_id` in the corresponding `PaidUp::Plan`. At a minimum, you will need an anonymous plan, a free plan, both with a cost amount of `0`; and also at least one paid plan.
+
+Coupons do not need any further configuration, other than adding them to your Stripe Account.
 
 Next, add a `Stripe::Customer` to serve as the Anonymous User, and subscribe that customer to the anonymous plan. Note the customer's `id` and copy that into your stripe configuration file.
 
@@ -97,7 +101,15 @@ The resources referred to in your config will need to call `paid_for`, like this
 
 ### Upgrading
 
-Version 0.8.0 introduced database changes to the foreign key columns to work with Rails 4.2.5. Let me know if you need help migrating your app to the newly named foreign keys.
+#### Version 0.9.0
+
+Version 0.9.0 enabled coupon codes, which are saved on the user's record. Be sure to run `rake paid_up:install:migrations` and migrate your database after upgrading.
+
+#### Version 0.8.0
+
+Version 0.8.0 introduced database changes to the foreign key columns to work with namespacing in Rails 4.2.5:
+
+`paid_up_plan_feature_settings`.`plan_id` must be changed to `paid_up_plan_feature_settings`.`paid_up_plan_id`.
 
 ## Contributing to Paid Up
  
