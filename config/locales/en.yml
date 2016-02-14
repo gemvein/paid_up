@@ -74,6 +74,7 @@ en:
   status: "Status"
   subscribe: "Subscribe"
   subscribe_to_plan: "Subscribe to %{plan_name} Plan"
+  subscription_plan_pricing: 'Subscription Plan Pricing'
   switch_plans: "Switch Plans"
   thank_you: "Thank You"
   trial_period: "Trial Period"
