@@ -198,7 +198,7 @@ RSpec.describe PaidUp::SubscriptionsController do
           end
           context "sets a flash message" do
             subject { flash[:notice] }
-            it { should match /You are now subscribed to the #{professional_plan.title} Plan/ }
+            it { should match /You are now subscribed to the Professional Plan/ }
           end
         end
       end
