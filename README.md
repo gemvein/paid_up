@@ -45,7 +45,7 @@ Coupons do not need any further configuration, other than adding them to your St
 
 Next, add a `Stripe::Customer` to serve as the Anonymous User, and subscribe that customer to the anonymous plan. Note the customer's `id` and copy that into your stripe configuration file.
 
-Pay close attention to the settings in `My Account` under `Subscriptions` and `Email`, as they have a big effect on how your site behaves.
+Pay close attention to the settings in `Account Settings` under `Subscriptions` and `Emails`, as they have a big effect on how your site behaves.
 
 ## Features Setup
 
