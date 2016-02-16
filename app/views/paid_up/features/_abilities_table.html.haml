@@ -7,8 +7,10 @@
           - when 'boolean'
             - if can? :use, feature.slug.to_sym
               = icon 'ok'
+              = :allowed.l
             - else
               = icon 'remove'
+              = :not_allowed.l
           - when 'table_rows'
             - if can? :own, feature.feature_model
               = icon 'ok'

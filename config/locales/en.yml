@@ -22,6 +22,7 @@
 en:
   abilities: "Abilities"
   account_is_delinquent: 'The paid features associated with your account have been disabled pending payment.'
+  allowed: 'Allowed'
   already_subscribed: "Already Subscribed"
   are_you_sure: "Are you sure?"
   cancel_my_account: 'Cancel My Account'
@@ -62,7 +63,6 @@ en:
   not_allowed: 'Not Allowed'
   or_sign_in: "Or, Sign In"
   or_sign_up: "Or, Sign Up"
-  payment_failed_statement: "Hi there,\n\nUnfortunately your most recent invoice payment for %{amount} was declined.\n\nThis could be due to a change in your card number or your card expiring, cancelation of your credit card, or the bank not recognizing the payment and taking action to prevent it.\n\nPlease update your payment information as soon as possible by logging in here:\n\n%{url}"
   paid_thru: "Paid Thru"
   plan_name: "Plan Name"
   plans: "Plans"
@@ -96,4 +96,3 @@ en:
   x_used_y_allowed: '%{x} used, %{y} allowed'
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"
   you_will_be_charged: "You will be charged %{charge_amount}."
-  your_site_subscription_payment failed: "Your %{site} Subscription Payment Failed."

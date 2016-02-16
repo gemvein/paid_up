@@ -3,7 +3,7 @@ module PaidUp
     include ::ActionView::Helpers::NumberHelper
 
     def plan_charge_human(plan, discount)
-      if !discount.nil? and !discount.coupon.nil?
+      if !discount.nil? and !discount.coupon.nil? && plan.amount != 0
         orig_amount = plan.amount
         amount = orig_amount
         amount -= (discount.coupon.percent_off || 0) * 0.01 * amount
