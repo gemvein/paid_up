@@ -28,10 +28,10 @@ module PaidUp::Mixins
             nil
           end
         }
-        self.send(:define_method, :subscribe_to_plan) { |plan_to_set, stripeToken = nil|
+        self.send(:define_method, :subscribe_to_plan) { |plan_to_set, stripe_token = nil, trial_end = nil|
           if stripe_id.present? && !subscription.nil? # There is an existing subscription
-            if stripeToken.present? # The customer has entered a new card
-              subscription.source = stripeToken
+            if stripe_token.present? # The customer has entered a new card
+              subscription.source = stripe_token
               subscription.save
               reload
             end
@@ -39,13 +39,18 @@ module PaidUp::Mixins
               stripe_data.coupon = coupon_code
               stripe_data.save
             end
+            if trial_end.present?
+              stripe_data.subscription.trial_end = trial_end
+              stripe_data.subscription.save
+            end
             subscription.plan = plan_to_set.stripe_id
             result = subscription.save || ( raise(:could_not_update_subscription.l) && false )
           else # Totally new subscription
             args = {
-              source: stripeToken,
+              source: stripe_token,
               plan: plan_to_set.stripe_id,
-              email: email
+              email: email,
+              trial_end: trial_end
             }
             if coupon_code.present?
               args[:coupon] = coupon_code
@@ -70,7 +75,11 @@ module PaidUp::Mixins
           subscribe_to_plan PaidUp::Plan.free
         }
         self.send(:define_method, :plan) {
-          PaidUp::Plan.find_by_stripe_id(subscription.plan.id)
+          if subscription.present?
+            PaidUp::Plan.find_by_stripe_id(subscription.plan.id)
+          else
+            PaidUp::Plan.free
+          end
         }
         self.send(:define_method, :table_rows_unlimited?) { |table_name|
           table_rows_allowed(table_name) == PaidUp::Unlimited.to_i
@@ -110,16 +119,24 @@ module PaidUp::Mixins
           stripe_data.subscriptions.data.first
         }
         self.send(:define_method, :is_subscribed_to?) { |plan_to_check|
-          plan.id == plan_to_check.id
+          plan.present? && plan.id == plan_to_check.id
         }
         self.send(:define_method, :can_upgrade_to?) { |plan_to_check|
-          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort_order.to_i > plan.sort_order.to_i)
+          plan.nil? || (
+            !is_subscribed_to?(plan_to_check) &&
+            (plan_to_check.sort_order.to_i > plan.sort_order.to_i)
+          )
         }
         self.send(:define_method, :can_downgrade_to?) { |plan_to_check|
-          !is_subscribed_to?(plan_to_check) && (plan_to_check.sort_order.to_i < plan.sort_order.to_i)
+          !plan.nil? && (
+            !is_subscribed_to?(plan_to_check) &&
+            (plan_to_check.sort_order.to_i < plan.sort_order.to_i)
+          )
         }
         self.send(:define_method, :using_free_plan?) {
-          plan.stripe_id == PaidUp.configuration.free_plan_stripe_id || stripe_data.delinquent
+          plan.nil? ||
+            stripe_data.delinquent ||
+            (plan.stripe_id == PaidUp.configuration.free_plan_stripe_id)
         }
         self.send(:define_method, :set_default_attributes) {
           if new_record?

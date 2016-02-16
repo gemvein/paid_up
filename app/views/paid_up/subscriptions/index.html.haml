@@ -1,16 +1,18 @@
 - add_title :my_subscription_information.l
 
-%h2
-  = current_user.plan.title
-  .small= plan_charge_human current_user.plan, current_user.stripe_data.discount
-
-= subscription_dl current_user.subscription
-
-- if current_user.subscription.cancel_at_period_end
-  %h3= :canceled.l
-
-%h3= :abilities.l
-= feature_abilities_table
-
-%p
-  = icon_button_to 'info btn-lg', 'arrow-right', :switch_plans.l, paid_up.plans_path, method: :get
+- if current_user.stripe_data.delinquent
+  %p= :account_is_delinquent.l
+  %p= :to_enable_paid_features_subscribe.l(subscribe_link: paid_up.plans_path)
+  %h3= :abilities.l
+  = feature_abilities_table mode: :delinquent
+  %p= icon_button_to 'info btn-lg', 'arrow-right', :choose_a_plan.l, paid_up.plans_path, method: :get
+- else
+  %h2
+    = current_user.plan.title
+    .small= plan_charge_human current_user.plan, current_user.stripe_data.discount
+  = subscription_dl current_user.subscription
+  - if current_user.subscription.cancel_at_period_end
+    %h3= :canceled.l
+  %h3= :abilities.l
+  = feature_abilities_table
+  %p= icon_button_to 'info btn-lg', 'arrow-right', :switch_plans.l, paid_up.plans_path, method: :get

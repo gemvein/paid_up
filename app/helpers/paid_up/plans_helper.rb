@@ -38,7 +38,10 @@ module PaidUp
       link = paid_up.new_plan_subscription_path(plan)
       if user_signed_in?
         text ||= :subscribe.l
-        if current_user.can_upgrade_to? plan
+        if current_user.stripe_data.delinquent
+          icon_class = 'arrow-right'
+          css_class += 'btn-info'
+        elsif current_user.can_upgrade_to? plan
           icon_class = 'arrow-up'
           css_class += 'btn-success'
         elsif current_user.can_downgrade_to? plan

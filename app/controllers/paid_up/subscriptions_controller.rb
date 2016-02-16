@@ -9,7 +9,7 @@ module PaidUp
 
     def new
       # nothing to do, @plan set by #set_plan
-      if current_user.can_downgrade_to? @plan || @plan.amount == 0
+      if current_user.can_downgrade_to?(@plan) || @plan.amount == 0
         create
       end
     end
@@ -24,7 +24,7 @@ module PaidUp
       end
     rescue Stripe::InvalidRequestError => e
       flash[:error] = e.message
-      redirect_to plans_path
+      redirect_to subscriptions_path
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to new_plan_subscription_path

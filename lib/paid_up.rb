@@ -39,8 +39,7 @@ end
 
 Integer.send(:include, PaidUp::Extensions::Integer)
 
-Stripe::Customer.send(:include, PaidUp::Extensions::Stripe)
-Stripe::Plan.send(:include, PaidUp::Extensions::Stripe)
+Stripe::APIResource.send(:include, PaidUp::Extensions::Stripe)
 
 ActiveRecord::Base.send(:include, PaidUp::Mixins::Subscriber)
 ActiveRecord::Base.send(:include, PaidUp::Mixins::PaidFor)

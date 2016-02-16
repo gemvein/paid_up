@@ -6,6 +6,7 @@ module PaidUp::Extensions
         begin
           self.retrieve(id)
         rescue
+          item[:id] ||= id
           self.create(item)
         end
       end

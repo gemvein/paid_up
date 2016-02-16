@@ -33,7 +33,7 @@ Next, install PaidUp for your user model by executing these commands:
     
 Edit your config file at `config/initializers/paid_up.rb` to set up some other key details.
 
-Set your environment variables with your STRIPE_PUBLISHABLE_KEY and your STRIPE_SECRET_KEY. (Check your operating system or IDE's documentation for details)
+Set your environment variables with your `STRIPE_PUBLISHABLE_KEY` and `STRIPE_SECRET_KEY`. (Check your operating system or IDE's documentation for details. I use the gem `dotenv` for this.)
 
 ## Stripe Setup
 
@@ -44,6 +44,8 @@ Each plan will also need a record in your own database, so for each `Stripe::Pla
 Coupons do not need any further configuration, other than adding them to your Stripe Account.
 
 Next, add a `Stripe::Customer` to serve as the Anonymous User, and subscribe that customer to the anonymous plan. Note the customer's `id` and copy that into your stripe configuration file.
+
+Pay close attention to the settings in `My Account` under `Subscriptions` and `Email`, as they have a big effect on how your site behaves.
 
 ## Features Setup
 
