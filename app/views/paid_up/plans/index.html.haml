@@ -8,7 +8,7 @@
           = plan.title
           .small= plan_charge_human plan, user_signed_in? ? current_user.stripe_data.discount : nil
         %p= plan.description.html_safe
-        %div{class:plan.title.gsub(' ',"_").downcase+'_subscribe_button'}
+        .hidden-print{class:plan.title.gsub(' ',"_").downcase+'_subscribe_button'}
           = plan_button plan
 %h2= :features.l
 .table-responsive

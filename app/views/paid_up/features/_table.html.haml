@@ -5,7 +5,7 @@
     - for feature in features
       %th= feature.title
     - if should_add_buttons
-      %th= :subscribe.l
+      %th.hidden-print= :subscribe.l
   - for plan in plans
     %tr{ class: highlight_plan == plan ? 'info' : ''}
       %td= :title_plan.l title: plan.title
@@ -13,4 +13,4 @@
       - for feature in features
         %td= feature_display feature, plan
       - if should_add_buttons
-        %td= plan_button plan
+        %td.hidden-print= plan_button plan
