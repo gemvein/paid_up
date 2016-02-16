@@ -20,13 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  abilities: "Abilities"
+  abilities: 'Abilities'
   account_is_delinquent: 'The paid features associated with your account have been disabled pending payment.'
   allowed: 'Allowed'
-  already_subscribed: "Already Subscribed"
-  are_you_sure: "Are you sure?"
+  already_subscribed: 'Already Subscribed'
+  are_you_sure: 'Are you sure?'
   cancel_my_account: 'Cancel My Account'
-  canceled: "Canceled"
+  canceled: 'Canceled'
   card: 'Card'
   card_ending_with: "%{brand} ending with %{last4}"
   card_number: 'Card Number'
@@ -47,11 +47,11 @@ en:
   didnt_receive_unlock_instructions: "Didn't receive unlock instructions?"
   edit_resource: "Edit %{resource}"
   enter_new_card: 'Enter New Card'
-  error: "Error"
+  error: 'Error'
   error_handling_feature_setting: "Error handling %{feature} setting"
   expiration: 'Expiration'
   features: 'Features'
-  feature_not_found: "Feature Not Found"
+  feature_not_found: 'Feature Not Found'
   feature_not_found_feature: "Feature Not Found: %{feature}"
   forgot_your_password: 'Forgot your password?'
   leave_blank_if_you_dont_want_to_change_it: "(leave blank if you don't want to change it)"
@@ -61,31 +61,31 @@ en:
   no_implicit_conversion_of_type_features: 'No implicit conversion of %{type} Features'
   no_features_associated_with_table: 'No features associated with %{table} table.'
   not_allowed: 'Not Allowed'
-  or_sign_in: "Or, Sign In"
-  or_sign_up: "Or, Sign Up"
-  paid_thru: "Paid Thru"
-  plan_name: "Plan Name"
-  plans: "Plans"
-  pricing: "Pricing"
+  or_sign_in: 'Or, Sign In'
+  or_sign_up: 'Or, Sign Up'
+  paid_thru: 'Paid Thru'
+  plan_name: 'Plan Name'
+  plans: 'Plans'
+  pricing: 'Pricing'
   resend_confirmation_instructions: 'Resend confirmation instructions'
   resend_unlock_instructions: 'Resend unlock instructions'
-  select_payment_info: "Select Payment Info"
-  send_me_reset_password_instructions: "Send me reset password instructions"
-  sign_in: "Sign In"
+  select_payment_info: 'Select Payment Info'
+  send_me_reset_password_instructions: 'Send me reset password instructions'
+  sign_in: 'Sign In'
   sign_in_with_provider: "Sign in with %{provider}"
-  sign_out: "Sign Out"
-  sign_up: "Sign Up"
-  status: "Status"
-  subscribe: "Subscribe"
+  sign_out: 'Sign Out'
+  sign_up: 'Sign Up'
+  status: 'Status'
+  subscribe: 'Subscribe'
   subscribe_to_plan: "Subscribe to %{plan_name} Plan"
   subscription_plan_pricing: 'Subscription Plan Pricing'
-  switch_plans: "Switch Plans"
-  thank_you: "Thank You"
+  switch_plans: 'Switch Plans'
+  thank_you: 'Thank You'
   title_plan: "%{title} Plan"
   to_disable_this_message_subscribe: "To disable this message, please <a href='%{subscribe_link}'>Choose a Plan</a>."
   to_enable_paid_features_subscribe: "To enable the paid features previously associated with your account, please <a href='%{subscribe_link}'>Choose a Plan</a>."
-  trial_period: "Trial Period"
-  unhappy: "Unhappy?"
+  trial_period: 'Trial Period'
+  unhappy: 'Unhappy?'
   unknown_feature_type: 'Unknown Feature Type'
   unlimited: 'Unlimited'
   update_account: 'Update Account'
@@ -93,7 +93,8 @@ en:
   we_need_your_current_password_to_confirm_your_changes: '(we need your current password to confirm your changes)'
   when_using_table_rows_table_must_exist: 'When using table_rows, the table must exist.'
   when_using_rolify_rows_table_must_exist: 'When using rolify_rows, the table must exist.'
-  x_of_y_remaining: '%{x} of %{y} remaining'
-  x_used_y_allowed: '%{x} used, %{y} allowed'
+  x_of_y_remaining: "%{x} of %{y} remaining"
+  x_used_y_allowed: "%{x} used, %{y} allowed"
+  y_remaining: "%{y} remaining"
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"
   you_will_be_charged: "You will be charged %{charge_amount}."
