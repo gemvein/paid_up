@@ -81,6 +81,7 @@ en:
   subscription_plan_pricing: 'Subscription Plan Pricing'
   switch_plans: "Switch Plans"
   thank_you: "Thank You"
+  title_plan: "%{title} Plan"
   to_disable_this_message_subscribe: "To disable this message, please <a href='%{subscribe_link}'>Choose a Plan</a>."
   to_enable_paid_features_subscribe: "To enable the paid features previously associated with your account, please <a href='%{subscribe_link}'>Choose a Plan</a>."
   trial_period: "Trial Period"
