@@ -95,6 +95,5 @@ en:
   when_using_rolify_rows_table_must_exist: 'When using rolify_rows, the table must exist.'
   x_of_y_remaining: "%{x} of %{y} remaining"
   x_used_y_allowed: "%{x} used, %{y} allowed"
-  y_remaining: "%{y} remaining"
   you_are_now_subscribed_to_the_plan: "You are now subscribed to the %{plan_name} Plan"
   you_will_be_charged: "You will be charged %{charge_amount}."
