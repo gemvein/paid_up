@@ -11,35 +11,35 @@
       %script{ src: 'https://js.stripe.com/v2/' }
       %input{ name: 'plan_id', value: @plan.id, type: 'hidden' }
       .payment-errors
-      .form-group
-        %label.control-label.col-xs-2= :card.l
-        .col-md-10
-          .group
-            - if current_user.cards.count > 0
-              - current_user.cards.each_with_index do |card, index|
-                .radio
-                  %label
-                    - if index == 0
-                      %input{ type: :radio, name: 'card', value: card.id, checked: 'checked' }
-                    - else
-                      %input{ type: :radio, name: 'card', value: card.id }
-                    = :card_ending_with.l brand: card.brand, last4: card.last4
-            .radio
-              %label
-                - if current_user.cards.count == 0
-                  %input{ type: :radio, name: 'card', value: 'stripeToken', checked: 'checked' }
-                - else
-                  %input{ type: :radio, name: 'card', value: 'stripeToken' }
-                = :enter_new_card.l
+
+      - if current_user.cards.count == 0
+        %input{ type: :hidden, name: 'card', value: 'stripeToken' }
+      - else
+        .form-group
+          %label.control-label.col-xs-2= :card.l
+          .col-md-10
+            .group
+              - if current_user.cards.count > 0
+                - current_user.cards.each_with_index do |card, index|
+                  .radio
+                    %label
+                      - if index == 0
+                        %input{ type: :radio, name: 'card', value: card.id, checked: 'checked' }
+                      - else
+                        %input{ type: :radio, name: 'card', value: card.id }
+                      = :card_ending_with.l brand: card.brand, last4: card.last4
+              .radio
+                %label
+                  - if current_user.cards.count == 0
+                    %input{ type: :radio, name: 'card', value: 'stripeToken', checked: 'checked' }
+                  - else
+                    %input{ type: :radio, name: 'card', value: 'stripeToken' }
+                  = :enter_new_card.l
       #new-card
         .form-group
           %label.control-label.col-xs-2{for: 'number'}= :card_number.l
           .col-md-10
             %input.form-control#number{ size: '16', data: { stripe: 'number' } }
-        .form-group
-          %label.control-label.col-xs-2{for: 'cvc'}= :cvc.l
-          .col-xs-4
-            %input.form-control#cvc{ size: '3', data: { stripe: 'cvc' } }
         .form-group
           %label.control-label.col-xs-2{for: 'exp-month'}
             = :expiration.l
@@ -50,6 +50,10 @@
             /
             %input.form-control#exp-year.col-xs-1{ size: '4', data: { stripe: 'exp-year' } }
         .form-group
+          %label.control-label.col-xs-2{for: 'cvc'}= :cvc.l
+          .col-xs-4
+            %input.form-control#cvc{ size: '3', data: { stripe: 'cvc' } }
+        .form-group
           %label.control-label.col-xs-2{for: 'coupon_code'}
             = :coupon_code.l
           .col-md-10
@@ -58,7 +62,6 @@
         .col-xs-10.col-xs-offset-2
           %button#submit-button.form-control.btn.btn-info
             =:subscribe.l
-
 - add_footer_javascript do
   :javascript
     function stripeResponseHandler(status, response) {
@@ -83,7 +86,7 @@
       // Disable the submit button to prevent repeated clicks
       $('#submit-button').prop('disabled', true);
 
-      if($("input:radio[name='card']:checked").val() == 'stripeToken') {
+      if($("input:radio[name='card']:checked").val() == 'stripeToken' || $("input:hidden[name='card']").val() == 'stripeToken') {
         var $form = $(this);
 
         Stripe.setPublishableKey('#{Rails.configuration.stripe[:publishable_key]}')
