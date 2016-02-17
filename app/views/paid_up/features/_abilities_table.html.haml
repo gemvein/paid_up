@@ -26,8 +26,6 @@
                 = :x_used_y_allowed.l x: used, y: allowed
               - elsif allowed == 0
                 = :not_allowed.l
-              - elsif remaining == 0
-                = :y_remaining.l y: remaining
               - else
                 = :x_of_y_remaining.l x: remaining, y: allowed
           - when 'rolify_rows'
@@ -45,8 +43,6 @@
                 = :x_used_y_allowed.l x: used, y: allowed
               - elsif allowed == 0
                 = :not_allowed.l
-              - elsif remaining == 0
-                = :y_remaining.l y: remaining
               - else
                 = :x_of_y_remaining.l x: remaining, y: allowed
           - else
