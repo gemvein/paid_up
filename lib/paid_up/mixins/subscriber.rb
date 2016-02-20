@@ -10,6 +10,7 @@ module PaidUp::Mixins
 
         after_initialize :set_default_attributes, :load_stripe_data
         before_save :remove_anonymous_association
+        before_destroy { |record| record.stripe_data.delete }
 
         self.send(:define_method, :reload) { |*args, &blk|
           super *args, &blk
