@@ -9,7 +9,7 @@ class CreatePaidUpPlansTable < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :paid_up_plans, :title, :unique => true
-    add_index :paid_up_plans, :stripe_id, :unique => true
+    add_index :paid_up_plans, :title, unique: true
+    add_index :paid_up_plans, :stripe_id, unique: true
   end
 end

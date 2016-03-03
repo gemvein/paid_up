@@ -26,7 +26,8 @@ require 'rake'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir["./spec/support/**/*.rb"].sort.each { |f| require f}
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+Dir['./spec/support/**/**/*.rb'].sort.each { |f| require f }
 
 ActiveRecord::Migrator.migrations_paths = 'spec/dummy/db/migrate'
 
@@ -35,7 +36,6 @@ ActiveRecord::Migrator.migrations_paths = 'spec/dummy/db/migrate'
 # ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
@@ -65,7 +65,7 @@ RSpec.configure do |config|
   # You can disable this behaviour by removing the line below, and instead
   # explicitly tag your specs with their type, e.g.:
   #
-  #     RSpec.describe UsersController, :type => :controller do
+  #     RSpec.describe UsersController, type: :controller do
   #       # ...
   #     end
   #
@@ -73,7 +73,7 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.before(:each)    { @routes = PaidUp::Engine.routes }
+  config.before(:each) { @routes = PaidUp::Engine.routes }
   config.include PaidUp::Engine.routes.url_helpers
 
   config.include Devise::TestHelpers, type: :controller

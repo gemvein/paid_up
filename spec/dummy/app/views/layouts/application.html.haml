@@ -19,7 +19,7 @@
   %footer
     - add_widget do
       .clearfix
-        = nav_list :class => 'nav-pills nav-stacked' do
+        = nav_list class: 'nav-pills nav-stacked' do
           = nav_item :plans.l, paid_up.plans_path
           - if signed_in?
             = nav_item :my_subscription.l, paid_up.subscriptions_path

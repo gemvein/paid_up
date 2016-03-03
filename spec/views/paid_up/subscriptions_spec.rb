@@ -1,9 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "paid_up/subscriptions/new" do
+RSpec.describe 'paid_up/subscriptions/new' do
   include_context 'loaded site'
   context 'when user is logged in as free customer' do
-    context "displays a payment form" do
+    context 'displays a payment form' do
       before do
         view.extend PaidUp::PlansHelper
         view.extend PaidUp::FeaturesHelper
@@ -13,13 +13,15 @@ RSpec.describe "paid_up/subscriptions/new" do
         render
       end
       subject { rendered }
-      it { should match /Professional/ }
+      it { should include 'Professional' }
       it { should have_selector 'form' }
-      it { should match /#{paid_up.plan_subscriptions_path(professional_plan.id)}/ }
+      it do
+        should include paid_up.plan_subscriptions_path(professional_plan.id)
+      end
     end
   end
   context 'when user is logged in as a paid customer' do
-    context "displays a payment form" do
+    context 'displays a payment form' do
       before do
         view.extend PaidUp::PlansHelper
         view.extend PaidUp::FeaturesHelper
@@ -29,14 +31,16 @@ RSpec.describe "paid_up/subscriptions/new" do
         render
       end
       subject { rendered }
-      it { should match /Professional/ }
+      it { should include 'Professional' }
       it { should have_selector 'form' }
-      it { should match /#{paid_up.plan_subscriptions_path(professional_plan.id)}/ }
+      it do
+        should include paid_up.plan_subscriptions_path(professional_plan.id)
+      end
     end
   end
 end
 
-RSpec.describe "paid_up/subscriptions/index" do
+RSpec.describe 'paid_up/subscriptions/index' do
   include_context 'loaded site'
   context 'when user is logged in' do
     context "displays the details of a user's subscriptions" do
@@ -48,10 +52,16 @@ RSpec.describe "paid_up/subscriptions/index" do
         render
       end
       subject { rendered }
-      it { should match /Group Leader/ }
-      it { should have_selector 'table.abilities #ad_free_ability .glyphicon-ok'}
-      it { should have_selector 'table.abilities #groups_ability .glyphicon-ok'}
-      it { should have_selector 'table.abilities #doodads_ability .glyphicon-ok'}
+      it { should include 'Group Leader' }
+      it do
+        should have_selector 'table.abilities #ad_free_ability .glyphicon-ok'
+      end
+      it do
+        should have_selector 'table.abilities #groups_ability .glyphicon-ok'
+      end
+      it do
+        should have_selector 'table.abilities #doodads_ability .glyphicon-ok'
+      end
     end
   end
 end

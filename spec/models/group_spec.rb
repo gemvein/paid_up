@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "cancan/matchers"
+require 'cancan/matchers'
 
 describe Group do
   include_context 'loaded site'
@@ -11,11 +11,12 @@ describe Group do
   end
 
   describe '#save_with_owner' do
-    subject {
-      new_group = Group.new({title: 'Saved Group'})
-      new_group.save_with_owner(professional_subscriber)
-      new_group.reload.owners
-    }
+    let(:new_group) do
+      group = Group.new(title: 'Saved Group')
+                   .save_with_owner(professional_subscriber)
+      group.reload
+    end
+    subject { new_group.owners }
     it { should include professional_subscriber }
   end
 

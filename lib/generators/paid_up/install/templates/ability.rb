@@ -1,3 +1,4 @@
+# CanCanCan Ability class
 class Ability
   include CanCan::Ability
   include PaidUp::Ability

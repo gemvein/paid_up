@@ -20,6 +20,10 @@ group :development do
   gem 'jeweler', '~> 2'
   gem 'bundler', '~> 1'
   gem 'web-console', '~> 3.0'
+  gem 'pre-commit', '~> 0.27'
+  gem 'rubocop', '~> 0.37'
+  gem 'coffeelint', '~> 1.14'
+  gem 'scss_lint', '~> 0.47.0', require: false
 end
 
 group :test, :development do

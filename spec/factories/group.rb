@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :group do
     title 'Test Title'
     transient do
-      owner { User.order("RANDOM()").first }
+      owner { User.order('RANDOM()').first }
     end
     # the after(:create) yields two values; the user instance itself and the
     # evaluator, which stores all values from the factory, including transient

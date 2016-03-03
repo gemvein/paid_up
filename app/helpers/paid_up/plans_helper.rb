@@ -1,9 +1,10 @@
 module PaidUp
+  # PaidUp Plans Helper
   module PlansHelper
     include ::ActionView::Helpers::NumberHelper
 
     def plan_charge_human(plan, discount)
-      if !discount.nil? and !discount.coupon.nil? && plan.amount != 0
+      if !discount.nil? && !discount.coupon.nil? && plan.amount != 0
         orig_amount = plan.amount
         amount = orig_amount
         amount -= (discount.coupon.percent_off || 0) * 0.01 * amount
@@ -13,9 +14,16 @@ module PaidUp
         orig_money = Money.new(orig_amount, plan.currency)
         money = Money.new(amount, plan.currency)
 
-        html = content_tag :s, (orig_money.format + '/' + plan_period_phrase(plan))
+        html = content_tag(
+          :s,
+          (orig_money.format + '/' + plan_period_phrase(plan))
+        )
         html << ' '
-        html << content_tag(:span, (money.format + '/' + plan_period_phrase(plan)), class: 'text-danger')
+        html << content_tag(
+          :span,
+          (money.format + '/' + plan_period_phrase(plan)),
+          class: 'text-danger'
+        )
       else
         html = plan.money.format + '/' + plan_period_phrase(plan)
       end
@@ -67,6 +75,5 @@ module PaidUp
       html_options[:disabled] ||= disabled_state
       icon_button_to css_class, icon_class, text, link, html_options
     end
-
   end
 end

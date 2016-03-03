@@ -1,13 +1,14 @@
-module PaidUp::Extensions
-  module Stripe
-    extend ActiveSupport::Concern
-    class_methods do
-      def find_or_create_by_id(id, item)
-        begin
-          self.retrieve(id)
+module PaidUp
+  module Extensions
+    # Stripe Extensions
+    module Stripe
+      extend ActiveSupport::Concern
+      class_methods do
+        def find_or_create_by_id(id, item)
+          retrieve(id)
         rescue
           item[:id] ||= id
-          self.create(item)
+          create(item)
         end
       end
     end

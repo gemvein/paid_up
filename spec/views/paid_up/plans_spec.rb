@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "paid_up/plans/index" do
+RSpec.describe 'paid_up/plans/index' do
   include_context 'loaded site'
 
   context 'when user is anonymous' do
@@ -12,18 +12,18 @@ RSpec.describe "paid_up/plans/index" do
       assign(:plans, PaidUp::Plan.subscribable)
       render
     end
-    context "displays the subscribable plans" do
+    context 'displays the subscribable plans' do
       subject { rendered }
-      it { should match /Free/ }
+      it { should include 'Free' }
       it { should have_css '.free_subscribe_button .btn-success' }
-      it { should match /No Ads/ }
+      it { should include 'No Ads' }
       it { should have_css '.no_ads_subscribe_button .btn-success' }
-      it { should match /Group Leader/ }
+      it { should include 'Group Leader' }
       it { should have_css '.group_leader_subscribe_button .btn-success' }
-      it { should match /Professional/ }
+      it { should include 'Professional' }
       it { should have_css '.professional_subscribe_button .btn-success' }
-      it { should_not match /Error/}
-      it { should_not match /Anonymous/}
+      it { should_not include 'Error' }
+      it { should_not include 'Anonymous' }
     end
   end
 
@@ -36,18 +36,18 @@ RSpec.describe "paid_up/plans/index" do
       assign(:plans, PaidUp::Plan.subscribable)
       render
     end
-    context "displays all the plans" do
+    context 'displays all the plans' do
       subject { rendered }
-      it { should match /Free/ }
+      it { should include 'Free' }
       it { should have_css '.free_subscribe_button .btn-danger' }
-      it { should match /No Ads/ }
+      it { should include 'No Ads' }
       it { should have_css '.no_ads_subscribe_button .btn-danger' }
-      it { should match /Group Leader/ }
+      it { should include 'Group Leader' }
       it { should have_css '.group_leader_subscribe_button .btn-danger' }
-      it { should match /Professional/ }
+      it { should include 'Professional' }
       it { should have_css '.professional_subscribe_button .btn-disabled' }
-      it { should_not match /Error/}
-      it { should_not match /Anonymous/}
+      it { should_not include 'Error' }
+      it { should_not include 'Anonymous' }
     end
   end
 end

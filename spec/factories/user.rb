@@ -1,10 +1,12 @@
 FactoryGirl.define do
   factory :user do
-    email { "#{name.gsub(' ', '.').downcase}@gemvein.com" }
-    password "password"
-    password_confirmation "password"
+    sequence :email do |n|
+      "#{name.tr(' ', '.').downcase}#{n}@example.com"
+    end
+    password 'password'
+    password_confirmation 'password'
     transient do
-      plan { PaidUp::Plan.order("RANDOM()").first }
+      plan { PaidUp::Plan.order('RANDOM()').first }
       past_due false
     end
     # the after(:create) yields two values; the user instance itself and the
@@ -24,12 +26,12 @@ FactoryGirl.define do
         trial_end = 5.seconds.from_now.to_time.to_i
       else
         token = Stripe::Token.create(
-            card: {
-                number: '4242424242424242',
-                exp_month: 1,
-                exp_year: 45,
-                cvc: '111'
-            }
+          card: {
+            number: '4242424242424242',
+            exp_month: 1,
+            exp_year: 45,
+            cvc: '111'
+          }
         ).id
         trial_end = nil
       end

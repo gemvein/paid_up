@@ -3,25 +3,31 @@ require 'rails_helper'
 describe PaidUp::Plan do
   include_context 'loaded site'
 
-  it { should have_many(:plan_feature_settings).class_name('PaidUp::PlanFeatureSetting') }
+  it do
+    should(
+      have_many(:plan_feature_settings).class_name(
+        'PaidUp::PlanFeatureSetting'
+      )
+    )
+  end
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:stripe_id) }
-
   it { should validate_uniqueness_of(:title) }
-
 
   describe '.subscribable' do
     context 'returns all subscribable plans' do
       subject { PaidUp::Plan.subscribable }
-      it { should eq [free_plan, no_ads_plan, group_leader_plan, professional_plan]}
+      it do
+        should eq [free_plan, no_ads_plan, group_leader_plan, professional_plan]
+      end
     end
   end
 
   describe '.free' do
     context 'returns the free plan' do
       subject { PaidUp::Plan.free }
-      it { should eq free_plan}
+      it { should eq free_plan }
     end
   end
 
@@ -129,6 +135,4 @@ describe PaidUp::Plan do
       it { should eq 'USD' }
     end
   end
-
-
 end

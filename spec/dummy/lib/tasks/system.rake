@@ -7,6 +7,6 @@ namespace :system do
     Rake::Task['db:migrate'].invoke
     Rake::Task['db:seed'].invoke
     Rake::Task['db:test:prepare'].invoke
-    puts "========== Completed in #{(Time.now-time).to_s} s =========="
+    puts "========== Completed in #{(Time.now - time)} s =========="
   end
 end

@@ -4,27 +4,23 @@
 
 Stripe::Plan.find_or_create_by_id(
   'anonymous-plan',
-  {
-    amount: 0,
-    interval: 'month',
-    name: 'Anonymous Plan',
-    currency: 'usd'
-  }
+  amount: 0,
+  interval: 'month',
+  name: 'Anonymous Plan',
+  currency: 'usd'
 )
-anonymous_plan = PaidUp::Plan.create(
+PaidUp::Plan.create(
   title: 'Anonymous',
   stripe_id: 'anonymous-plan',
-  description: "What you can do without logging in.",
+  description: 'What you can do without logging in.',
   sort_order: -1
 )
 Stripe::Plan.find_or_create_by_id(
   'free-plan',
-  {
-    amount: 0,
-    interval: 'month',
-    name: 'Free Plan',
-    currency: 'usd'
-  }
+  amount: 0,
+  interval: 'month',
+  name: 'Free Plan',
+  currency: 'usd'
 )
 free_plan = PaidUp::Plan.create(
   title: 'Free',
@@ -34,47 +30,42 @@ free_plan = PaidUp::Plan.create(
 )
 Stripe::Plan.find_or_create_by_id(
   'no-ads-plan',
-  {
-    amount: 100,
-    interval: 'month',
-    name: 'No Ads Plan',
-    currency: 'usd'
-  }
+  amount: 100,
+  interval: 'month',
+  name: 'No Ads Plan',
+  currency: 'usd'
 )
 no_ads_plan = PaidUp::Plan.create(
   title: 'No Ads',
   stripe_id: 'no-ads-plan',
-  description: "No frills, just removes the ads.",
+  description: 'No frills, just removes the ads.',
   sort_order: 1
 )
 Stripe::Plan.find_or_create_by_id(
   'group-leader-plan',
-  {
-    amount: 500,
-    interval: 'month',
-    name: 'Group Leader Plan',
-    currency: 'usd'
-  }
+  amount: 500,
+  interval: 'month',
+  name: 'Group Leader Plan',
+  currency: 'usd'
 )
 group_leader_plan = PaidUp::Plan.create(
   title: 'Group Leader',
   stripe_id: 'group-leader-plan',
-  description: "For leaders of single groups, with configuration.",
+  description: 'For leaders of single groups, with configuration.',
   sort_order: 2
 )
 Stripe::Plan.find_or_create_by_id(
   'professional-plan',
-  {
-    amount: 1000,
-    interval: 'month',
-    name: 'Professional Plan',
-    currency: 'usd'
-  }
+  amount: 1000,
+  interval: 'month',
+  name: 'Professional Plan',
+  currency: 'usd'
 )
 professional_plan = PaidUp::Plan.create(
   title: 'Professional',
   stripe_id: 'professional-plan',
-  description: "Designed for professionals with unlimited groups, a calendar and configuration.",
+  description: 'Designed for professionals with unlimited groups, a calendar '\
+                 'and configuration.',
   sort_order: 3
 )
 
@@ -83,21 +74,17 @@ professional_plan = PaidUp::Plan.create(
 ###############
 
 Stripe::Coupon.find_or_create_by_id(
-    '25OFF',
-    {
-        percent_off: 25,
-        currency: 'usd',
-        duration: 'forever'
-    }
+  '25OFF',
+  percent_off: 25,
+  currency: 'usd',
+  duration: 'forever'
 )
 
 Stripe::Coupon.find_or_create_by_id(
-    'MINUS25',
-    {
-        amount_off: 25,
-        currency: 'usd',
-        duration: 'forever'
-    }
+  'MINUS25',
+  amount_off: 25,
+  currency: 'usd',
+  duration: 'forever'
 )
 
 ######################
@@ -105,10 +92,8 @@ Stripe::Coupon.find_or_create_by_id(
 ######################
 Stripe::Customer.find_or_create_by_id(
   'anonymous-customer',
-  {
-    description: 'Anonymous Customer',
-    plan: 'anonymous-plan'
-  }
+  description: 'Anonymous Customer',
+  plan: 'anonymous-plan'
 )
 #######################
 # PlanFeatureSettings #
@@ -159,13 +144,13 @@ PaidUp::PlanFeatureSetting.create(
 # Users     #
 ###############
 
-free_subscriber = FactoryGirl.create(
+FactoryGirl.create(
   :user,
   name: 'Free Subscriber',
   plan: free_plan
 )
 
-no_ads_subscriber = FactoryGirl.create(
+FactoryGirl.create(
   :user,
   name: 'No Ads Subscriber',
   plan: no_ads_plan
@@ -189,7 +174,7 @@ professional_subscriber = FactoryGirl.create(
   plan: professional_plan
 )
 
-blank_subscriber = FactoryGirl.create(
+FactoryGirl.create(
   :user,
   name: 'Blank Subscriber',
   plan: professional_plan

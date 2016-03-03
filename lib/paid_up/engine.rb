@@ -1,7 +1,8 @@
 module PaidUp
+  # PaidUp Engine
   class Engine < Rails::Engine
     isolate_namespace PaidUp
-    engine_name "paid_up"
+    engine_name 'paid_up'
 
     config.generators do |g|
       g.hidden_namespaces << 'test_unit' << 'erb'
@@ -18,5 +19,5 @@ module PaidUp
     def self.table_name_prefix
       'paid_up_'
     end
-  end 
+  end
 end

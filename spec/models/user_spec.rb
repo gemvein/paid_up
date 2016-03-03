@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "cancan/matchers"
+require 'cancan/matchers'
 
 describe User do
   include_context 'loaded site'
@@ -53,14 +53,14 @@ describe User do
 
     context '#subscribe_to_free_plan' do
       context 'starting from no subscription' do
-        let(:test_user) {
+        let(:test_user) do
           user = FactoryGirl.create(
             :user,
             name: 'Test User'
           )
           user.subscribe_to_free_plan
           user
-        }
+        end
         subject { test_user.plan }
         it { should eq(free_plan) }
       end
@@ -162,7 +162,7 @@ describe User do
     end
     context 'when subscribed to a plan with the feature unlimited' do
       subject { professional_subscriber.rolify_rows_remaining 'groups' }
-      it { should be > 99999999 }
+      it { should be > 99_999_999 }
     end
   end
 
@@ -296,7 +296,7 @@ describe User do
 
   context '#using_free_plan?' do
     context 'when false' do
-      subject { no_ads_subscriber.using_free_plan?  }
+      subject { no_ads_subscriber.using_free_plan? }
       it { should be false }
     end
     context 'when true' do
@@ -309,83 +309,93 @@ describe User do
   # Abilities        #
   ####################
 
-
-  describe "Abilities" do
-
-    context "when anonymous" do
-      let(:group){ FactoryGirl.create(:group, owner: professional_subscriber) }
-      let(:user){ nil }
-      subject(:ability){ Ability.new(user) }
-      it{ should be_able_to(:index, group) }
-      it{ should be_able_to(:show, group) }
-      it{ should_not be_able_to(:manage, group) }
-      it{ should_not be_able_to(:own, Group) }
-      it{ should_not be_able_to(:create, Group) }
-      it{ should_not be_able_to(:use, :ad_free) }
-      it{ should_not be_able_to(:create, Doodad) }
-    end
-    context "when on free plan" do
-      let(:group){ FactoryGirl.create(:group, owner: professional_subscriber) }
-      let(:user){ free_subscriber }
-      subject(:ability){ Ability.new(user) }
-      it{ should be_able_to(:index, group) }
-      it{ should be_able_to(:show, group) }
-      it{ should_not be_able_to(:manage, group) }
-      it{ should_not be_able_to(:own, Group) }
-      it{ should_not be_able_to(:create, Group) }
-      it{ should_not be_able_to(:use, :ad_free) }
-      it{ should_not be_able_to(:create, Doodad) }
-    end
-    context "when on group plan" do
-      context "given no groups are owned" do
-        let(:group){ FactoryGirl.create(:group, owner: group_leader_subscriber) }
-        let(:user){ group_leader_subscriber }
-        subject(:ability){ Ability.new(user) }
-        it{ should be_able_to(:index, group) }
-        it{ should be_able_to(:show, group) }
-        it{ should be_able_to(:manage, group) }
-        it{ should be_able_to(:own, Group) }
-        it{ should be_able_to(:create, Group) }
-        it{ should be_able_to(:use, :ad_free) }
-        it{ should be_able_to(:create, Doodad) }
+  describe 'Abilities' do
+    context 'when anonymous' do
+      let(:group) do
+        FactoryGirl.create(:group, owner: professional_subscriber)
       end
-      context "given all allowed groups are owned" do
-        let(:group){ FactoryGirl.create(:group, owner: disabling_subscriber) }
+      let(:user) { nil }
+      subject(:ability) { Ability.new(user) }
+      it { should be_able_to(:index, group) }
+      it { should be_able_to(:show, group) }
+      it { should_not be_able_to(:manage, group) }
+      it { should_not be_able_to(:own, Group) }
+      it { should_not be_able_to(:create, Group) }
+      it { should_not be_able_to(:use, :ad_free) }
+      it { should_not be_able_to(:create, Doodad) }
+    end
+    context 'when on free plan' do
+      let(:group) do
+        FactoryGirl.create(:group, owner: professional_subscriber)
+      end
+      let(:user) { free_subscriber }
+      subject(:ability) { Ability.new(user) }
+      it { should be_able_to(:index, group) }
+      it { should be_able_to(:show, group) }
+      it { should_not be_able_to(:manage, group) }
+      it { should_not be_able_to(:own, Group) }
+      it { should_not be_able_to(:create, Group) }
+      it { should_not be_able_to(:use, :ad_free) }
+      it { should_not be_able_to(:create, Doodad) }
+    end
+    context 'when on group plan' do
+      context 'given no groups are owned' do
+        let(:group) do
+          FactoryGirl.create(:group, owner: group_leader_subscriber)
+        end
+        let(:user) { group_leader_subscriber }
+        subject(:ability) { Ability.new(user) }
+        it { should be_able_to(:index, group) }
+        it { should be_able_to(:show, group) }
+        it { should be_able_to(:manage, group) }
+        it { should be_able_to(:own, Group) }
+        it { should be_able_to(:create, Group) }
+        it { should be_able_to(:use, :ad_free) }
+        it { should be_able_to(:create, Doodad) }
+      end
+      context 'given all allowed groups are owned' do
+        let(:group) do
+          FactoryGirl.create(:group, owner: disabling_subscriber)
+        end
         let(:user) { disabling_subscriber }
-        subject(:ability){ Ability.new(user) }
-        it{ should be_able_to(:index, group) }
-        it{ should be_able_to(:show, group) }
-        it{ should be_able_to(:manage, group) }
-        it{ should be_able_to(:own, Group) }
-        it{ should_not be_able_to(:create, Group) }
-        it{ should be_able_to(:use, :ad_free) }
-        it{ should be_able_to(:create, Doodad) }
+        subject(:ability) { Ability.new(user) }
+        it { should be_able_to(:index, group) }
+        it { should be_able_to(:show, group) }
+        it { should be_able_to(:manage, group) }
+        it { should be_able_to(:own, Group) }
+        it { should_not be_able_to(:create, Group) }
+        it { should be_able_to(:use, :ad_free) }
+        it { should be_able_to(:create, Doodad) }
       end
     end
-    context "when on professional plan" do
-      context "given no groups are owned" do
-        let(:group){ FactoryGirl.create(:group, owner: blank_subscriber) }
-        let(:user){ professional_subscriber }
-        subject(:ability){ Ability.new(user) }
-        it{ should be_able_to(:index, group) }
-        it{ should be_able_to(:show, group) }
-        it{ should_not be_able_to(:manage, group) }
-        it{ should be_able_to(:own, Group) }
-        it{ should be_able_to(:create, Group) }
-        it{ should be_able_to(:use, :ad_free) }
-        it{ should be_able_to(:create, Doodad) }
+    context 'when on professional plan' do
+      context 'given no groups are owned' do
+        let(:group) do
+          FactoryGirl.create(:group, owner: blank_subscriber)
+        end
+        let(:user) { professional_subscriber }
+        subject(:ability) { Ability.new(user) }
+        it { should be_able_to(:index, group) }
+        it { should be_able_to(:show, group) }
+        it { should_not be_able_to(:manage, group) }
+        it { should be_able_to(:own, Group) }
+        it { should be_able_to(:create, Group) }
+        it { should be_able_to(:use, :ad_free) }
+        it { should be_able_to(:create, Doodad) }
       end
-      context "given one group is owned" do
-        let(:group){ FactoryGirl.create(:group, owner: professional_subscriber) }
-        let(:user){ professional_subscriber }
-        subject(:ability){ Ability.new(user) }
-        it{ should be_able_to(:index, group) }
-        it{ should be_able_to(:show, group) }
-        it{ should be_able_to(:manage, group) }
-        it{ should be_able_to(:own, Group) }
-        it{ should be_able_to(:create, Group) }
-        it{ should be_able_to(:use, :ad_free) }
-        it{ should be_able_to(:create, Doodad) }
+      context 'given one group is owned' do
+        let(:group) do
+          FactoryGirl.create(:group, owner: professional_subscriber)
+        end
+        let(:user) { professional_subscriber }
+        subject(:ability) { Ability.new(user) }
+        it { should be_able_to(:index, group) }
+        it { should be_able_to(:show, group) }
+        it { should be_able_to(:manage, group) }
+        it { should be_able_to(:own, Group) }
+        it { should be_able_to(:create, Group) }
+        it { should be_able_to(:use, :ad_free) }
+        it { should be_able_to(:create, Doodad) }
       end
     end
   end

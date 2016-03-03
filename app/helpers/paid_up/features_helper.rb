@@ -1,4 +1,5 @@
 module PaidUp
+  # PaidUp Features Helper
   module FeaturesHelper
     include PaidUp::PaidUpHelper
 
@@ -6,7 +7,7 @@ module PaidUp
       data = {}
       features = PaidUp::Feature.all
 
-      for feature in features
+      features.each do |feature|
         data[feature.title] = feature_display feature, plan
       end
 
@@ -39,11 +40,11 @@ module PaidUp
 
       plans = PaidUp::Plan.subscribable
       if options[:only].present?
-        plans = plans.where('id IN (?)', options[:only])
+        plans = plans.where(id: options[:only])
         options.delete(:only)
       end
       if options[:except].present?
-        plans = plans.where('NOT ( id IN (?) )', options[:except])
+        plans = plans.where.not(id: options[:except])
         options.delete(:except)
       end
 
@@ -54,12 +55,24 @@ module PaidUp
         highlight_plan = nil
       end
 
-      render(partial: 'paid_up/features/table', locals: { should_add_buttons: should_add_buttons, plans: plans, features: features, highlight_plan: highlight_plan, html_options: options})
+      render(
+        partial: 'paid_up/features/table',
+        locals: {
+          should_add_buttons: should_add_buttons,
+          plans: plans,
+          features: features,
+          highlight_plan: highlight_plan,
+          html_options: options
+        }
+      )
     end
 
     def feature_abilities_table(options = {})
       features = PaidUp::Feature.all
-      render(partial: 'paid_up/features/abilities_table', locals: { features: features, html_options: options})
+      render(
+        partial: 'paid_up/features/abilities_table',
+        locals: { features: features, html_options: options }
+      )
     end
   end
 end
