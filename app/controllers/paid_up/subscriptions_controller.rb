@@ -28,7 +28,7 @@ module PaidUp
         else
           money = @plan.money
         end
-        flash[:paid_up_subscription] = money.format
+        flash[:paid_up_subscription] = money.dollars
         redirect_to(
           subscriptions_path,
           flash: {
