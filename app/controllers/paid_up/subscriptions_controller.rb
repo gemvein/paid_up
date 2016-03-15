@@ -17,6 +17,18 @@ module PaidUp
       # @plan set by #set_plan
       current_user.update_attribute(:coupon_code, params[:coupon_code])
       if current_user.subscribe_to_plan(@plan, params[:stripeToken])
+        discount = current_user.stripe_data.discount
+        if !discount.nil? && !discount.coupon.nil? && @plan.amount != 0
+          orig_amount = @plan.amount
+          amount = orig_amount
+          amount -= (discount.coupon.percent_off || 0) * 0.01 * amount
+          amount -= (discount.coupon.amount_off || 0)
+          amount = amount > 0 ? amount : 0
+          money = Money.new(amount, @plan.currency)
+        else
+          money = @plan.money
+        end
+        flash[:paid_up_subscription] = money.format
         redirect_to(
           subscriptions_path,
           flash: {
