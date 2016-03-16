@@ -103,6 +103,10 @@ The resources referred to in your config will need to call `paid_for`, like this
     end
     
 ### Enabling Google Analytics
+    
+In your application controller, add:
+
+    helper PaidUp::PaidUpHelper
 
 In your layout view, include the following code snippet, which will only fire when a subscription is made. 
 
