@@ -13,5 +13,9 @@ module PaidUp
       end
       dates.join('&mdash;').html_safe
     end
+
+    def paid_up_google_analytics_data_layer
+      render partial: 'paid_up/layouts/google_analytics_data_layer'
+    end
   end
 end

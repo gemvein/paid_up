@@ -1,0 +1,4 @@
+- if flash[:paid_up_google_analytics_data].present?
+  :javascript
+    window.dataLayer = window.dataLayer || []
+      dataLayer.push(#{flash[:paid_up_google_analytics_data].to_json});

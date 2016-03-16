@@ -11,6 +11,7 @@ Paid Up is a start-to-finish Stripe subscription engine. You set up the plans an
 * Authorization by CanCanCan
 * Subscription by Stripe
 * Roles by Rolify
+* Uses Google Tag Manager for Google Analytics `dataLayer` object to provide e-commerce analytics.
 * Assumes you will be using some variety of Bootstrap, and designed to be quite responsive out of the box, but included views can be overridden with custom views.
 
 ## Installation
@@ -100,6 +101,16 @@ The resources referred to in your config will need to call `paid_for`, like this
     class Group < ActiveRecord::Base
       paid_for
     end
+    
+### Enabling Google Analytics
+
+In your layout view, include the following code snippet, which will only fire when a subscription is made. 
+
+This needs to go above your call to Google Tag Manager, so that the data in it is available to GTM.
+
+    = paid_up_google_analytics_data_layer
+    
+Doing this will populate the e-commerce data in Google Analytics, but you must also have that feature turned on.
 
 ### Upgrading
 

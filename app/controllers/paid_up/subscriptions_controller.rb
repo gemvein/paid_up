@@ -17,6 +17,7 @@ module PaidUp
       # @plan set by #set_plan
       current_user.update_attribute(:coupon_code, params[:coupon_code])
       if current_user.subscribe_to_plan(@plan, params[:stripeToken])
+        subscription_id = current_user.stripe_data.subscriptions.first.id
         discount = current_user.stripe_data.discount
         if !discount.nil? && !discount.coupon.nil? && @plan.amount != 0
           orig_amount = @plan.amount
@@ -28,7 +29,16 @@ module PaidUp
         else
           money = @plan.money
         end
-        flash[:paid_up_subscription] = money.dollars
+        flash[:paid_up_google_analytics_data] = {
+          transactionId: subscription_id,
+          transactionTotal: money.dollars,
+          transactionProducts: [
+            sku: @plan.stripe_id,
+            name: @plan.title,
+            price: @plan.money.dollars,
+            quantity: '1'
+          ]
+        }
         redirect_to(
           subscriptions_path,
           flash: {
