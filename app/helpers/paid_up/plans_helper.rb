@@ -59,7 +59,6 @@ module PaidUp
         elsif current_user.is_subscribed_to? plan
           icon_class = 'ok'
           css_class += 'disabled disabled'
-          disabled_state = true
           link = '#'
           text = :already_subscribed.l
         else # Plans are equal in sort_order
@@ -72,7 +71,6 @@ module PaidUp
         css_class += 'success'
       end
       html_options[:method] ||= :get
-      html_options[:disabled] ||= disabled_state
       icon_button_to css_class, icon_class, text, link, html_options
     end
   end
