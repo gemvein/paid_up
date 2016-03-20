@@ -41,35 +41,35 @@ module PaidUp
 
     def plan_button(plan, text = nil, html_options = {})
       data = {}
-      css_class = 'btn '
+      css_class = ''
       disabled_state = false
       link = paid_up.new_plan_subscription_path(plan)
       if user_signed_in?
         text ||= :subscribe.l
         if current_user.stripe_data.delinquent
           icon_class = 'arrow-right'
-          css_class += 'btn-info'
+          css_class += 'info'
         elsif current_user.can_upgrade_to? plan
           icon_class = 'arrow-up'
-          css_class += 'btn-success'
+          css_class += 'success'
         elsif current_user.can_downgrade_to? plan
           icon_class = 'arrow-down'
-          css_class += 'btn-danger'
+          css_class += 'danger'
           data[:confirm] = :are_you_sure.l
         elsif current_user.is_subscribed_to? plan
           icon_class = 'ok'
-          css_class += 'btn-disabled'
+          css_class += 'disabled disabled'
           disabled_state = true
           link = '#'
           text = :already_subscribed.l
         else # Plans are equal in sort_order
           icon_class = 'arrow-right'
-          css_class += 'btn-info'
+          css_class += 'info'
         end
       else
         text ||= :sign_up.l
         icon_class = 'arrow-right'
-        css_class += 'btn-success'
+        css_class += 'success'
       end
       html_options[:method] ||= :get
       html_options[:disabled] ||= disabled_state
