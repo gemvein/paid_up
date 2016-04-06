@@ -4,7 +4,11 @@
 = features_table only: @plan, should_add_buttons: false
 
 %h2= :select_payment_info.l
-%p= :you_will_be_charged.l charge_amount: plan_charge_human(@plan, current_user.stripe_data.discount)
+%p.lead
+  - if @plan.stripe_data.trial_period_days.present?
+    = :after_trial_period_you_will_be_charged.l trial_period: @plan.stripe_data.trial_period_days, charge_amount: plan_charge_human(@plan, current_user.stripe_data.discount)
+  - else
+    = :you_will_be_charged.l charge_amount: plan_charge_human(@plan, current_user.stripe_data.discount)
 .row
   .col-md-6
     = form_tag paid_up.plan_subscriptions_path(@plan), class: 'form-horizontal', id: 'payment-form' do

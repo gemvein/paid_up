@@ -22,6 +22,7 @@
 en:
   abilities: 'Abilities'
   account_is_delinquent: 'The paid features associated with your account have been disabled pending payment.'
+  after_trial_period_you_will_be_charged: "After a trial period of %{trial_period} days, you will be charged %{charge_amount}."
   allowed: 'Allowed'
   already_subscribed: 'Already Subscribed'
   are_you_sure: 'Are you sure?'
