@@ -8,8 +8,12 @@ module PaidUp
           PaidUp::Feature.find_by_slug(table_name)
         end
 
+        def paid_for_scope
+          send(@scope)
+        end
+
         def paid_for(options = {})
-          my_scope = options[:scope] || :all
+          @scope = options[:scope] || :all
           feature.nil? && raise(
             :feature_not_found_feature.l(feature: table_name)
           )
@@ -28,12 +32,6 @@ module PaidUp
                 value: feature.setting_type
               )
             )
-          end
-
-          singleton_class.instance_eval do
-            send(:define_method, :paid_for_scope) do
-              send(my_scope)
-            end
           end
 
           send(:define_method, :owners) do
@@ -69,12 +67,12 @@ module PaidUp
               case self.class.feature.setting_type
               when 'table_rows'
                 ids += subscriber.send(self.class.table_name)
-                                 .send(my_scope)
+                                 .paid_for_scope
                                  .pluck(:id)
               when 'rolify_rows'
                 ids += self.class
                            .with_role(:owner, subscriber)
-                           .send(my_scope)
+                           .paid_for_scope
                            .pluck(:id)
               else
                 raise(
