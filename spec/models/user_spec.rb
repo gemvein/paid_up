@@ -206,7 +206,8 @@ describe User do
         3.times do
           FactoryGirl.create(
             :group,
-            owner: blank_subscriber
+            owner: blank_subscriber,
+            active: true
           )
         end
       end

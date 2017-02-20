@@ -62,6 +62,16 @@ In the `table_rows` case, the table and its model must exist. the table should h
     
 In the `rolify_rows` case, the table and its model must also exist. Once that is done and the corresponding `PaidUp::Feature` is created, add `paid_for` to the model. This means the resource model will run the `resourcify` method, and the User method will have had the `rolify` method added to it during install, so no further setup is required.
 
+#### Scope
+
+If you only want to count certain records against a user's tally, for example only records with `active` set to `true`, you can add the scope option with a symbol corresponding to the desired method or scope, like so:
+
+    class Post < ActiveRecord::Base
+      paid_for scope: :active
+      scope :active, -> { where(active: true) }
+    end
+
+
 ## Enabling Javascript
 
 In order for PaidUp's AJAX functionality to work (which is required because Stripe uses AJAX), you will need to add this to your layout file, preferably near the end of the <body> element (for speed reasons):

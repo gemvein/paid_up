@@ -24,4 +24,10 @@ PaidUp.configure do |config|
     description: 'How many doodads included with this plan?',
     setting_type: 'table_rows'
   )
+  PaidUp.add_feature(
+    slug: 'posts',
+    title: 'Posts',
+    description: 'How many posts included with this plan?',
+    setting_type: 'table_rows'
+  )
 end

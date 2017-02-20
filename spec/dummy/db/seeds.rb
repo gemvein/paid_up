@@ -99,11 +99,23 @@ Stripe::Customer.find_or_create_by_id(
 # PlanFeatureSettings #
 #######################
 
+# Free
+PaidUp::PlanFeatureSetting.create(
+  feature: 'posts',
+  plan: free_plan,
+  setting: 3
+)
+
 # Ad Free
 PaidUp::PlanFeatureSetting.create(
   feature: 'ad_free',
   plan: no_ads_plan,
   setting: 1
+)
+PaidUp::PlanFeatureSetting.create(
+  feature: 'posts',
+  plan: no_ads_plan,
+  setting: 5
 )
 
 # Group Leader
@@ -119,6 +131,11 @@ PaidUp::PlanFeatureSetting.create(
 )
 PaidUp::PlanFeatureSetting.create(
   feature: 'doodads',
+  plan: group_leader_plan,
+  setting: 10
+)
+PaidUp::PlanFeatureSetting.create(
+  feature: 'posts',
   plan: group_leader_plan,
   setting: 10
 )
@@ -139,12 +156,17 @@ PaidUp::PlanFeatureSetting.create(
   plan: professional_plan,
   setting: PaidUp::Unlimited.to_i(:db)
 )
+PaidUp::PlanFeatureSetting.create(
+  feature: 'posts',
+  plan: professional_plan,
+  setting: 25
+)
 
 ###############
 # Users     #
 ###############
 
-FactoryGirl.create(
+free_subscriber = FactoryGirl.create(
   :user,
   name: 'Free Subscriber',
   plan: free_plan
@@ -194,33 +216,84 @@ past_due_subscriber = FactoryGirl.create(
 FactoryGirl.create(
   :group,
   title: 'First Group',
-  owner: group_leader_subscriber
+  owner: group_leader_subscriber,
+  active: true
+)
+
+FactoryGirl.create(
+  :group,
+  title: 'Inactive Group',
+  owner: group_leader_subscriber,
+  active: false
 )
 
 FactoryGirl.create(
   :group,
   title: 'Second Group',
-  owner: professional_subscriber
+  owner: professional_subscriber,
+  active: true
 )
 
 FactoryGirl.create(
   :group,
   title: 'Third Group',
-  owner: professional_subscriber
+  owner: professional_subscriber,
+  active: true
 )
 
 5.times do
-  FactoryGirl.create(:group, owner: disabling_subscriber)
+  FactoryGirl.create(:group, owner: disabling_subscriber, active: true)
 end
 
 FactoryGirl.create(
   :group,
   title: 'Disabled Group',
-  owner: disabling_subscriber
+  owner: disabling_subscriber,
+  active: true
 )
 
 FactoryGirl.create(
   :group,
   title: 'Past Due Group',
-  owner: past_due_subscriber
+  owner: past_due_subscriber,
+  active: true
+)
+
+###############
+# Posts       #
+###############
+
+FactoryGirl.create(
+  :post,
+  title: 'First Post',
+  user: free_subscriber,
+  active: true
+)
+
+FactoryGirl.create(
+  :post,
+  title: 'Active Post',
+  user: free_subscriber,
+  active: true
+)
+
+FactoryGirl.create(
+  :post,
+  title: 'Inactive Post',
+  user: free_subscriber,
+  active: false
+)
+
+FactoryGirl.create(
+  :post,
+  title: 'Still Enabled Post',
+  user: free_subscriber,
+  active: true
+)
+
+FactoryGirl.create(
+  :post,
+  title: 'No Longer Enabled Post',
+  user: free_subscriber,
+  active: true
 )

@@ -42,7 +42,6 @@ module PaidUp
     def plan_button(plan, text = nil, html_options = {})
       data = {}
       css_class = ''
-      disabled_state = false
       link = paid_up.new_plan_subscription_path(plan)
       if user_signed_in?
         text ||= :subscribe.l

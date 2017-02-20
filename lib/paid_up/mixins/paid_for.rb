@@ -8,7 +8,8 @@ module PaidUp
           PaidUp::Feature.find_by_slug(table_name)
         end
 
-        def paid_for
+        def paid_for(options = {})
+          my_scope = options[:scope] || :all
           feature.nil? && raise(
             :feature_not_found_feature.l(feature: table_name)
           )
@@ -20,6 +21,7 @@ module PaidUp
             attr_accessor :owner
           when 'table_rows'
             belongs_to :user
+            User.has_many table_name.to_sym
           else
             raise(
               :value_is_not_a_valid_setting_type.l(
@@ -28,8 +30,19 @@ module PaidUp
             )
           end
 
+          singleton_class.instance_eval do
+            send(:define_method, :paid_for_scope) do
+              send(my_scope)
+            end
+          end
+
           send(:define_method, :owners) do
-            User.with_role(:owner, self)
+            case self.class.feature.setting_type
+            when 'table_rows'
+              [user]
+            when 'rolify_rows'
+              User.with_role(:owner, self)
+            end
           end
 
           send(:define_method, :save_with_owner) do |owner|
@@ -41,6 +54,7 @@ module PaidUp
             end
           end
 
+          # How many records can this user have?
           send(:define_method, :owners_enabled_count) do
             setting = 0
             owners.each do |subscriber|
@@ -54,9 +68,14 @@ module PaidUp
             owners.each do |subscriber|
               case self.class.feature.setting_type
               when 'table_rows'
-                ids += subscriber.send(self.class.table_name).pluck(:id)
+                ids += subscriber.send(self.class.table_name)
+                                 .send(my_scope)
+                                 .pluck(:id)
               when 'rolify_rows'
-                ids += self.class.with_role(:owner, subscriber).pluck(:id)
+                ids += self.class
+                           .with_role(:owner, subscriber)
+                           .send(my_scope)
+                           .pluck(:id)
               else
                 raise(
                   :no_features_associated_with_table.l(

@@ -31,7 +31,8 @@ describe PaidUp::Feature do
         eq(
           ad_free: ad_free_feature,
           groups: groups_feature,
-          doodads: doodads_feature
+          doodads: doodads_feature,
+          posts: posts_feature
         )
       )
     end
@@ -39,7 +40,14 @@ describe PaidUp::Feature do
 
   context '.all' do
     subject { PaidUp::Feature.all }
-    it { should eq [ad_free_feature, groups_feature, doodads_feature] }
+    it do
+      should eq [
+        ad_free_feature,
+        groups_feature,
+        doodads_feature,
+        posts_feature
+      ]
+    end
   end
 
   context '.find_all' do

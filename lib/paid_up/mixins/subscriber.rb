@@ -88,7 +88,8 @@ module PaidUp
             plan.feature_setting table_name
           end
           send(:define_method, :table_rows) do |table_name|
-            send(table_name).size
+            model = table_name.classify.constantize
+            model.paid_for_scope.size
           end
           send(:define_method, :rolify_rows_unlimited?) do |table_name|
             rolify_rows_allowed(table_name) == PaidUp::Unlimited.to_i
@@ -100,8 +101,8 @@ module PaidUp
             plan.feature_setting table_name
           end
           send(:define_method, :rolify_rows) do |table_name|
-            records = table_name.classify.constantize.with_role(:owner, self)
-            records.size
+            model = table_name.classify.constantize
+            model.with_role(:owner, self).paid_for_scope.size
           end
           send(:define_method, :plan_stripe_id) do
             subscription.nil? && return
