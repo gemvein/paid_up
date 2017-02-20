@@ -340,33 +340,88 @@ describe User do
       it { should_not be_able_to(:create, Doodad) }
     end
     context 'when on group plan' do
-      context 'given no groups are owned' do
-        let(:group) do
-          FactoryGirl.create(:group, owner: group_leader_subscriber)
-        end
+      describe 'misc abilities' do
         let(:user) { group_leader_subscriber }
         subject(:ability) { Ability.new(user) }
-        it { should be_able_to(:index, group) }
-        it { should be_able_to(:show, group) }
-        it { should be_able_to(:manage, group) }
-        it { should be_able_to(:own, Group) }
-        it { should be_able_to(:create, Group) }
         it { should be_able_to(:use, :ad_free) }
-        it { should be_able_to(:create, Doodad) }
       end
-      context 'given all allowed groups are owned' do
-        let(:group) do
-          FactoryGirl.create(:group, owner: disabling_subscriber)
+      describe 'using groups' do
+        context 'given no groups are owned' do
+          let(:group) do
+            FactoryGirl.create(:group, owner: group_leader_subscriber)
+          end
+          let(:user) { group_leader_subscriber }
+          subject(:ability) { Ability.new(user) }
+          it { should be_able_to(:index, group) }
+          it { should be_able_to(:show, group) }
+          it { should be_able_to(:manage, group) }
+          it { should be_able_to(:own, Group) }
+          it { should be_able_to(:create, Group) }
         end
-        let(:user) { disabling_subscriber }
-        subject(:ability) { Ability.new(user) }
-        it { should be_able_to(:index, group) }
-        it { should be_able_to(:show, group) }
-        it { should be_able_to(:manage, group) }
-        it { should be_able_to(:own, Group) }
-        it { should_not be_able_to(:create, Group) }
-        it { should be_able_to(:use, :ad_free) }
-        it { should be_able_to(:create, Doodad) }
+        context 'given all allowed groups are owned' do
+          let(:group) do
+            FactoryGirl.create(:group, owner: disabling_subscriber)
+          end
+          let(:user) { disabling_subscriber }
+          subject(:ability) { Ability.new(user) }
+          it { should be_able_to(:index, group) }
+          it { should be_able_to(:show, group) }
+          it { should be_able_to(:manage, group) }
+          it { should be_able_to(:own, Group) }
+          it { should_not be_able_to(:create, Group) }
+        end
+      end
+      describe 'using doodads' do
+        context 'given no doodads are owned' do
+          let(:doodad) do
+            FactoryGirl.create(:doodad, user: group_leader_subscriber)
+          end
+          let(:user) { group_leader_subscriber }
+          subject(:ability) { Ability.new(user) }
+          it { should be_able_to(:index, doodad) }
+          it { should be_able_to(:show, doodad) }
+          it { should be_able_to(:manage, doodad) }
+          it { should be_able_to(:own, Doodad) }
+          it { should be_able_to(:create, Doodad) }
+        end
+        context 'given all allowed doodads are owned' do
+          let(:doodad) do
+            FactoryGirl.create(:doodad, user: disabling_subscriber)
+          end
+          let(:user) { disabling_subscriber }
+          subject(:ability) { Ability.new(user) }
+          it { should be_able_to(:index, doodad) }
+          it { should be_able_to(:show, doodad) }
+          it { should be_able_to(:manage, doodad) }
+          it { should be_able_to(:own, Doodad) }
+          it { should_not be_able_to(:create, Doodad) }
+        end
+      end
+      describe 'using posts' do
+        context 'given no posts are owned' do
+          let(:post) do
+            FactoryGirl.create(:post, user: group_leader_subscriber)
+          end
+          let(:user) { group_leader_subscriber }
+          subject(:ability) { Ability.new(user) }
+          it { should be_able_to(:index, post) }
+          it { should be_able_to(:show, post) }
+          it { should be_able_to(:manage, post) }
+          it { should be_able_to(:own, Post) }
+          it { should be_able_to(:create, Post) }
+        end
+        context 'given all allowed posts are owned' do
+          let(:post) do
+            FactoryGirl.create(:post, user: disabling_subscriber)
+          end
+          let(:user) { disabling_subscriber }
+          subject(:ability) { Ability.new(user) }
+          it { should be_able_to(:index, post) }
+          it { should be_able_to(:show, post) }
+          it { should be_able_to(:manage, post) }
+          it { should be_able_to(:own, Post) }
+          it { should_not be_able_to(:create, Post) }
+        end
       end
     end
     context 'when on professional plan' do

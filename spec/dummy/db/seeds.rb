@@ -241,9 +241,9 @@ FactoryGirl.create(
   active: true
 )
 
-5.times do
-  FactoryGirl.create(:group, owner: disabling_subscriber, active: true)
-end
+FactoryGirl.create_list(:group, 5, owner: disabling_subscriber, active: true)
+FactoryGirl.create_list(:doodad, 10, user: disabling_subscriber)
+FactoryGirl.create_list(:post, 10, user: disabling_subscriber, active: true)
 
 FactoryGirl.create(
   :group,
