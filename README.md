@@ -12,7 +12,7 @@ Paid Up is a start-to-finish Stripe subscription engine. You set up the plans an
 * Subscription by Stripe
 * Roles by Rolify
 * Uses Google Tag Manager for Google Analytics `dataLayer` object to provide e-commerce analytics.
-* Assumes you will be using some variety of Bootstrap, and designed to be quite responsive out of the box, but included views can be overridden with custom views.
+* Assumes you will be using some variety of Bootstrap, and designed to be quite responsive out of the box. Included views can be overridden with custom views.
 
 ## Installation
 
@@ -52,7 +52,7 @@ Pay close attention to the settings in `Account Settings` under `Subscriptions` 
 
 Set up each `PaidUp::Feature` using the config file. (A config file is used rather than using records in an `ActiveRecord::Base` model because relationships cannot be created at runtime.) Associate the features with the corresponding plans using the `PaidUp::PlanFeatureSetting` model. For an example, check out the seeds file at [`spec/dummy/db/seeds.db`](spec/dummy/db/seeds.db)
 
-Possible `:setting_type` values are: `boolean`, `table_rows`, `rolify_rows`. The latter two require that a table corresponding to the feature's `:name` value. 
+Possible `:setting_type` values are: `boolean`, `table_rows`, `rolify_rows`. The latter two require a table corresponding to the feature's `:name` value. 
 
 #### Setting Type: Table Rows
 
