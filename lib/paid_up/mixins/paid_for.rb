@@ -3,17 +3,19 @@ module PaidUp
     # PaidFor Mixin
     module PaidFor
       extend ActiveSupport::Concern
+      @@scope = {}
+
       class_methods do
         def feature
           PaidUp::Feature.find_by_slug(table_name)
         end
 
         def paid_for_scope
-          send(@scope)
+          send(@@scope[table_name.to_sym])
         end
 
         def paid_for(options = {})
-          @scope = options[:scope] || :all
+          @@scope[table_name.to_sym] = options[:scope] || :all
           feature.nil? && raise(
             :feature_not_found_feature.l(feature: table_name)
           )
