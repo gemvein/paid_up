@@ -89,7 +89,7 @@ module PaidUp
           end
           send(:define_method, :table_rows) do |table_name|
             model = table_name.classify.constantize
-            model.paid_for_scope.size
+            model.where(user: self).paid_for_scope.size
           end
           send(:define_method, :rolify_rows_unlimited?) do |table_name|
             rolify_rows_allowed(table_name) == PaidUp::Unlimited.to_i
