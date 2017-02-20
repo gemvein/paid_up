@@ -3,19 +3,20 @@ module PaidUp
     # PaidFor Mixin
     module PaidFor
       extend ActiveSupport::Concern
-      @@scope = {}
 
       class_methods do
+        attr_accessor :paid_for_scope_symbol # Creates class-level instance var
+
         def feature
           PaidUp::Feature.find_by_slug(table_name)
         end
 
         def paid_for_scope
-          send(@@scope[table_name.to_sym])
+          send(self.paid_for_scope_symbol)
         end
 
         def paid_for(options = {})
-          @@scope[table_name.to_sym] = options[:scope] || :all
+          self.paid_for_scope_symbol = options.fetch(:scope, :all)
           feature.nil? && raise(
             :feature_not_found_feature.l(feature: table_name)
           )
@@ -70,12 +71,12 @@ module PaidUp
               when 'table_rows'
                 ids += subscriber.send(self.class.table_name)
                                  .paid_for_scope
-                                 .pluck(:id)
+                                 .ids
               when 'rolify_rows'
                 ids += self.class
                            .with_role(:owner, subscriber)
                            .paid_for_scope
-                           .pluck(:id)
+                           .ids
               else
                 raise(
                   :no_features_associated_with_table.l(
