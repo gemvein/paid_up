@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', '~> 2.2', require: 'dotenv/rails-now', groups: [:development, :test]
+
 gem 'rails', '~> 4.2'
 gem 'rails-i18n', '~> 4'
 gem 'haml-rails', '~> 0.9'
