@@ -40,5 +40,5 @@ Integer.send(:include, PaidUp::Extensions::Integer)
 
 Stripe::APIResource.send(:include, PaidUp::Extensions::Stripe)
 
-ActiveRecord::Base.send(:include, PaidUp::Mixins::Subscriber)
-ActiveRecord::Base.send(:include, PaidUp::Mixins::PaidFor)
+ActiveRecord::Base.send(:extend, PaidUp::Mixins::Subscriber)
+ActiveRecord::Base.send(:extend, PaidUp::Mixins::PaidFor)
