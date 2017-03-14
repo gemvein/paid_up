@@ -4,7 +4,7 @@ module PaidUp
     class TableRows < ActiveModel::Validator
       def validate(record)
         if record.send(options[:field]) == options[:comparison] &&
-           !ActiveRecord::Base.connection.table_exists?(
+           !ActiveRecord::Base.connection.data_source_exists?(
              record.send(options[:found_in])
            )
           record.errors[

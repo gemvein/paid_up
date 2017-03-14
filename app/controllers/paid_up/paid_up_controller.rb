@@ -4,7 +4,7 @@ module PaidUp
     helper :all
 
     before_action :set_locale
-    before_filter :warn_if_delinquent
+    before_action :warn_if_delinquent
 
     private
 

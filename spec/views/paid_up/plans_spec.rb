@@ -3,11 +3,14 @@ require 'rails_helper'
 RSpec.describe 'paid_up/plans/index' do
   include_context 'loaded site'
 
+  before do
+    view.extend PaidUp::PlansHelper
+    view.extend PaidUp::FeaturesHelper
+    view.extend BootstrapLeatherHelper
+  end
+
   context 'when user is anonymous' do
     before do
-      view.extend PaidUp::PlansHelper
-      view.extend PaidUp::FeaturesHelper
-
       assign(:current_user, access_anonymous)
       assign(:plans, PaidUp::Plan.subscribable)
       render
@@ -29,9 +32,6 @@ RSpec.describe 'paid_up/plans/index' do
 
   context 'when user is logged in as professional subscriber' do
     before do
-      view.extend PaidUp::PlansHelper
-      view.extend PaidUp::FeaturesHelper
-
       assign(:current_user, login_subscriber(professional_subscriber))
       assign(:plans, PaidUp::Plan.subscribable)
       render

@@ -2,12 +2,16 @@ require 'rails_helper'
 
 RSpec.describe 'paid_up/subscriptions/new' do
   include_context 'loaded site'
+
+  before do
+    view.extend PaidUp::PlansHelper
+    view.extend PaidUp::FeaturesHelper
+    view.extend BootstrapLeatherHelper
+  end
+
   context 'when user is logged in as free customer' do
     context 'displays a payment form' do
       before do
-        view.extend PaidUp::PlansHelper
-        view.extend PaidUp::FeaturesHelper
-
         assign(:current_user, login_subscriber(free_subscriber))
         assign(:plan, professional_plan)
         render
@@ -23,9 +27,6 @@ RSpec.describe 'paid_up/subscriptions/new' do
   context 'when user is logged in as a paid customer' do
     context 'displays a payment form' do
       before do
-        view.extend PaidUp::PlansHelper
-        view.extend PaidUp::FeaturesHelper
-
         assign(:current_user, login_subscriber(no_ads_subscriber))
         assign(:plan, professional_plan)
         render
@@ -42,12 +43,16 @@ end
 
 RSpec.describe 'paid_up/subscriptions/index' do
   include_context 'loaded site'
+
+  before do
+    view.extend PaidUp::PlansHelper
+    view.extend PaidUp::FeaturesHelper
+    view.extend BootstrapLeatherHelper
+  end
+
   context 'when user is logged in' do
     context "displays the details of a user's subscriptions" do
       before do
-        view.extend PaidUp::PlansHelper
-        view.extend PaidUp::FeaturesHelper
-
         assign(:current_user, login_subscriber(group_leader_subscriber))
         render
       end

@@ -6,7 +6,7 @@
 
 Paid Up is a start-to-finish Stripe subscription engine. You set up the plans and coupons you want on Stripe, and the gem gives you a way to tie those plans and coupons to authenticated users, granting them abilities based on the features outlined for their plan.
 
-* Ruby 2, Rails 4
+* Ruby 2, Rails 4 and 5
 * Authentication by Devise
 * Authorization by CanCanCan
 * Subscription by Stripe

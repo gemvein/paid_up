@@ -7,6 +7,7 @@ require 'spec_helper'
 require File.expand_path('../dummy/config/environment', __FILE__)
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'rspec/core/formatters/console_codes'
 require 'shoulda/matchers'
 require 'factory_girl_rails'
 require 'capybara/rspec'
@@ -76,8 +77,15 @@ RSpec.configure do |config|
   config.before(:each) { @routes = PaidUp::Engine.routes }
   config.include PaidUp::Engine.routes.url_helpers
 
-  config.include Devise::TestHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include ControllerMacros, type: :controller
   config.include ControllerMacros, type: :view
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
 end

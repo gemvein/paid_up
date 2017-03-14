@@ -37,7 +37,7 @@ RSpec.describe PaidUp::SubscriptionsController do
     describe 'when the user is anonymous' do
       before do
         access_anonymous
-        get :new, plan_id: professional_plan.id
+        get :new, params: { plan_id: professional_plan.id }
       end
       describe 'redirects to the user sign up page' do
         subject { response }
@@ -50,7 +50,7 @@ RSpec.describe PaidUp::SubscriptionsController do
         describe 'with a paid plan' do
           before do
             sign_in free_subscriber
-            get :new, plan_id: professional_plan.id
+            get :new, params: { plan_id: professional_plan.id }
           end
           after do
             free_subscriber.subscribe_to_plan free_plan
@@ -72,7 +72,7 @@ RSpec.describe PaidUp::SubscriptionsController do
         describe 'with the free plan' do
           before do
             login_subscriber no_ads_subscriber
-            get :new, plan_id: free_plan.id
+            get :new, params: { plan_id: free_plan.id }
           end
           after do
             no_ads_subscriber.subscribe_to_plan no_ads_plan
@@ -94,7 +94,7 @@ RSpec.describe PaidUp::SubscriptionsController do
         describe 'when downgrading' do
           before do
             sign_in professional_subscriber
-            get :new, plan_id: no_ads_plan.id
+            get :new, params: { plan_id: no_ads_plan.id }
           end
           after do
             professional_subscriber.subscribe_to_plan professional_plan
@@ -135,7 +135,7 @@ RSpec.describe PaidUp::SubscriptionsController do
           before do
             sign_in free_subscriber
             token = working_stripe_token free_subscriber
-            post :create, plan_id: professional_plan.id, stripeToken: token
+            post :create, params: { plan_id: professional_plan.id, stripeToken: token }
           end
           after do
             free_subscriber.subscribe_to_plan free_plan
@@ -160,9 +160,11 @@ RSpec.describe PaidUp::SubscriptionsController do
             token = working_stripe_token free_subscriber
             post(
               :create,
-              plan_id: professional_plan.id,
-              stripeToken: token,
-              coupon_code: '25OFF'
+              params: {
+                plan_id: professional_plan.id,
+                stripeToken: token,
+                coupon_code: '25OFF'
+              }
             )
           end
           after do
@@ -187,7 +189,7 @@ RSpec.describe PaidUp::SubscriptionsController do
         describe 'without a coupon code' do
           before do
             sign_in no_ads_subscriber
-            post :create, plan_id: professional_plan.id
+            post :create, params: { plan_id: professional_plan.id }
           end
           after do
             no_ads_subscriber.subscribe_to_plan no_ads_plan

@@ -1,8 +1,8 @@
 module PaidUp
   # Subscriptions Controller
   class SubscriptionsController < PaidUpController
-    before_filter :authenticate_user!
-    before_filter :set_plan, only: [:new, :create]
+    before_action :authenticate_user!
+    before_action :set_plan, only: [:new, :create]
 
     def index
       # nothing to do, everything we need is in current_user

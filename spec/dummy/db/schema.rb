@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -17,9 +16,8 @@ ActiveRecord::Schema.define(version: 20170220001913) do
     t.string "user_id"
     t.string "name"
     t.text   "description"
+    t.index ["user_id"], name: "index_doodads_on_user_id"
   end
-
-  add_index "doodads", ["user_id"], name: "index_doodads_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "title"
@@ -27,18 +25,16 @@ ActiveRecord::Schema.define(version: 20170220001913) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",      default: false, null: false
+    t.index ["active"], name: "index_groups_on_active"
   end
-
-  add_index "groups", ["active"], name: "index_groups_on_active"
 
   create_table "paid_up_plan_feature_settings", force: :cascade do |t|
     t.integer "paid_up_plan_id"
     t.string  "feature"
     t.integer "setting"
+    t.index ["feature"], name: "index_paid_up_plan_feature_settings_on_feature"
+    t.index ["paid_up_plan_id"], name: "index_paid_up_plan_feature_settings_on_paid_up_plan_id"
   end
-
-  add_index "paid_up_plan_feature_settings", ["feature"], name: "index_paid_up_plan_feature_settings_on_feature"
-  add_index "paid_up_plan_feature_settings", ["paid_up_plan_id"], name: "index_paid_up_plan_feature_settings_on_paid_up_plan_id"
 
   create_table "paid_up_plans", force: :cascade do |t|
     t.string   "stripe_id"
@@ -47,10 +43,9 @@ ActiveRecord::Schema.define(version: 20170220001913) do
     t.integer  "sort_order"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["stripe_id"], name: "index_paid_up_plans_on_stripe_id", unique: true
+    t.index ["title"], name: "index_paid_up_plans_on_title", unique: true
   end
-
-  add_index "paid_up_plans", ["stripe_id"], name: "index_paid_up_plans_on_stripe_id", unique: true
-  add_index "paid_up_plans", ["title"], name: "index_paid_up_plans_on_title", unique: true
 
   create_table "posts", force: :cascade do |t|
     t.string   "user_id"
@@ -58,21 +53,19 @@ ActiveRecord::Schema.define(version: 20170220001913) do
     t.boolean  "active",     default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["active"], name: "index_posts_on_active"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
-
-  add_index "posts", ["active"], name: "index_posts_on_active"
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.integer  "resource_id"
     t.string   "resource_type"
+    t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name"], name: "index_roles_on_name"
   end
-
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -88,16 +81,14 @@ ActiveRecord::Schema.define(version: 20170220001913) do
     t.string   "last_sign_in_ip"
     t.string   "stripe_id"
     t.string   "coupon_code"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
   end
-
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
 
 end
