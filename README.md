@@ -14,6 +14,12 @@ Paid Up is a start-to-finish Stripe subscription engine. You set up the plans an
 * Uses Google Tag Manager for Google Analytics `dataLayer` object to provide e-commerce analytics.
 * Assumes you will be using some variety of Bootstrap, and designed to be quite responsive out of the box. Included views can be overridden with custom views.
 
+### Plans Index Page
+![Plans Index Page Screenshot](http://gemvein.com/assets/screenshots/paid_up-plans-index.png)
+
+### New Subscription Page
+![New Subscription Page Screenshot](http://gemvein.com/assets/screenshots/paid_up-subscriptions-new.png)
+
 ## Installation
 
 First, add paid_up to your `Gemfile`:
