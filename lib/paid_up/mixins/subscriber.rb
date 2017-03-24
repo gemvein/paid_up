@@ -13,9 +13,10 @@ module PaidUp
         after_initialize :set_default_attributes, :load_stripe_data
         before_save :remove_anonymous_association
         before_destroy { |record| record.stripe_data.delete }
-        send :include, InstanceMethods
+        include InstanceMethods
       end
 
+      # Included by subscriber mixin
       module InstanceMethods
         def reload(*args, &blk)
           super(*args, &blk)
@@ -49,7 +50,7 @@ module PaidUp
             end
             subscription.plan = plan_to_set.stripe_id
             result = subscription.save ||
-              (raise(:could_not_update_subscription.l) && false)
+                     (raise(:could_not_update_subscription.l) && false)
           else # Totally new subscription
             args = {
               source: stripe_token,
@@ -59,15 +60,15 @@ module PaidUp
             }
             coupon_code.present? && args[:coupon] = coupon_code
             customer = Stripe::Customer.create(args) ||
-              (raise(:could_not_create_subscription.l) && false)
+                       (raise(:could_not_create_subscription.l) && false)
 
             # If there is an update to be made, we go ahead
-            if stripe_id != customer.id
-              result = update_attributes(stripe_id: customer.id) ||
-                (raise(:could_not_associate_subscription.l) && false)
-            else
-              result = true
-            end
+            result = if stripe_id != customer.id
+                       update_attributes(stripe_id: customer.id) ||
+                         (raise(:could_not_associate_subscription.l) && false)
+                     else
+                       true
+                     end
           end
           result && Rails.cache.delete("#{stripe_id}/stripe_data") && reload
         end
@@ -128,20 +129,20 @@ module PaidUp
           stripe_data.subscriptions.data.first
         end
 
-        def is_subscribed_to?(plan_to_check)
+        def subscribed_to?(plan_to_check)
           plan.present? && plan.id == plan_to_check.id
         end
 
         def can_upgrade_to?(plan_to_check)
           plan.nil? || (
-            !is_subscribed_to?(plan_to_check) &&
+            !subscribed_to?(plan_to_check) &&
             (plan_to_check.sort_order.to_i > plan.sort_order.to_i)
           )
         end
 
         def can_downgrade_to?(plan_to_check)
           !plan.nil? && (
-            !is_subscribed_to?(plan_to_check) &&
+            !subscribed_to?(plan_to_check) &&
             (plan_to_check.sort_order.to_i < plan.sort_order.to_i)
           )
         end
@@ -155,19 +156,18 @@ module PaidUp
         private
 
         def set_default_attributes
-          if new_record?
-            self.stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
-          end
+          return unless new_record?
+          self.stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
         end
 
         def load_stripe_data
           working_stripe_id = if new_record?
-            PaidUp.configuration
-            .anonymous_customer_stripe_id
-          else
-            !stripe_id.present? && subscribe_to_free_plan
-            stripe_id
-          end
+                                PaidUp.configuration
+                                      .anonymous_customer_stripe_id
+                              else
+                                !stripe_id.present? && subscribe_to_free_plan
+                                stripe_id
+                              end
 
           @customer_stripe_data = Rails.cache.fetch(
             "#{working_stripe_id}/stripe_data",
@@ -180,9 +180,9 @@ module PaidUp
         end
 
         def remove_anonymous_association
-          if stripe_id == PaidUp.configuration.anonymous_customer_stripe_id
-            self.stripe_id = nil
-          end
+          return unless stripe_id ==
+                        PaidUp.configuration.anonymous_customer_stripe_id
+          self.stripe_id = nil
         end
       end
     end

@@ -16,7 +16,8 @@ module PaidUp
     def install_devise
       output(
         'To start with, Devise is used to authenticate users. No need to '\
-          "install it separately, I'll do that now.", :magenta)
+          "install it separately, I'll do that now.", :magenta
+      )
       generate('devise:install')
       generate('devise User')
     end

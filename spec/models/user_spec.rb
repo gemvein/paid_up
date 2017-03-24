@@ -238,17 +238,17 @@ describe User do
     end
   end
 
-  context '#is_subscribed_to?' do
+  context '#subscribed_to?' do
     context 'when using free plan' do
-      subject { free_subscriber.is_subscribed_to? free_plan }
+      subject { free_subscriber.subscribed_to? free_plan }
       it { should be true }
     end
     context 'when true' do
-      subject { professional_subscriber.is_subscribed_to? professional_plan }
+      subject { professional_subscriber.subscribed_to? professional_plan }
       it { should be true }
     end
     context 'when false' do
-      subject { no_ads_subscriber.is_subscribed_to? professional_plan }
+      subject { no_ads_subscriber.subscribed_to? professional_plan }
       it { should be false }
     end
   end

@@ -10,7 +10,7 @@ module PaidUp
 
     def new
       # nothing to do, @plan set by #set_plan
-      (current_user.can_downgrade_to?(@plan) || @plan.amount == 0) && create
+      (current_user.can_downgrade_to?(@plan) || @plan.amount.zero?) && create
     end
 
     def create

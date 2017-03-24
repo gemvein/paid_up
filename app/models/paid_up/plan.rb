@@ -98,12 +98,11 @@ module PaidUp
     private
 
     def load_stripe_data
-      if stripe_id.present?
-        self.stripe_data = Rails.cache.fetch(
-          "#{stripe_id}/stripe_data", expires_in: 1.minute
-        ) do
-          Stripe::Plan.retrieve stripe_id
-        end
+      return unless stripe_id.present?
+      self.stripe_data = Rails.cache.fetch(
+        "#{stripe_id}/stripe_data", expires_in: 1.minute
+      ) do
+        Stripe::Plan.retrieve stripe_id
       end
     end
 

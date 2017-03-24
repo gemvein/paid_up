@@ -135,7 +135,10 @@ RSpec.describe PaidUp::SubscriptionsController do
           before do
             sign_in free_subscriber
             token = working_stripe_token free_subscriber
-            post :create, params: { plan_id: professional_plan.id, stripeToken: token }
+            post(
+              :create,
+              params: { plan_id: professional_plan.id, stripeToken: token }
+            )
           end
           after do
             free_subscriber.subscribe_to_plan free_plan

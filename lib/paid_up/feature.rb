@@ -1,14 +1,14 @@
 # PaidUp module
 module PaidUp
-  @@feature_object = {}
+  @feature_object = {}
 
   def self.add_feature(params)
     feature = PaidUp::Feature.new(params)
-    @@feature_object[feature.slug.to_sym] = feature
+    @feature_object[feature.slug.to_sym] = feature
   end
 
   def self.features
-    @@feature_object
+    @feature_object
   end
 
   # Feature Class: Not an ActiveRecord object.
@@ -45,7 +45,7 @@ module PaidUp
     end
 
     def feature_model_name
-      acceptable_setting_types = %w( table_rows rolify_rows )
+      acceptable_setting_types = %w(table_rows rolify_rows)
       unless acceptable_setting_types.include? setting_type
         raise :no_implicit_conversion_of_type_features.l(type: setting_type)
       end

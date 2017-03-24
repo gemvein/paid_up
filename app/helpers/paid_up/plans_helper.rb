@@ -55,7 +55,7 @@ module PaidUp
           icon_class = 'arrow-down'
           css_class += 'danger'
           data[:confirm] = :are_you_sure.l
-        elsif current_user.is_subscribed_to? plan
+        elsif current_user.subscribed_to? plan
           icon_class = 'ok'
           css_class += 'disabled disabled'
           link = '#'
