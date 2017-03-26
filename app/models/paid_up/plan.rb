@@ -79,8 +79,24 @@ module PaidUp
       end
     end
 
+    def adjusted_amount(discount)
+      return amount unless adjust?(discount)
+      adjusted = amount
+      adjusted -= (discount.coupon.percent_off || 0) * 0.01 * adjusted
+      adjusted -= (discount.coupon.adjusted_amount_off || 0)
+      [adjusted, 0].max
+    end
+
     def money
       Money.new(amount, currency)
+    end
+
+    def adjusted_money(discount)
+      Money.new(adjusted_amount(discount), currency)
+    end
+
+    def adjust?(discount)
+      discount.present? && discount.coupon.present? && !amount.zero?
     end
 
     def charge

@@ -3,19 +3,19 @@ module PaidUp
   module PaidUpHelper
     def date_range(start_date, end_date)
       dates = []
-      if start_date.present? &&
-         (start_date.is_a?(Date) || start_date.is_a?(Integer))
-        dates << start_date.to_date
-      end
-      if end_date.present? &&
-         (end_date.is_a?(Date) || end_date.is_a?(Integer))
-        dates << end_date.to_date
-      end
+      dates << start_date.to_date if date_valid?(start_date)
+      dates << end_date.to_date if date_valid?(end_date)
       dates.join('&mdash;').html_safe
     end
 
     def paid_up_google_analytics_data_layer
       render partial: 'paid_up/layouts/google_analytics_data_layer'
+    end
+
+    private
+
+    def date_valid?(date)
+      date.present? && (date.is_a?(Date) || date.is_a?(Integer))
     end
   end
 end

@@ -32,45 +32,61 @@ module PaidUp
           stripe_data.present? && stripe_data.sources.all(object: 'card')
         end
 
-        def subscribe_to_plan(plan_to_set, stripe_token = nil, trial_end = nil)
+        def subscribe_to_plan(
+          plan_to_set, stripe_token = nil, coupon_code = nil, trial_end = nil
+        )
           # If there is an existing subscription
-          if stripe_id.present? && !subscription.nil?
-            if stripe_token.present? # The customer has entered a new card
-              subscription.source = stripe_token
-              subscription.save
-              reload
-            end
-            if coupon_code.present?
-              stripe_data.coupon = coupon_code
-              stripe_data.save
-            end
-            if trial_end.present?
-              stripe_data.subscription.trial_end = trial_end
-              stripe_data.subscription.save
-            end
-            subscription.plan = plan_to_set.stripe_id
-            result = subscription.save ||
-                     (raise(:could_not_update_subscription.l) && false)
+          if stripe_id.present? && subscription.present?
+            update_subscription(
+              plan_to_set, stripe_token, coupon_code, trial_end
+            )
           else # Totally new subscription
-            args = {
-              source: stripe_token,
-              plan: plan_to_set.stripe_id,
-              email: email,
-              trial_end: trial_end
-            }
-            coupon_code.present? && args[:coupon] = coupon_code
-            customer = Stripe::Customer.create(args) ||
-                       (raise(:could_not_create_subscription.l) && false)
-
-            # If there is an update to be made, we go ahead
-            result = if stripe_id != customer.id
-                       update_attributes(stripe_id: customer.id) ||
-                         (raise(:could_not_associate_subscription.l) && false)
-                     else
-                       true
-                     end
+            new_subscription(
+              plan_to_set, stripe_token, coupon_code, trial_end
+            )
           end
-          result && Rails.cache.delete("#{stripe_id}/stripe_data") && reload
+          Rails.cache.delete("#{stripe_id}/stripe_data")
+          reload
+        end
+
+        def new_subscription(
+          plan_to_set, stripe_token = nil, coupon_code = nil, trial_end = nil
+        )
+          args = {
+            source: stripe_token,
+            plan: plan_to_set.stripe_id,
+            email: email,
+            trial_end: trial_end
+          }
+          args[:coupon] = coupon_code if coupon_code.present?
+
+          customer = Stripe::Customer.create(args)
+          raise(:could_not_create_subscription.l) unless customer.present?
+
+          # If there is an update to be made, we go ahead
+          return true if stripe_id == customer.id
+          update_attributes(stripe_id: customer.id) ||
+            raise(:could_not_associate_subscription.l)
+        end
+
+        def update_subscription(
+          plan_to_set, stripe_token = nil, coupon_code = nil, trial_end = nil
+        )
+          if stripe_token.present? # The customer has entered a new card
+            subscription.source = stripe_token
+            subscription.save
+            reload
+          end
+          if coupon_code.present?
+            stripe_data.coupon = coupon_code
+            stripe_data.save!
+          end
+          if trial_end.present?
+            stripe_data.subscription.trial_end = trial_end
+            stripe_data.subscription.save!
+          end
+          subscription.plan = plan_to_set.stripe_id
+          subscription.save || raise(:could_not_update_subscription.l)
         end
 
         def subscribe_to_free_plan
