@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PaidUp
   # PaidUp Plan model
   class Plan < ActiveRecord::Base
@@ -33,18 +34,19 @@ module PaidUp
       feature = PaidUp::Feature.find_by_slug(feature_name) ||
                 raise(:feature_not_found.l)
       raw = plan_feature_settings.where(feature: feature_name)
+      setting = raw.first.setting
       case feature.setting_type
       when 'boolean'
         if raw.empty?
           false
         else
-          raw.first.setting != 0
+          setting != 0
         end
       when 'table_rows', 'rolify_rows'
         if raw.empty?
           0
         else
-          raw.first.setting
+          setting
         end
       else
         raise :error_handling_feature_setting.l feature: feature

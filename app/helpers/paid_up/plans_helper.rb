@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PaidUp
   # PaidUp Plans Helper
   module PlansHelper
@@ -8,16 +9,10 @@ module PaidUp
       if plan.adjust?(discount)
         return amount_per_interval(plan.money.format, interval)
       end
-
-      orig_money = plan.money.format
-      money = plan.adjusted_money(discount).format
-
-      html = content_tag(:s, amount_per_interval(orig_money, interval))
-      html << ' '
-      html << content_tag(
-        :span, amount_per_interval(money, interval), class: 'text-danger'
+      plan_charge_reduced(
+        plan.money.format,
+        plan.adjusted_money(discount).format
       )
-      html
     end
 
     def plan_button(plan, text = nil, html_options = {})
@@ -49,6 +44,17 @@ module PaidUp
       "#{amount}/#{interval}"
     end
 
+    def plan_charge_reduced(old_money, new_money)
+      html = []
+      html << content_tag(:s, amount_per_interval(old_money, interval))
+      html << content_tag(
+        :span, amount_per_interval(new_money, interval), class: 'text-danger'
+      )
+      html.join(' ')
+    end
+
+    # rubocop:disable Metrics/AbcSize
+    # This is just this complex.
     def plan_button_atts(plan)
       return anonymous_atts unless user_signed_in?
       return delinquent_atts if current_user.stripe_data.delinquent
@@ -57,6 +63,7 @@ module PaidUp
       return downgrade_atts if current_user.can_downgrade_to? plan
       sidegrade_atts
     end
+    # rubocop:enable Metrics/AbcSize
 
     def anonymous_atts
       { text: :sign_up.l, icon_class: 'arrow-right', css_class: 'success' }

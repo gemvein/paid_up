@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PaidUp
   # PaidUp Ability model
   module Ability
@@ -12,38 +13,34 @@ module PaidUp
 
     private
 
-    def enable_table_rows(user, feature)
-      slug = feature.slug
-      model = feature.feature_model
+    def enable_rows(model, allowed, remaining)
       can :index, model
       can :show, model, &:enabled
-      if user.table_rows_allowed(slug) > 0 ||
-         user.table_rows_unlimited?(slug)
-        can :manage, model, user: user
+      if allowed > 0
         can :own, model
         cannot :create, model
-        user.table_rows_remaining(slug) > 0 &&
-          can([:create, :new], model)
+        can([:create, :new], model) if remaining > 0
       else
         cannot [:delete, :update, :own, :create], model
       end
     end
 
+    def enable_table_rows(user, feature)
+      slug = feature.slug
+      model = feature.feature_model
+      allowed = user.table_rows_allowed(slug)
+      remaining = user.table_rows_remaining(slug)
+      enable_rows(model, allowed, remaining)
+      can :manage, model, user: user if allowed > 0
+    end
+
     def enable_rolify_rows(user, feature)
       slug = feature.slug
       model = feature.feature_model
-      can :index, model
-      can :show, model, &:enabled
-      if user.rolify_rows_allowed(slug) > 0 ||
-         user.rolify_rows_unlimited?(slug)
-        can :manage, model, id: model.with_role(:owner, user).ids
-        can :own, model
-        cannot :create, model
-        user.rolify_rows_remaining(slug) > 0 &&
-          can([:create, :new], model)
-      else
-        cannot [:delete, :update, :own, :create], model
-      end
+      allowed = user.rolify_rows_allowed(slug)
+      remaining = user.rolify_rows_remaining(slug)
+      enable_rows(model, allowed, remaining)
+      can :manage, model, id: model.with_role(:owner, user).ids if allowed > 0
     end
 
     def enable_boolean(user, feature)

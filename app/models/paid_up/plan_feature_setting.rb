@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PaidUp
   # Plan-FeatureSetting Relationship
   class PlanFeatureSetting < ActiveRecord::Base

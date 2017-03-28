@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # PaidUp module
 module PaidUp
   VERSION = File.read(File.expand_path('../../../VERSION', __FILE__))

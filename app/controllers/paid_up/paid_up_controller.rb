@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PaidUp
   # PaidUp Controller
   class PaidUpController < ApplicationController
@@ -13,16 +14,19 @@ module PaidUp
     end
 
     def warn_if_delinquent
-      return unless user_signed_in? &&
-                    params[:controller] != 'paid_up/subscriptions' &&
-                    (
-                      current_user.plan.nil? ||
-                      current_user.stripe_data.delinquent
-                    )
+      return unless delinquent? &&
+                    params[:controller] != 'paid_up/subscriptions'
       flash[:error] = :account_is_delinquent.l +
                       :to_disable_this_message_subscribe.l(
                         subscribe_link: paid_up.plans_path
                       )
+    end
+
+    def delinquent?
+      user_signed_in? && (
+        current_user.plan.nil? ||
+        current_user.stripe_data.delinquent
+      )
     end
   end
 end

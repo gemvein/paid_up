@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PaidUp
   module Mixins
     ASSOCIATION_METHODS = {
@@ -18,18 +19,13 @@ module PaidUp
 
         self.paid_for_scope_symbol = options.fetch(:scope, :all)
 
-        if feature.nil?
-          raise(
-            :feature_not_found_feature.l(feature: table_name)
-          )
-        end
+        validate_feature
 
         setting_type = feature.setting_type
         method = ASSOCIATION_METHODS[setting_type.to_sym] ||
                  raise(
                    :value_is_not_a_valid_setting_type.l(value: setting_type)
                  )
-
         send(method)
       end
 
@@ -44,6 +40,11 @@ module PaidUp
         end
 
         private
+
+        def validate_feature
+          return true unless feature.nil?
+          raise(:feature_not_found_feature.l(feature: table_name))
+        end
 
         def associations_for_rolify_rows
           resourcify

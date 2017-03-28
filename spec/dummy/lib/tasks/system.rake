@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :system do
   desc 'Recreate database from seeds'
   task clean: :environment do

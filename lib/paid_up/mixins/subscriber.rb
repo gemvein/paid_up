@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PaidUp
   module Mixins
     # Subscriber Mixin
@@ -33,29 +34,23 @@ module PaidUp
         end
 
         def subscribe_to_plan(
-          plan_to_set, stripe_token = nil, coupon_code = nil, trial_end = nil
+          new_plan, stripe_token = nil, coupon_code = nil, trial_end = nil
         )
           # If there is an existing subscription
           if stripe_id.present? && subscription.present?
-            update_subscription(
-              plan_to_set, stripe_token, coupon_code, trial_end
-            )
+            update_subscription(new_plan, stripe_token, coupon_code, trial_end)
           else # Totally new subscription
-            new_subscription(
-              plan_to_set, stripe_token, coupon_code, trial_end
-            )
+            new_subscription(new_plan, stripe_token, coupon_code, trial_end)
           end
           Rails.cache.delete("#{stripe_id}/stripe_data")
           reload
         end
 
         def new_subscription(
-          plan_to_set, stripe_token = nil, coupon_code = nil, trial_end = nil
+          new_plan, stripe_token = nil, coupon_code = nil, trial_end = nil
         )
           args = {
-            source: stripe_token,
-            plan: plan_to_set.stripe_id,
-            email: email,
+            source: stripe_token, plan: new_plan.stripe_id, email: email,
             trial_end: trial_end
           }
           args[:coupon] = coupon_code if coupon_code.present?
@@ -70,12 +65,12 @@ module PaidUp
         end
 
         def update_subscription(
-          plan_to_set, stripe_token = nil, coupon_code = nil, trial_end = nil
+          new_plan, stripe_token = nil, coupon_code = nil, trial_end = nil
         )
           update_stripe_token(stripe_token)
           update_coupon_code(coupon_code)
           update_trial_end(trial_end)
-          update_plan(plan_to_set)
+          update_plan(new_plan)
         end
 
         def subscribe_to_free_plan
@@ -95,10 +90,12 @@ module PaidUp
         end
 
         def table_rows_remaining(table_name)
+          return PaidUp::Unlimited if table_rows_unlimited?
           table_rows_allowed(table_name) - table_rows_count(table_name)
         end
 
         def table_rows_allowed(table_name)
+          return PaidUp::Unlimited if table_rows_unlimited?
           plan.feature_setting table_name
         end
 
@@ -112,14 +109,16 @@ module PaidUp
         end
 
         def rolify_rows_unlimited?(table_name)
-          rolify_rows_allowed(table_name) == PaidUp::Unlimited.to_i
+          rolify_rows_allowed(table_name) == PidUpa::Unlimited.to_i
         end
 
         def rolify_rows_remaining(table_name)
+          return PaidUp::Unlimited if rolify_rows_unlimited?
           rolify_rows_allowed(table_name) - rolify_rows_count(table_name)
         end
 
         def rolify_rows_allowed(table_name)
+          return PaidUp::Unlimited if rolify_rows_unlimited?
           plan.feature_setting table_name
         end
 
@@ -195,11 +194,11 @@ module PaidUp
           subscription.save || raise(:could_not_update_cancel.l)
         end
 
-        def update_plan(plan_to_set)
-          return unless plan_to_set.present?
+        def update_plan(new_plan)
+          return unless new_plan.present?
           # The customer has changed plans
           # We need to update the info on the Stripe API.
-          subscription.plan = plan_to_set.stripe_id
+          subscription.plan = new_plan.stripe_id
           subscription.save || raise(:could_not_update_plan.l)
         end
 

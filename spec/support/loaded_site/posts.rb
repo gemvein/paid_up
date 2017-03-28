@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 shared_context 'posts' do
   let(:first_post) { Post.find_by_title('First Post') }
   let(:active_post) { Post.find_by_title('Active Post') }

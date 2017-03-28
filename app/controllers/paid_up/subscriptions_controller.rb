@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module PaidUp
   # Subscriptions Controller
   class SubscriptionsController < PaidUpController
@@ -65,8 +66,9 @@ module PaidUp
     end
 
     def google_analytics_flash
-      subscription_id = current_user.stripe_data.subscriptions.first.id
-      discount = current_user.stripe_data.discount
+      stripe_data = current_user.stripe_data
+      subscription_id = stripe_data.subscriptions.first.id
+      discount = stripe_data.discount
       flash[:paid_up_google_analytics_data] = {
         transactionId: subscription_id,
         transactionTotal: @plan.adjusted_money(discount).dollars,
