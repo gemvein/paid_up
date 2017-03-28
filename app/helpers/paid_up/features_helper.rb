@@ -29,31 +29,16 @@ module PaidUp
     end
 
     def features_table(options = {})
-      features = PaidUp::Feature.all
-
-      if !options[:should_add_buttons].nil?
-        should_add_buttons = options[:should_add_buttons]
-        options.delete(:should_add_buttons)
-      else
-        should_add_buttons = true
-      end
+      should_add_buttons = options.delete(:should_add_buttons) || true
+      highlight = options.delete(:highlight)
+      only = options.delete(:only)
+      except = options.delete(:except)
 
       plans = PaidUp::Plan.subscribable
-      if options[:only].present?
-        plans = plans.where(id: options[:only])
-        options.delete(:only)
-      end
-      if options[:except].present?
-        plans = plans.where.not(id: options[:except])
-        options.delete(:except)
-      end
+      plans = plans.where(id: only) if only.present?
+      plans = plans.where.not(id: except) if except.present?
 
-      if options[:highlight].present?
-        highlight_plan = options[:highlight]
-        options.delete(:highlight)
-      else
-        highlight_plan = nil
-      end
+      features = PaidUp::Feature.all
 
       render(
         partial: 'paid_up/features/table',
@@ -61,7 +46,7 @@ module PaidUp
           should_add_buttons: should_add_buttons,
           plans: plans,
           features: features,
-          highlight_plan: highlight_plan,
+          highlight_plan: highlight,
           html_options: options
         }
       )

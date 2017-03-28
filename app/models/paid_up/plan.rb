@@ -83,7 +83,7 @@ module PaidUp
       return amount unless adjust?(discount)
       adjusted = amount
       adjusted -= (discount.coupon.percent_off || 0) * 0.01 * adjusted
-      adjusted -= (discount.coupon.adjusted_amount_off || 0)
+      adjusted -= (discount.coupon.amount_off || 0)
       [adjusted, 0].max
     end
 

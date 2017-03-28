@@ -21,13 +21,13 @@ describe 'Scopes' do
     end
   end
 
-  describe 'user#table_rows' do
-    subject { free_subscriber.table_rows('posts') }
+  describe 'user#table_rows_count' do
+    subject { free_subscriber.table_rows_count('posts') }
     it { should eq 4 }
   end
 
-  describe 'user#rolify_rows' do
-    subject { group_leader_subscriber.rolify_rows('groups') }
+  describe 'user#rolify_rows_count' do
+    subject { group_leader_subscriber.rolify_rows_count('groups') }
     it { should eq 1 }
   end
 end

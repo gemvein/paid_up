@@ -135,9 +135,9 @@ describe User do
     end
   end
 
-  context '#table_rows' do
+  context '#table_rows_count' do
     context 'when possessing no rows' do
-      subject { professional_subscriber.table_rows 'doodads' }
+      subject { professional_subscriber.table_rows_count 'doodads' }
       it { should eq 0 }
     end
     context 'when possessing 3 rows' do
@@ -146,7 +146,7 @@ describe User do
           professional_subscriber.doodads.create! name: 'Test Doodad'
         end
       end
-      subject { professional_subscriber.table_rows 'doodads' }
+      subject { professional_subscriber.table_rows_count 'doodads' }
       it { should eq 3 }
     end
   end
@@ -196,9 +196,9 @@ describe User do
     end
   end
 
-  context '#rolify_rows' do
+  context '#rolify_rows_count' do
     context 'when possessing no rows' do
-      subject { blank_subscriber.rolify_rows 'groups' }
+      subject { blank_subscriber.rolify_rows_count 'groups' }
       it { should eq 0 }
     end
     context 'when possessing 3 rows' do
@@ -211,7 +211,7 @@ describe User do
           )
         end
       end
-      subject { blank_subscriber.rolify_rows 'groups' }
+      subject { blank_subscriber.rolify_rows_count 'groups' }
       it { should eq 3 }
     end
   end

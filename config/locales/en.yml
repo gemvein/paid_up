@@ -38,7 +38,10 @@ en:
   could_not_associate_subscription: 'Could not associate subscription'
   could_not_create_subscription: 'Could not create subscription'
   could_not_subscribe_to_plan: "Could not subscribe to %{plan}"
-  could_not_update_subscription: 'Could not update subscription'
+  could_not_update_cancel: 'Could not update to reflect cancel'
+  could_not_update_card: 'Could not update card'
+  could_not_update_coupon: 'Could not update coupon'
+  could_not_update_subscription: 'Could not update plan'
   coupon_code: 'Coupon Code'
   currently_awaiting_confirmation_for_resource: "Currently awaiting confirmation for %{resource}"
   cvc: 'CVC/CVV'

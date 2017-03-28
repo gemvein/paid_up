@@ -134,6 +134,10 @@ Doing this will populate the e-commerce data in Google Analytics, but you must a
 
 ### Upgrading
 
+#### Version 0.12.0
+
+`table_rows` and `rolify_rows` were renamed to `table_rows_count` and `rolify_rows_count`, replaced by methods that fetch the rows themselves.
+
 #### Version 0.9.0
 
 Version 0.9.0 enabled coupon codes, which are saved on the user's record. Be sure to run `rake paid_up:install:migrations` and migrate your database after upgrading.
