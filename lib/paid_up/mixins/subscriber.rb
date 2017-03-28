@@ -90,12 +90,10 @@ module PaidUp
         end
 
         def table_rows_remaining(table_name)
-          return PaidUp::Unlimited if table_rows_unlimited?
           table_rows_allowed(table_name) - table_rows_count(table_name)
         end
 
         def table_rows_allowed(table_name)
-          return PaidUp::Unlimited if table_rows_unlimited?
           plan.feature_setting table_name
         end
 
@@ -109,16 +107,14 @@ module PaidUp
         end
 
         def rolify_rows_unlimited?(table_name)
-          rolify_rows_allowed(table_name) == PidUpa::Unlimited.to_i
+          rolify_rows_allowed(table_name) == PaidUp::Unlimited.to_i
         end
 
         def rolify_rows_remaining(table_name)
-          return PaidUp::Unlimited if rolify_rows_unlimited?
           rolify_rows_allowed(table_name) - rolify_rows_count(table_name)
         end
 
         def rolify_rows_allowed(table_name)
-          return PaidUp::Unlimited if rolify_rows_unlimited?
           plan.feature_setting table_name
         end
 

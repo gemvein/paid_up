@@ -85,9 +85,9 @@ module PaidUp
     def self.method_missing(method_sym, *arguments, &block)
       # the first argument is a Symbol, so you need to_s it if you want to
       # pattern match
-      if method_sym.to_s.match?(/^find_by_(.*)$/)
+      if method_sym.to_s =~ /^find_by_(.*)$/
         find(Regexp.last_match[1].to_sym => arguments.first)
-      elsif method_sym.to_s.match?(/^find_all_by_(.*)$/)
+      elsif method_sym.to_s =~ /^find_all_by_(.*)$/
         find_all(Regexp.last_match[1].to_sym => arguments.first)
       else
         super

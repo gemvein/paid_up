@@ -11,7 +11,8 @@ module PaidUp
       end
       plan_charge_reduced(
         plan.money.format,
-        plan.adjusted_money(discount).format
+        plan.adjusted_money(discount).format,
+        interval
       )
     end
 
@@ -44,7 +45,7 @@ module PaidUp
       "#{amount}/#{interval}"
     end
 
-    def plan_charge_reduced(old_money, new_money)
+    def plan_charge_reduced(old_money, new_money, interval)
       html = []
       html << content_tag(:s, amount_per_interval(old_money, interval))
       html << content_tag(

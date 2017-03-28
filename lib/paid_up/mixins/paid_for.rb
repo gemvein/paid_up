@@ -110,7 +110,7 @@ module PaidUp
           if owners_enabled_count >= owners_records_count
             true
           else
-            enabled_records = owners_records.order('created_at ASC')
+            enabled_records = owners_records.order(id: :asc)
                                             .limit(owners_enabled_count)
             enabled_records.include? self
           end
