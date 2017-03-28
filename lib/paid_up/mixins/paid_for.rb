@@ -1,5 +1,11 @@
 module PaidUp
   module Mixins
+    ASSOCIATION_METHODS = {
+      rolify_rows: :associations_for_rolify_rows,
+      table_rows: :associations_for_table_rows,
+      boolean: :true
+    }.freeze
+
     # PaidFor Mixin
     module PaidFor
       extend ActiveSupport::Concern
@@ -11,23 +17,20 @@ module PaidUp
         include InstanceMethods
 
         self.paid_for_scope_symbol = options.fetch(:scope, :all)
-        feature.nil? && raise(
-          :feature_not_found_feature.l(feature: table_name)
-        )
-        case feature.setting_type
-        when 'rolify_rows'
-          resourcify
-          attr_accessor :owner
-        when 'table_rows'
-          belongs_to :user
-          User.has_many table_name.to_sym
-        else
-          unless feature.setting_type == 'boolean'
-            raise(
-              :value_is_not_a_valid_setting_type.l(value: feature.setting_type)
-            )
-          end
+
+        if feature.nil?
+          raise(
+            :feature_not_found_feature.l(feature: table_name)
+          )
         end
+
+        setting_type = feature.setting_type
+        method = ASSOCIATION_METHODS[setting_type.to_sym] ||
+                 raise(
+                   :value_is_not_a_valid_setting_type.l(value: setting_type)
+                 )
+
+        send(method)
       end
 
       # Extended by paid_for mixin
@@ -38,6 +41,18 @@ module PaidUp
 
         def paid_for_scope
           send(paid_for_scope_symbol)
+        end
+
+        private
+
+        def associations_for_rolify_rows
+          resourcify
+          attr_accessor :owner
+        end
+
+        def associations_for_table_rows
+          belongs_to :user
+          User.has_many table_name.to_sym
         end
       end
 
@@ -71,26 +86,18 @@ module PaidUp
         end
 
         def owners_records
-          ids = []
-          owners.each do |subscriber|
-            case self.class.feature.setting_type
-            when 'table_rows'
-              ids += subscriber.send(self.class.table_name)
-                               .paid_for_scope
-                               .ids
-            when 'rolify_rows'
-              ids += self.class
-                         .with_role(:owner, subscriber)
-                         .paid_for_scope
-                         .ids
+          setting_type = self.class.feature.setting_type
+          table_name = self.class.table_name
+          ids = owners.map do |subscriber|
+            case setting_type
+            when 'table_rows', 'rolify_rows'
+              subscriber.send(setting_type, table_name).ids
             else
               raise(
-                :no_features_associated_with_table.l(
-                  table: self.class.table_name
-                )
+                :no_features_associated_with_table.l(table: table_name)
               )
             end
-          end
+          end.flatten
           self.class.where(id: ids)
         end
 
