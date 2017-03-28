@@ -11,13 +11,13 @@ describe 'Scopes' do
     it { should_not include inactive_post }
   end
 
-  describe 'paid_for#enabled' do
+  describe 'paid_for#enabled?' do
     describe 'when it is within the limit' do
-      subject { still_enabled_post.enabled }
+      subject { still_enabled_post.enabled? }
       it { should be true }
     end
     describe 'when it is NOT within the limit' do
-      subject { no_longer_enabled_post.enabled }
+      subject { no_longer_enabled_post.enabled? }
       it { should be false }
     end
   end

@@ -43,13 +43,13 @@ describe Group do
     it { should eq 2 }
   end
 
-  describe '#enabled' do
+  describe '#enabled?' do
     describe 'when true' do
-      subject { first_group.enabled }
+      subject { first_group.enabled? }
       it { should eq true }
     end
     describe 'when false' do
-      subject { disabled_group.enabled }
+      subject { disabled_group.enabled? }
       it { should eq false }
     end
   end

@@ -136,7 +136,11 @@ Doing this will populate the e-commerce data in Google Analytics, but you must a
 
 #### Version 0.12.0
 
-`table_rows` and `rolify_rows` were renamed to `table_rows_count` and `rolify_rows_count`, replaced by methods that fetch the rows themselves.
+##### paid_for Mixin
+
+The methods `table_rows` and `rolify_rows` were renamed to `table_rows_count` and `rolify_rows_count`, replaced by methods that fetch the rows themselves.
+
+The method `enabled` was renamed to `enabled?`.
 
 #### Version 0.9.0
 

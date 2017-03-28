@@ -106,13 +106,13 @@ module PaidUp
           owners_records.count
         end
 
-        def enabled
+        def enabled?
           if owners_enabled_count >= owners_records_count
             true
           else
-            enabled_records = owners_records.order(id: :asc)
-                                            .limit(owners_enabled_count)
-            enabled_records.include? self
+            owners_records.order(id: :asc)
+                          .limit(owners_enabled_count)
+                          .include? self
           end
         end
       end

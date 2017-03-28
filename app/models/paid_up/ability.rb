@@ -15,7 +15,7 @@ module PaidUp
 
     def enable_rows(model, allowed, remaining)
       can :index, model
-      can :show, model, &:enabled
+      can :show, model, &:enabled?
       if allowed.positive?
         can :own, model
         cannot :create, model
