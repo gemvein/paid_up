@@ -16,10 +16,10 @@ module PaidUp
     def enable_rows(model, allowed, remaining)
       can :index, model
       can :show, model, &:enabled
-      if allowed > 0
+      if allowed.positive?
         can :own, model
         cannot :create, model
-        can([:create, :new], model) if remaining > 0
+        can([:create, :new], model) if remaining.positive?
       else
         cannot [:delete, :update, :own, :create], model
       end
@@ -31,7 +31,8 @@ module PaidUp
       allowed = user.table_rows_allowed(slug)
       remaining = user.table_rows_remaining(slug)
       enable_rows(model, allowed, remaining)
-      can :manage, model, user: user if allowed > 0
+      return unless allowed.positive?
+      can :manage, model, user: user
     end
 
     def enable_rolify_rows(user, feature)
@@ -40,7 +41,8 @@ module PaidUp
       allowed = user.rolify_rows_allowed(slug)
       remaining = user.rolify_rows_remaining(slug)
       enable_rows(model, allowed, remaining)
-      can :manage, model, id: model.with_role(:owner, user).ids if allowed > 0
+      return unless allowed.positive?
+      can :manage, model, id: model.with_role(:owner, user).ids
     end
 
     def enable_boolean(user, feature)
