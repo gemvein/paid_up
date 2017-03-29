@@ -8,3 +8,4 @@ coverage/
 .idea
 Gemfile.lock
 spec/dummy/.env
+spec/dummy/*.sqlite3
