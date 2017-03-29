@@ -25,7 +25,8 @@ gem 'stripe', '>= 1.36', '< 2'
 group :development do
   gem 'bundler', '~> 1'
   gem 'coffeelint', '~> 1.14'
-  gem 'jeweler', '~> 2'
+  gem 'juwelier', '~> 2'
+  gem 'nokogiri', '>= 1.7'
   gem 'pre-commit', '~> 0.32'
   gem 'rubocop', git: 'https://github.com/bbatsov/rubocop.git' # Wait for 0.49
   gem 'scss_lint', '~> 0.52.0', require: false
