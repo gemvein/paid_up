@@ -60,15 +60,9 @@ RSpec.describe 'paid_up/subscriptions/index' do
       end
       subject { rendered }
       it { should include 'Group Leader' }
-      it do
-        should have_selector 'table.abilities #ad_free_ability .glyphicon-ok'
-      end
-      it do
-        should have_selector 'table.abilities #groups_ability .glyphicon-ok'
-      end
-      it do
-        should have_selector 'table.abilities #doodads_ability .glyphicon-ok'
-      end
+      it { should have_css 'table.abilities #ad_free_ability .glyphicon-ok' }
+      it { should have_css 'table.abilities #groups_ability .glyphicon-ok' }
+      it { should have_css 'table.abilities #doodads_ability .glyphicon-ok' }
     end
   end
 end

@@ -26,6 +26,19 @@ module PaidUp
       end
     end
 
+    def feature_state(feature)
+      case feature.setting_type
+      when 'boolean'
+        boolean_state(feature)
+      when 'table_rows'
+        setting_state feature, current_user.table_setting(feature.slug)
+      when 'rolify_rows'
+        setting_state feature, current_user.rolify_setting(feature.slug)
+      else
+        :error.l
+      end
+    end
+
     def features_table(options = {})
       plans = PaidUp::Plan.display options.delete(:only),
                                    options.delete(:except)
@@ -45,6 +58,22 @@ module PaidUp
         partial: 'paid_up/features/abilities_table',
         locals: { features: features, html_options: options }
       )
+    end
+
+    private
+
+    def boolean_state(feature)
+      render partial: 'paid_up/features/boolean_state', locals: {
+        feature: feature
+      }
+    end
+
+    def setting_state(feature, setting)
+      render partial: 'paid_up/features/setting_state', locals: {
+        remaining: setting.rows_remaining, used: setting.rows_count,
+        allowed: setting.rows_allowed, model: feature.feature_model,
+        unlimited: setting.rows_unlimited?
+      }
     end
   end
 end
