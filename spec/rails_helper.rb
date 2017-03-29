@@ -1,6 +1,8 @@
 # frozen_string_literal: true
-require 'coveralls'
-Coveralls.wear!
+
+# This is getting deprecation warnings for some reason
+# require 'coveralls'
+# Coveralls.wear!
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'

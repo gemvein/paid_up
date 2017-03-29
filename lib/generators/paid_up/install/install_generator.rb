@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module PaidUp
   # PaidUp Install Generator
   class InstallGenerator < Rails::Generators::Base

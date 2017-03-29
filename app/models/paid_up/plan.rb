@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module PaidUp
   # PaidUp Plan model
   class Plan < ActiveRecord::Base
@@ -20,8 +21,16 @@ module PaidUp
 
     default_scope { order('sort_order ASC') }
     scope :subscribable, -> { where('sort_order >=  ?', 0) }
+    scope :within, ->(ids) { where(id: ids) }
+    scope :without, ->(ids) { where.not(id: ids) }
     scope :free, (lambda do
       find_by_stripe_id(PaidUp.configuration.free_plan_stripe_id)
+    end)
+    scope :display, (lambda do |within, without|
+      plans = subscribable
+      plans = plans.within(within) if within.present?
+      plans = plans.without(without) if without.present?
+      plans
     end)
 
     def reload(*args, &blk)
@@ -31,22 +40,13 @@ module PaidUp
     end
 
     def feature_setting(feature_name)
-      feature = PaidUp::Feature.find_by_slug(feature_name) ||
-                raise(:feature_not_found.l)
+      feature = PaidUp::Feature.find_by_slug!(feature_name)
       raw = plan_feature_settings.where(feature: feature_name)
       case feature.setting_type
       when 'boolean'
-        if raw.empty?
-          false
-        else
-          raw.first.setting != 0
-        end
+        raw&.first&.setting == 1
       when 'table_rows', 'rolify_rows'
-        if raw.empty?
-          0
-        else
-          raw.first.setting
-        end
+        raw&.first&.setting || 0
       else
         raise :error_handling_feature_setting.l feature: feature
       end

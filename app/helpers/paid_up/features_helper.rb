@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module PaidUp
   # PaidUp Features Helper
   module FeaturesHelper
@@ -17,11 +18,7 @@ module PaidUp
 
     def feature_display(feature, plan)
       if feature.setting_type == 'boolean'
-        if plan.feature_setting(feature.slug)
-          icon 'ok'
-        else
-          icon 'remove'
-        end
+        icon plan.feature_setting(feature.slug) ? 'ok' : 'remove'
       elsif plan.feature_unlimited?(feature.slug)
         :unlimited.l
       else
@@ -30,25 +27,14 @@ module PaidUp
     end
 
     def features_table(options = {})
-      should_add_buttons = options.delete(:should_add_buttons) || true
-      highlight = options.delete(:highlight)
-      only = options.delete(:only)
-      except = options.delete(:except)
-
-      plans = PaidUp::Plan.subscribable
-      plans = plans.where(id: only) if only.present?
-      plans = plans.where.not(id: except) if except.present?
-
-      features = PaidUp::Feature.all
-
+      plans = PaidUp::Plan.display options.delete(:only),
+                                   options.delete(:except)
       render(
         partial: 'paid_up/features/table',
         locals: {
-          should_add_buttons: should_add_buttons,
-          plans: plans,
-          features: features,
-          highlight_plan: highlight,
-          html_options: options
+          highlight_plan: options.delete(:highlight), plans: plans,
+          should_add_buttons: options.delete(:should_add_buttons) || true,
+          features: PaidUp::Feature.all, html_options: options
         }
       )
     end

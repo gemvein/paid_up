@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 module PaidUp
   # Subscriptions Controller
   class SubscriptionsController < PaidUpController
     before_action :authenticate_user!
-    before_action :load_plan, only: [:new, :create]
+    before_action :load_plan, only: %i(new create)
 
     rescue_from Stripe::InvalidRequestError do |error|
       invalid_request_error(error)
@@ -67,15 +68,12 @@ module PaidUp
 
     def google_analytics_flash
       stripe_data = current_user.stripe_data
-      subscription_id = stripe_data.subscriptions.first.id
       discount = stripe_data.discount
       flash[:paid_up_google_analytics_data] = {
-        transactionId: subscription_id,
+        transactionId: stripe_data.subscriptions.first.id,
         transactionTotal: @plan.adjusted_money(discount).dollars,
         transactionProducts: [
-          sku: @plan.stripe_id,
-          name: @plan.title,
-          price: @plan.money.dollars,
+          sku: @plan.stripe_id, name: @plan.title, price: @plan.money.dollars,
           quantity: '1'
         ]
       }

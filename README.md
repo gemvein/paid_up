@@ -136,6 +136,8 @@ Doing this will populate the e-commerce data in Google Analytics, but you must a
 
 #### Version 0.12.0
 
+Version 0.12.0 requires Ruby 2.3 or higher because of the use of the `&.` operator.
+
 ##### paid_for Mixin
 
 The methods `table_rows` and `rolify_rows` were renamed to `table_rows_count` and `rolify_rows_count`, replaced by methods that fetch the rows themselves.

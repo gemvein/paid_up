@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module PaidUp
   module Validators
     # RolifyRows Validator

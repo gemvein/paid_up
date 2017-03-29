@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 group :test, :development do
@@ -26,7 +27,7 @@ group :development do
   gem 'coffeelint', '~> 1.14'
   gem 'jeweler', '~> 2'
   gem 'pre-commit', '~> 0.32'
-  gem 'rubocop', '~> 0.47'
+  gem 'rubocop', git: 'https://github.com/bbatsov/rubocop.git' # Wait for 0.49
   gem 'scss_lint', '~> 0.52.0', require: false
   gem 'web-console', '~> 3'
 end
@@ -43,7 +44,9 @@ end
 
 group :test do
   gem 'capybara', '~> 2'
-  gem 'coveralls', '>= 0.8', '< 2', require: false
+  # # Getting deprecation warnings on this
+  # gem 'coveralls', '>= 0.8', '< 2', require: false
+  # gem 'simplecov', '>= 0.14', :require => false
   gem 'database_cleaner', '~> 1'
   gem 'launchy', '~> 2.4', require: false
   gem 'rspec-collection_matchers', '~> 1.1'

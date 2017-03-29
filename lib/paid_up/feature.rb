@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # PaidUp module
 module PaidUp
   @feature_object = {}
@@ -61,6 +62,10 @@ module PaidUp
       raw[slug.to_sym]
     end
 
+    def self.find_by_slug!(slug)
+      find_by_slug(slug) || raise(:feature_not_found.l)
+    end
+
     def self.all
       raw.values
     end
@@ -81,10 +86,7 @@ module PaidUp
       find_all(conditions).first
     end
 
-    # Define on self, since it's  a class method
     def self.method_missing(method_sym, *arguments, &block)
-      # the first argument is a Symbol, so you need to_s it if you want to
-      # pattern match
       if method_sym.to_s =~ /^find_by_(.*)$/
         find(Regexp.last_match[1].to_sym => arguments.first)
       elsif method_sym.to_s =~ /^find_all_by_(.*)$/

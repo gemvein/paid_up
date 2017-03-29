@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module PaidUp
   module Mixins
     ASSOCIATION_METHODS = {
@@ -20,13 +21,7 @@ module PaidUp
         self.paid_for_scope_symbol = options.fetch(:scope, :all)
 
         validate_feature
-
-        setting_type = feature.setting_type
-        method = ASSOCIATION_METHODS[setting_type.to_sym] ||
-                 raise(
-                   :value_is_not_a_valid_setting_type.l(value: setting_type)
-                 )
-        send(method)
+        associations
       end
 
       # Extended by paid_for mixin
@@ -44,6 +39,15 @@ module PaidUp
         def validate_feature
           return true unless feature.nil?
           raise(:feature_not_found_feature.l(feature: table_name))
+        end
+
+        def associations
+          setting_type = feature.setting_type
+          method = ASSOCIATION_METHODS[setting_type.to_sym] ||
+                   raise(
+                     :value_is_not_a_valid_setting_type.l(value: setting_type)
+                   )
+          send(method)
         end
 
         def associations_for_rolify_rows
@@ -87,19 +91,20 @@ module PaidUp
         end
 
         def owners_records
+          self.class.where(id: owners_records_ids)
+        end
+
+        def owners_records_ids
           setting_type = self.class.feature.setting_type
           table_name = self.class.table_name
-          ids = owners.map do |subscriber|
+          owners.map do |subscriber|
             case setting_type
             when 'table_rows', 'rolify_rows'
               subscriber.send(setting_type, table_name).ids
             else
-              raise(
-                :no_features_associated_with_table.l(table: table_name)
-              )
+              raise :no_features_associated_with_table.l(table: table_name)
             end
           end.flatten
-          self.class.where(id: ids)
         end
 
         def owners_records_count

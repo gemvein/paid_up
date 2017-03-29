@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 shared_context 'users' do
   let(:free_subscriber) { User.find_by_name('Free Subscriber') }
   let(:no_ads_subscriber) { User.find_by_name('No Ads Subscriber') }

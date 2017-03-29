@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module PaidUp
   # PaidUp Ability model
   module Ability
@@ -19,9 +20,9 @@ module PaidUp
       if allowed.positive?
         can :own, model
         cannot :create, model
-        can([:create, :new], model) if remaining.positive?
+        can(%i(create new), model) if remaining.positive?
       else
-        cannot [:delete, :update, :own, :create], model
+        cannot %i(delete update own create), model
       end
     end
 

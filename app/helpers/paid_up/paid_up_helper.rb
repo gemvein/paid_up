@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module PaidUp
   # PaidUp PaidUp Helper
   module PaidUpHelper

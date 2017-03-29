@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 shared_context 'loaded site' do
   include_context 'plans'
   include_context 'features'

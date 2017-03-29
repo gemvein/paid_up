@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # PaidUp Module
 module PaidUp
   require 'active_record/railtie'
@@ -23,6 +24,7 @@ module PaidUp
   require 'paid_up/engine'
   require 'paid_up/localization'
   require 'paid_up/version'
+  require 'paid_up/ruby_version_check'
 
   require 'paid_up/extensions/stripe'
   require 'paid_up/extensions/integer'

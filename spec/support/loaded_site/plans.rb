@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 shared_context 'plans' do
   let!(:anonymous_plan) { PaidUp::Plan.find_by_stripe_id('anonymous-plan') }
   let!(:free_plan) { PaidUp::Plan.find_by_stripe_id('free-plan') }

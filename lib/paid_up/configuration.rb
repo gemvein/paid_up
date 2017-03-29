@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # PaidUp Module
 module PaidUp
   def self.configure(configuration = PaidUp::Configuration.new)
