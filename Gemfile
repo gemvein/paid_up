@@ -20,7 +20,7 @@ gem 'money', '~> 6.5'
 gem 'cancancan', '~> 1'
 gem 'devise', '>= 3.4', '< 5'
 gem 'rolify', '~> 5'
-gem 'stripe', '>= 1.36', '< 2'
+gem 'stripe', '>= 1.36', '< 3'
 
 group :development do
   gem 'bundler', '~> 1'
@@ -45,9 +45,7 @@ end
 
 group :test do
   gem 'capybara', '~> 2'
-  # # Getting deprecation warnings on this
-  # gem 'coveralls', '>= 0.8', '< 2', require: false
-  # gem 'simplecov', '>= 0.14', :require => false
+  gem 'coveralls', '>= 0.8', '< 2', require: false
   gem 'database_cleaner', '~> 1'
   gem 'launchy', '~> 2.4', require: false
   gem 'rspec-collection_matchers', '~> 1.1'
