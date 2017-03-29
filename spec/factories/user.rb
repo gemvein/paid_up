@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :user do
     sequence :email do |n|
@@ -35,7 +37,7 @@ FactoryGirl.define do
         ).id
         trial_end = nil
       end
-      user.subscribe_to_plan(evaluator.plan, token, trial_end)
+      user.subscribe_to_plan(evaluator.plan, token, nil, trial_end)
     end
   end
 end

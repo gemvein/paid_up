@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PaidUp
   module Mixins
     # Subscriber Mixin
@@ -10,12 +12,14 @@ module PaidUp
           has_many feature.slug.to_sym
         end
 
+        delegate :plan, to: :subscription
         after_initialize :set_default_attributes, :load_stripe_data
         before_save :remove_anonymous_association
         before_destroy { |record| record.stripe_data.delete }
-        send :include, InstanceMethods
+        include InstanceMethods
       end
 
+      # Included by subscriber mixin
       module InstanceMethods
         def reload(*args, &blk)
           super(*args, &blk)
@@ -31,144 +35,71 @@ module PaidUp
           stripe_data.present? && stripe_data.sources.all(object: 'card')
         end
 
-        def subscribe_to_plan(plan_to_set, stripe_token = nil, trial_end = nil)
+        def subscribe_to_plan(
+          new_plan, stripe_token = nil, coupon = nil, trial_end = nil
+        )
           # If there is an existing subscription
-          if stripe_id.present? && !subscription.nil?
-            if stripe_token.present? # The customer has entered a new card
-              subscription.source = stripe_token
-              subscription.save
-              reload
-            end
-            if coupon_code.present?
-              stripe_data.coupon = coupon_code
-              stripe_data.save
-            end
-            if trial_end.present?
-              stripe_data.subscription.trial_end = trial_end
-              stripe_data.subscription.save
-            end
-            subscription.plan = plan_to_set.stripe_id
-            result = subscription.save ||
-              (raise(:could_not_update_subscription.l) && false)
+          if stripe_id.present? && subscription.present?
+            subscription.update(new_plan, stripe_token, coupon, trial_end)
           else # Totally new subscription
-            args = {
-              source: stripe_token,
-              plan: plan_to_set.stripe_id,
-              email: email,
-              trial_end: trial_end
-            }
-            coupon_code.present? && args[:coupon] = coupon_code
-            customer = Stripe::Customer.create(args) ||
-              (raise(:could_not_create_subscription.l) && false)
-
-            # If there is an update to be made, we go ahead
-            if stripe_id != customer.id
-              result = update_attributes(stripe_id: customer.id) ||
-                (raise(:could_not_associate_subscription.l) && false)
-            else
-              result = true
-            end
+            subscription.create(new_plan, stripe_token, coupon, trial_end)
           end
-          result && Rails.cache.delete("#{stripe_id}/stripe_data") && reload
+          Rails.cache.delete("#{stripe_id}/stripe_data")
+          reload
         end
 
         def subscribe_to_free_plan
           subscribe_to_plan PaidUp::Plan.free
         end
 
-        def plan
-          if subscription.present?
-            PaidUp::Plan.find_by_stripe_id(subscription.plan.id)
-          else
-            PaidUp::Plan.free
-          end
+        def table_setting(table_name)
+          PaidUp::TableFeatureSettingType.new(name: table_name, user: self)
         end
 
-        def table_rows_unlimited?(table_name)
-          table_rows_allowed(table_name) == PaidUp::Unlimited.to_i
-        end
-
-        def table_rows_remaining(table_name)
-          table_rows_allowed(table_name) - table_rows(table_name)
-        end
-
-        def table_rows_allowed(table_name)
-          plan.feature_setting table_name
-        end
-
-        def table_rows(table_name)
-          model = table_name.classify.constantize
-          model.where(user: self).paid_for_scope.size
-        end
-
-        def rolify_rows_unlimited?(table_name)
-          rolify_rows_allowed(table_name) == PaidUp::Unlimited.to_i
-        end
-
-        def rolify_rows_remaining(table_name)
-          rolify_rows_allowed(table_name) - rolify_rows(table_name)
-        end
-
-        def rolify_rows_allowed(table_name)
-          plan.feature_setting table_name
-        end
-
-        def rolify_rows(table_name)
-          model = table_name.classify.constantize
-          model.with_role(:owner, self).paid_for_scope.size
+        def rolify_setting(table_name)
+          PaidUp::RolifyFeatureSettingType.new(name: table_name, user: self)
         end
 
         def plan_stripe_id
-          subscription.nil? && return
-          subscription.plan.id
+          subscription&.stripe_data&.plan&.id
         end
 
         def subscription
           stripe_data.nil? && subscribe_to_free_plan
-          stripe_data.subscriptions.data.first
+          @subscription
         end
 
-        def is_subscribed_to?(plan_to_check)
+        def subscribed_to?(plan_to_check)
           plan.present? && plan.id == plan_to_check.id
         end
 
         def can_upgrade_to?(plan_to_check)
           plan.nil? || (
-            !is_subscribed_to?(plan_to_check) &&
+            !subscribed_to?(plan_to_check) &&
             (plan_to_check.sort_order.to_i > plan.sort_order.to_i)
           )
         end
 
         def can_downgrade_to?(plan_to_check)
-          !plan.nil? && (
-            !is_subscribed_to?(plan_to_check) &&
+          plan.present? && (
+            !subscribed_to?(plan_to_check) &&
             (plan_to_check.sort_order.to_i < plan.sort_order.to_i)
           )
         end
 
         def using_free_plan?
-          plan.nil? ||
-            stripe_data.delinquent ||
-            (plan.stripe_id == PaidUp.configuration.free_plan_stripe_id)
+          plan.nil? || stripe_data.delinquent ||
+            plan.stripe_id == PaidUp.configuration.free_plan_stripe_id
         end
 
         private
 
         def set_default_attributes
-          if new_record?
-            self.stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
-          end
+          return unless new_record?
+          self.stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
         end
 
         def load_stripe_data
-          working_stripe_id = if new_record?
-            PaidUp.configuration
-            .anonymous_customer_stripe_id
-          else
-            !stripe_id.present? && subscribe_to_free_plan
-            stripe_id
-          end
-
           @customer_stripe_data = Rails.cache.fetch(
             "#{working_stripe_id}/stripe_data",
             expires_in: 12.hours
@@ -176,13 +107,25 @@ module PaidUp
             Stripe::Customer.retrieve working_stripe_id
           end
 
-          @customer_stripe_data.nil? && raise(:could_not_load_subscription.l)
+          @subscription = PaidUp::Subscription.new(user: self)
+
+          raise(:could_not_load_subscription.l) if @customer_stripe_data.nil?
+          stripe_data
+        end
+
+        def working_stripe_id
+          if new_record?
+            PaidUp.configuration.anonymous_customer_stripe_id
+          else
+            subscribe_to_free_plan unless stripe_id.present?
+            stripe_id
+          end
         end
 
         def remove_anonymous_association
-          if stripe_id == PaidUp.configuration.anonymous_customer_stripe_id
-            self.stripe_id = nil
-          end
+          return unless stripe_id ==
+                        PaidUp.configuration.anonymous_customer_stripe_id
+          self.stripe_id = nil
         end
       end
     end

@@ -1,0 +1,13 @@
+- if can? :own, model
+  = icon 'ok'
+- else
+  = icon 'remove'
+
+- if unlimited
+  = :unlimited.l
+- if remaining.negative?
+  = :x_used_y_allowed.l x: used, y: allowed
+- elsif allowed.zero?
+  = :not_allowed.l
+- else
+  = :x_of_y_remaining.l x: remaining, y: allowed

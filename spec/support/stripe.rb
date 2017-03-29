@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_context 'stripe' do
   let(:default_card_data) do
     {

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'paid_up/subscriptions/new' do
@@ -53,20 +55,14 @@ RSpec.describe 'paid_up/subscriptions/index' do
   context 'when user is logged in' do
     context "displays the details of a user's subscriptions" do
       before do
-        assign(:current_user, login_subscriber(group_leader_subscriber))
+        assign(:current_user, login_subscriber(leader_subscriber))
         render
       end
       subject { rendered }
       it { should include 'Group Leader' }
-      it do
-        should have_selector 'table.abilities #ad_free_ability .glyphicon-ok'
-      end
-      it do
-        should have_selector 'table.abilities #groups_ability .glyphicon-ok'
-      end
-      it do
-        should have_selector 'table.abilities #doodads_ability .glyphicon-ok'
-      end
+      it { should have_css 'table.abilities #ad_free_ability .glyphicon-ok' }
+      it { should have_css 'table.abilities #groups_ability .glyphicon-ok' }
+      it { should have_css 'table.abilities #doodads_ability .glyphicon-ok' }
     end
   end
 end

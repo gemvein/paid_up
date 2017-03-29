@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 # PaidUp Module
 module PaidUp
   def self.configure(configuration = PaidUp::Configuration.new)
     block_given? && yield(configuration)
-    @@configuration = configuration
+    @configuration = configuration
   end
 
   def self.configuration
-    @@configuration ||= PaidUp::Configuration.new
+    @configuration ||= PaidUp::Configuration.new
   end
 
   # PaidUp Configuration

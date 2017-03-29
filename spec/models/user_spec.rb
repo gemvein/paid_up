@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'cancan/matchers'
 
@@ -10,7 +12,7 @@ describe User do
   end
 
   context '#cards' do
-    subject { professional_subscriber.cards.first }
+    subject { prof_subscriber.cards.first }
     it { should be_a Stripe::Card }
   end
 
@@ -67,13 +69,13 @@ describe User do
 
       context 'starting from higher subscription' do
         before do
-          professional_subscriber.subscribe_to_free_plan
+          prof_subscriber.subscribe_to_free_plan
         end
         after do
           token = working_stripe_token no_ads_subscriber
-          professional_subscriber.subscribe_to_plan professional_plan, token
+          prof_subscriber.subscribe_to_plan professional_plan, token
         end
-        subject { professional_subscriber.plan }
+        subject { prof_subscriber.plan }
         it { should eq(free_plan) }
       end
     end
@@ -90,115 +92,115 @@ describe User do
     end
   end
 
-  context '#table_rows_remaining' do
+  context '#table_setting().rows_remaining' do
     context 'when using a plan without the feature' do
-      subject { no_ads_subscriber.table_rows_remaining 'doodads' }
+      subject { no_ads_subscriber.table_setting('doodads').rows_remaining }
       it { should eq 0 }
     end
     context 'when subscribed to a plan with the feature limited' do
-      subject { group_leader_subscriber.table_rows_remaining 'doodads' }
+      subject { leader_subscriber.table_setting('doodads').rows_remaining }
       it { should eq 10 }
     end
     context 'when subscribed to a plan with the feature unlimited' do
-      subject { professional_subscriber.table_rows_remaining 'doodads' }
+      subject { prof_subscriber.table_setting('doodads').rows_remaining }
       it { should eq PaidUp::Unlimited.to_i }
     end
   end
 
-  context '#table_rows_unlimited?' do
+  context '#table_setting().rows_unlimited?' do
     context 'when using a plan without the feature' do
-      subject { no_ads_subscriber.table_rows_unlimited? 'doodads' }
+      subject { no_ads_subscriber.table_setting('doodads').rows_unlimited? }
       it { should eq false }
     end
     context 'when subscribed to a plan with the feature limited' do
-      subject { group_leader_subscriber.table_rows_unlimited? 'doodads' }
+      subject { leader_subscriber.table_setting('doodads').rows_unlimited? }
       it { should eq false }
     end
     context 'when subscribed to a plan with the feature unlimited' do
-      subject { professional_subscriber.table_rows_unlimited? 'doodads' }
+      subject { prof_subscriber.table_setting('doodads').rows_unlimited? }
       it { should eq true }
     end
   end
 
-  context '#table_rows_allowed' do
+  context '#table_setting().rows_allowed' do
     context 'when using a plan without the feature' do
-      subject { no_ads_subscriber.table_rows_allowed 'doodads' }
+      subject { no_ads_subscriber.table_setting('doodads').rows_allowed }
       it { should eq 0 }
     end
     context 'when subscribed to a plan with the feature limited' do
-      subject { group_leader_subscriber.table_rows_allowed 'doodads' }
+      subject { leader_subscriber.table_setting('doodads').rows_allowed }
       it { should eq 10 }
     end
     context 'when subscribed to a plan with the feature unlimited' do
-      subject { professional_subscriber.table_rows_allowed 'doodads' }
+      subject { prof_subscriber.table_setting('doodads').rows_allowed }
       it { should eq PaidUp::Unlimited.to_i }
     end
   end
 
-  context '#table_rows' do
+  context '#table_setting().rows_count' do
     context 'when possessing no rows' do
-      subject { professional_subscriber.table_rows 'doodads' }
+      subject { prof_subscriber.table_setting('doodads').rows_count }
       it { should eq 0 }
     end
     context 'when possessing 3 rows' do
       before do
         3.times do
-          professional_subscriber.doodads.create! name: 'Test Doodad'
+          prof_subscriber.doodads.create! name: 'Test Doodad'
         end
       end
-      subject { professional_subscriber.table_rows 'doodads' }
+      subject { prof_subscriber.table_setting('doodads').rows_count }
       it { should eq 3 }
     end
   end
 
-  context '#rolify_rows_remaining' do
+  context '#rolify_setting().rows_remaining' do
     context 'when using a plan without the feature' do
-      subject { no_ads_subscriber.rolify_rows_remaining 'groups' }
+      subject { no_ads_subscriber.rolify_setting('groups').rows_remaining }
       it { should eq 0 }
     end
     context 'when subscribed to a plan with the feature limited' do
-      subject { group_leader_subscriber.rolify_rows_remaining 'groups' }
+      subject { leader_subscriber.rolify_setting('groups').rows_remaining }
       it { should eq 4 }
     end
     context 'when subscribed to a plan with the feature unlimited' do
-      subject { professional_subscriber.rolify_rows_remaining 'groups' }
+      subject { prof_subscriber.rolify_setting('groups').rows_remaining }
       it { should be > 99_999_999 }
     end
   end
 
-  context '#rolify_rows_unlimited?' do
+  context '#rolify_setting().rows_unlimited?' do
     context 'when using a plan without the feature' do
-      subject { no_ads_subscriber.rolify_rows_unlimited? 'groups' }
+      subject { no_ads_subscriber.rolify_setting('groups').rows_unlimited? }
       it { should eq false }
     end
     context 'when subscribed to a plan with the feature limited' do
-      subject { group_leader_subscriber.rolify_rows_unlimited? 'groups' }
+      subject { leader_subscriber.rolify_setting('groups').rows_unlimited? }
       it { should eq false }
     end
     context 'when subscribed to a plan with the feature unlimited' do
-      subject { professional_subscriber.rolify_rows_unlimited? 'groups' }
+      subject { prof_subscriber.rolify_setting('groups').rows_unlimited? }
       it { should eq true }
     end
   end
 
-  context '#rolify_rows_allowed' do
+  context '#rolify_setting().rows_allowed' do
     context 'when using a plan without the feature' do
-      subject { no_ads_subscriber.rolify_rows_allowed 'groups' }
+      subject { no_ads_subscriber.rolify_setting('groups').rows_allowed }
       it { should eq 0 }
     end
     context 'when subscribed to a plan with the feature limited' do
-      subject { group_leader_subscriber.rolify_rows_allowed 'groups' }
+      subject { leader_subscriber.rolify_setting('groups').rows_allowed }
       it { should eq 5 }
     end
     context 'when subscribed to a plan with the feature unlimited' do
-      subject { professional_subscriber.rolify_rows_allowed 'groups' }
+      subject { prof_subscriber.rolify_setting('groups').rows_allowed }
       it { should eq PaidUp::Unlimited.to_i }
     end
   end
 
-  context '#rolify_rows' do
+  context '#rolify_setting().rows_count' do
     context 'when possessing no rows' do
-      subject { blank_subscriber.rolify_rows 'groups' }
+      subject { blank_subscriber.rolify_setting('groups').rows_count }
       it { should eq 0 }
     end
     context 'when possessing 3 rows' do
@@ -211,7 +213,7 @@ describe User do
           )
         end
       end
-      subject { blank_subscriber.rolify_rows 'groups' }
+      subject { blank_subscriber.rolify_setting('groups').rows_count }
       it { should eq 3 }
     end
   end
@@ -230,25 +232,25 @@ describe User do
   context '#subscription' do
     context 'when using free plan' do
       subject { free_subscriber.subscription }
-      it { should be_a Stripe::Subscription }
+      it { should be_a PaidUp::Subscription }
     end
     context 'when subscribed to a plan' do
       subject { no_ads_subscriber.subscription }
-      it { should be_a Stripe::Subscription }
+      it { should be_a PaidUp::Subscription }
     end
   end
 
-  context '#is_subscribed_to?' do
+  context '#subscribed_to?' do
     context 'when using free plan' do
-      subject { free_subscriber.is_subscribed_to? free_plan }
+      subject { free_subscriber.subscribed_to? free_plan }
       it { should be true }
     end
     context 'when true' do
-      subject { professional_subscriber.is_subscribed_to? professional_plan }
+      subject { prof_subscriber.subscribed_to? professional_plan }
       it { should be true }
     end
     context 'when false' do
-      subject { no_ads_subscriber.is_subscribed_to? professional_plan }
+      subject { no_ads_subscriber.subscribed_to? professional_plan }
       it { should be false }
     end
   end
@@ -269,7 +271,7 @@ describe User do
       it { should be true }
     end
     context 'when false' do
-      subject { professional_subscriber.can_upgrade_to? no_ads_plan }
+      subject { prof_subscriber.can_upgrade_to? no_ads_plan }
       it { should be false }
     end
   end
@@ -290,7 +292,7 @@ describe User do
       it { should be false }
     end
     context 'when true' do
-      subject { professional_subscriber.can_downgrade_to? no_ads_plan }
+      subject { prof_subscriber.can_downgrade_to? no_ads_plan }
       it { should be true }
     end
   end
@@ -313,7 +315,7 @@ describe User do
   describe 'Abilities' do
     context 'when anonymous' do
       let(:group) do
-        FactoryGirl.create(:group, owner: professional_subscriber)
+        FactoryGirl.create(:group, owner: prof_subscriber)
       end
       let(:user) { nil }
       subject(:ability) { Ability.new(user) }
@@ -327,7 +329,7 @@ describe User do
     end
     context 'when on free plan' do
       let(:group) do
-        FactoryGirl.create(:group, owner: professional_subscriber)
+        FactoryGirl.create(:group, owner: prof_subscriber)
       end
       let(:user) { free_subscriber }
       subject(:ability) { Ability.new(user) }
@@ -341,16 +343,16 @@ describe User do
     end
     context 'when on group plan' do
       describe 'misc abilities' do
-        let(:user) { group_leader_subscriber }
+        let(:user) { leader_subscriber }
         subject(:ability) { Ability.new(user) }
         it { should be_able_to(:use, :ad_free) }
       end
       describe 'using groups' do
         context 'given no groups are owned' do
           let(:group) do
-            FactoryGirl.create(:group, owner: group_leader_subscriber)
+            FactoryGirl.create(:group, owner: leader_subscriber)
           end
-          let(:user) { group_leader_subscriber }
+          let(:user) { leader_subscriber }
           subject(:ability) { Ability.new(user) }
           it { should be_able_to(:index, group) }
           it { should be_able_to(:show, group) }
@@ -374,9 +376,9 @@ describe User do
       describe 'using doodads' do
         context 'given no doodads are owned' do
           let(:doodad) do
-            FactoryGirl.create(:doodad, user: group_leader_subscriber)
+            FactoryGirl.create(:doodad, user: leader_subscriber)
           end
-          let(:user) { group_leader_subscriber }
+          let(:user) { leader_subscriber }
           subject(:ability) { Ability.new(user) }
           it { should be_able_to(:index, doodad) }
           it { should be_able_to(:show, doodad) }
@@ -400,9 +402,9 @@ describe User do
       describe 'using posts' do
         context 'given no posts are owned' do
           let(:post) do
-            FactoryGirl.create(:post, user: group_leader_subscriber)
+            FactoryGirl.create(:post, user: leader_subscriber)
           end
-          let(:user) { group_leader_subscriber }
+          let(:user) { leader_subscriber }
           subject(:ability) { Ability.new(user) }
           it { should be_able_to(:index, post) }
           it { should be_able_to(:show, post) }
@@ -429,7 +431,7 @@ describe User do
         let(:group) do
           FactoryGirl.create(:group, owner: blank_subscriber)
         end
-        let(:user) { professional_subscriber }
+        let(:user) { prof_subscriber }
         subject(:ability) { Ability.new(user) }
         it { should be_able_to(:index, group) }
         it { should be_able_to(:show, group) }
@@ -441,9 +443,9 @@ describe User do
       end
       context 'given one group is owned' do
         let(:group) do
-          FactoryGirl.create(:group, owner: professional_subscriber)
+          FactoryGirl.create(:group, owner: prof_subscriber)
         end
-        let(:user) { professional_subscriber }
+        let(:user) { prof_subscriber }
         subject(:ability) { Ability.new(user) }
         it { should be_able_to(:index, group) }
         it { should be_able_to(:show, group) }

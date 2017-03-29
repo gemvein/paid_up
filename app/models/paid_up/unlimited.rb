@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PaidUp
   # Unlimited class: designed to output as 'Unlimited' for string, -1 for db,
   # or 999999999 for number.

@@ -1,33 +1,34 @@
+# frozen_string_literal: true
+
 module PaidUp
   # PaidUp Plans Helper
   module PlansHelper
     include ::ActionView::Helpers::NumberHelper
 
     def plan_charge_human(plan, discount)
-      if !discount.nil? && !discount.coupon.nil? && plan.amount != 0
-        orig_amount = plan.amount
-        amount = orig_amount
-        amount -= (discount.coupon.percent_off || 0) * 0.01 * amount
-        amount -= (discount.coupon.amount_off || 0)
-        amount = amount > 0 ? amount : 0
-
-        orig_money = Money.new(orig_amount, plan.currency)
-        money = Money.new(amount, plan.currency)
-
-        html = content_tag(
-          :s,
-          (orig_money.format + '/' + plan_period_phrase(plan))
-        )
-        html << ' '
-        html << content_tag(
-          :span,
-          (money.format + '/' + plan_period_phrase(plan)),
-          class: 'text-danger'
-        )
-      else
-        html = plan.money.format + '/' + plan_period_phrase(plan)
+      interval = plan_period_phrase(plan)
+      if plan.adjust?(discount)
+        return amount_per_interval(plan.money.format, interval)
       end
-      html
+      plan_charge_reduced(
+        plan.money.format,
+        plan.adjusted_money(discount).format,
+        interval
+      )
+    end
+
+    def plan_button(plan, text = nil, html_options = {})
+      atts = plan_button_atts(plan)
+      atts[:text] = text if text.present?
+      atts[:link] ||= paid_up.new_plan_subscription_path(plan)
+
+      html_options[:method] ||= :get
+      html_options[:data] = atts.delete(:data)
+
+      icon_button_to(
+        atts[:css_class], atts[:icon_class], atts[:text], atts[:link],
+        html_options
+      )
     end
 
     def plan_period_phrase(plan)
@@ -39,38 +40,57 @@ module PaidUp
       period_phrase + plan.interval.capitalize
     end
 
-    def plan_button(plan, text = nil, html_options = {})
-      data = {}
-      css_class = ''
-      link = paid_up.new_plan_subscription_path(plan)
-      if user_signed_in?
-        text ||= :subscribe.l
-        if current_user.stripe_data.delinquent
-          icon_class = 'arrow-right'
-          css_class += 'info'
-        elsif current_user.can_upgrade_to? plan
-          icon_class = 'arrow-up'
-          css_class += 'success'
-        elsif current_user.can_downgrade_to? plan
-          icon_class = 'arrow-down'
-          css_class += 'danger'
-          data[:confirm] = :are_you_sure.l
-        elsif current_user.is_subscribed_to? plan
-          icon_class = 'ok'
-          css_class += 'disabled disabled'
-          link = '#'
-          text = :already_subscribed.l
-        else # Plans are equal in sort_order
-          icon_class = 'arrow-right'
-          css_class += 'info'
-        end
-      else
-        text ||= :sign_up.l
-        icon_class = 'arrow-right'
-        css_class += 'success'
-      end
-      html_options[:method] ||= :get
-      icon_button_to css_class, icon_class, text, link, html_options
+    private
+
+    def amount_per_interval(amount, interval)
+      "#{amount}/#{interval}"
+    end
+
+    def plan_charge_reduced(old_money, new_money, interval)
+      html = []
+      html << content_tag(:s, amount_per_interval(old_money, interval))
+      html << content_tag(
+        :span, amount_per_interval(new_money, interval), class: 'text-danger'
+      )
+      html.join(' ')
+    end
+
+    # rubocop:disable Metrics/AbcSize
+    # This is just this complex.
+    def plan_button_atts(plan)
+      return anonymous_atts unless user_signed_in?
+      return delinquent_atts if current_user.stripe_data.delinquent
+      return same_plan_atts if current_user.subscribed_to? plan
+      return upgrade_atts if current_user.can_upgrade_to? plan
+      return downgrade_atts if current_user.can_downgrade_to? plan
+      sidegrade_atts
+    end
+    # rubocop:enable Metrics/AbcSize
+
+    def anonymous_atts
+      { text: :sign_up.l, icon_class: 'arrow-right', css_class: 'success' }
+    end
+
+    def delinquent_atts
+      { text: :subscribe.l, icon_class: 'arrow-right', css_class: 'info' }
+    end
+
+    def upgrade_atts
+      { text: :subscribe.l, icon_class: 'arrow-up', css_class: 'success' }
+    end
+
+    def downgrade_atts
+      { text: :subscribe.l, icon_class: 'arrow-down', css_class: 'danger',
+        data: { confirm: :are_you_sure.l } }
+    end
+
+    def same_plan_atts
+      { text: :already_subscribed.l, icon_class: 'ok', css_class: 'disabled',
+        link: '#' }
+    end
+
+    def sidegrade_atts
+      { text: :subscribe.l, icon_class: 'arrow-right', css_class: 'info' }
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'coveralls'
 Coveralls.wear!
 
@@ -35,6 +37,10 @@ ActiveRecord::Migrator.migrations_paths = 'spec/dummy/db/migrate'
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 # ActiveRecord::Migration.maintain_test_schema!
+
+# TODO: Add feature specs
+# TODO: Add helper specs
+# TODO: Remove view specs
 
 RSpec.configure do |config|
   config.before(:suite) do

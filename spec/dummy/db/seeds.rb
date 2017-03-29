@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ###############
 # Plans     #
 ###############
@@ -178,7 +180,7 @@ FactoryGirl.create(
   plan: no_ads_plan
 )
 
-group_leader_subscriber = FactoryGirl.create(
+leader_subscriber = FactoryGirl.create(
   :user,
   name: 'Group Leader Subscriber',
   plan: group_leader_plan
@@ -190,7 +192,7 @@ disabling_subscriber = FactoryGirl.create(
   plan: group_leader_plan
 )
 
-professional_subscriber = FactoryGirl.create(
+prof_subscriber = FactoryGirl.create(
   :user,
   name: 'Professional Subscriber',
   plan: professional_plan
@@ -216,28 +218,28 @@ past_due_subscriber = FactoryGirl.create(
 FactoryGirl.create(
   :group,
   title: 'First Group',
-  owner: group_leader_subscriber,
+  owner: leader_subscriber,
   active: true
 )
 
 FactoryGirl.create(
   :group,
   title: 'Inactive Group',
-  owner: group_leader_subscriber,
+  owner: leader_subscriber,
   active: false
 )
 
 FactoryGirl.create(
   :group,
   title: 'Second Group',
-  owner: professional_subscriber,
+  owner: prof_subscriber,
   active: true
 )
 
 FactoryGirl.create(
   :group,
   title: 'Third Group',
-  owner: professional_subscriber,
+  owner: prof_subscriber,
   active: true
 )
 

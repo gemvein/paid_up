@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # PaidUp Module
 module PaidUp
   require 'active_record/railtie'
@@ -18,16 +20,22 @@ module PaidUp
 
   require 'paid_up/configuration'
   require 'paid_up/feature'
+  require 'paid_up/feature_setting_type'
+  require 'paid_up/subscription'
   require 'paid_up/railtie'
   require 'paid_up/engine'
   require 'paid_up/localization'
   require 'paid_up/version'
+  require 'paid_up/ruby_version_check'
 
   require 'paid_up/extensions/stripe'
   require 'paid_up/extensions/integer'
 
   require 'paid_up/mixins/subscriber'
   require 'paid_up/mixins/paid_for'
+
+  require 'paid_up/feature_setting_types/table'
+  require 'paid_up/feature_setting_types/rolify'
 
   require 'haml-rails'
   require 'bootstrap_leather'

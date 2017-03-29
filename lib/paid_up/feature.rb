@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 # PaidUp module
 module PaidUp
-  @@feature_object = {}
+  @feature_object = {}
 
   def self.add_feature(params)
     feature = PaidUp::Feature.new(params)
-    @@feature_object[feature.slug.to_sym] = feature
+    @feature_object[feature.slug.to_sym] = feature
   end
 
   def self.features
-    @@feature_object
+    @feature_object
   end
 
   # Feature Class: Not an ActiveRecord object.
@@ -45,7 +47,7 @@ module PaidUp
     end
 
     def feature_model_name
-      acceptable_setting_types = %w( table_rows rolify_rows )
+      acceptable_setting_types = %w(table_rows rolify_rows)
       unless acceptable_setting_types.include? setting_type
         raise :no_implicit_conversion_of_type_features.l(type: setting_type)
       end
@@ -58,6 +60,10 @@ module PaidUp
 
     def self.find_by_slug(slug)
       raw[slug.to_sym]
+    end
+
+    def self.find_by_slug!(slug)
+      find_by_slug(slug) || raise(:feature_not_found.l)
     end
 
     def self.all
@@ -80,10 +86,7 @@ module PaidUp
       find_all(conditions).first
     end
 
-    # Define on self, since it's  a class method
     def self.method_missing(method_sym, *arguments, &block)
-      # the first argument is a Symbol, so you need to_s it if you want to
-      # pattern match
       if method_sym.to_s =~ /^find_by_(.*)$/
         find(Regexp.last_match[1].to_sym => arguments.first)
       elsif method_sym.to_s =~ /^find_all_by_(.*)$/

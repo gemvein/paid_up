@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'paid_up/plans/index' do
@@ -32,7 +34,7 @@ RSpec.describe 'paid_up/plans/index' do
 
   context 'when user is logged in as professional subscriber' do
     before do
-      assign(:current_user, login_subscriber(professional_subscriber))
+      assign(:current_user, login_subscriber(prof_subscriber))
       assign(:plans, PaidUp::Plan.subscribable)
       render
     end

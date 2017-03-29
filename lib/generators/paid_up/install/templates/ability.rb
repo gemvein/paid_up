@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # CanCanCan Ability class
 class Ability
   include CanCan::Ability

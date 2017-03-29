@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'cancan/matchers'
 
@@ -6,18 +8,18 @@ describe Group do
 
   describe '#owners' do
     subject { first_group.owners }
-    it { should include group_leader_subscriber }
-    it { should_not include professional_subscriber }
+    it { should include leader_subscriber }
+    it { should_not include prof_subscriber }
   end
 
   describe '#save_with_owner' do
     let(:new_group) do
       group = Group.new(title: 'Saved Group')
-                   .save_with_owner(professional_subscriber)
+                   .save_with_owner(prof_subscriber)
       group.reload
     end
     subject { new_group.owners }
-    it { should include professional_subscriber }
+    it { should include prof_subscriber }
   end
 
   describe '#owners_enabled_count' do
@@ -42,13 +44,13 @@ describe Group do
     it { should eq 2 }
   end
 
-  describe '#enabled' do
+  describe '#enabled?' do
     describe 'when true' do
-      subject { first_group.enabled }
+      subject { first_group.enabled? }
       it { should eq true }
     end
     describe 'when false' do
-      subject { disabled_group.enabled }
+      subject { disabled_group.enabled? }
       it { should eq false }
     end
   end

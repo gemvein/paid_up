@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PaidUp
   # PaidUp Plans Controller
   class PlansController < PaidUpController
