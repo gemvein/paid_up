@@ -95,15 +95,14 @@ module PaidUp
         end
 
         def owners_records_ids
-          setting_type = self.class.feature.setting_type
+          setting = self.class.feature.setting_type
+                        .gsub('_rows', '_setting')
           table_name = self.class.table_name
+          unless %w(table_setting rolify_setting).include? setting
+            raise :no_features_associated_with_table.l(table: table_name)
+          end
           owners.map do |subscriber|
-            case setting_type
-            when 'table_rows', 'rolify_rows'
-              subscriber.send(setting_type, table_name).ids
-            else
-              raise :no_features_associated_with_table.l(table: table_name)
-            end
+            subscriber.send(setting, table_name).ids
           end.flatten
         end
 

@@ -20,6 +20,8 @@ module PaidUp
 
   require 'paid_up/configuration'
   require 'paid_up/feature'
+  require 'paid_up/feature_setting_type'
+  require 'paid_up/subscription'
   require 'paid_up/railtie'
   require 'paid_up/engine'
   require 'paid_up/localization'
@@ -31,6 +33,9 @@ module PaidUp
 
   require 'paid_up/mixins/subscriber'
   require 'paid_up/mixins/paid_for'
+
+  require 'paid_up/feature_setting_types/table'
+  require 'paid_up/feature_setting_types/rolify'
 
   require 'haml-rails'
   require 'bootstrap_leather'

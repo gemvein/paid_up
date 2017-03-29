@@ -29,8 +29,9 @@ module PaidUp
     def enable_table_rows(user, feature)
       slug = feature.slug
       model = feature.feature_model
-      allowed = user.table_rows_allowed(slug)
-      remaining = user.table_rows_remaining(slug)
+      table_setting = user.table_setting(slug)
+      allowed = table_setting.rows_allowed
+      remaining = table_setting.rows_remaining
       can :manage, model, user: user if allowed.positive?
       enable_rows(model, allowed, remaining)
     end
@@ -38,8 +39,9 @@ module PaidUp
     def enable_rolify_rows(user, feature)
       slug = feature.slug
       model = feature.feature_model
-      allowed = user.rolify_rows_allowed(slug)
-      remaining = user.rolify_rows_remaining(slug)
+      rolify_setting = user.rolify_setting(slug)
+      allowed = rolify_setting.rows_allowed
+      remaining = rolify_setting.rows_remaining
       if allowed.positive?
         can :manage, model, id: model.with_role(:owner, user).ids
       end

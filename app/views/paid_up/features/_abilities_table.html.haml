@@ -16,12 +16,12 @@
               = icon 'ok'
             - else
               = icon 'remove'
-            - if current_user.table_rows_unlimited?(feature.slug)
+            - if current_user.table_setting(feature.slug).rows_unlimited?
               = :unlimited.l
             - else
-              - remaining = current_user.table_rows_remaining(feature.slug)
-              - allowed = current_user.table_rows_allowed(feature.slug)
-              - used = current_user.table_rows(feature.slug)
+              - remaining = current_user.table_setting(feature.slug).rows_remaining
+              - allowed = current_user.table_setting(feature.slug).rows_allowed
+              - used = current_user.table_setting(feature.slug).rows
               - if remaining < 0
                 = :x_used_y_allowed.l x: used, y: allowed
               - elsif allowed == 0
@@ -33,12 +33,12 @@
               = icon 'ok'
             - else
               = icon 'remove'
-            - if current_user.rolify_rows_unlimited?(feature.slug)
+            - if current_user.rolify_setting(feature.slug).rows_unlimited?
               = :unlimited.l
             - else
-              - remaining = current_user.rolify_rows_remaining(feature.slug)
-              - allowed = current_user.rolify_rows_allowed(feature.slug)
-              - used = current_user.rolify_rows(feature.slug)
+              - remaining = current_user.rolify_setting(feature.slug).rows_remaining
+              - allowed = current_user.rolify_setting(feature.slug).rows_allowed
+              - used = current_user.rolify_setting(feature.slug).rows
               - if remaining < 0
                 = :x_used_y_allowed.l x: used, y: allowed
               - elsif allowed == 0

@@ -95,11 +95,11 @@ RSpec.describe PaidUp::SubscriptionsController do
         end
         describe 'when downgrading' do
           before do
-            sign_in professional_subscriber
+            sign_in prof_subscriber
             get :new, params: { plan_id: no_ads_plan.id }
           end
           after do
-            professional_subscriber.subscribe_to_plan professional_plan
+            prof_subscriber.subscribe_to_plan professional_plan
           end
           describe 'redirects to the subscriptions index page' do
             subject { response }

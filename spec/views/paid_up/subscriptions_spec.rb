@@ -55,7 +55,7 @@ RSpec.describe 'paid_up/subscriptions/index' do
   context 'when user is logged in' do
     context "displays the details of a user's subscriptions" do
       before do
-        assign(:current_user, login_subscriber(group_leader_subscriber))
+        assign(:current_user, login_subscriber(leader_subscriber))
         render
       end
       subject { rendered }

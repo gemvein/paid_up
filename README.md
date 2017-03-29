@@ -140,7 +140,9 @@ Version 0.12.0 requires Ruby 2.3 or higher because of the use of the `&.` operat
 
 ##### paid_for Mixin
 
-The methods `table_rows` and `rolify_rows` were renamed to `table_rows_count` and `rolify_rows_count`, replaced by methods that fetch the rows themselves.
+The methods `table_rows` and `rolify_rows` were renamed to `table_setting(table_name).rows_count` and `rolify_setting(table_name).rows_count`, replaced by methods that fetch the rows themselves.
+
+All previous methods beginning with `table_rows_` and `rolify_rows_` have also been moved into `table_setting()` and `rolify_setting()`
 
 The method `enabled` was renamed to `enabled?`.
 
