@@ -20,7 +20,7 @@ Juwelier::Tasks.new do |gem|
   gem.email = 'karen.e.lundgren@gmail.com'
   gem.authors = ['Karen Lundgren']
 end
-JuwelierJuwelier::RubygemsDotOrgTasks.new
+Juwelier::RubygemsDotOrgTasks.new
 
 require 'rspec/core'
 require 'rspec/core/rake_task'
