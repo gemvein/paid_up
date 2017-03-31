@@ -12,7 +12,7 @@ module PaidUp
           has_many feature.slug.to_sym
         end
 
-        delegate :plan, to: :subscription
+        delegate :plan, to: :paid_up_subscription
         after_initialize :set_default_attributes, :load_stripe_data
         before_save :remove_anonymous_association
         before_destroy { |record| record.stripe_data.delete }
@@ -39,10 +39,10 @@ module PaidUp
           new_plan, stripe_token = nil, coupon = nil, trial_end = nil
         )
           # If there is an existing subscription
-          if stripe_id.present? && subscription.present?
-            subscription.update(new_plan, stripe_token, coupon, trial_end)
+          if stripe_id.present? && paid_up_subscription.present?
+            paid_up_subscription.update(new_plan, stripe_token, coupon, trial_end)
           else # Totally new subscription
-            subscription.create(new_plan, stripe_token, coupon, trial_end)
+            paid_up_subscription.create(new_plan, stripe_token, coupon, trial_end)
           end
           Rails.cache.delete("#{stripe_id}/stripe_data")
           reload
@@ -61,10 +61,10 @@ module PaidUp
         end
 
         def plan_stripe_id
-          subscription&.stripe_data&.plan&.id
+          paid_up_subscription&.stripe_data&.plan&.id
         end
 
-        def subscription
+        def paid_up_subscription
           stripe_data.nil? && subscribe_to_free_plan
           @subscription
         end

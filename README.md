@@ -134,6 +134,9 @@ Doing this will populate the e-commerce data in Google Analytics, but you must a
 
 ### Upgrading
 
+#### Version 0.12.1
+Renamed `subscription` to `paid_up_subscription` and `subscriptions` to `paid_up_subscriptions` to avoid naming conflicts with other gems.
+
 #### Version 0.12.0
 
 Version 0.12.0 requires Ruby 2.3 or higher because of the use of the `&.` operator.

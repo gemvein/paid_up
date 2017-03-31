@@ -10,8 +10,8 @@
   %h2
     = current_user.plan.title
     .small= plan_charge_human current_user.plan, current_user.stripe_data.discount
-  = subscription_dl current_user.subscription
-  - if current_user.subscription.cancel_at_period_end
+  = subscription_dl current_user.paid_up_subscription
+  - if current_user.paid_up_subscription.cancel_at_period_end
     %h3= :canceled.l
   %h3= :abilities.l
   = feature_abilities_table

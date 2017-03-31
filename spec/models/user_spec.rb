@@ -229,13 +229,13 @@ describe User do
     end
   end
 
-  context '#subscription' do
+  context '#paid_up_subscription' do
     context 'when using free plan' do
-      subject { free_subscriber.subscription }
+      subject { free_subscriber.paid_up_subscription }
       it { should be_a PaidUp::Subscription }
     end
     context 'when subscribed to a plan' do
-      subject { no_ads_subscriber.subscription }
+      subject { no_ads_subscriber.paid_up_subscription }
       it { should be_a PaidUp::Subscription }
     end
   end
