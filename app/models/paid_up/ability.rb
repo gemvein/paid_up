@@ -27,6 +27,7 @@ module PaidUp
     end
 
     def enable_table_rows(user, feature)
+      return if user.new_record?
       slug = feature.slug
       model = feature.feature_model
       table_setting = user.table_setting(slug)
@@ -37,6 +38,7 @@ module PaidUp
     end
 
     def enable_rolify_rows(user, feature)
+      return if user.new_record?
       slug = feature.slug
       model = feature.feature_model
       rolify_setting = user.rolify_setting(slug)
