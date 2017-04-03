@@ -14,6 +14,7 @@ module PaidUp
 
         delegate :plan, to: :paid_up_subscription
         after_initialize :set_default_attributes, :load_stripe_data
+        after_save :load_stripe_data
         before_save :remove_anonymous_association
         before_destroy { |record| record.stripe_data.delete }
         include InstanceMethods
