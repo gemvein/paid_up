@@ -107,7 +107,7 @@ module PaidUp
         end
 
         def owners_records_count
-          owners_records.count
+          owners_records.size
         end
 
         def enabled?
