@@ -30,6 +30,7 @@ module PaidUp
       update_coupon(coupon)
       update_trial_end(trial_end)
       update_plan(plan)
+      stripe_data.save || raise(:could_not_update_plan.l)
     end
 
     def create(plan, stripe_token = nil, coupon = nil, trial_end = nil)
@@ -51,8 +52,6 @@ module PaidUp
       # The customer has entered a new card
       # We need to update the info on the Stripe API.
       stripe_data.source = stripe_token
-      stripe_data.save || raise(:could_not_update_card.l)
-      user.reload # This causes load_stripe_data to fire
     end
 
     def update_coupon(coupon)
@@ -60,7 +59,6 @@ module PaidUp
       # The customer has entered a new coupon code
       # We need to update the stripe customer.
       stripe_data.coupon = coupon
-      stripe_data.save || raise(:could_not_update_coupon.l)
     end
 
     def update_trial_end(trial_end)
@@ -70,7 +68,6 @@ module PaidUp
       # stripe_data.stripe_data.trial_end = trial_end
       # stripe_data.stripe_data.save!
       stripe_data.trial_end = trial_end
-      stripe_data.save || raise(:could_not_update_cancel.l)
     end
 
     def update_plan(new_plan)
@@ -78,7 +75,6 @@ module PaidUp
       # The customer has changed plans
       # We need to update the info on the Stripe API.
       stripe_data.plan = new_plan.stripe_id
-      stripe_data.save || raise(:could_not_update_plan.l)
     end
   end
 end
