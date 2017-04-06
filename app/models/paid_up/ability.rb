@@ -14,9 +14,12 @@ module PaidUp
 
     private
 
-    def enable_rows(model, allowed, remaining)
+    def enable_read(model)
       can :index, model
       can :show, model, &:enabled?
+    end
+
+    def enable_rows(model, allowed, remaining)
       if allowed.positive?
         can :own, model
         cannot :create, model
@@ -27,9 +30,10 @@ module PaidUp
     end
 
     def enable_table_rows(user, feature)
+      model = feature.feature_model
+      enable_read(model)
       return if user.new_record?
       slug = feature.slug
-      model = feature.feature_model
       table_setting = user.table_setting(slug)
       allowed = table_setting.rows_allowed
       remaining = table_setting.rows_remaining
@@ -38,9 +42,10 @@ module PaidUp
     end
 
     def enable_rolify_rows(user, feature)
+      model = feature.feature_model
+      enable_read(model)
       return if user.new_record?
       slug = feature.slug
-      model = feature.feature_model
       rolify_setting = user.rolify_setting(slug)
       allowed = rolify_setting.rows_allowed
       remaining = rolify_setting.rows_remaining
