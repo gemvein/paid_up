@@ -6,7 +6,7 @@ group :test, :development do
   gem 'dotenv-rails', '~> 2.2', require: 'dotenv/rails-now'
 end
 
-gem 'haml-rails', '~> 0.9'
+gem 'haml-rails', '>= 1', '< 2'
 gem 'jquery-rails', '~> 4'
 gem 'rails', '>= 4', '< 6'
 gem 'rails-i18n', '>= 4', '< 6'
@@ -49,5 +49,5 @@ group :test do
   gem 'database_cleaner', '~> 1'
   gem 'launchy', '~> 2.4', require: false
   gem 'rspec-collection_matchers', '~> 1.1'
-  gem 'shoulda-matchers', '>=2', '< 4'
+  gem 'shoulda-matchers', '>= 2', '< 4'
 end
