@@ -175,6 +175,5 @@ Version 0.8.0 introduced database changes to the foreign key columns to work wit
 
 ## Copyright
 
-Copyright (c) 2015-2017 Gem Vein. See LICENSE.txt for
-further details.
+Copyright (c) 2015-2017 [Gem Vein](https://www.gemvein.com). See LICENSE.txt for further details.
 
