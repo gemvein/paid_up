@@ -26,7 +26,7 @@ group :development do
   gem 'bundler', '~> 1'
   gem 'coffeelint', '~> 1.14'
   gem 'juwelier', '~> 2'
-  gem 'nokogiri', '>= 1.7'
+  gem 'nokogiri', '>= 1.7', '< 2'
   gem 'pre-commit', '~> 0.32'
   gem 'rubocop', '>= 0.49', '< 1'
   gem 'scss_lint', '>= 0.52.0', '< 1', require: false
