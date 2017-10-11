@@ -11,7 +11,7 @@ FactoryGirl.define do
     # attributes; `create_list`'s second argument is the number of records
     # to create and we make sure the user is associated properly to the post
     after(:create) do |group, evaluator|
-      evaluator.owner.add_role(:owner, group)
+      group.save_with_owner(evaluator.owner)
     end
   end
 end
