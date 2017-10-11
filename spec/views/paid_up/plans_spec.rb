@@ -8,7 +8,7 @@ RSpec.describe 'paid_up/plans/index' do
   before do
     view.extend PaidUp::PlansHelper
     view.extend PaidUp::FeaturesHelper
-    view.extend BootstrapLeatherHelper
+    view.extend BootstrapLeather::ApplicationHelper
   end
 
   context 'when user is anonymous' do

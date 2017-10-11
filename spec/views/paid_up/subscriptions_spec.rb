@@ -8,7 +8,7 @@ RSpec.describe 'paid_up/subscriptions/new' do
   before do
     view.extend PaidUp::PlansHelper
     view.extend PaidUp::FeaturesHelper
-    view.extend BootstrapLeatherHelper
+    view.extend BootstrapLeather::ApplicationHelper
   end
 
   context 'when user is logged in as free customer' do
@@ -49,7 +49,7 @@ RSpec.describe 'paid_up/subscriptions/index' do
   before do
     view.extend PaidUp::PlansHelper
     view.extend PaidUp::FeaturesHelper
-    view.extend BootstrapLeatherHelper
+    view.extend BootstrapLeather::ApplicationHelper
   end
 
   context 'when user is logged in' do
