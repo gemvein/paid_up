@@ -52,7 +52,6 @@ module PaidUp
 
         def associations_for_rolify_rows
           resourcify
-          attr_accessor :owner
         end
 
         def associations_for_table_rows
@@ -69,6 +68,8 @@ module PaidUp
             [user]
           when 'rolify_rows'
             User.with_role(:owner, self)
+          else
+            raise :value_is_not_a_valid_setting_type.l
           end
         end
 
@@ -91,19 +92,19 @@ module PaidUp
         end
 
         def owners_records
-          self.class.where(id: owners_records_ids)
-        end
-
-        def owners_records_ids
-          setting = self.class.feature.setting_type
-                        .gsub('_rows', '_setting')
-          table_name = self.class.table_name
-          unless %w(table_setting rolify_setting).include? setting
-            raise :no_features_associated_with_table.l(table: table_name)
+          scoped_records = self.class.paid_for_scope
+          case self.class.feature.setting_type
+            when 'table_rows'
+              scoped_records.where(user_id: user_id)
+            when 'rolify_rows'
+              scoped_records
+                  .includes(roles: :users)
+                  .references(:roles, :users)
+                  .where('roles.name = ?', 'owner')
+                  .where('users.id IN (?)', owners.ids)
+            else
+              raise :value_is_not_a_valid_setting_type.l
           end
-          owners.map do |subscriber|
-            subscriber.send(setting, table_name).ids
-          end.flatten
         end
 
         def owners_records_count
