@@ -17,10 +17,10 @@ gem 'bootstrap_leather', '~> 0.9'
 gem 'chronic', '~> 0.10'
 gem 'money', '~> 6.5'
 
-gem 'cancancan', '~> 1'
+gem 'cancancan', '>= 1', '< 3'
 gem 'devise', '>= 3.4', '< 5'
 gem 'rolify', '~> 5'
-gem 'stripe', '>= 1.36', '< 3'
+gem 'stripe', '>= 1.36', '< 3.4' # 3.4 and 3.5 break caching, because they return a singleton
 
 group :development do
   gem 'bundler', '~> 1'
@@ -28,18 +28,18 @@ group :development do
   gem 'juwelier', '~> 2'
   gem 'nokogiri', '>= 1.7'
   gem 'pre-commit', '~> 0.32'
-  gem 'rubocop', git: 'https://github.com/bbatsov/rubocop.git' # Wait for 0.49
-  gem 'scss_lint', '~> 0.52.0', require: false
+  gem 'rubocop', '>= 0.49', '< 1'
+  gem 'scss_lint', '>= 0.52.0', '< 1', require: false
   gem 'web-console', '~> 3'
 end
 
 group :test, :development do
-  gem 'bootstrap-sass', '~> 3'
+  gem 'bootstrap-sass', '>= 3.3', '< 4'
   gem 'factory_girl_rails', '~> 4.5'
   gem 'forgery', '~> 0.6'
   gem 'rails-controller-testing', '~> 1'
   gem 'rspec-rails', '~> 3'
-  gem 'sass-rails', '~> 5'
+  gem 'sass-rails', '>= 5', '< 7'
   gem 'sqlite3', '~> 1.3'
 end
 
