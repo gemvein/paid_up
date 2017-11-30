@@ -168,43 +168,43 @@ PaidUp::PlanFeatureSetting.create(
 # Users     #
 ###############
 
-free_subscriber = FactoryGirl.create(
+free_subscriber = FactoryBot.create(
   :user,
   name: 'Free Subscriber',
   plan: free_plan
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :user,
   name: 'No Ads Subscriber',
   plan: no_ads_plan
 )
 
-leader_subscriber = FactoryGirl.create(
+leader_subscriber = FactoryBot.create(
   :user,
   name: 'Group Leader Subscriber',
   plan: group_leader_plan
 )
 
-disabling_subscriber = FactoryGirl.create(
+disabling_subscriber = FactoryBot.create(
   :user,
   name: 'Disabling Subscriber',
   plan: group_leader_plan
 )
 
-prof_subscriber = FactoryGirl.create(
+prof_subscriber = FactoryBot.create(
   :user,
   name: 'Professional Subscriber',
   plan: professional_plan
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :user,
   name: 'Blank Subscriber',
   plan: professional_plan
 )
 
-past_due_subscriber = FactoryGirl.create(
+past_due_subscriber = FactoryBot.create(
   :user,
   name: 'Past Due Subscriber',
   plan: professional_plan,
@@ -215,46 +215,46 @@ past_due_subscriber = FactoryGirl.create(
 # Groups    #
 ###############
 
-FactoryGirl.create(
+FactoryBot.create(
   :group,
   title: 'First Group',
   owner: leader_subscriber,
   active: true
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :group,
   title: 'Inactive Group',
   owner: leader_subscriber,
   active: false
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :group,
   title: 'Second Group',
   owner: prof_subscriber,
   active: true
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :group,
   title: 'Third Group',
   owner: prof_subscriber,
   active: true
 )
 
-FactoryGirl.create_list(:group, 5, owner: disabling_subscriber, active: true)
-FactoryGirl.create_list(:doodad, 10, user: disabling_subscriber)
-FactoryGirl.create_list(:post, 10, user: disabling_subscriber, active: true)
+FactoryBot.create_list(:group, 5, owner: disabling_subscriber, active: true)
+FactoryBot.create_list(:doodad, 10, user: disabling_subscriber)
+FactoryBot.create_list(:post, 10, user: disabling_subscriber, active: true)
 
-FactoryGirl.create(
+FactoryBot.create(
   :group,
   title: 'Disabled Group',
   owner: disabling_subscriber,
   active: true
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :group,
   title: 'Past Due Group',
   owner: past_due_subscriber,
@@ -265,35 +265,35 @@ FactoryGirl.create(
 # Posts       #
 ###############
 
-FactoryGirl.create(
+FactoryBot.create(
   :post,
   title: 'First Post',
   user: free_subscriber,
   active: true
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :post,
   title: 'Active Post',
   user: free_subscriber,
   active: true
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :post,
   title: 'Inactive Post',
   user: free_subscriber,
   active: false
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :post,
   title: 'Still Enabled Post',
   user: free_subscriber,
   active: true
 )
 
-FactoryGirl.create(
+FactoryBot.create(
   :post,
   title: 'No Longer Enabled Post',
   user: free_subscriber,

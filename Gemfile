@@ -20,7 +20,7 @@ gem 'money', '~> 6.5'
 gem 'cancancan', '>= 1', '< 3'
 gem 'devise', '>= 3.4', '< 5'
 gem 'rolify', '~> 5'
-gem 'stripe', '>= 1.36', '< 3.4' # 3.4 and 3.5 break caching, because they return a singleton
+gem 'stripe', '>= 3.8', '< 4' # 3.4 and 3.5 break caching, because they return a singleton
 
 group :development do
   gem 'bundler', '~> 1'
@@ -35,7 +35,7 @@ end
 
 group :test, :development do
   gem 'bootstrap-sass', '>= 3.3', '< 4'
-  gem 'factory_girl_rails', '~> 4.5'
+  gem 'factory_bot_rails', '>= 4.8', '< 5'
   gem 'forgery', '~> 0.6'
   gem 'rails-controller-testing', '~> 1'
   gem 'rspec-rails', '~> 3'

@@ -56,7 +56,7 @@ describe User do
     context '#subscribe_to_free_plan' do
       context 'starting from no subscription' do
         let(:test_user) do
-          user = FactoryGirl.create(
+          user = FactoryBot.create(
             :user,
             name: 'Test User'
           )
@@ -206,7 +206,7 @@ describe User do
     context 'when possessing 3 rows' do
       before do
         3.times do
-          FactoryGirl.create(
+          FactoryBot.create(
             :group,
             owner: blank_subscriber,
             active: true
@@ -315,7 +315,7 @@ describe User do
   describe 'Abilities' do
     context 'when anonymous' do
       let(:group) do
-        FactoryGirl.create(:group, owner: prof_subscriber)
+        FactoryBot.create(:group, owner: prof_subscriber)
       end
       let(:user) { nil }
       subject(:ability) { Ability.new(user) }
@@ -329,7 +329,7 @@ describe User do
     end
     context 'when on free plan' do
       let(:group) do
-        FactoryGirl.create(:group, owner: prof_subscriber)
+        FactoryBot.create(:group, owner: prof_subscriber)
       end
       let(:user) { free_subscriber }
       subject(:ability) { Ability.new(user) }
@@ -350,7 +350,7 @@ describe User do
       describe 'using groups' do
         context 'given no groups are owned' do
           let(:group) do
-            FactoryGirl.create(:group, owner: leader_subscriber)
+            FactoryBot.create(:group, owner: leader_subscriber)
           end
           let(:user) { leader_subscriber }
           subject(:ability) { Ability.new(user) }
@@ -362,7 +362,7 @@ describe User do
         end
         context 'given all allowed groups are owned' do
           let(:group) do
-            FactoryGirl.create(:group, owner: disabling_subscriber)
+            FactoryBot.create(:group, owner: disabling_subscriber)
           end
           let(:user) { disabling_subscriber }
           subject(:ability) { Ability.new(user) }
@@ -376,7 +376,7 @@ describe User do
       describe 'using doodads' do
         context 'given no doodads are owned' do
           let(:doodad) do
-            FactoryGirl.create(:doodad, user: leader_subscriber)
+            FactoryBot.create(:doodad, user: leader_subscriber)
           end
           let(:user) { leader_subscriber }
           subject(:ability) { Ability.new(user) }
@@ -388,7 +388,7 @@ describe User do
         end
         context 'given all allowed doodads are owned' do
           let(:doodad) do
-            FactoryGirl.create(:doodad, user: disabling_subscriber)
+            FactoryBot.create(:doodad, user: disabling_subscriber)
           end
           let(:user) { disabling_subscriber }
           subject(:ability) { Ability.new(user) }
@@ -402,7 +402,7 @@ describe User do
       describe 'using posts' do
         context 'given no posts are owned' do
           let(:post) do
-            FactoryGirl.create(:post, user: leader_subscriber)
+            FactoryBot.create(:post, user: leader_subscriber)
           end
           let(:user) { leader_subscriber }
           subject(:ability) { Ability.new(user) }
@@ -414,7 +414,7 @@ describe User do
         end
         context 'given all allowed posts are owned' do
           let(:post) do
-            FactoryGirl.create(:post, user: disabling_subscriber)
+            FactoryBot.create(:post, user: disabling_subscriber)
           end
           let(:user) { disabling_subscriber }
           subject(:ability) { Ability.new(user) }
@@ -429,7 +429,7 @@ describe User do
     context 'when on professional plan' do
       context 'given no groups are owned' do
         let(:group) do
-          FactoryGirl.create(:group, owner: blank_subscriber)
+          FactoryBot.create(:group, owner: blank_subscriber)
         end
         let(:user) { prof_subscriber }
         subject(:ability) { Ability.new(user) }
@@ -443,7 +443,7 @@ describe User do
       end
       context 'given one group is owned' do
         let(:group) do
-          FactoryGirl.create(:group, owner: prof_subscriber)
+          FactoryBot.create(:group, owner: prof_subscriber)
         end
         let(:user) { prof_subscriber }
         subject(:ability) { Ability.new(user) }

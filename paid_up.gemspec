@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Karen Lundgren".freeze]
-  s.date = "2017-10-11"
+  s.date = "2017-11-30"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features.".freeze
   s.email = "karen.e.lundgren@gmail.com".freeze
   s.extra_rdoc_files = [
@@ -51,7 +51,6 @@ Gem::Specification.new do |s|
     "config/initializers/stripe.rb",
     "config/locales/en.yml",
     "config/routes.rb",
-    "coverage/.resultset.json.lock",
     "db/migrate/20150407110101_create_paid_up_plans_table.rb",
     "db/migrate/20150519164237_add_stripe_id_column_to_users.rb",
     "db/migrate/20160207113800_create_paid_up_plan_feature_settings_table.rb",
@@ -118,9 +117,6 @@ Gem::Specification.new do |s|
     "spec/dummy/config/locales/en.yml",
     "spec/dummy/config/routes.rb",
     "spec/dummy/config/secrets.yml",
-    "spec/dummy/coverage/.last_run.json",
-    "spec/dummy/coverage/.resultset.json",
-    "spec/dummy/coverage/.resultset.json.lock",
     "spec/dummy/db/migrate/20150406154440_create_users_table.rb",
     "spec/dummy/db/migrate/20150517175135_create_groups_table.rb",
     "spec/dummy/db/migrate/20150517175136_create_doodads_table.rb",
@@ -168,7 +164,7 @@ Gem::Specification.new do |s|
     "spec/routing/paid_up/subscription_spec.rb",
     "spec/spec_helper.rb",
     "spec/support/controller_macros.rb",
-    "spec/support/factory_girl.rb",
+    "spec/support/factory_bot.rb",
     "spec/support/loaded_site/features.rb",
     "spec/support/loaded_site/groups.rb",
     "spec/support/loaded_site/loaded_site.rb",
@@ -199,7 +195,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<cancancan>.freeze, ["< 3", ">= 1"])
       s.add_runtime_dependency(%q<devise>.freeze, ["< 5", ">= 3.4"])
       s.add_runtime_dependency(%q<rolify>.freeze, ["~> 5"])
-      s.add_runtime_dependency(%q<stripe>.freeze, ["< 3.4", ">= 1.36"])
+      s.add_runtime_dependency(%q<stripe>.freeze, ["< 4", ">= 3.8"])
       s.add_development_dependency(%q<dotenv-rails>.freeze, ["~> 2.2"])
       s.add_development_dependency(%q<bundler>.freeze, ["~> 1"])
       s.add_development_dependency(%q<coffeelint>.freeze, ["~> 1.14"])
@@ -210,7 +206,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<scss_lint>.freeze, ["< 1", ">= 0.52.0"])
       s.add_development_dependency(%q<web-console>.freeze, ["~> 3"])
       s.add_development_dependency(%q<bootstrap-sass>.freeze, ["< 4", ">= 3.3"])
-      s.add_development_dependency(%q<factory_girl_rails>.freeze, ["~> 4.5"])
+      s.add_development_dependency(%q<factory_bot_rails>.freeze, ["< 5", ">= 4.8"])
       s.add_development_dependency(%q<forgery>.freeze, ["~> 0.6"])
       s.add_development_dependency(%q<rails-controller-testing>.freeze, ["~> 1"])
       s.add_development_dependency(%q<rspec-rails>.freeze, ["~> 3"])
@@ -228,7 +224,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cancancan>.freeze, ["< 3", ">= 1"])
       s.add_dependency(%q<devise>.freeze, ["< 5", ">= 3.4"])
       s.add_dependency(%q<rolify>.freeze, ["~> 5"])
-      s.add_dependency(%q<stripe>.freeze, ["< 3.4", ">= 1.36"])
+      s.add_dependency(%q<stripe>.freeze, ["< 4", ">= 3.8"])
       s.add_dependency(%q<dotenv-rails>.freeze, ["~> 2.2"])
       s.add_dependency(%q<bundler>.freeze, ["~> 1"])
       s.add_dependency(%q<coffeelint>.freeze, ["~> 1.14"])
@@ -239,7 +235,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<scss_lint>.freeze, ["< 1", ">= 0.52.0"])
       s.add_dependency(%q<web-console>.freeze, ["~> 3"])
       s.add_dependency(%q<bootstrap-sass>.freeze, ["< 4", ">= 3.3"])
-      s.add_dependency(%q<factory_girl_rails>.freeze, ["~> 4.5"])
+      s.add_dependency(%q<factory_bot_rails>.freeze, ["< 5", ">= 4.8"])
       s.add_dependency(%q<forgery>.freeze, ["~> 0.6"])
       s.add_dependency(%q<rails-controller-testing>.freeze, ["~> 1"])
       s.add_dependency(%q<rspec-rails>.freeze, ["~> 3"])
@@ -258,7 +254,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cancancan>.freeze, ["< 3", ">= 1"])
     s.add_dependency(%q<devise>.freeze, ["< 5", ">= 3.4"])
     s.add_dependency(%q<rolify>.freeze, ["~> 5"])
-    s.add_dependency(%q<stripe>.freeze, ["< 3.4", ">= 1.36"])
+    s.add_dependency(%q<stripe>.freeze, ["< 4", ">= 3.8"])
     s.add_dependency(%q<dotenv-rails>.freeze, ["~> 2.2"])
     s.add_dependency(%q<bundler>.freeze, ["~> 1"])
     s.add_dependency(%q<coffeelint>.freeze, ["~> 1.14"])
@@ -269,7 +265,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<scss_lint>.freeze, ["< 1", ">= 0.52.0"])
     s.add_dependency(%q<web-console>.freeze, ["~> 3"])
     s.add_dependency(%q<bootstrap-sass>.freeze, ["< 4", ">= 3.3"])
-    s.add_dependency(%q<factory_girl_rails>.freeze, ["~> 4.5"])
+    s.add_dependency(%q<factory_bot_rails>.freeze, ["< 5", ">= 4.8"])
     s.add_dependency(%q<forgery>.freeze, ["~> 0.6"])
     s.add_dependency(%q<rails-controller-testing>.freeze, ["~> 1"])
     s.add_dependency(%q<rspec-rails>.freeze, ["~> 3"])

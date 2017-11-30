@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :plan, class: 'PaidUp::Plan' do
     title 'Plan Title'
     description 'This is the description'
