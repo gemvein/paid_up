@@ -50,7 +50,9 @@ module PaidUp
       allowed = rolify_setting.rows_allowed
       remaining = rolify_setting.rows_remaining
       if allowed.positive?
-        can :manage, model, roles: { name: 'owner', users: { id: user.id } }
+        # This was a nice idea, but broke in practice
+        # can :manage, model, roles: { name: 'owner', users: { id: user.id } }
+        can :manage, model, id: model.with_role(:owner, user).ids
       end
       enable_rows(model, allowed, remaining)
     end
