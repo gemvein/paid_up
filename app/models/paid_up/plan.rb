@@ -21,15 +21,15 @@ module PaidUp
 
     default_scope { order('sort_order ASC') }
     scope :subscribable, -> { where('sort_order >=  ?', 0) }
-    scope :within, ->(ids) { where(id: ids) }
-    scope :without, ->(ids) { where.not(id: ids) }
+    scope :including, ->(ids) { where(id: ids) }
+    scope :excluding, ->(ids) { where.not(id: ids) }
     scope :free, (lambda do
       find_by_stripe_id(PaidUp.configuration.free_plan_stripe_id)
     end)
-    scope :display, (lambda do |within, without|
+    scope :display, (lambda do |including, excluding|
       plans = subscribable
-      plans = plans.within(within) if within.present?
-      plans = plans.without(without) if without.present?
+      plans = plans.including(including) if including.present?
+      plans = plans.excluding(excluding) if excluding.present?
       plans
     end)
 
