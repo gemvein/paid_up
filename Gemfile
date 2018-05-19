@@ -44,7 +44,7 @@ group :test, :development do
 end
 
 group :test do
-  gem 'capybara', '~> 2'
+  gem 'capybara', '>= 3', '< 4'
   gem 'coveralls', '>= 0.8', '< 2', require: false
   gem 'database_cleaner', '~> 1'
   gem 'launchy', '~> 2.4', require: false

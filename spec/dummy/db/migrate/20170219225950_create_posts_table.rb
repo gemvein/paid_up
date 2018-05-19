@@ -1,4 +1,4 @@
-class CreatePostsTable < ActiveRecord::Migration
+class CreatePostsTable < ActiveRecord::Migration[5.2]
   def change
     create_table :posts do |t|
       t.string :user_id, index: true

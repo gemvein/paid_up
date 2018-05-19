@@ -1,4 +1,4 @@
-class CreatePaidUpPlansTable < ActiveRecord::Migration
+class CreatePaidUpPlansTable < ActiveRecord::Migration[5.2]
   def change
     create_table :paid_up_plans do |t|
       t.string :stripe_id

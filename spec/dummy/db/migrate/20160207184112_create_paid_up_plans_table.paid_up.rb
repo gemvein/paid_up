@@ -1,5 +1,5 @@
 # This migration comes from paid_up (originally 20150407110101)
-class CreatePaidUpPlansTable < ActiveRecord::Migration
+class CreatePaidUpPlansTable < ActiveRecord::Migration[5.2]
   def change
     create_table :paid_up_plans do |t|
       t.string :stripe_id

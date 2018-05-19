@@ -8,7 +8,7 @@ FactoryBot.define do
     password 'password'
     password_confirmation 'password'
     transient do
-      plan { PaidUp::Plan.order('RANDOM()').first }
+      plan { PaidUp::Plan.all.sample }
       past_due false
     end
     # the after(:create) yields two values; the user instance itself and the

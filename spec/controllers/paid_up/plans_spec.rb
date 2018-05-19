@@ -12,7 +12,7 @@ RSpec.describe PaidUp::PlansController do
     end
     context 'responds successfully with an HTTP 200 status code' do
       subject { response }
-      it { should be_success }
+      it { should be_successful }
       it { should have_http_status(200) }
     end
     context 'renders the index template' do
