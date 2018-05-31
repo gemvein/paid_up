@@ -102,6 +102,14 @@ Abilities corresponding to features you have defined will be generated automatic
       end
     end
     
+## Speeding up User queries
+
+If you try generating a list of users for display in a directory, you may find
+that the Stripe checking code slows down your query.
+
+To avoid this, add "select(:field_1, :field_2, :etc)" to your finder, being
+sure to *omit* the :stripe_id column.
+    
 ## Controller
 
 Your controller should inherit from PaidUp::PaidUpController, which in turn inherits from your own ApplicationController.

@@ -101,11 +101,13 @@ module PaidUp
         end
 
         def load_stripe_data
+          return unless attributes.has_key?('stripe_id')
+          my_working_stripe_id = working_stripe_id
           @customer_stripe_data = Rails.cache.fetch(
-            "#{working_stripe_id}/stripe_data",
+            "#{my_working_stripe_id}/stripe_data",
             expires_in: 12.hours
           ) do
-            Stripe::Customer.retrieve working_stripe_id
+            Stripe::Customer.retrieve my_working_stripe_id
           end
 
           @subscription = PaidUp::Subscription.new(user: self)
