@@ -109,6 +109,10 @@ that the Stripe checking code slows down your query.
 
 To avoid this, add "select(:field_1, :field_2, :etc)" to your finder, being
 sure to *omit* the :stripe_id column.
+
+Another option would be to create a Person model that inherits from the User model but omits the :stripe_id column 
+(as above) in its `default_scope`. You can use this Person object for queries related to directory or profile display, 
+thereby speeding up all queries not requiring plan information. 
     
 ## Controller
 
