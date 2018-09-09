@@ -104,8 +104,8 @@ Abilities corresponding to features you have defined will be generated automatic
     
 ## Speeding up User queries
 
-If you try generating a list of users for display in a directory, you may find
-that the Stripe checking code slows down your query.
+If you try generating a list of users (such as for display in a user directory), you may find
+that the Stripe checking code slows down your query significantly.
 
 To avoid this, add "select(:field_1, :field_2, :etc)" to your finder, being
 sure to *omit* the :stripe_id column.
