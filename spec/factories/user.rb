@@ -5,11 +5,11 @@ FactoryBot.define do
     sequence :email do |n|
       "#{name.tr(' ', '.').downcase}#{n}@example.com"
     end
-    password 'password'
-    password_confirmation 'password'
+    password { 'password' }
+    password_confirmation { 'password' }
     transient do
       plan { PaidUp::Plan.all.sample }
-      past_due false
+      past_due { false }
     end
     # the after(:create) yields two values; the user instance itself and the
     # evaluator, which stores all values from the factory, including transient

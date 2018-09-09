@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :post do
-    title 'Test Title'
+    title { 'Test Title' }
     user { User.order('RANDOM()').first }
-    active true
+    active { true }
   end
 end

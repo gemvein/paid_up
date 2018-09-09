@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :group do
-    title 'Test Title'
+    title { 'Test Title' }
     transient do
       owner { User.order('RANDOM()').first }
     end
