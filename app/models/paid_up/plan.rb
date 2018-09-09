@@ -11,7 +11,7 @@ module PaidUp
     )
     accepts_nested_attributes_for :plan_feature_settings
 
-    after_initialize :load_stripe_data
+    after_initialize :load_stripe_data, :load_feature_settings
     after_save :expire_stripe_data
 
     attr_accessor :stripe_data
@@ -39,17 +39,33 @@ module PaidUp
       self
     end
 
-    def feature_setting(feature_name)
-      feature = PaidUp::Feature.find_by_slug!(feature_name)
-      raw = plan_feature_settings.where(feature: feature_name)
-      case feature.setting_type
+    def load_feature_settings
+      @feature_settings = {}
+      settings = {}
+
+      plan_feature_settings.each do |feature_setting|
+        settings[feature_setting.feature] = feature_setting.setting
+      end
+
+      PaidUp::Feature.all.each do |feature|
+        slug = feature.slug
+        @feature_settings[slug] = parse_setting_by_type(feature.setting_type, settings[slug])
+      end
+    end
+
+    def parse_setting_by_type(setting_type, setting)
+      case setting_type
       when 'boolean'
-        raw&.first&.setting == 1
+        setting == 1
       when 'table_rows', 'rolify_rows'
-        raw&.first&.setting || 0
+        setting || 0
       else
         raise :error_handling_feature_setting.l feature: feature
       end
+    end
+
+    def feature_setting(feature_name)
+      @feature_settings[feature_name]
     end
 
     def feature_unlimited?(feature_name)

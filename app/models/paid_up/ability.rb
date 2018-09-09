@@ -59,7 +59,7 @@ module PaidUp
 
     def enable_boolean(user, feature)
       slug = feature.slug
-      can :use, slug.to_sym if user.plan.feature_setting slug
+      can :use, slug.to_sym if user.plan&.feature_setting slug
     end
   end
 end
