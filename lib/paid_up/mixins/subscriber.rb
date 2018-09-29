@@ -97,7 +97,7 @@ module PaidUp
 
         def set_default_attributes
           return unless new_record?
-          self.stripe_id = PaidUp.configuration.anonymous_customer_stripe_id
+          self.stripe_id = working_stripe_id
         end
 
         def load_stripe_data
@@ -128,7 +128,9 @@ module PaidUp
         def remove_anonymous_association
           return unless stripe_id ==
                         PaidUp.configuration.anonymous_customer_stripe_id
-          self.stripe_id = nil
+
+          existing_customer = Stripe::Customer.list(email: email, limit: 1)&.first
+          self.stripe_id = existing_customer&.id
         end
       end
     end
