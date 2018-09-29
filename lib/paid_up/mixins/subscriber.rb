@@ -129,7 +129,7 @@ module PaidUp
           return unless stripe_id ==
                         PaidUp.configuration.anonymous_customer_stripe_id
 
-          existing_customer = Stripe::Customer.list(email: email, limit: 1)&.first
+          existing_customer = Stripe::Customer.list(email: email, limit: 1)&.first if %w(test development).include?(Rails.env)
           self.stripe_id = existing_customer&.id
         end
       end
