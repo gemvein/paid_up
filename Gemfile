@@ -20,10 +20,9 @@ gem 'money', '~> 6.5'
 gem 'cancancan', '>= 1', '< 3'
 gem 'devise', '>= 3.4', '< 5'
 gem 'rolify', '~> 5'
-gem 'stripe', '>= 3.8', '< 4' # 3.4 and 3.5 break caching, because they return a singleton
+gem 'stripe', '>= 4.8', '< 5'
 
 group :development do
-  gem 'bundler', '~> 1'
   gem 'coffeelint', '~> 1.14'
   gem 'juwelier', '~> 2'
   gem 'nokogiri', '>= 1.7', '< 2'
@@ -40,7 +39,7 @@ group :test, :development do
   gem 'rails-controller-testing', '~> 1'
   gem 'rspec-rails', '~> 3'
   gem 'sass-rails', '>= 5', '< 7'
-  gem 'sqlite3', '~> 1.3'
+  gem 'sqlite3', '>= 1.3', '< 1.4'
 end
 
 group :test do

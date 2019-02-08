@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Karen Lundgren".freeze]
-  s.date = "2018-09-29"
+  s.date = "2019-02-08"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features.".freeze
   s.email = "karen.e.lundgren@gmail.com".freeze
   s.extra_rdoc_files = [
@@ -195,9 +195,8 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<cancancan>.freeze, ["< 3", ">= 1"])
       s.add_runtime_dependency(%q<devise>.freeze, ["< 5", ">= 3.4"])
       s.add_runtime_dependency(%q<rolify>.freeze, ["~> 5"])
-      s.add_runtime_dependency(%q<stripe>.freeze, ["< 4", ">= 3.8"])
+      s.add_runtime_dependency(%q<stripe>.freeze, ["< 5", ">= 4.8"])
       s.add_development_dependency(%q<dotenv-rails>.freeze, ["~> 2.2"])
-      s.add_development_dependency(%q<bundler>.freeze, ["~> 1"])
       s.add_development_dependency(%q<coffeelint>.freeze, ["~> 1.14"])
       s.add_development_dependency(%q<juwelier>.freeze, ["~> 2"])
       s.add_development_dependency(%q<nokogiri>.freeze, ["< 2", ">= 1.7"])
@@ -224,9 +223,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cancancan>.freeze, ["< 3", ">= 1"])
       s.add_dependency(%q<devise>.freeze, ["< 5", ">= 3.4"])
       s.add_dependency(%q<rolify>.freeze, ["~> 5"])
-      s.add_dependency(%q<stripe>.freeze, ["< 4", ">= 3.8"])
+      s.add_dependency(%q<stripe>.freeze, ["< 5", ">= 4.8"])
       s.add_dependency(%q<dotenv-rails>.freeze, ["~> 2.2"])
-      s.add_dependency(%q<bundler>.freeze, ["~> 1"])
       s.add_dependency(%q<coffeelint>.freeze, ["~> 1.14"])
       s.add_dependency(%q<juwelier>.freeze, ["~> 2"])
       s.add_dependency(%q<nokogiri>.freeze, ["< 2", ">= 1.7"])
@@ -254,9 +252,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cancancan>.freeze, ["< 3", ">= 1"])
     s.add_dependency(%q<devise>.freeze, ["< 5", ">= 3.4"])
     s.add_dependency(%q<rolify>.freeze, ["~> 5"])
-    s.add_dependency(%q<stripe>.freeze, ["< 4", ">= 3.8"])
+    s.add_dependency(%q<stripe>.freeze, ["< 5", ">= 4.8"])
     s.add_dependency(%q<dotenv-rails>.freeze, ["~> 2.2"])
-    s.add_dependency(%q<bundler>.freeze, ["~> 1"])
     s.add_dependency(%q<coffeelint>.freeze, ["~> 1.14"])
     s.add_dependency(%q<juwelier>.freeze, ["~> 2"])
     s.add_dependency(%q<nokogiri>.freeze, ["< 2", ">= 1.7"])
