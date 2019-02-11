@@ -17,6 +17,7 @@ module PaidUp
   class Feature
     include ActiveModel::Model
     include ActiveModel::AttributeMethods
+    extend ActiveSupport::Concern
 
     attr_accessor :slug, :title, :setting_type, :description
 
@@ -38,8 +39,52 @@ module PaidUp
       found_in: 'slug'
     )
 
-    def self.raw
-      PaidUp.features
+    class << self
+      def raw
+        PaidUp.features
+      end
+
+      def find_by_slug(slug)
+        raw[slug.to_sym]
+      end
+
+      def find_by_slug!(slug)
+        find_by_slug(slug) || raise(:feature_not_found.l)
+      end
+
+      def all
+        raw.values
+      end
+
+      def find_all(**conditions)
+        collection = []
+        all.each do |feature|
+          qualifies = true
+          conditions.each do |key, value|
+            feature.send(key) != value && (qualifies = false)
+          end
+          qualifies && collection << feature
+        end
+        collection
+      end
+
+      def find(**conditions)
+        find_all(conditions).first
+      end
+
+      def method_missing(method_sym, *arguments, &block)
+        if method_sym.to_s =~ /^find_by_(.*)$/
+          find(Regexp.last_match[1].to_sym => arguments.first)
+        elsif method_sym.to_s =~ /^find_all_by_(.*)$/
+          find_all(Regexp.last_match[1].to_sym => arguments.first)
+        else
+          super
+        end
+      end
+
+      def respond_to_missing?(method_name, include_private = false)
+        method_name.to_s.start_with?('find_') || super
+      end
     end
 
     def to_s
@@ -58,46 +103,25 @@ module PaidUp
       feature_model_name.constantize
     end
 
-    def self.find_by_slug(slug)
-      raw[slug.to_sym]
+    def for_graphql(setting)
+      OpenStruct.new(
+        id: slug,
+        title: title,
+        slug: slug,
+        description: description,
+        setting: setting,
+        setting_human: setting_human(setting)
+      )
     end
 
-    def self.find_by_slug!(slug)
-      find_by_slug(slug) || raise(:feature_not_found.l)
-    end
-
-    def self.all
-      raw.values
-    end
-
-    def self.find_all(**conditions)
-      collection = []
-      all.each do |feature|
-        qualifies = true
-        conditions.each do |key, value|
-          feature.send(key) != value && (qualifies = false)
-        end
-        qualifies && collection << feature
-      end
-      collection
-    end
-
-    def self.find(**conditions)
-      find_all(conditions).first
-    end
-
-    def self.method_missing(method_sym, *arguments, &block)
-      if method_sym.to_s =~ /^find_by_(.*)$/
-        find(Regexp.last_match[1].to_sym => arguments.first)
-      elsif method_sym.to_s =~ /^find_all_by_(.*)$/
-        find_all(Regexp.last_match[1].to_sym => arguments.first)
+    def setting_human(setting)
+      if setting == PaidUp::Unlimited.to_i
+        PaidUp::Unlimited.to_s
+      elsif setting_type == 'boolean'
+        setting ? :allowed.l : :not_allowed.l
       else
-        super
+        setting.to_s
       end
-    end
-
-    def self.respond_to_missing?(method_name, include_private = false)
-      method_name.to_s.start_with?('find_') || super
     end
   end
 end
