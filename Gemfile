@@ -28,7 +28,6 @@ group :development do
   gem 'nokogiri', '>= 1.7', '< 2'
   gem 'pre-commit', '~> 0.32'
   gem 'rubocop', '>= 0.49', '< 1'
-  gem 'scss_lint', '>= 0.52.0', '< 1', require: false
   gem 'web-console', '~> 3'
 end
 

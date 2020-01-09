@@ -8,3 +8,5 @@ Rails.configuration.stripe = {
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
 
 Stripe.set_app_info('Rails PaidUp', version: PaidUp::VERSION, url: 'https://www.gemvein.com/museum/cases/paid_up')
+
+Money.rounding_mode = BigDecimal::ROUND_HALF_UP

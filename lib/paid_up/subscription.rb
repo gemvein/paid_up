@@ -26,6 +26,7 @@ module PaidUp
     end
 
     def update(plan, stripe_token = nil, coupon = nil, trial_end = nil)
+      return if stripe_data.nil?
       update_stripe_token(stripe_token)
       update_coupon(coupon)
       update_trial_end(trial_end)
