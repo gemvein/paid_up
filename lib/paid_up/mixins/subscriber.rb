@@ -33,7 +33,7 @@ module PaidUp
         end
 
         def cards
-          stripe_data.present? && stripe_data.sources.all(object: 'card')
+          stripe_data.present? && stripe_data.sources.list(object: 'card')
         end
 
         def subscribe_to_plan(
