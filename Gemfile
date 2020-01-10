@@ -13,7 +13,7 @@ gem 'rails', '>= 6', '< 7'
 gem 'rails-i18n', '>= 6', '< 7'
 gem 'uglifier', '>= 2.7', '< 5'
 
-gem 'bootstrap_leather', '>= 0.10.13'
+gem 'bootstrap_leather', '>= 0.10.13', '< 0.11'
 
 gem 'chronic', '~> 0.10'
 gem 'money', '~> 6.5'
@@ -39,7 +39,7 @@ group :test, :development do
   gem 'rails-controller-testing', '~> 1'
   gem 'rspec-rails', '>= 4.0.0.beta3'
   gem 'sass-rails', '>= 5', '< 7'
-  gem 'sqlite3', '>= 1.4'
+  gem 'sqlite3', '>= 1.4', '< 2'
 end
 
 group :test do
