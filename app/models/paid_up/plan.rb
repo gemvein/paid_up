@@ -17,7 +17,7 @@ module PaidUp
     attr_accessor :stripe_data
 
     validates_presence_of :title, :stripe_id
-    validates_uniqueness_of :title
+    validates_uniqueness_of :title, case_sensitive: true
 
     default_scope { order('sort_order ASC') }
     scope :subscribable, -> { where('sort_order >=  ?', 0) }
