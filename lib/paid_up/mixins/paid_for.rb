@@ -31,7 +31,7 @@ module PaidUp
         end
 
         def paid_for_scope
-          send(paid_for_scope_symbol)
+          unscoped { send(paid_for_scope_symbol) }
         end
 
         private
