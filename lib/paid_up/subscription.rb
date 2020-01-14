@@ -42,7 +42,7 @@ module PaidUp
 
       # If there is an update to be made, we go ahead
       return true if stripe_id == customer.id
-      user.update_attributes(stripe_id: customer.id) ||
+      user.update_attribute(stripe_id: customer.id) ||
         raise(:could_not_associate_subscription.l)
     end
 
