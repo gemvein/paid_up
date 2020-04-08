@@ -17,7 +17,7 @@ module PaidUp
         after_save :load_stripe_data
         before_save :remove_anonymous_association
         before_destroy do |record|
-          next if record.stripe_data.deleted
+          next if record.stripe_data.respond_to? :deleted
           record.stripe_data.delete
         end
         include InstanceMethods
