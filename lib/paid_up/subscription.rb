@@ -14,6 +14,7 @@ module PaidUp
 
     def initialize(args)
       super args
+      return unless user.stripe_data.respond_to? :subscriptions
       self.stripe_data = user.stripe_data.subscriptions.first
     end
 
