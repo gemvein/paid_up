@@ -17,7 +17,7 @@ module PaidUp
         after_save :load_stripe_data
         before_save :remove_anonymous_association
         before_destroy do |record|
-          next unless record.stripe_data.subscriptions.any?
+          next if record.stripe_data.deleted
           record.stripe_data.delete
         end
         include InstanceMethods
