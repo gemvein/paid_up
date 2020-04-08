@@ -16,7 +16,10 @@ module PaidUp
         after_initialize :set_default_attributes, :load_stripe_data
         after_save :load_stripe_data
         before_save :remove_anonymous_association
-        before_destroy { |record| record.stripe_data.delete }
+        before_destroy do |record|
+          return unless record.stripe_data.subscriptions.any?
+          record.stripe_data.delete
+        end
         include InstanceMethods
       end
 
