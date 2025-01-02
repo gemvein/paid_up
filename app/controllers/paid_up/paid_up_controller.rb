@@ -5,6 +5,8 @@ module PaidUp
   class PaidUpController < ApplicationController
     helper :all
 
+    helper Rails.application.routes.url_helpers
+
     before_action :set_locale
     before_action :warn_if_delinquent
 

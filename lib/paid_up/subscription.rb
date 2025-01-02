@@ -36,10 +36,13 @@ module PaidUp
     end
 
     def create(plan, stripe_token = nil, coupon = nil, trial_end = nil)
-      customer = Stripe::Customer.create(source: stripe_token, email: email,
-                                         plan: plan.stripe_id, coupon: coupon,
-                                         trial_end: trial_end) ||
-                 raise(:could_not_create_subscription.l)
+      customer = Stripe::Customer.create(source: stripe_token, email: email, trial_end: trial_end) ||
+        raise(:could_not_create_customer.l)
+
+      Stripe::Subscription.create(
+        customer: customer.id,
+        items: [{ price: plan, quantity: 1, discounts: { coupon: } }]
+      ) || raise(:could_not_create_subscription.l)
 
       # If there is an update to be made, we go ahead
       return true if stripe_id == customer.id

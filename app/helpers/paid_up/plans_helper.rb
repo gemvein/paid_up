@@ -48,11 +48,11 @@ module PaidUp
 
     def plan_charge_reduced(old_money, new_money, interval)
       html = []
-      html << content_tag(:s, amount_per_interval(old_money, interval))
+      html << content_tag(:span, amount_per_interval(old_money, interval))
       html << content_tag(
         :span, amount_per_interval(new_money, interval), class: 'text-danger'
       )
-      html.join(' ')
+      html.join(' ').html_safe
     end
 
     # rubocop:disable Metrics/AbcSize

@@ -73,15 +73,15 @@ module PaidUp
     end
 
     def interval
-      stripe_data&.interval || :default_interval.l
+      stripe_data&.recurring&.interval || :default_interval.l
     end
 
     def interval_count
-      stripe_data&.interval_count || 1
+      stripe_data&.recurring&.interval_count || 1
     end
 
     def amount
-      stripe_data&.amount || 0
+      stripe_data&.unit_amount || 0
     end
 
     def adjusted_amount(discount)
@@ -122,7 +122,7 @@ module PaidUp
       return unless stripe_id.present?
       self.stripe_data = Rails.cache.fetch(
         "#{stripe_id}/stripe_data", expires_in: 1.minute
-      ) { Stripe::Plan.retrieve stripe_id }
+      ) { Stripe::Price.retrieve stripe_id }
     end
 
     def expire_stripe_data

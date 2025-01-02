@@ -44,10 +44,12 @@ module PaidUp
         )
           # If there is an existing subscription
           if stripe_id.present? && paid_up_subscription.present?
+            # abort 'foo'
             paid_up_subscription.update(new_plan, stripe_token, coupon, trial_end)
           else # Totally new subscription
             paid_up_subscription.create(new_plan, stripe_token, coupon, trial_end)
           end
+          # abort 'baz'
           Rails.cache.delete("#{stripe_id}/stripe_data")
           reload
         end
@@ -105,13 +107,9 @@ module PaidUp
 
         def load_stripe_data
           return unless attributes.has_key?('stripe_id')
+
           my_working_stripe_id = working_stripe_id
-          @customer_stripe_data = Rails.cache.fetch(
-            "#{my_working_stripe_id}/stripe_data",
-            expires_in: 12.hours
-          ) do
-            Stripe::Customer.retrieve my_working_stripe_id
-          end
+          @customer_stripe_data = Stripe::Customer.retrieve my_working_stripe_id
 
           @subscription = PaidUp::Subscription.new(user: self)
 

@@ -40,13 +40,26 @@ Next, install PaidUp for your user model by executing these commands:
     
 Edit your config file at `config/initializers/paid_up.rb` to set up some other key details.
 
-Set your environment variables with your `STRIPE_PUBLISHABLE_KEY` and `STRIPE_SECRET_KEY`. (Check your operating system or IDE's documentation for details. I use the gem `dotenv` for this.)
+Set your stripe credentials using `rails credentials:edit`. It is recommended that you use a restricted key. The key needs to have write access to customers and checkout.
+
+```yaml
+production:
+  stripe:
+    publishable_key: 'PUT YOUR PRODUCTION PUBLISHABLE KEY HERE'
+    secret_key: 'PUT YOUR PRODUCTION SECRET KEY HERE'
+development:
+  stripe:
+    publishable_key: 'PUT YOUR DEVELOPMENT PUBLISHABLE KEY HERE'
+    secret_key: 'PUT YOUR DEVELOPMENT SECRET KEY HERE'
+```
+
+(The old environment variables will still work, but this use is not recommended)
 
 ## Stripe Setup
 
 Using your own code or Stripe's convenient web interface, add the plans and coupons you intend to offer.
 
-Each plan will also need a record in your own database, so for each `Stripe::Plan` you create, note the `id` and use it as the `stripe_id` in the corresponding `PaidUp::Plan`. At a minimum, you will need an anonymous plan, a free plan, both with a cost amount of `0`; and also at least one paid plan.
+Each plan will also need a record in your own database, so for each `Stripe::Plan` you create, note the `id` for its free price and use it as the `stripe_id` in the corresponding `PaidUp::Plan`. At a minimum, you will need an anonymous plan, a free plan, both with a cost amount of `0`; and also at least one paid plan.
 
 Coupons do not need any further configuration, other than adding them to your Stripe Account.
 
@@ -145,6 +158,9 @@ This needs to go above your call to Google Tag Manager, so that the data in it i
 Doing this will populate the e-commerce data in Google Analytics, but you must also have that feature turned on.
 
 ### Upgrading
+
+#### Version 0.13
+Updated to use Stripe's "Price" system instead of the old "Plan" system. Keys will need to be updated.
 
 #### Version 0.12.1
 Renamed `subscription` to `paid_up_subscription` and `subscriptions` to `paid_up_subscriptions` to avoid naming conflicts with other gems.
