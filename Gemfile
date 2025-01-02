@@ -7,7 +7,7 @@ group :test, :development do
 end
 
 gem 'haml-rails', '>= 1', '< 3'
-gem 'haml', '>= 5', '< 6'
+gem 'haml', '>= 5', '< 7'
 gem 'jquery-rails', '~> 4'
 gem 'rails', '>= 7', '< 8'
 gem 'rails-i18n', '>= 7', '< 8'
@@ -20,8 +20,8 @@ gem 'money', '~> 6.5'
 
 gem 'cancancan', '>= 1', '< 4'
 gem 'devise', '>= 3.4', '< 5'
-gem 'rolify', '~> 5'
-gem 'stripe', '>= 5', '< 6'
+gem 'rolify', '~> 6'
+gem 'stripe', '>= 13', '< 14'
 
 group :development do
   gem 'coffeelint', '~> 1.14'
