@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
-  s.authors = ["Karen Lundgren".freeze]
+  s.authors = ["Loren Lundgren".freeze]
   s.date = "2025-01-02"
   s.description = "Allows a model of your choosing (such as users) to subscribe to a plan, which enables features.".freeze
-  s.email = "karen.e.lundgren@gmail.com".freeze
+  s.email = "loren.lundgren@gmail.com".freeze
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"

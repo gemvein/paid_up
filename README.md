@@ -182,7 +182,7 @@ Version 0.8.0 introduced database changes to the foreign key columns to work wit
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 ## Contributors
-* [Karen Lundgren](https://github.com/nerakdon)
+* [Loren Lundgren](https://github.com/nerakdon)
 * [Chad Lundgren](https://github.com/chadlundgren)
 
 ## Copyright

@@ -17,8 +17,8 @@ Juwelier::Tasks.new do |gem|
                   ' enables features.'
   gem.description = 'Allows a model of your choosing (such as users) to '\
                       'subscribe to a plan, which enables features.'
-  gem.email = 'karen.e.lundgren@gmail.com'
-  gem.authors = ['Karen Lundgren']
+  gem.email = 'loren.lundgren@gmail.com'
+  gem.authors = ['Loren Lundgren']
 end
 Juwelier::RubygemsDotOrgTasks.new
 
